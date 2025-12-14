@@ -1,30 +1,21 @@
 import "./globals.css";
-import { Anton, Inter } from "next/font/google";
+import { Bangers } from "next/font/google";
 
-const headingFont = Anton({
+const comicFont = Bangers({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-heading",
-});
-
-const bodyFont = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-comic",
 });
 
 export const metadata = {
   title: "MIST BLITZ",
-  description: "Offical website of Mist BlitZ",
+  description: "Official website of MIST BLITZ",
 };
-
-
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${headingFont.variable} ${bodyFont.variable} bg-black text-white`}
-      >
+      <body className={`${comicFont.className} bg-black text-white`}>
         {children}
       </body>
     </html>
