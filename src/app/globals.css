@@ -3,7 +3,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --blitz-black: #bcbabadd;
+  --blitz-yellow: #fdf10bfb;
   --blitz-red: #e10600;
   --blitz-gray: #1e1e1e;
   --blitz-white: #ffffff;
