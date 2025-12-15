@@ -39,6 +39,7 @@ const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
     transition={{ duration: 0.5 }}
     className={`text-5xl md:text-6xl font-comic font-extrabold ${colorClass} mb-8 
                     drop-shadow-[4px_4px_0_rgba(0,0,0,0.8)] 
+                    tracking-wide
                     transform skew-x-[-5deg] inline-block px-2 border-b-4 border-yellow-400`}
   >
     {children}
@@ -52,7 +53,7 @@ const FramedImage = ({ src, alt, caption, rotation }) => (
     whileInView={{ opacity: 1, scale: 1 }}
     viewport={{ once: true, amount: 0.6 }}
     transition={{ type: "spring", stiffness: 50, damping: 10, delay: 0.2 }}
-    className={`relative w-full aspect-video md:aspect-square overflow-hidden border-8 object-cover border-black shadow-[16px_16px_0_0_#D90000]`}
+    className={`relative w-full aspect-video md:aspect-square overflow-hidden border-8 object-cover border-black shadow-[16px_16px_0_0_#ffd900]`}
     style={{ transform: `rotate(${rotation}deg)` }}
   >
     <img src={src} alt={alt} className="w-full h-full object-cover" />
@@ -64,7 +65,6 @@ const FramedImage = ({ src, alt, caption, rotation }) => (
 
 // --- Main Component ---
 const AboutPreview = () => {
-  // Staggered list item entrance for realism
   const listVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: (i) => ({
@@ -75,215 +75,136 @@ const AboutPreview = () => {
   };
 
   return (
-  <div className="min-h-screen  mx-auto">
+    <div className="min-h-screen  mx-auto">
       <section
-      id="about-mist-blitz-pro"
-      className="relative overflow-hidden bg-gray-50"
-      style={{
-        backgroundImage: "url(/bg3.jpg)",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-      }}
-    >
+        id="about-mist-blitz-pro"
+        className="relative overflow-hidden bg-[url(/bg2.jpg)]   bg-no-repeat object-center bg-center object-cover bg-gray-50"
+      >
+        {/* --- Section 1: What is Formula Student? (Full Width) --- */}
+        <div className="bg-white bg-[url(/bg6.png)]   bg-no-repeat object-center bg-cover py-16 border-t-8 border-b-8 border-black">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <ComicHeadline colorClass="text-yellow-400">
+              MISSION OBJECTIVE
+            </ComicHeadline>
 
-      {/* --- Section 1: What is Formula Student? (Full Width) --- */}
-      <div className="bg-white bg-[url(/bg-about.jpg)] bg-no-repeat object-center bg-cover py-16 border-t-8 border-b-8 border-black">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <ComicHeadline colorClass="text-blue-700">
-            MISSION OBJECTIVE
+            <div className="md:flex items-start gap-12">
+              <div className="md:w-1/2 mb-8 md:mb-0">
+                <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                  WHAT IS FORMULA STUDENT?
+                </h3>
+                <p className="text-xl text-gray-700 leading-relaxed mb-6">
+                  Formula Student (FS) is Europe's most established educational
+                  engineering competition. Teams around the globe design, build,
+                  and compete with a single-seater race car, pushing the
+                  boundaries of automotive engineering.
+                </p>
+                <motion.ul
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.5 }}
+                  className="space-y-3 text-lg font-semibold text-gray-800"
+                >
+                  {[
+                    "Engineering Design",
+                    "Cost & Manufacturing",
+                    "Dynamic Track Events",
+                  ].map((item, index) => (
+                    <motion.li
+                      key={item}
+                      custom={index}
+                      variants={listVariants}
+                      className="flex items-center"
+                    >
+                      <span className="text-red-500 mr-3 text-2xl font-extrabold font-comic">
+                        {index + 1}.
+                      </span>
+                      {item}
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </div>
+
+              <div className="md:w-1/2">
+                <FramedImage
+                  src="/team.jpg" // Use a more realistic image path
+                  alt="Formula Student Competition"
+                  caption="The proving ground for future engineers."
+                  rotation={-3}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* --- Section 2: MIST BLITZ & Team History (Staggered Layout) --- */}
+        <div className="  py-16  object-cover  mx-auto px-4 max-w-6xl ">
+          <ComicHeadline colorClass="text-red-700">
+            MIST BLITZ ORIGINS
           </ComicHeadline>
 
-          <div className="md:flex items-start gap-12">
-            <div className="md:w-1/2 mb-8 md:mb-0">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                WHAT IS FORMULA STUDENT?
-              </h3>
-              <p className="text-xl text-gray-700 leading-relaxed mb-6">
-                Formula Student (FS) is Europe's most established educational
-                engineering competition. Teams around the globe design, build,
-                and compete with a single-seater race car, pushing the
-                boundaries of automotive engineering.
-              </p>
-              <motion.ul
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.5 }}
-                className="space-y-3 text-lg font-semibold text-gray-800"
-              >
-                {[
-                  "Engineering Design",
-                  "Cost & Manufacturing",
-                  "Dynamic Track Events",
-                ].map((item, index) => (
-                  <motion.li
-                    key={item}
-                    custom={index}
-                    variants={listVariants}
-                    className="flex items-center"
-                  >
-                    <span className="text-red-500 mr-3 text-2xl font-extrabold font-comic">
-                      {index + 1}.
-                    </span>
-                    {item}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </div>
-
-            <div className="md:w-1/2">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
               <FramedImage
-                src="/team.jpg" // Use a more realistic image path
-                alt="Formula Student Competition"
-                caption="The proving ground for future engineers."
-                rotation={-3}
+                src="/furiosa.png"
+                alt="Furiosa 1.0 Race Car"
+                caption="Furiosa 1.0: Our first contender."
+                rotation={5}
               />
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* --- Section 2: MIST BLITZ & Team History (Staggered Layout) --- */}
-      <div className="container mx-auto px-4 max-w-6xl py-16">
-        <ComicHeadline colorClass="text-red-700">
-          MIST BLITZ ORIGINS
-        </ComicHeadline>
-
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="order-2 md:order-1">
-            <FramedImage
-              src="/furiosa.png" // Use a realistic car render
-              alt="Furiosa 1.0 Race Car"
-              caption="Furiosa 1.0: Our first contender."
-              rotation={5}
-            />
-          </div>
-
-          <div className="order-1 md:order-2">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">
-              WHO WE ARE
-            </h3>
-            <p className="text-xl text-gray-700 leading-relaxed mb-6">
-              MIST BLITZ is the dedicated Formula Student team from MIST
-              (Military Institute of Science and Technology). We were founded
-              with a singular vision: to elevate Bangladeshi engineering to the
-              world stage of motorsport.
-            </p>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ delay: 0.4 }}
-              className="bg-yellow-100 p-6 border-4 border-black font-comic shadow-[6px_6px_0_0_#D90000] transform rotate-1"
-            >
-              <span className="text-3xl text-red-600">ALERT! </span>
-              <span className="text-xl text-black">
-                Team formed in **April 2024**. Ready for the next race season!
-              </span>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-
-      {/* --- Section 3: What We Do & Car Features (Side-by-Side Focus) --- */}
-      <div className="container mx-auto px-4 max-w-6xl py-16">
-        <ComicHeadline colorClass="text-blue-700">
-          THE TECHNICAL BREAKDOWN
-        </ComicHeadline>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Panel 1: What We Do */}
-          <motion.div
-            custom={0}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            variants={listVariants}
-            className="p-8 border-4 border-black bg-white shadow-[8px_8px_0_0_#0000FF] transform rotate-[-1deg]"
-          >
-            <h3 className="text-3xl font-comic text-red-600 mb-4 border-b-2 border-dashed border-red-600 pb-2">
-              OUR SUB-TEAMS
-            </h3>
-            <ul className="space-y-2 text-lg font-bold text-gray-800">
-              {[
-                "Chassis & Ergonomics",
-                "Aerodynamics & Composites",
-                "Powertrain & ECU Mapping",
-                "Business & Sponsorship",
-              ].map((item, index) => (
-                <li key={index} className="flex items-center">
-                  <span className="text-blue-500 mr-2 text-2xl">•</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="text-right mt-6 text-5xl text-gray-400">🤝</div>
-          </motion.div>
-
-          {/* Panel 2: Car Features (Primary) - Takes up 2/3 width */}
-          <motion.div
-            custom={1}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            variants={listVariants}
-            className="lg:col-span-2 p-8 border-6 border-red-600 bg-black text-white shadow-[12px_12px_0_0_#FFC107] transform rotate-2 relative overflow-hidden"
-          >
-            <span className="absolute top-[-10px] left-1/2 transform -translate-x-1/2 text-5xl font-comic text-yellow-400 drop-shadow-lg">
-              TOP SECRET!
-            </span>
-            <h3 className="text-4xl font-comic text-red-500 mt-6 mb-4 border-b-4 border-yellow-500 pb-2">
-              FURIOSA 1.0 HIGHLIGHTS
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-4 text-xl">
-              <p className="font-bold text-blue-300">CHASSIS:</p>
-              <p>Torsionally Rigid Steel Space Frame.</p>
-
-              <p className="font-bold text-blue-300">AERO:</p>
-              <p>CFD Optimized Front & Rear Wing Package.</p>
-
-              <p className="font-bold text-blue-300">POWERTRAIN:</p>
-              <p>Engineered for Maximum Efficiency & Output.</p>
+            <div className="order-1 md:order-2">
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                WHO WE ARE
+              </h3>
+              <p className="text-xl text-gray-700 leading-relaxed mb-6">
+                MIST BLITZ is the dedicated Formula Student team from MIST
+                (Military Institute of Science and Technology). We were founded
+                with a singular vision: to elevate Bangladeshi engineering to
+                the world stage of motorsport.
+              </p>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ delay: 0.4 }}
+                className="bg-yellow-100 p-6 border-4 border-black font-comic shadow-[6px_6px_0_0_#D90000] transform rotate-1"
+              >
+                <span className="text-3xl text-red-600">ALERT! </span>
+                <span className="text-xl text-black">
+                  Team formed in **April 2024**. Ready for the next race season!
+                </span>
+              </motion.div>
             </div>
-            <ComicActionText
-              text="MAXIMUM SPEED!"
-              color="#0000FF"
-              position={{ bottom: "0px", right: "0px" }}
-              size="4xl"
-              rotation={10}
-              delay={0.3}
-            />
-          </motion.div>
+          </div>
         </div>
-      </div>
 
-      {/* --- CTA Button --- */}
-      <div className="text-center mt-20">
-        <motion.a
-          href="/full-mission"
-          aria-label="Read the full MIST BLITZ mission"
-          initial={{ opacity: 0, y: 50, scale: 0.8 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 10,
-            delay: 0.5,
-          }}
-          whileHover={{
-            scale: 1.08,
-            boxShadow: "14px 14px 0px 0px #D90000",
-          }}
-          whileTap={{ scale: 0.9, y: 8, x: 8, boxShadow: "none" }}
-          className="inline-flex items-center justify-center px-16 py-6 text-3xl font-extrabold text-white bg-black border-8 border-black rounded-none shadow-[14px_14px_0_0_#FFC107] transition-all duration-150 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-offset-4 focus:ring-offset-black skew-y-[-1deg] relative z-30 cursor-pointer"
-        >
-          READ FULL MISSION
-          <span className="ml-5 text-4xl">→</span>
-        </motion.a>
-      </div>
-    </section>
-  </div>
+        {/* --- CTA Button --- */}
+        <div className="text-center mt-0 mb-20">
+          <motion.a
+            href="/full-mission"
+            aria-label="Read the full MIST BLITZ mission"
+            initial={{ opacity: 0, y: 50, scale: 0.8 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 10,
+              delay: 0.1,
+            }}
+            whileHover={{
+              scale: 1,
+              boxShadow: "14px 14px 0px 0px #D90000",
+            }}
+            whileTap={{ scale: 0.9, y: 8, x: 8, boxShadow: "none" }}
+            className="inline-flex items-center hover:translate-x-4 hover:-translate-y-2 hover:transition-all delay-300 justify-center px-16 py-6 text-3xl font-extrabold text-white bg-black border-8 border-black rounded-none shadow-[14px_14px_0_0_#FFC107] transition-all duration-150 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-offset-4 focus:ring-offset-black skew-y-12 relative z-30 cursor-pointer"
+          >
+            READ FULL MISSION
+            <span className="ml-5 text-4xl">→</span>
+          </motion.a>
+        </div>
+      </section>
+    </div>
   );
 };
 
