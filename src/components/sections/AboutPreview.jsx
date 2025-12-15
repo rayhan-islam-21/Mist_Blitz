@@ -78,7 +78,7 @@ const AboutPreview = () => {
     <div className="min-h-screen  mx-auto">
       <section
         id="about-mist-blitz-pro"
-        className="relative overflow-hidden bg-[url(/bg2.jpg)]   bg-no-repeat object-center bg-center object-cover bg-gray-50"
+        className="relative overflow-hidden bg-[url(/bg6.png)]   bg-no-repeat object-center bg-center object-cover bg-gray-50"
       >
         {/* --- Section 1: What is Formula Student? (Full Width) --- */}
         <div className="bg-white bg-[url(/bg6.png)]   bg-no-repeat object-center bg-cover py-16 border-t-8 border-b-8 border-black">
@@ -188,16 +188,19 @@ const AboutPreview = () => {
             viewport={{ once: true, amount: 0.5 }}
             transition={{
               type: "spring",
-              stiffness: 100,
-              damping: 10,
+              // stiffness: 100,
+              // damping: 10,
               delay: 0.1,
             }}
             whileHover={{
-              scale: 1,
-              boxShadow: "14px 14px 0px 0px #D90000",
+              scale: 1,  
+              x: -2, // move left
+              y: -1, // move slightly up
+              boxShadow: "8px 8px 0px 0px #D90000",
+              // transition: { type: "spring", stiffness: 200, damping: 12 },
             }}
-            whileTap={{ scale: 0.9, y: 8, x: 8, boxShadow: "none" }}
-            className="inline-flex items-center hover:translate-x-4 hover:-translate-y-2 hover:transition-all delay-300 justify-center px-16 py-6 text-3xl font-extrabold text-white bg-black border-8 border-black rounded-none shadow-[14px_14px_0_0_#FFC107] transition-all duration-150 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-offset-4 focus:ring-offset-black skew-y-12 relative z-30 cursor-pointer"
+            whileTap={{ scale: 0.95, boxShadow: "none" }}
+            className="inline-flex items-center justify-center px-16 py-6 text-3xl font-extrabold text-white bg-black border-8 border-black rounded-none shadow-[14px_14px_0_0_#FFC107] transition-all duration-150 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-offset-4 focus:ring-offset-black skew-y-12 relative z-30 cursor-pointer"
           >
             READ FULL MISSION
             <span className="ml-5 text-4xl">→</span>
