@@ -1,70 +1,290 @@
 "use client";
 
-import React from 'react';
+import React from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
+// --- Comic Action Text Component ---
+const ComicActionText = ({
+  text,
+  color,
+  position,
+  size = "3xl",
+  rotation = 0,
+  delay = 0,
+}) => (
+  <motion.span
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.5 }}
+    transition={{ type: "spring", stiffness: 150, damping: 10, delay: delay }}
+    className={`absolute font-comic font-extrabold text-${size} p-1 z-10 whitespace-nowrap`}
+    style={{
+      color: color,
+      textShadow: `3px 3px 0 #000`,
+      ...position,
+      transform: `rotate(${rotation}deg)`,
+    }}
+  >
+    {text}
+  </motion.span>
+);
+
+// --- Reusable Component for Stylized Titles ---
+const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
+  <motion.h2
+    initial={{ y: 20, opacity: 0 }}
+    whileInView={{ y: 0, opacity: 1 }}
+    viewport={{ once: true, amount: 0.8 }}
+    transition={{ duration: 0.5 }}
+    className={`text-5xl md:text-6xl font-comic font-extrabold ${colorClass} mb-8 
+                    drop-shadow-[4px_4px_0_rgba(0,0,0,0.8)] 
+                    transform skew-x-[-5deg] inline-block px-2 border-b-4 border-yellow-400`}
+  >
+    {children}
+  </motion.h2>
+);
+
+// --- Component for Comic-Framed Image ---
+const FramedImage = ({ src, alt, caption, rotation }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true, amount: 0.6 }}
+    transition={{ type: "spring", stiffness: 50, damping: 10, delay: 0.2 }}
+    className={`relative w-full aspect-video md:aspect-square overflow-hidden border-8 object-cover border-black shadow-[16px_16px_0_0_#D90000]`}
+    style={{ transform: `rotate(${rotation}deg)` }}
+  >
+    <img src={src} alt={alt} className="w-full h-full object-cover" />
+    <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-2 text-center text-white text-lg font-bold font-comic">
+      {caption}
+    </div>
+  </motion.div>
+);
+
+// --- Main Component ---
 const AboutPreview = () => {
-    return (
-        // The section retains the comic image background and overlay for consistency
-        <section 
-            id="about-us-preview" 
-            className="h-screen shadow-inner bg-[url('/images/comic-dot-texture.png')] bg-repeat bg-fixed"
+  // Staggered list item entrance for realism
+  const listVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.1 },
+    }),
+  };
+
+  return (
+  <div className="min-h-screen  mx-auto">
+      <section
+      id="about-mist-blitz-pro"
+      className="relative overflow-hidden bg-gray-50"
+      style={{
+        backgroundImage: "url(/bg3.jpg)",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
+
+      {/* --- Section 1: What is Formula Student? (Full Width) --- */}
+      <div className="bg-white bg-[url(/bg-about.jpg)] bg-no-repeat object-center bg-cover py-16 border-t-8 border-b-8 border-black">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <ComicHeadline colorClass="text-blue-700">
+            MISSION OBJECTIVE
+          </ComicHeadline>
+
+          <div className="md:flex items-start gap-12">
+            <div className="md:w-1/2 mb-8 md:mb-0">
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                WHAT IS FORMULA STUDENT?
+              </h3>
+              <p className="text-xl text-gray-700 leading-relaxed mb-6">
+                Formula Student (FS) is Europe's most established educational
+                engineering competition. Teams around the globe design, build,
+                and compete with a single-seater race car, pushing the
+                boundaries of automotive engineering.
+              </p>
+              <motion.ul
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+                className="space-y-3 text-lg font-semibold text-gray-800"
+              >
+                {[
+                  "Engineering Design",
+                  "Cost & Manufacturing",
+                  "Dynamic Track Events",
+                ].map((item, index) => (
+                  <motion.li
+                    key={item}
+                    custom={index}
+                    variants={listVariants}
+                    className="flex items-center"
+                  >
+                    <span className="text-red-500 mr-3 text-2xl font-extrabold font-comic">
+                      {index + 1}.
+                    </span>
+                    {item}
+                  </motion.li>
+                ))}
+              </motion.ul>
+            </div>
+
+            <div className="md:w-1/2">
+              <FramedImage
+                src="/team.jpg" // Use a more realistic image path
+                alt="Formula Student Competition"
+                caption="The proving ground for future engineers."
+                rotation={-3}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* --- Section 2: MIST BLITZ & Team History (Staggered Layout) --- */}
+      <div className="container mx-auto px-4 max-w-6xl py-16">
+        <ComicHeadline colorClass="text-red-700">
+          MIST BLITZ ORIGINS
+        </ComicHeadline>
+
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="order-2 md:order-1">
+            <FramedImage
+              src="/furiosa.png" // Use a realistic car render
+              alt="Furiosa 1.0 Race Car"
+              caption="Furiosa 1.0: Our first contender."
+              rotation={5}
+            />
+          </div>
+
+          <div className="order-1 md:order-2">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              WHO WE ARE
+            </h3>
+            <p className="text-xl text-gray-700 leading-relaxed mb-6">
+              MIST BLITZ is the dedicated Formula Student team from MIST
+              (Military Institute of Science and Technology). We were founded
+              with a singular vision: to elevate Bangladeshi engineering to the
+              world stage of motorsport.
+            </p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ delay: 0.4 }}
+              className="bg-yellow-100 p-6 border-4 border-black font-comic shadow-[6px_6px_0_0_#D90000] transform rotate-1"
+            >
+              <span className="text-3xl text-red-600">ALERT! </span>
+              <span className="text-xl text-black">
+                Team formed in **April 2024**. Ready for the next race season!
+              </span>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* --- Section 3: What We Do & Car Features (Side-by-Side Focus) --- */}
+      <div className="container mx-auto px-4 max-w-6xl py-16">
+        <ComicHeadline colorClass="text-blue-700">
+          THE TECHNICAL BREAKDOWN
+        </ComicHeadline>
+
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Panel 1: What We Do */}
+          <motion.div
+            custom={0}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={listVariants}
+            className="p-8 border-4 border-black bg-white shadow-[8px_8px_0_0_#0000FF] transform rotate-[-1deg]"
+          >
+            <h3 className="text-3xl font-comic text-red-600 mb-4 border-b-2 border-dashed border-red-600 pb-2">
+              OUR SUB-TEAMS
+            </h3>
+            <ul className="space-y-2 text-lg font-bold text-gray-800">
+              {[
+                "Chassis & Ergonomics",
+                "Aerodynamics & Composites",
+                "Powertrain & ECU Mapping",
+                "Business & Sponsorship",
+              ].map((item, index) => (
+                <li key={index} className="flex items-center">
+                  <span className="text-blue-500 mr-2 text-2xl">•</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="text-right mt-6 text-5xl text-gray-400">🤝</div>
+          </motion.div>
+
+          {/* Panel 2: Car Features (Primary) - Takes up 2/3 width */}
+          <motion.div
+            custom={1}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={listVariants}
+            className="lg:col-span-2 p-8 border-6 border-red-600 bg-black text-white shadow-[12px_12px_0_0_#FFC107] transform rotate-2 relative overflow-hidden"
+          >
+            <span className="absolute top-[-10px] left-1/2 transform -translate-x-1/2 text-5xl font-comic text-yellow-400 drop-shadow-lg">
+              TOP SECRET!
+            </span>
+            <h3 className="text-4xl font-comic text-red-500 mt-6 mb-4 border-b-4 border-yellow-500 pb-2">
+              FURIOSA 1.0 HIGHLIGHTS
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-4 text-xl">
+              <p className="font-bold text-blue-300">CHASSIS:</p>
+              <p>Torsionally Rigid Steel Space Frame.</p>
+
+              <p className="font-bold text-blue-300">AERO:</p>
+              <p>CFD Optimized Front & Rear Wing Package.</p>
+
+              <p className="font-bold text-blue-300">POWERTRAIN:</p>
+              <p>Engineered for Maximum Efficiency & Output.</p>
+            </div>
+            <ComicActionText
+              text="MAXIMUM SPEED!"
+              color="#0000FF"
+              position={{ bottom: "0px", right: "0px" }}
+              size="4xl"
+              rotation={10}
+              delay={0.3}
+            />
+          </motion.div>
+        </div>
+      </div>
+
+      {/* --- CTA Button --- */}
+      <div className="text-center mt-20">
+        <motion.a
+          href="/full-mission"
+          aria-label="Read the full MIST BLITZ mission"
+          initial={{ opacity: 0, y: 50, scale: 0.8 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{
+            type: "spring",
+            stiffness: 100,
+            damping: 10,
+            delay: 0.5,
+          }}
+          whileHover={{
+            scale: 1.08,
+            boxShadow: "14px 14px 0px 0px #D90000",
+          }}
+          whileTap={{ scale: 0.9, y: 8, x: 8, boxShadow: "none" }}
+          className="inline-flex items-center justify-center px-16 py-6 text-3xl font-extrabold text-white bg-black border-8 border-black rounded-none shadow-[14px_14px_0_0_#FFC107] transition-all duration-150 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-offset-4 focus:ring-offset-black skew-y-[-1deg] relative z-30 cursor-pointer"
         >
-            <div className="bg-yellow-200/90 py-10"> 
-                
-                <div className="container mx-auto px-4 max-w-5xl text-center">
-
-                    {/* Section Title (Simplified for Preview) */}
-                    <h2 className="text-6xl sm:text-7xl font-comic text-black mb-12 drop-shadow-[4px_4px_0_rgba(255,0,0,1)] inline-block transform -rotate-1">
-                        MISSION BRIEFING
-                    </h2>
-
-                    {/* 1. Short Intro and Team Goals (The Core Content) */}
-                    <div className="mb-12 border-8 border-black p-6 bg-white shadow-[12px_12px_0_0_rgba(0,0,0,0.8)] transform rotate-1">
-                        
-                        <h3 className="text-4xl font-comic text-red-700 mb-4 border-b-4 border-red-700 inline-block px-2">
-                            MIST BLITZ: RACING BEYOND LIMITS!
-                        </h3>
-                        
-                        <p className="mb-6 text-xl font-bold text-gray-800 italic leading-relaxed">
-                            We are the premier Formula Student team from Bangladesh, designing, building, and racing our own formula-style car.
-                            Our goal is simple: **To put Bangladeshi engineering excellence on the global motorsport map!**
-                        </p>
-                        
-                        {/* A small, comic-style element for visual flair */}
-                        <span className="text-3xl font-comic text-blue-600 drop-shadow-[2px_2px_0_yellow] inline-block mt-4">
-                            [ INNOVATION + TEAMWORK = SPEED ]
-                        </span>
-                    </div>
-                    
-                    {/* 2. Read More Button (Call to Action) */}
-                    <a 
-                        href="/about-us" // Link to the full "About Us" page
-                        aria-label="Read more about MIST BLITZ's mission and activities"
-                        className={`
-                            inline-flex items-center justify-center
-                            mt-8 px-12 py-4 
-                            text-xl font-extrabold 
-                            text-black 
-                            bg-yellow-400
-                            border-4 border-black
-                            rounded-none
-                            shadow-[8px_8px_0_0_black]
-                            hover:shadow-[4px_4px_0_0_black]
-                            hover:bg-yellow-300
-                            transition-all duration-150
-                            active:translate-x-2 active:translate-y-2 active:shadow-none
-                            focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-white
-                            transform skew-y-1 hover:skew-y-0
-                        `}
-                    >
-                        READ FULL MISSION
-                        <span className="ml-3 text-2xl">⚡️</span>
-                    </a>
-
-                </div>
-            </div> 
-        </section>
-    );
+          READ FULL MISSION
+          <span className="ml-5 text-4xl">→</span>
+        </motion.a>
+      </div>
+    </section>
+  </div>
+  );
 };
 
 export default AboutPreview;
