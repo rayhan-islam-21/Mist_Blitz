@@ -29,7 +29,7 @@ const Navbar = () => {
               </Button>
             }
           >
-            <div className="flex z-50 flex-col gap-1 p-1 ">
+            <div className="flex z-10 flex-col gap-1 p-1 ">
               <DropdownMenuItem onClick={() => console.log("What we do")}>
                 <span className="tracking-wide text-xl">What we do</span>
               </DropdownMenuItem>
