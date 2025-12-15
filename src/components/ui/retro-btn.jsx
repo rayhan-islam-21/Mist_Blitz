@@ -9,7 +9,7 @@ const cn = (...classes) => {
 
 // --- Button Variants Definition ---
 const buttonVariants = cva(// Base styles for all buttons.
-"font-sans transition-all outline-none cursor-pointer duration-200 font-medium flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-60", {
+"transition-all outline-none cursor-pointer duration-200 font-medium flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-60", {
   variants: {
     variant: {
       // Default button with a hard shadow effect

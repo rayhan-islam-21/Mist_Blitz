@@ -1,7 +1,7 @@
 import "./globals.css";
-import { Bangers } from "next/font/google";
+import { Bangers,Mouse_Memoirs } from "next/font/google";
 
-const comicFont = Bangers({
+const comicFont = Mouse_Memoirs({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-comic",
@@ -15,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${comicFont.className} bg-black text-white`}>
+      <body className={`${comicFont.className} bg-black text-white `}>
         {children}
       </body>
     </html>

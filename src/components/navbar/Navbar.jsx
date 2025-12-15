@@ -19,7 +19,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex  space-x-4 items-center">
-          <Button className="bg-yellow-300  text-black">
+          <Button variant="secondary" className="bg-yellow-300  text-black">
             <Link href="/">Home</Link>
           </Button>
           <DropdownMenu
