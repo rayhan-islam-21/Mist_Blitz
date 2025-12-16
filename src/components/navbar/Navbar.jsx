@@ -10,11 +10,11 @@ import {
 
 const Navbar = () => {
   return (
-    <header className="bg-yellow-400 z-50 text-gray-900 p-4 md:px-8 py-6   shadow-md border-b-4 border-yellow-600">
+    <header className="bg-gray-100 z-50 text-gray-900 p-4 md:px-8 py-6   shadow-md border-b-4 border-yellow-600">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         {/* Logo */}
-        <div>
-          <Image src="/logo_black.png" alt="logo" width={120} height={120} />
+        <div className="select-none">
+          <Image src="/logo3.png" className="select-none" alt="logo" width={140} height={140} />
         </div>
 
         {/* Desktop Menu */}
@@ -25,7 +25,7 @@ const Navbar = () => {
           <DropdownMenu
             trigger={
               <Button className="bg-yellow-300 text-black relative overflow-hidden group">
-                <span className="relative z-10">About</span>
+                <span className="relative z-40">About</span>
               </Button>
             }
           >

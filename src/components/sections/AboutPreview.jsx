@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { DotPattern } from "@/components/ui/dot-pattern"
 
 // --- Comic Action Text Component ---
 const ComicActionText = ({
@@ -75,13 +76,14 @@ const AboutPreview = () => {
   };
 
   return (
-    <div className="min-h-screen  mx-auto">
+    <div className="min-h-screen  relative mx-auto">
+      <DotPattern/>
       <section
         id="about-mist-blitz-pro"
-        className="relative overflow-hidden bg-[url(/bg6.png)]   bg-no-repeat object-center bg-center object-cover bg-gray-50"
+        className="relative overflow-hidden  bg-no-repeat object-center bg-center object-cover bg-gray-50"
       >
         {/* --- Section 1: What is Formula Student? (Full Width) --- */}
-        <div className="bg-white bg-[url(/bg6.png)]   bg-no-repeat object-center bg-cover py-16 border-t-8 border-b-8 border-black">
+        <div className="bg-white  py-16 border-t-8 border-b-8 border-black">
           <div className="container mx-auto px-4 max-w-6xl">
             <ComicHeadline colorClass="text-yellow-400">
               MISSION OBJECTIVE

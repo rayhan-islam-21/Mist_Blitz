@@ -2,6 +2,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+* {
+  cursor: none !important;
+}
+input,
+textarea,
+select {
+  cursor: text !important;
+}
 :root {
   --blitz-yellow: #ffe600;
   --blitz-red: #e10600;

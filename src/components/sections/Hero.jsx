@@ -5,10 +5,10 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative -z-40 h-screen w-full overflow-hidden">
       {/* Background Video */}
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        className="absolute -z-10 top-0 left-0 w-full h-full object-cover"
         autoPlay
         muted
         loop
@@ -24,7 +24,7 @@ const Hero = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-black/50 z-0"></div>
 
       <div
-        className="absolute top-0 left-0 w-full h-full z-0" 
+        className="absolute top-0 left-0 w-full h-full" 
         style={{
           background:
             "linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.4) 100%)",
@@ -35,9 +35,6 @@ const Hero = () => {
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
         {/* Constrain content width for large screens */}
         <div className="max-w-5xl mx-auto">
-          {/* <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold text-white drop-shadow-xl tracking-wide">
-            MIST BLIT<span className="text-(--blitz-red)">Z</span>
-          </h1> */}
           <Image 
           src="/hero.png"
           width={600}
