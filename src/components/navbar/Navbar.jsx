@@ -1,68 +1,68 @@
-{/* ABOUT DROPDOWN */}
-<DropdownMenu
-  trigger={
-    <span
-      className={`${navItemBase} ${navItemHover} cursor-pointer flex items-center gap-2`}
-    >
-      About
-      <span className="text-xs transition-transform group-data-[state=open]:rotate-180">
-        ▼
-      </span>
-    </span>
-  }
->
-  <div
-    className="
-      relative bg-white
-      border-4 border-black
-      shadow-[8px_8px_0_#000]
-      w-56
-      p-2
-    "
-  >
-    {/* Header strip */}
-    <div
-      className="
-        mb-2 px-3 py-2
-        bg-yellow-300
-        border-2 border-black
-        font-(--font-comic)
-        font-extrabold
-        text-black
-        text-lg
-        shadow-[3px_3px_0_#000]
-      "
-    >
-      ABOUT US
-    </div>
+"use client";
+import Link from "next/link";
+import Button from "../ui/retro-btn";
+import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "../ui/dropdown";
 
-    {/* Items */}
-    {[
-      { label: "What we do", href: "/about#what" },
-      { label: "Who we are", href: "/about#who" },
-      { label: "Our aim", href: "/about#aim" },
-    ].map((item, index) => (
-      <DropdownMenuItem key={item.label} className="p-0">
-        <Link
-          href={item.href}
-          className="
-            group block w-full px-4 py-3
-            font-(--font-comic) text-lg text-black
-            border-2 border-transparent
-            hover:border-black
-            hover:bg-yellow-200
-            hover:shadow-[4px_4px_0_#000]
-            transition-all duration-150
-          "
-        >
-          <span className="flex items-center gap-2">
-            <span className="text-red-600 font-extrabold">
-              {index + 1}.
-            </span>
-            {item.label}
-          </span>
-        </Link>
-      </DropdownMenuItem>
-    ))}
-  </div>
-</DropdownMenu>
+const Navbar = () => {
+  return (
+    <header className="bg-gray-100 z-50 text-gray-900 p-4 md:px-8 py-6   shadow-md border-b-4 border-yellow-600">
+      <div className="flex justify-between items-center max-w-7xl mx-auto">
+        {/* Logo */}
+        <div className="select-none">
+          <Image src="/logo3.png" className="select-none" alt="logo" width={140} height={140} />
+        </div>
+
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex  space-x-4 items-center">
+          <Button variant="secondary" className="bg-yellow-300  text-black">
+            <Link href="/">Home</Link>
+          </Button>
+          <DropdownMenu
+            trigger={
+              <Button className="bg-yellow-300 text-black relative overflow-hidden group">
+                <span className="relative z-40">About</span>
+              </Button>
+            }
+          >
+            <div className="flex z-10 flex-col gap-1 p-1 ">
+              <DropdownMenuItem onClick={() => console.log("What we do")}>
+                <span className="tracking-wide text-xl">What we do</span>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem onClick={() => console.log("Who we are")}>
+                <span className="tracking-wide text-xl">Who we are</span>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem onClick={() => console.log("Our aim")}>
+                <span className="tracking-wide text-xl">Our aim</span>
+              </DropdownMenuItem>
+            </div>
+          </DropdownMenu>
+
+          <Button className="bg-yellow-300 text-black">
+            <Link href="/">Partners</Link>
+          </Button>
+          <Button className="bg-yellow-300 text-black">
+            <Link href="/">Join Us</Link>
+          </Button>
+          <Button className="bg-yellow-300 text-black">
+            <Link href="/">Gallery</Link>
+          </Button>
+          <Button className="bg-yellow-300 text-black">
+            <Link href="/">Shop</Link>
+          </Button>
+          <Button className=" text-lg text-black font-(--font-comic)">
+            Contact
+          </Button>
+        </nav>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;

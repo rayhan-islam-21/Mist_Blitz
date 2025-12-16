@@ -4,22 +4,14 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
-import SponsorCard from "@/components/ui/sponsor-card";
 
 // --- Comic Action Text Component ---
-const ComicActionText = ({
-  text,
-  color,
-  position,
-  size = "3xl",
-  rotation = 0,
-  delay = 0,
-}) => (
+const ComicActionText = ({ text, color, position, size = "3xl", rotation = 0, delay = 0 }) => (
   <motion.span
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.5 }}
-    transition={{ type: "spring", stiffness: 150, damping: 10, delay: delay }}
+    transition={{ type: "spring", stiffness: 150, damping: 10, delay }}
     className={`absolute font-comic font-extrabold text-${size} p-1 z-10 whitespace-nowrap`}
     style={{
       color: color,
@@ -39,9 +31,7 @@ const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
     whileInView={{ y: 0, opacity: 1 }}
     viewport={{ once: true, amount: 0.8 }}
     transition={{ duration: 0.5 }}
-    className={`text-5xl md:text-6xl font-comic font-extrabold mb-8 
-                drop-shadow-[1px_4px_0_rgba(0,0,0,0.8)] 
-                tracking-wide transform skew-x-[-5deg] inline-block px-2 border-b-4 border-yellow-400 ${colorClass}`}
+    className={`text-5xl md:text-6xl font-comic font-extrabold mb-8 drop-shadow-[1px_4px_0_rgba(0,0,0,0.8)] tracking-wide transform skew-x-[-5deg] inline-block px-2 border-b-4 border-yellow-400 ${colorClass}`}
   >
     {children}
   </motion.h2>
@@ -68,42 +58,12 @@ const FramedImage = ({ src, alt, caption, rotation }) => (
 const AboutPreview = () => {
   const listVariants = {
     hidden: { opacity: 0, y: 10 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.1 },
-    }),
+    visible: (i) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1 } }),
   };
-
-  // Example sponsors data
-  const sponsors = [
-    {
-      logo: "/sponsor1.png",
-      name: "Sponsor One",
-      website: "https://sponsorone.com",
-      description: "Leading innovator in automotive components.",
-      accentColor: "yellow",
-    },
-    {
-      logo: "/sponsor2.png",
-      name: "Sponsor Two",
-      website: "https://sponsortwo.com",
-      description: "Experts in engineering solutions.",
-      accentColor: "blue",
-    },
-    {
-      logo: "/sponsor3.png",
-      name: "Sponsor Three",
-      website: "https://sponsorthree.com",
-      description: "Supporting next-gen motorsport talent.",
-      accentColor: "red",
-    },
-  ];
 
   return (
     <div className="relative min-h-screen overflow-hidden">
       <section id="about-mist-blitz-pro" className="relative z-10 bg-white">
-        {/* Interactive background grids */}
         <InteractiveGridPattern
           hoverFill="fill-gray-400/50"
           fadeDelay={200}
@@ -119,9 +79,7 @@ const AboutPreview = () => {
 
             <div className="md:flex items-start gap-12">
               <div className="md:w-1/2 mb-8 md:mb-0">
-                <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                  WHAT IS FORMULA STUDENT?
-                </h3>
+                <h3 className="text-3xl font-bold text-gray-900 mb-4">WHAT IS FORMULA STUDENT?</h3>
                 <p className="text-xl text-gray-700 leading-relaxed mb-6">
                   Formula Student (FS) is Europe's most established educational engineering competition. Teams around the globe design, build, and compete with a single-seater race car, pushing the boundaries of automotive engineering.
                 </p>
@@ -173,30 +131,6 @@ const AboutPreview = () => {
                   Team formed in <strong>April 2024</strong>. Ready for the next race season!
                 </span>
               </motion.div>
-            </div>
-          </div>
-        </div>
-
-        {/* --- Sponsors Section --- */}
-        <div className="py-16 bg-gray-100 border-t-8 border-black relative z-10">
-          <div className="container mx-auto px-4 max-w-6xl text-center">
-            <ComicHeadline colorClass="text-blue-500">OUR SPONSORS</ComicHeadline>
-            <p className="text-lg text-gray-700 mb-12">
-              Proudly supported by organizations that fuel our journey.
-            </p>
-
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 justify-center items-stretch">
-              {sponsors.map((sponsor, idx) => (
-                <motion.div
-                  key={sponsor.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.15 }}
-                >
-                  <SponsorCard {...sponsor} />
-                </motion.div>
-              ))}
             </div>
           </div>
         </div>

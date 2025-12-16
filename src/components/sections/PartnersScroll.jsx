@@ -1,22 +1,57 @@
 "use client";
 
 import { motion, useAnimation } from "framer-motion";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import SponsorCard from "../ui/retro-card";
+import SponsorCard from "../ui/retro-card"; // Correct import
 import { RetroGrid } from "../ui/retro-grid";
 
+// Sponsor details
 const sponsors = [
-  "/sponsers/sp1.png",
-  "/sponsers/sp2.png",
-  "/sponsers/sp3.png",
-  "/sponsers/sp4.png",
-  "/sponsers/sp5.png",
-  "/sponsers/sp6.png",
-  "/sponsers/sp7.png",
-  "/sponsers/sp8.png",
+  {
+    logo: "/sponsers/sp1.png",
+    name: "Sponsor One",
+    website: "https://sponsor1.com",
+    description: "Leading innovator in automotive components.",
+    accentColor: "yellow",
+  },
+  {
+    logo: "/sponsers/sp2.png",
+    name: "Sponsor Two",
+    website: "https://sponsor2.com",
+    description: "Experts in engineering solutions.",
+    accentColor: "blue",
+  },
+  {
+    logo: "/sponsers/sp3.png",
+    name: "Sponsor Three",
+    website: "https://sponsor3.com",
+    description: "Supporting next-gen motorsport talent.",
+    accentColor: "red",
+  },
+  {
+    logo: "/sponsers/sp4.png",
+    name: "Sponsor Four",
+    website: "https://sponsor4.com",
+    description: "Innovative solutions for racing.",
+    accentColor: "green",
+  },
+  {
+    logo: "/sponsers/sp5.png",
+    name: "Sponsor Five",
+    website: "https://sponsor5.com",
+    description: "Engineering excellence worldwide.",
+    accentColor: "yellow",
+  },
+  {
+    logo: "/sponsers/sp6.png",
+    name: "Sponsor Six",
+    website: "https://sponsor6.com",
+    description: "Supporting future engineers.",
+    accentColor: "blue",
+  },
 ];
 
+// Duplicate sponsors for continuous scrolling
 const loopSponsors = [...sponsors, ...sponsors];
 
 export default function PartnersScroll() {
@@ -24,14 +59,12 @@ export default function PartnersScroll() {
   const router = useRouter();
 
   return (
-    <section className="relative  bg-white border-y-8 border-black overflow-hidden">
-      <RetroGrid></RetroGrid>
+    <section className="relative bg-white border-y-8 border-black overflow-hidden">
+      <RetroGrid />
+
       <div className="max-w-vh mx-auto py-14">
         {/* Title */}
-        <h2
-          className="text-center text-4xl md:text-5xl font-comic font-extrabold mb-10
-                       text-red-700 drop-shadow-[4px_4px_0_#000]"
-        >
+        <h2 className="text-center text-4xl md:text-5xl font-comic font-extrabold mb-10 text-red-700 drop-shadow-[4px_4px_0_#000]">
           OUR PARTNERS
         </h2>
 
@@ -48,14 +81,13 @@ export default function PartnersScroll() {
             }}
             onViewportEnter={() => controls.start({ x: ["0%", "-50%"] })}
           >
-            {loopSponsors.map((logo, index) => (
+            {loopSponsors.map((sponsor, index) => (
               <motion.div
                 key={index}
                 onHoverStart={() => controls.stop()}
                 onHoverEnd={() => controls.start({ x: ["0%", "-50%"] })}
-                onClick={() => router.push("/#sponsors")}
+                onClick={() => window.open(sponsor.website, "_blank")}
                 whileHover={{
-                  rotate: 0,
                   scale: 1.08,
                   y: -6,
                 }}
@@ -63,16 +95,8 @@ export default function PartnersScroll() {
                   scale: 0.95,
                 }}
               >
-                {/* Wrap sponsor logo in RetroCard */}
-                <SponsorCard className="hover:rotate-10  px-6 py-4">
-                  <Image
-                    src={logo}
-                    alt="Sponsor logo"
-                    width={140}
-                    height={140}
-                    className="object-contain"
-                  />
-                </SponsorCard>
+                {/* Sponsor Card */}
+                <SponsorCard logo={sponsor.logo} name={sponsor.name} />
               </motion.div>
             ))}
           </motion.div>
