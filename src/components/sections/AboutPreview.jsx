@@ -80,7 +80,8 @@ const AboutPreview = () => {
   return (
     <div className="relative min-h-screen overflow-hidden">
       <section id="about-mist-blitz-pro" className="relative z-10 bg-white">
-        <InteractiveGridPattern hoverFill="fill-gray-400/50" fadeDelay={200} squares={[30,30]} className="opacity-50"  />
+        <InteractiveGridPattern hoverFill="fill-gray-400/50" fadeDelay={200} squares={[30,30]} className="opacity-50 md:block hidden"  />
+        <InteractiveGridPattern squares={[10,10]} className="md:hidden block opacity-20" />
         {/* --- Section 1: Mission Objective --- */}
         <div className=" py-16 border-t-8 border-b-12 overflow-hidden border-black">
           <div className="container mx-auto px-4 max-w-6xl">

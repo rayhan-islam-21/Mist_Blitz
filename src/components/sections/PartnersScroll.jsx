@@ -5,6 +5,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import RetroCard from "@/components/ui/retro-card";
+import { GridPattern } from "../ui/grid-pattern";
+import { DotPattern } from "../ui/dot-pattern";
+import { RetroGrid } from "../ui/retro-grid";
 
 const sponsors = [
   "/sponsers/sp1.png",
@@ -24,24 +27,26 @@ export default function PartnersScroll() {
   const router = useRouter();
 
   return (
-    <section className="relative bg-white border-y-8 border-black overflow-hidden">
-      <AnimatedGridPattern />
-      <div className="max-w-7xl mx-auto py-14">
+    <section className="relative  bg-white border-y-8 border-black overflow-hidden">
+      <RetroGrid></RetroGrid>
+      <div className="max-w-vh mx-auto py-14">
         {/* Title */}
-        <h2 className="text-center text-4xl md:text-5xl font-comic font-extrabold mb-10
-                       text-red-700 drop-shadow-[4px_4px_0_#000]">
+        <h2
+          className="text-center text-4xl md:text-5xl font-comic font-extrabold mb-10
+                       text-red-700 drop-shadow-[4px_4px_0_#000]"
+        >
           OUR PARTNERS
         </h2>
 
         {/* Scroll Container */}
         <div className="relative overflow-x-hidden overflow-y-visible p-12">
-          {/* LEFT FOG */}
+          {/* LEFT FOG
           <div className="pointer-events-none absolute left-0 top-0 h-full w-32
                           bg-linear-to-r from-[#ffffff] via-[#ffffff]/80 to-transparent z-10" />
 
           {/* RIGHT FOG */}
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-32
-                          bg-linear-to-l from-[#ffffff] via-[#ffffff]/80 to-transparent z-10" />
+          {/* <div className="pointer-events-none absolute right-0 top-0 h-full w-32
+                          bg-linear-to-l from-[#ffffff] via-[#ffffff]/80 to-transparent z-10" /> */}
 
           <motion.div
             className="flex gap-12 w-max"

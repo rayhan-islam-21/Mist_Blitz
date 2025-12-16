@@ -8,8 +8,7 @@ import { Pointer } from "@/components/ui/pointer"
 export default function Home() {
   return (
     <>
-      {/* <SmoothCursor/> */}
-      <Pointer/>
+      <SmoothCursor/>
      <Navbar/>
      <Hero/>
      <AboutPreview/>
