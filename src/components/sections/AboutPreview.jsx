@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { DotPattern } from "@/components/ui/dot-pattern";
 import { GridPattern } from "@/components/ui/grid-pattern";
+import { RetroGrid } from "@/components/ui/retro-grid";
+import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 
 // --- Comic Action Text Component ---
 const ComicActionText = ({
@@ -78,9 +80,9 @@ const AboutPreview = () => {
   return (
     <div className="relative min-h-screen overflow-hidden">
       <section id="about-mist-blitz-pro" className="relative z-10 bg-white">
+        <InteractiveGridPattern hoverFill="fill-gray-400/50" fadeDelay={200} squares={[30,30]} className="opacity-50"  />
         {/* --- Section 1: Mission Objective --- */}
-        <div className="bg-white py-16 border-t-8 border-b-12 overflow-hidden border-black">
-          <DotPattern className="text-black/20" />
+        <div className=" py-16 border-t-8 border-b-12 overflow-hidden border-black">
           <div className="container mx-auto px-4 max-w-6xl">
             <ComicHeadline colorClass="text-yellow-400">
               MISSION OBJECTIVE
@@ -137,7 +139,7 @@ const AboutPreview = () => {
 
         {/* --- Section 2: MIST BLITZ Origins --- */}
         <div className="py-16 mx-auto px-4 max-w-6xl">
-          <GridPattern className="opacity-45" />
+          {/* <GridPattern className="opacity-45" /> */}
           <ComicHeadline colorClass="text-red-700">
             MIST BLITZ ORIGINS
           </ComicHeadline>
