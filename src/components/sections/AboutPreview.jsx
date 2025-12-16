@@ -3,10 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { DotPattern } from "@/components/ui/dot-pattern";
-import { GridPattern } from "@/components/ui/grid-pattern";
-import { RetroGrid } from "@/components/ui/retro-grid";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
+import SponsorCard from "@/components/ui/sponsor-card";
 
 // --- Comic Action Text Component ---
 const ComicActionText = ({
@@ -43,7 +41,7 @@ const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
     transition={{ duration: 0.5 }}
     className={`text-5xl md:text-6xl font-comic font-extrabold mb-8 
                 drop-shadow-[1px_4px_0_rgba(0,0,0,0.8)] 
-                tracking-wide transform skew-x-[-5deg] inline-block px-2 border-b-4 border-yellow-400 ${colorClass}  `}
+                tracking-wide transform skew-x-[-5deg] inline-block px-2 border-b-4 border-yellow-400 ${colorClass}`}
   >
     {children}
   </motion.h2>
@@ -77,17 +75,47 @@ const AboutPreview = () => {
     }),
   };
 
+  // Example sponsors data
+  const sponsors = [
+    {
+      logo: "/sponsor1.png",
+      name: "Sponsor One",
+      website: "https://sponsorone.com",
+      description: "Leading innovator in automotive components.",
+      accentColor: "yellow",
+    },
+    {
+      logo: "/sponsor2.png",
+      name: "Sponsor Two",
+      website: "https://sponsortwo.com",
+      description: "Experts in engineering solutions.",
+      accentColor: "blue",
+    },
+    {
+      logo: "/sponsor3.png",
+      name: "Sponsor Three",
+      website: "https://sponsorthree.com",
+      description: "Supporting next-gen motorsport talent.",
+      accentColor: "red",
+    },
+  ];
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       <section id="about-mist-blitz-pro" className="relative z-10 bg-white">
-        <InteractiveGridPattern hoverFill="fill-gray-400/50" fadeDelay={200} squares={[30,30]} className="opacity-50 md:block hidden"  />
-        <InteractiveGridPattern squares={[10,10]} className="md:hidden block opacity-20" />
+        {/* Interactive background grids */}
+        <InteractiveGridPattern
+          hoverFill="fill-gray-400/50"
+          fadeDelay={200}
+          squares={[30, 30]}
+          className="opacity-50 md:block hidden"
+        />
+        <InteractiveGridPattern squares={[10, 10]} className="md:hidden block opacity-20" />
+
         {/* --- Section 1: Mission Objective --- */}
-        <div className=" py-16 border-t-8 border-b-12 overflow-hidden border-black">
+        <div className="py-16 border-t-8 border-b-12 overflow-hidden border-black">
           <div className="container mx-auto px-4 max-w-6xl">
-            <ComicHeadline colorClass="text-yellow-400">
-              MISSION OBJECTIVE
-            </ComicHeadline>
+            <ComicHeadline colorClass="text-yellow-400">MISSION OBJECTIVE</ComicHeadline>
 
             <div className="md:flex items-start gap-12">
               <div className="md:w-1/2 mb-8 md:mb-0">
@@ -95,10 +123,7 @@ const AboutPreview = () => {
                   WHAT IS FORMULA STUDENT?
                 </h3>
                 <p className="text-xl text-gray-700 leading-relaxed mb-6">
-                  Formula Student (FS) is Europe's most established educational
-                  engineering competition. Teams around the globe design, build,
-                  and compete with a single-seater race car, pushing the
-                  boundaries of automotive engineering.
+                  Formula Student (FS) is Europe's most established educational engineering competition. Teams around the globe design, build, and compete with a single-seater race car, pushing the boundaries of automotive engineering.
                 </p>
                 <motion.ul
                   initial="hidden"
@@ -106,20 +131,9 @@ const AboutPreview = () => {
                   viewport={{ once: true, amount: 0.5 }}
                   className="space-y-3 text-lg font-semibold text-gray-800"
                 >
-                  {[
-                    "Engineering Design",
-                    "Cost & Manufacturing",
-                    "Dynamic Track Events",
-                  ].map((item, index) => (
-                    <motion.li
-                      key={item}
-                      custom={index}
-                      variants={listVariants}
-                      className="flex items-center"
-                    >
-                      <span className="text-red-500 mr-3 text-2xl font-extrabold font-comic">
-                        {index + 1}.
-                      </span>
+                  {["Engineering Design", "Cost & Manufacturing", "Dynamic Track Events"].map((item, index) => (
+                    <motion.li key={item} custom={index} variants={listVariants} className="flex items-center">
+                      <span className="text-red-500 mr-3 text-2xl font-extrabold font-comic">{index + 1}.</span>
                       {item}
                     </motion.li>
                   ))}
@@ -127,12 +141,7 @@ const AboutPreview = () => {
               </div>
 
               <div className="md:w-1/2">
-                <FramedImage
-                  src="/team.jpg"
-                  alt="Formula Student Competition"
-                  caption="The proving ground for future engineers."
-                  rotation={-3}
-                />
+                <FramedImage src="/team.jpg" alt="Formula Student Competition" caption="The proving ground for future engineers." rotation={-3} />
               </div>
             </div>
           </div>
@@ -140,30 +149,17 @@ const AboutPreview = () => {
 
         {/* --- Section 2: MIST BLITZ Origins --- */}
         <div className="py-16 mx-auto px-4 max-w-6xl">
-          {/* <GridPattern className="opacity-45" /> */}
-          <ComicHeadline colorClass="text-red-700">
-            MIST BLITZ ORIGINS
-          </ComicHeadline>
+          <ComicHeadline colorClass="text-red-700">MIST BLITZ ORIGINS</ComicHeadline>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
-              <FramedImage
-                src="/furiosa.png"
-                alt="Furiosa 1.0 Race Car"
-                caption="Furiosa 1.0: Our first contender."
-                rotation={5}
-              />
+              <FramedImage src="/furiosa.png" alt="Furiosa 1.0 Race Car" caption="Furiosa 1.0: Our first contender." rotation={5} />
             </div>
 
             <div className="order-1 md:order-2">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                WHO WE ARE
-              </h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">WHO WE ARE</h3>
               <p className="text-xl text-gray-700 leading-relaxed mb-6">
-                MIST BLITZ is the dedicated Formula Student team from MIST
-                (Military Institute of Science and Technology). We were founded
-                with a singular vision: to elevate Bangladeshi engineering to
-                the world stage of motorsport.
+                MIST BLITZ is the dedicated Formula Student team from MIST (Military Institute of Science and Technology). We were founded with a singular vision: to elevate Bangladeshi engineering to the world stage of motorsport.
               </p>
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -174,10 +170,33 @@ const AboutPreview = () => {
               >
                 <span className="text-3xl text-red-600">ALERT! </span>
                 <span className="text-xl text-black">
-                  Team formed in <strong>April 2024</strong>. Ready for the next
-                  race season!
+                  Team formed in <strong>April 2024</strong>. Ready for the next race season!
                 </span>
               </motion.div>
+            </div>
+          </div>
+        </div>
+
+        {/* --- Sponsors Section --- */}
+        <div className="py-16 bg-gray-100 border-t-8 border-black relative z-10">
+          <div className="container mx-auto px-4 max-w-6xl text-center">
+            <ComicHeadline colorClass="text-blue-500">OUR SPONSORS</ComicHeadline>
+            <p className="text-lg text-gray-700 mb-12">
+              Proudly supported by organizations that fuel our journey.
+            </p>
+
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 justify-center items-stretch">
+              {sponsors.map((sponsor, idx) => (
+                <motion.div
+                  key={sponsor.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.15 }}
+                >
+                  <SponsorCard {...sponsor} />
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>

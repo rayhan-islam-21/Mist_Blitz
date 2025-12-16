@@ -3,10 +3,7 @@
 import { motion, useAnimation } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
-import RetroCard from "@/components/ui/retro-card";
-import { GridPattern } from "../ui/grid-pattern";
-import { DotPattern } from "../ui/dot-pattern";
+import SponsorCard from "../ui/retro-card";
 import { RetroGrid } from "../ui/retro-grid";
 
 const sponsors = [
@@ -40,14 +37,6 @@ export default function PartnersScroll() {
 
         {/* Scroll Container */}
         <div className="relative overflow-x-hidden overflow-y-visible p-12">
-          {/* LEFT FOG
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-32
-                          bg-linear-to-r from-[#ffffff] via-[#ffffff]/80 to-transparent z-10" />
-
-          {/* RIGHT FOG */}
-          {/* <div className="pointer-events-none absolute right-0 top-0 h-full w-32
-                          bg-linear-to-l from-[#ffffff] via-[#ffffff]/80 to-transparent z-10" /> */}
-
           <motion.div
             className="flex gap-12 w-max"
             animate={controls}
@@ -75,7 +64,7 @@ export default function PartnersScroll() {
                 }}
               >
                 {/* Wrap sponsor logo in RetroCard */}
-                <RetroCard className="-rotate-5 px-6 py-4">
+                <SponsorCard className="hover:rotate-10  px-6 py-4">
                   <Image
                     src={logo}
                     alt="Sponsor logo"
@@ -83,7 +72,7 @@ export default function PartnersScroll() {
                     height={140}
                     className="object-contain"
                   />
-                </RetroCard>
+                </SponsorCard>
               </motion.div>
             ))}
           </motion.div>
