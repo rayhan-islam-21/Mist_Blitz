@@ -3,7 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { DotPattern } from "@/components/ui/dot-pattern"
+import { DotPattern } from "@/components/ui/dot-pattern";
+import { GridPattern } from "@/components/ui/grid-pattern";
 
 // --- Comic Action Text Component ---
 const ComicActionText = ({
@@ -31,40 +32,39 @@ const ComicActionText = ({
   </motion.span>
 );
 
-// --- Reusable Component for Stylized Titles ---
+// --- Comic Headline Component ---
 const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
   <motion.h2
     initial={{ y: 20, opacity: 0 }}
     whileInView={{ y: 0, opacity: 1 }}
     viewport={{ once: true, amount: 0.8 }}
     transition={{ duration: 0.5 }}
-    className={`text-5xl md:text-6xl font-comic font-extrabold ${colorClass} mb-8 
-                    drop-shadow-[4px_4px_0_rgba(0,0,0,0.8)] 
-                    tracking-wide
-                    transform skew-x-[-5deg] inline-block px-2 border-b-4 border-yellow-400`}
+    className={`text-5xl md:text-6xl font-comic font-extrabold mb-8 
+                drop-shadow-[1px_4px_0_rgba(0,0,0,0.8)] 
+                tracking-wide transform skew-x-[-5deg] inline-block px-2 border-b-4 border-yellow-400 ${colorClass}  `}
   >
     {children}
   </motion.h2>
 );
 
-// --- Component for Comic-Framed Image ---
+// --- Comic Framed Image Component ---
 const FramedImage = ({ src, alt, caption, rotation }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.8 }}
     whileInView={{ opacity: 1, scale: 1 }}
     viewport={{ once: true, amount: 0.6 }}
     transition={{ type: "spring", stiffness: 50, damping: 10, delay: 0.2 }}
-    className={`relative w-full aspect-video md:aspect-square overflow-hidden border-8 object-cover border-black shadow-[16px_16px_0_0_#ffd900]`}
+    className={`relative w-full aspect-video md:aspect-square overflow-hidden border-8 border-black shadow-[16px_16px_0_0_#ffd900]`}
     style={{ transform: `rotate(${rotation}deg)` }}
   >
-    <img src={src} alt={alt} className="w-full h-full object-cover" />
+    <Image src={src} alt={alt} fill className="object-cover" />
     <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-2 text-center text-white text-lg font-bold font-comic">
       {caption}
     </div>
   </motion.div>
 );
 
-// --- Main Component ---
+// --- Main AboutPreview Component ---
 const AboutPreview = () => {
   const listVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -76,14 +76,11 @@ const AboutPreview = () => {
   };
 
   return (
-    <div className="min-h-screen  relative mx-auto">
-      <DotPattern/>
-      <section
-        id="about-mist-blitz-pro"
-        className="relative overflow-hidden  bg-no-repeat object-center bg-center object-cover bg-gray-50"
-      >
-        {/* --- Section 1: What is Formula Student? (Full Width) --- */}
-        <div className="bg-white  py-16 border-t-8 border-b-8 border-black">
+    <div className="relative min-h-screen overflow-hidden">
+      <section id="about-mist-blitz-pro" className="relative z-10 bg-white">
+        {/* --- Section 1: Mission Objective --- */}
+        <div className="bg-white py-16 border-t-8 border-b-12 overflow-hidden border-black">
+          <DotPattern className="text-black/20" />
           <div className="container mx-auto px-4 max-w-6xl">
             <ComicHeadline colorClass="text-yellow-400">
               MISSION OBJECTIVE
@@ -128,7 +125,7 @@ const AboutPreview = () => {
 
               <div className="md:w-1/2">
                 <FramedImage
-                  src="/team.jpg" // Use a more realistic image path
+                  src="/team.jpg"
                   alt="Formula Student Competition"
                   caption="The proving ground for future engineers."
                   rotation={-3}
@@ -138,8 +135,9 @@ const AboutPreview = () => {
           </div>
         </div>
 
-        {/* --- Section 2: MIST BLITZ & Team History (Staggered Layout) --- */}
-        <div className="  py-16  object-cover  mx-auto px-4 max-w-6xl ">
+        {/* --- Section 2: MIST BLITZ Origins --- */}
+        <div className="py-16 mx-auto px-4 max-w-6xl">
+          <GridPattern className="opacity-45" />
           <ComicHeadline colorClass="text-red-700">
             MIST BLITZ ORIGINS
           </ComicHeadline>
@@ -173,7 +171,8 @@ const AboutPreview = () => {
               >
                 <span className="text-3xl text-red-600">ALERT! </span>
                 <span className="text-xl text-black">
-                  Team formed in **April 2024**. Ready for the next race season!
+                  Team formed in <strong>April 2024</strong>. Ready for the next
+                  race season!
                 </span>
               </motion.div>
             </div>
@@ -181,25 +180,19 @@ const AboutPreview = () => {
         </div>
 
         {/* --- CTA Button --- */}
-        <div className="text-center mt-0 mb-20">
+        <div className="text-center mt-0 p-12">
           <motion.a
             href="/full-mission"
             aria-label="Read the full MIST BLITZ mission"
             initial={{ opacity: 0, y: 50, scale: 0.8 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.5 }}
-            transition={{
-              type: "spring",
-              // stiffness: 100,
-              // damping: 10,
-              delay: 0.1,
-            }}
+            transition={{ type: "spring", delay: 0.1 }}
             whileHover={{
-              scale: 1,  
-              x: -2, // move left
-              y: -1, // move slightly up
+              scale: 1.05,
+              x: -2,
+              y: -1,
               boxShadow: "8px 8px 0px 0px #D90000",
-              // transition: { type: "spring", stiffness: 200, damping: 12 },
             }}
             whileTap={{ scale: 0.95, boxShadow: "none" }}
             className="inline-flex items-center justify-center px-16 py-6 text-3xl font-extrabold text-white bg-black border-8 border-black rounded-none shadow-[14px_14px_0_0_#FFC107] transition-all duration-150 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-offset-4 focus:ring-offset-black skew-y-12 relative z-30 cursor-pointer"
