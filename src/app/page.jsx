@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import PartnersScroll from "@/components/sections/PartnersScroll";
 import { SmoothCursor } from "@/components/ui/smooth-cursor"
 import { Pointer } from "@/components/ui/pointer"
+import Footer from "@/components/footer/Footer";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
      <Hero/>
      <AboutPreview/>
      <PartnersScroll/>
+     <Footer/>
     </>
   );
 }
