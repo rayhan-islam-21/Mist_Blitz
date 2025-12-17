@@ -1,117 +1,74 @@
 "use client";
 
 import { motion, useAnimation } from "framer-motion";
-import { useRouter } from "next/navigation";
-import SponsorCard from "../ui/retro-card"; // Correct import
+import Image from "next/image";
 import { RetroGrid } from "../ui/retro-grid";
 
-// Sponsor details
+// Sponsor logos
 const sponsors = [
-  {
-    logo: "/sponsers/sp1.png",
-    name: "DongFien Motor",
-    website: "https://sponsor1.com",
-    description: "Leading innovator in automotive components.",
-    accentColor: "yellow",
-  },
-  {
-    logo: "/sponsers/sp2.png",
-    name: "Radient",
-    website: "https://sponsor2.com",
-    description: "Experts in engineering solutions.",
-    accentColor: "blue",
-  },
-  {
-    logo: "/sponsers/sp3.png",
-    name: "Seven Rings",
-    website: "https://sponsor3.com",
-    description: "Supporting next-gen motorsport talent.",
-    accentColor: "red",
-  },
-  {
-    logo: "/sponsers/sp4.png",
-    name: "Dessualt System",
-    website: "https://sponsor4.com",
-    description: "Innovative solutions for racing.",
-    accentColor: "green",
-  },
-  {
-    logo: "/sponsers/sp5.png",
-    name: "Rapid Harness",
-    website: "https://sponsor5.com",
-    description: "Engineering excellence worldwide.",
-    accentColor: "yellow",
-  },
-  {
-    logo: "/sponsers/sp6.png",
-    name: "Ventra",
-    website: "https://sponsor6.com",
-    description: "Supporting future engineers.",
-    accentColor: "blue",
-  },
-  {
-    logo: "/sponsers/sp7.png",
-    name: "JMI",
-    website: "https://sponsor6.com",
-    description: "Supporting future engineers.",
-    accentColor: "blue",
-  },
-  {
-    logo: "/sponsers/sp8.png",
-    name: "Geely",
-    website: "https://sponsor6.com",
-    description: "Supporting future engineers.",
-    accentColor: "blue",
-  },
+  { logo: "/sponsers/sp1.png", website: "https://sponsor1.com" },
+  { logo: "/sponsers/sp2.png", website: "https://sponsor2.com" },
+  { logo: "/sponsers/sp3.png", website: "https://sponsor3.com" },
+  { logo: "/sponsers/sp4.png", website: "https://sponsor4.com" },
+  { logo: "/sponsers/sp5.png", website: "https://sponsor5.com" },
+  { logo: "/sponsers/sp6.png", website: "https://sponsor6.com" },
+  { logo: "/sponsers/sp7.png", website: "https://sponsor7.com" },
+  { logo: "/sponsers/sp8.png", website: "https://sponsor8.com" },
 ];
 
-// Duplicate sponsors for continuous scrolling
-const loopSponsors = [...sponsors, ...sponsors];
+// Duplicate for seamless loop
+const loopSponsors = [...sponsors, ...sponsors,...sponsors];
 
 export default function PartnersScroll() {
   const controls = useAnimation();
-  const router = useRouter();
 
   return (
     <section className="relative bg-white border-y-8 border-black overflow-hidden">
       <RetroGrid />
 
-      <div className="max-w-vh mx-auto py-14">
+      <div className="py-14">
         {/* Title */}
-        <h2 className="text-center text-4xl md:text-5xl font-comic font-extrabold mb-10 text-red-700 drop-shadow-[4px_4px_0_#000]">
+        <h2 className="text-center text-4xl md:text-5xl font-comic font-extrabold mb-12 text-yellow-400  drop-shadow-[4px_4px_0_#000]">
           OUR PARTNERS
         </h2>
 
-        {/* Scroll Container */}
-        <div className="relative overflow-x-hidden overflow-y-visible p-12">
+        {/* Marquee */}
+        <div className="relative overflow-hidden">
           <motion.div
-            className="flex gap-12 w-max"
+            className="flex items-center gap-3 w-max"
             animate={controls}
             initial={{ x: "0%" }}
             transition={{
-              repeat: Infinity,
+              duration: 30,
               ease: "linear",
-              duration: 28,
+              repeat: Infinity,
             }}
-            onViewportEnter={() => controls.start({ x: ["0%", "-50%"] })}
+            onViewportEnter={() =>
+              controls.start({ x: ["0%", "-50%"] })
+            }
           >
             {loopSponsors.map((sponsor, index) => (
-              <motion.div
+              <motion.a
                 key={index}
+                href={sponsor.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative   transition-all duration-300"
                 onHoverStart={() => controls.stop()}
-                onHoverEnd={() => controls.start({ x: ["0%", "-50%"] })}
-                onClick={() => window.open(sponsor.website, "_blank")}
-                whileHover={{
-                  scale: 1.08,
-                  y: -6,
-                }}
-                whileTap={{
-                  scale: 0.95,
-                }}
+                onHoverEnd={() =>
+                  controls.start({ x: ["0%", "-50%"] })
+                }
+                whileHover={{ scale: 1.2 }}
               >
-                {/* Sponsor Card */}
-                <SponsorCard logo={sponsor.logo} name={sponsor.name} />
-              </motion.div>
+                <Image
+                  src={sponsor.logo}
+                  alt="Sponsor logo"
+                  width={300}
+                  height={20}
+                  className="object-cover "
+                  priority
+                />
+              </motion.a>
             ))}
           </motion.div>
         </div>
