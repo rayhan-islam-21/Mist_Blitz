@@ -10,7 +10,7 @@ import JoinCTA from "@/components/sections/JoinCTA";
 export default function Home() {
   return (
     <>
-      <SmoothCursor/>
+      {/* <SmoothCursor/> */}
      <Navbar/>
      <Hero/>
      <AboutPreview/>
