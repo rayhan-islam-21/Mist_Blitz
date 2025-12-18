@@ -65,10 +65,10 @@ const AboutPreview = () => {
     <div className="relative min-h-screen overflow-hidden">
       <section id="about-mist-blitz-pro" className="relative z-10 bg-white">
         <InteractiveGridPattern
-          hoverFill="fill-gray-400/50"
+          hoverFill="fill-yellow-500"
           fadeDelay={200}
           squares={[30, 30]}
-          className="opacity-50 md:block hidden"
+          className="opacity-40 md:block hidden"
         />
         <InteractiveGridPattern squares={[10, 10]} className="md:hidden block opacity-20" />
 

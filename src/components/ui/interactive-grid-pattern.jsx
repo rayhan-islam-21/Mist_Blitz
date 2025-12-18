@@ -6,7 +6,7 @@ export function InteractiveGridPattern({
   width = 40,
   height = 40,
   squares = [24, 24],
-  hoverFill = "fill-yellow-400/40",
+  hoverFill = "fill-yellow-400",
   fadeDelay = 600, // 👈 how long box stays lit (ms)
   className,
   squaresClassName,
