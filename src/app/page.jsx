@@ -6,6 +6,7 @@ import { SmoothCursor } from "@/components/ui/smooth-cursor"
 import { Pointer } from "@/components/ui/pointer"
 import Footer from "@/components/footer/Footer";
 import JoinCTA from "@/components/sections/JoinCTA";
+import GalleryPreview from "@/components/sections/GalleryPreview";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
      <AboutPreview/>
      <PartnersScroll/>
      <JoinCTA/>
+     <GalleryPreview/>
      <Footer/>
     </>
   );
