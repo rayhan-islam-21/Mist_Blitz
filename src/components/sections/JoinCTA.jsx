@@ -6,11 +6,11 @@ import { DotPattern } from "../ui/dot-pattern";
 import Button from "../ui/retro-btn";
 import { Highlighter } from "../ui/highlighter";
 
-export default function SponsorHero() {
+export default function JoinCTA() {
   return (
-    <section className="relative bg-linear-to-b from-gray-50 to-white py-28 flex flex-col items-center justify-center text-center overflow-hidden">
+    <section className="relative bg-white py-28 flex flex-col items-center justify-center text-center overflow-hidden">
       {/* Background Dot Pattern */}
-      <DotPattern className="absolute inset-0 opacity-50" />
+      <DotPattern className="absolute inset-0 bg-white opacity-20" />
 
       {/* Floating shapes for depth */}
       <div className="absolute top-10 left-10 w-24 h-24 bg-yellow-200 rounded-full opacity-20 animate-pulse"></div>
@@ -45,7 +45,7 @@ export default function SponsorHero() {
         Student competitions.
       </motion.p>
 
-      <Button className="mt-12 w-52 bg-yellow-300 p-4 text-xl z-40">
+      <Button className="mt-12 w-52 -rotate-2 hover:rotate-0 transform transition-all delay-100 bg-yellow-300 p-4 text-xl z-40">
         Join Us
       </Button>
 

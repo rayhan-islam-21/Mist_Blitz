@@ -20,14 +20,14 @@ const buttonVariants = cva(// Base styles for all buttons.
         "bg-[#374151] text-[#ffffff] border-2 border-[#000000] shadow-[4px_4px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[4px_4px_0px_0px_#000000] dark:bg-[#374151] dark:text-[#ffffff] dark:border-[#000000] dark:shadow-[4px_4px_0px_0px_#ffffff]",
       // An outline button that fills with the custom color on hover
       outline:
-        "bg-transparent text-[#00ff84] border-2 border-[#00ff84] shadow-[4px_4px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 hover:bg-[#00ff84] hover:text-[#000000] disabled:hover:bg-transparent disabled:hover:text-[#00ff84] disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[4px_4px_0px_0px_#000000] dark:bg-transparent dark:text-[#00ff84] dark:border-[#00ff84] dark:shadow-[4px_4px_0px_0px_#ffffff] dark:hover:bg-[#00ff84] dark:hover:text-[#000000]",
+        "bg-transparent text-black border-2 border-[#000000] shadow-[4px_4px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 hover:bg-[#00ff84] hover:text-[#000000] disabled:hover:bg-transparent disabled:hover:text-[#00ff84] disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[4px_4px_0px_0px_#000000] dark:bg-transparent dark:text-[#00ff84] dark:border-[#00ff84] dark:shadow-[4px_4px_0px_0px_#ffffff] dark:hover:bg-[#00ff84] dark:hover:text-[#000000]",
       // A simple link-style button
       link: "bg-transparent text-[#00ff84] hover:underline dark:text-[#00ff84]",
     },
     size: {
       sm: "px-4 py-2 text-sm",
       md: "px-6 py-2.5 text-base",
-      lg: "px-8 py-4 text-lg",
+      lg: "px-8 py-4 text-xl",
       icon: "h-12 w-12", // Made icon button a bit larger for better visuals
     },
   },

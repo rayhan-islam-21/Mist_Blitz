@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
+import Button from "../ui/retro-btn";
 
 // --- Comic Action Text Component ---
 const ComicActionText = ({ text, color, position, size = "3xl", rotation = 0, delay = 0 }) => (
@@ -40,10 +41,11 @@ const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
 // --- Comic Framed Image Component ---
 const FramedImage = ({ src, alt, caption, rotation }) => (
   <motion.div
-    initial={{ opacity: 0, scale: 0.8 }}
-    whileInView={{ opacity: 1, scale: 1 }}
+    initial={{ opacity: 0, y: 50, scale: 0.9 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
     viewport={{ once: true, amount: 0.6 }}
-    transition={{ type: "spring", stiffness: 50, damping: 10, delay: 0.2 }}
+    transition={{ type: "spring", stiffness: 70, damping: 15 }}
+    whileHover={{ scale: 1.05, rotate: rotation }}
     className={`relative w-full aspect-video md:aspect-square overflow-hidden border-8 border-black shadow-[16px_16px_0_0_#ffd900]`}
     style={{ transform: `rotate(${rotation}deg)` }}
   >
@@ -99,7 +101,7 @@ const AboutPreview = () => {
               </div>
 
               <div className="md:w-1/2">
-                <FramedImage src="/team.jpg" alt="Formula Student Competition" caption="The proving ground for future engineers." rotation={-3} />
+                <FramedImage src="/team.jpg" alt="Formula Student Competition" caption="The proving ground for future engineers." rotation={-2} />
               </div>
             </div>
           </div>
@@ -111,7 +113,7 @@ const AboutPreview = () => {
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
-              <FramedImage src="/furiosa.png" alt="Furiosa 1.0 Race Car" caption="Furiosa 1.0: Our first contender." rotation={5} />
+              <FramedImage src="/furiosa.png" alt="Furiosa 1.0 Race Car" caption="Furiosa 1.0: Our first contender." rotation={-2} />
             </div>
 
             <div className="order-1 md:order-2">
@@ -136,26 +138,8 @@ const AboutPreview = () => {
         </div>
 
         {/* --- CTA Button --- */}
-        <div className="text-center mt-0 p-12">
-          <motion.a
-            href="/full-mission"
-            aria-label="Read the full MIST BLITZ mission"
-            initial={{ opacity: 0, y: 50, scale: 0.8 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ type: "spring", delay: 0.1 }}
-            whileHover={{
-              scale: 1.05,
-              x: -2,
-              y: -1,
-              boxShadow: "8px 8px 0px 0px #D90000",
-            }}
-            whileTap={{ scale: 0.95, boxShadow: "none" }}
-            className="inline-flex items-center justify-center px-16 py-6 text-3xl font-extrabold text-white bg-black border-8 border-black rounded-none shadow-[14px_14px_0_0_#FFC107] transition-all duration-150 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-offset-4 focus:ring-offset-black skew-y-12 relative z-30 cursor-pointer"
-          >
-            READ FULL MISSION
-            <span className="ml-5 text-4xl">→</span>
-          </motion.a>
+        <div className="text-center mb-6 place-items-center hover:rotate-0 -rotate-1">
+          <Button variant="outline" className="w-72 hover:bg-yellow-300  z-50 bg-yellow-300 " size="lg">Read Full Mission</Button>
         </div>
       </section>
     </div>
