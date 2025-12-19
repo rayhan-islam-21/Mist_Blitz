@@ -8,6 +8,7 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   const quickLinks = [
@@ -52,15 +53,14 @@ export default function Footer() {
           {/* Brand section */}
           <div className="lg:col-span-1">
             <div className="mb-6">
-              <h3
-                className="text-4xl text-red-600 tracking-wider"
-                style={{
-                  WebkitTextStroke: "4px white/30",
-                  paintOrder: "stroke fill",
-                }}
-              >
-                MIST BLITZ
-              </h3>
+              <Image 
+              src="/hero.png"
+              alt="logo"
+              width={200}
+              height={200}
+              className="-ml-9"
+              
+              />
               <div className="mt-2 inline-block bg-yellow-300 border-3 border-white px-3 py-1 -rotate-2 shadow-[3px_3px_0px_white]">
                 <span className="text-sm uppercase text-black tracking-wider">
                   Formula Student
