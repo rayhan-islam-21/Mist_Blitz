@@ -7,6 +7,7 @@ import { Pointer } from "@/components/ui/pointer"
 import Footer from "@/components/footer/Footer";
 import JoinCTA from "@/components/sections/JoinCTA";
 import GalleryPreview from "@/components/sections/GalleryPreview";
+import JoinTeamSection from "@/components/sections/JoinTeam";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
      <PartnersScroll/>
      <JoinCTA/>
      <GalleryPreview/>
+     <JoinTeamSection/>
      <Footer/>
     </>
   );
