@@ -3,10 +3,11 @@
 import Image from "next/image";
 import React from "react";
 import Button from "../ui/retro-btn";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative z-0 min-h-screen flex flex-col items-center justify-center w-full overflow-hidden">
+    <section className="relative z-0 min-h-screen flex flex-col items-center justify-center w-full overflow-x-hidden">
       {/* Background Video */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
@@ -46,38 +47,63 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-30 flex flex-col items-center justify-center h-full text-center px-4">
         {/* Hero Image */}
-        <Image
-          src="/hero.png"
-          width={600}
-          height={600}
-          alt="MIST BLITZ Hero"
-          className="mx-auto hover:scale-105 transition-transform duration-700"
-          priority
-        />
+        <motion.div
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
+        >
+          <Image
+            src="/hero.png"
+            width={600}
+            height={600}
+            alt="MIST BLITZ Hero"
+            className="
+    mx-auto
+    max-h-[45vh]
+    w-auto
+    object-contain
+    hover:scale-105
+    transition-transform
+    duration-700
+  "
+            priority
+          />
+        </motion.div>
 
         {/* Tagline */}
-        <p className="mt-6 text-xl sm:text-2xl md:text-3xl text-white tracking-wide drop-shadow-lg">
-          The Formula Student Team of Military Institute of Science and Technology, Bangladesh
-        </p>
+        <motion.p
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+          className="
+    mt-3
+    max-w-3xl
+    text-base sm:text-lg md:text-xl
+    leading-relaxed
+    text-white/90
+    tracking-wide
+    text-center
+    relative
+  "
+        >
+          The Formula Student Team of
+          <span className="block text-gray-100">
+            Military Institute of Science and Technology, Bangladesh
+          </span>
+          {/* subtle underline accent */}
+          <span className="absolute left-1/2 -bottom-3 w-24 h-[2px] bg-yellow-400 -translate-x-1/2 opacity-70"></span>
+        </motion.p>
 
         {/* CTA Button */}
-        <Button className="mt-10 px-10 py-4 w-56 text-xl font-extrabold text-black bg-yellow-400 border-2 border-black rounded-none shadow-[6px_6px_0_0_black] hover:shadow-[4px_4px_0_0-black] hover:bg-yellow-300 hover:scale-105 transition-all duration-300 relative">
-          <span className="absolute -inset-0.5 bg-yellow-500 blur-xl opacity-30 -z-10 rounded-none"></span>
+        <motion.button
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+          className="mt-10 px-10 py-4 w-56 text-xl font-extrabold text-black bg-yellow-300 border-2 border-black rounded-none shadow-[6px_6px_0_0_black] hover:shadow-[4px_4px_0_0-black] hover:bg-yellow-300 hover:scale-105 transition-all duration-300 relative"
+        >
+          <span className="absolute -inset-0.5 bg-yellow-300 blur-xl opacity-30 -z-10 rounded-none"></span>
           CONTACT US
-        </Button>
-
-        {/* Highlight Badges */}
-        {/* <div className="flex gap-6 mt-10 justify-center text-white text-sm sm:text-base">
-          <div className="bg-black/50 px-4 py-2 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-            🏎 Cars: 3
-          </div>
-          <div className="bg-black/50 px-4 py-2 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-            👥 Team Members: 35
-          </div>
-          <div className="bg-black/50 px-4 py-2 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-            ⚡ Top Speed: 200 km/h
-          </div>
-        </div> */}
+        </motion.button>
       </div>
     </section>
   );

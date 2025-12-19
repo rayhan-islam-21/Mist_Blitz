@@ -27,7 +27,7 @@ export default function PartnersScroll() {
       <RetroGrid />
 
       <div className="relative  py-10">
-        <h2 className="text-center tracking-widest text-4xl md:text-5xl font-comic font-extrabold mb-0 mt-6 text-yellow-300 box-shadow-[4px_4px_0_#ffffff]">
+        <h2 className="text-center tracking-widest text-4xl md:text-5xl font-comic font-extrabold mb-0 mt-6 text-yellow-300 drop-shadow-[3px_4px_0_#000000]">
           <Highlighter action="underline" color="#E4013A">
             OUR
           </Highlighter>
