@@ -31,7 +31,7 @@ const galleryData = [
   },
   {
     id: 4,
-    image: "/china.jpg",
+    image: "/car2.jpg",
     title: "Engineering",
     tag: "Design & Simulation",
     hoverText: "System-level vehicle design driven by CAD modeling and CFD analysis.",

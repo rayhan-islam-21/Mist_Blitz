@@ -6,7 +6,9 @@ import Image from "next/image";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import Button from "../ui/retro-btn";
 import { Highlighter } from "../ui/highlighter";
-import ImageConnector from "@/styles/ImageConnector";
+import { RiDoubleQuotesR } from "react-icons/ri";
+import { BiSolidQuoteAltLeft } from "react-icons/bi";
+import { RiDoubleQuotesL } from "react-icons/ri";
 
 const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
   <motion.h2
@@ -38,7 +40,6 @@ const FramedImage = ({ src, alt, caption, rotation }) => (
 );
 
 const AboutPreview = () => {
-
   const handleScroll = () => {
     const section = document.getElementById("what-we-do");
     if (section) section.scrollIntoView({ behavior: "smooth" });
@@ -61,18 +62,35 @@ const AboutPreview = () => {
         {/* --- About Us Section --- */}
         <div className="py-16  overflow-hidden">
           <div className="container mx-auto px-4 max-w-6xl">
-            <ComicHeadline colorClass="text-yellow-400" ><Highlighter action="underline" color="#E4010D" >
-              About Us
-              </Highlighter></ComicHeadline>
+            <ComicHeadline colorClass="text-yellow-400">
+              <Highlighter action="underline" color="#E4010D">
+                About Us
+              </Highlighter>
+            </ComicHeadline>
 
             <div className="md:flex items-start gap-12">
-              <div className="md:w-1/2 mb-8 md:mb-0">
-                <p className={`text-xl font-normal text-balance   text-gray-900 leading-relaxed mb-4`}>
-                  MIST BLITZ is the official Formula Student team of MIST, Bangladesh. We are driven by a vision to push the boundaries of engineering education, providing students hands-on experience in designing, building, and testing single-seater race cars.
-                </p>
-                <p className="text-xl text-gray-900 leading-relaxed mb-4">
-                  Our mission is not only to achieve competitive excellence but also to cultivate creativity, teamwork, and problem-solving skills in the next generation of engineers. We emphasize real-world engineering challenges including aerodynamics, vehicle dynamics, materials selection, manufacturing, and cost optimization.
-                </p>
+              <div className="md:w-1/2 mb-8 md:mb-0 flex flex-col gap-6">
+                <div className="relative">
+                  <p className="text-xl px-1 text-gray-900 leading-relaxed">
+                    MIST BLITZ is the official Formula Student team of MIST,
+                    Bangladesh. We are driven by a vision to push the boundaries
+                    of engineering education, providing students hands-on
+                    experience in designing, building, and testing single-seater
+                    race cars.
+                  </p>
+                </div>
+
+                <div className="relative pl-2 text-balance">
+                  <div className="absolute left-0 text-balance top-0 bottom-0 w-1 bg-yellow-500 opacity-50 ml-0"></div>
+                  <p className="text-lg text-balance text-gray-500 leading-relaxed px-1">
+                    Our mission is not only to achieve competitive excellence
+                    but also to cultivate creativity, teamwork, and
+                    problem-solving skills in the next generation of engineers.
+                    We emphasize real-world engineering challenges including
+                    aerodynamics, vehicle dynamics, materials selection,
+                    manufacturing, and cost optimization.
+                  </p>
+                </div>
               </div>
 
               <div className="md:w-1/2">
@@ -86,13 +104,17 @@ const AboutPreview = () => {
             </div>
           </div>
         </div>
-{/* 
+        {/* 
         <ImageConnector/> */}
 
         {/* --- Origins Section --- */}
         <div className="py-16 mx-auto px-4 max-w-6xl">
-          <ComicHeadline colorClass="text-yellow-400"> <Highlighter action="underline" color="#E4010D">
-            MIST BLITZ ORIGINS</Highlighter> </ComicHeadline>
+          <ComicHeadline colorClass="text-yellow-400">
+            {" "}
+            <Highlighter action="underline" color="#E4010D">
+              MIST BLITZ ORIGINS
+            </Highlighter>{" "}
+          </ComicHeadline>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
@@ -105,11 +127,17 @@ const AboutPreview = () => {
             </div>
 
             <div className="order-1 md:order-2">
-              <h3 className="text-3xl font-bold text-gray-100 mb-4">
-                <Highlighter action="highlight" color="#E4010D">Who We Are {" "}? </Highlighter>
-                </h3>
+              <h3 className="text-3xl font-bold w-96 flex items-center  text-gray-100 mb-4">
+                <Highlighter action="highlight"  color="#E4010D">
+                  Who We Are
+                </Highlighter>
+              </h3>
               <p className="text-xl text-gray-700 leading-relaxed mb-4">
-                Founded in April 2024, MIST BLITZ brings together passionate students who aim to represent Bangladesh in global motorsport competitions. We combine technical knowledge with practical experience to produce competitive, innovative, and safe race cars.
+                Founded in April 2024, MIST BLITZ brings together passionate
+                students who aim to represent Bangladesh in global motorsport
+                competitions. We combine technical knowledge with practical
+                experience to produce competitive, innovative, and safe race
+                cars.
               </p>
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -120,7 +148,8 @@ const AboutPreview = () => {
               >
                 <span className="text-2xl text-red-600">ALERT! </span>
                 <span className="text-lg text-black">
-                  Team formed in <strong>April 2024</strong>. Ready for the next race season!
+                  Team formed in <strong>April 2024</strong>. Ready for the next
+                  race season!
                 </span>
               </motion.div>
             </div>
