@@ -50,8 +50,8 @@ export default function JoinCTA() {
       </Button>
 
       {/* Optional spark accents */}
-      <div className="absolute top-1/3 left-1/4 w-6 h-6 bg-yellow-300 rounded-full opacity-40 animate-ping"></div>
-      <div className="absolute bottom-1/4 right-1/3 w-8 h-8 bg-red-600 rounded-full opacity-30 animate-ping"></div>
+      <div className="absolute top-1/3 left-1/4 w-6 h-6 bg-yellow-300 rounded-full opacity-40 animate-bounce"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-8 h-8 bg-red-500 rounded-full opacity-30 animate-bounce"></div>
     </section>
   );
 }

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import Button from "../ui/retro-btn";
 import { Highlighter } from "../ui/highlighter";
+import { ComicText } from "@/components/ui/comic-text"
 
 const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
   <motion.h2
@@ -91,7 +92,7 @@ const AboutPreview = () => {
                 </div>
               </div>
 
-              <div className=" md:w-1/2">
+              <div className=" relative md:w-1/2">
                 <FramedImage
                   src="/china4.jpg"
                   alt="Formula Student Competition"

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import React from "react";
-import Button from "../ui/retro-btn";
 import { motion } from "framer-motion";
 
 const Hero = () => {
