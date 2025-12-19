@@ -1,6 +1,7 @@
 "use client";
 
 import LogoLoop from "../LogoLoop";
+import { Highlighter } from "../ui/highlighter";
 import { RetroGrid } from "../ui/retro-grid";
 
 const sponsors = [
@@ -26,8 +27,15 @@ export default function PartnersScroll() {
       <RetroGrid />
 
       <div className="relative py-10">
-        <h2 className="text-center text-4xl md:text-5xl font-comic font-extrabold mb-14 text-yellow-400 drop-shadow-[4px_4px_0_#000]">
-          OUR PARTNERS
+        <h2 className="text-center tracking-widest text-4xl md:text-5xl font-comic font-extrabold mb-14 text-yellow-400 drop-shadow-[4px_4px_0_#000]">
+          <Highlighter action="underline" color="#E4013A">
+            OUR
+          </Highlighter>
+          {"  "}
+          {" "}
+          <Highlighter action="highlight" color="#E4013A">
+            PARTNERS
+          </Highlighter>
         </h2>
 
         {/* Bigger Logo Loop */}
@@ -36,14 +44,13 @@ export default function PartnersScroll() {
             logos={sponsorLogos}
             speed={110}
             direction="left"
-            logoHeight={250}  
-            gap={20}           
+            logoHeight={250}
+            gap={20}
             hoverSpeed={0}
             scaleOnHover
             fadeOut
             fadeOutColor="#ffffff"
             ariaLabel="Our partners"
-            
           />
         </div>
       </div>

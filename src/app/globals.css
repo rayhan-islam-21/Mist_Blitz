@@ -1,3 +1,6 @@
+/* globals.css */
+@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap");
+
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
@@ -9,6 +12,12 @@ input,
 textarea,
 select {
   cursor: text !important;
+}
+
+.description-text {
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 :root {
   --blitz-yellow: #ffe600;
@@ -95,11 +104,11 @@ select {
   --color-sidebar-ring: var(--sidebar-ring);
   --animate-grid: grid 15s linear infinite;
   @keyframes grid {
-  0% {
-    transform: translateY(-50%);
+    0% {
+      transform: translateY(-50%);
     }
-  100% {
-    transform: translateY(0);
+    100% {
+      transform: translateY(0);
     }
   }
 }
