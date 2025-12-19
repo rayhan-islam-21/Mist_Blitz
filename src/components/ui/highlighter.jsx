@@ -6,7 +6,7 @@ import { annotate } from "rough-notation"
 export function Highlighter({
   children,
   action = "underline",
-  color = "#ffd1dc",
+  color = "",
   strokeWidth = 2.5,
   animationDuration = 600,
   iterations = 2,

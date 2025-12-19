@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import Button from "../ui/retro-btn";
+import { Highlighter } from "../ui/highlighter";
 
 const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
   <motion.h2
@@ -12,7 +13,7 @@ const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
     whileInView={{ y: 0, opacity: 1 }}
     viewport={{ once: true, amount: 0.8 }}
     transition={{ duration: 0.5 }}
-    className={`text-5xl md:text-6xl font-cousine font-bold mb-8 drop-shadow-[1px_4px_0_rgba(0,0,0,0.8)] tracking-wide transform skew-x-[-3deg] inline-block px-2 border-b-4 border-yellow-400 ${colorClass}`}
+    className={`text-5xl md:text-6xl font-cousine font-bold mb-8 drop-shadow-[1px_4px_0_rgba(0,0,0,0.8)] tracking-wide transform skew-x--3 inline-block px-2  ${colorClass}`}
   >
     {children}
   </motion.h2>
@@ -61,19 +62,21 @@ const AboutPreview = () => {
         />
 
         {/* --- About Us Section --- */}
-        <div className="py-16 overflow-hidden">
+        <div className="py-16  overflow-hidden">
           <div className="container mx-auto px-4 max-w-6xl">
-            <ComicHeadline colorClass="text-yellow-400">About Us</ComicHeadline>
+            <ComicHeadline colorClass="text-yellow-400" ><Highlighter action="underline" color="#E4010D" >
+              About Us
+              </Highlighter></ComicHeadline>
 
             <div className="md:flex items-start gap-12">
               <div className="md:w-1/2 mb-8 md:mb-0">
-                <p className={`text-xl description-text  text-gray-900 leading-relaxed mb-41`}>
+                <p className={`text-xl font-normal text-balance   text-gray-900 leading-relaxed mb-4`}>
                   MIST BLITZ is the official Formula Student team of MIST, Bangladesh. We are driven by a vision to push the boundaries of engineering education, providing students hands-on experience in designing, building, and testing single-seater race cars.
                 </p>
                 <p className="text-xl text-gray-900 leading-relaxed mb-4">
                   Our mission is not only to achieve competitive excellence but also to cultivate creativity, teamwork, and problem-solving skills in the next generation of engineers. We emphasize real-world engineering challenges including aerodynamics, vehicle dynamics, materials selection, manufacturing, and cost optimization.
                 </p>
-                <motion.ul
+                {/* <motion.ul
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.5 }}
@@ -98,7 +101,7 @@ const AboutPreview = () => {
                       {item}
                     </motion.li>
                   ))}
-                </motion.ul>
+                </motion.ul> */}
               </div>
 
               <div className="md:w-1/2">
@@ -115,7 +118,8 @@ const AboutPreview = () => {
 
         {/* --- Origins Section --- */}
         <div className="py-16 mx-auto px-4 max-w-6xl">
-          <ComicHeadline colorClass="text-red-700">MIST BLITZ ORIGINS</ComicHeadline>
+          <ComicHeadline colorClass="text-yellow-400"> <Highlighter action="underline" color="#E4010D">
+            MIST BLITZ ORIGINS</Highlighter> </ComicHeadline>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
@@ -128,7 +132,9 @@ const AboutPreview = () => {
             </div>
 
             <div className="order-1 md:order-2">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">Who We Are</h3>
+              <h3 className="text-3xl font-bold text-gray-100 mb-4">
+                <Highlighter action="highlight" color="#E4010D">Who We Are {" "}? </Highlighter>
+                </h3>
               <p className="text-xl text-gray-700 leading-relaxed mb-4">
                 Founded in April 2024, MIST BLITZ brings together passionate students who aim to represent Bangladesh in global motorsport competitions. We combine technical knowledge with practical experience to produce competitive, innovative, and safe race cars.
               </p>
@@ -158,19 +164,6 @@ const AboutPreview = () => {
           >
             Read More About Us
           </Button>
-        </div>
-      </section>
-
-      {/* --- "What We Do" Section --- */}
-      <section id="what-we-do" className="relative z-10 bg-gray-50 py-16">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <ComicHeadline colorClass="text-blue-600">What We Do</ComicHeadline>
-          <p className="text-xl text-gray-900 leading-relaxed mb-4">
-            We design, prototype, assemble, and test race cars from scratch. Every student gets to experience vehicle dynamics, aerodynamics, manufacturing, and cost management while working collaboratively in a professional-style team environment.
-          </p>
-          <p className="text-xl text-gray-900 leading-relaxed">
-            Each project also focuses on innovation, efficiency, and safety, preparing students for real-world engineering challenges and competitions.
-          </p>
         </div>
       </section>
     </div>
