@@ -6,6 +6,7 @@ import Image from "next/image";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import Button from "../ui/retro-btn";
 import { Highlighter } from "../ui/highlighter";
+import ImageConnector from "@/styles/ImageConnector";
 
 const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
   <motion.h2
@@ -26,7 +27,7 @@ const FramedImage = ({ src, alt, caption, rotation }) => (
     viewport={{ once: true, amount: 0.6 }}
     transition={{ type: "spring", stiffness: 70, damping: 15 }}
     whileHover={{ scale: 1.05, rotate: rotation }}
-    className={`relative w-full aspect-video md:aspect-square overflow-hidden border-8 border-black shadow-[16px_16px_0_0_#ffd900]`}
+    className={`relative w-full  md:aspect-square overflow-hidden border-8 border-black shadow-[16px_16px_0_0_#ffd900]`}
     style={{ transform: `rotate(${rotation}deg)` }}
   >
     <Image src={src} alt={alt} fill className="object-cover" />
@@ -37,10 +38,6 @@ const FramedImage = ({ src, alt, caption, rotation }) => (
 );
 
 const AboutPreview = () => {
-  const listVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: (i) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1 } }),
-  };
 
   const handleScroll = () => {
     const section = document.getElementById("what-we-do");
@@ -51,10 +48,10 @@ const AboutPreview = () => {
     <div className="relative min-h-screen overflow-hidden font-cousine">
       <section id="about-mist-blitz-pro" className="relative z-10 bg-white">
         <InteractiveGridPattern
-          hoverFill="fill-yellow-500"
+          hoverFill="fill-gray-500"
           fadeDelay={200}
-          squares={[30, 30]}
-          className="opacity-30 md:block hidden"
+          squares={[40, 40]}
+          className="opacity-20 md:block hidden"
         />
         <InteractiveGridPattern
           squares={[10, 10]}
@@ -76,37 +73,11 @@ const AboutPreview = () => {
                 <p className="text-xl text-gray-900 leading-relaxed mb-4">
                   Our mission is not only to achieve competitive excellence but also to cultivate creativity, teamwork, and problem-solving skills in the next generation of engineers. We emphasize real-world engineering challenges including aerodynamics, vehicle dynamics, materials selection, manufacturing, and cost optimization.
                 </p>
-                {/* <motion.ul
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.5 }}
-                  className="space-y-2 text-lg font-semibold text-gray-800"
-                >
-                  {[
-                    "Innovative Vehicle Design",
-                    "Efficient Manufacturing",
-                    "Dynamic Track Performance",
-                    "Teamwork & Leadership",
-                    "Cost & Resource Management",
-                  ].map((item, index) => (
-                    <motion.li
-                      key={item}
-                      custom={index}
-                      variants={listVariants}
-                      className="flex items-center"
-                    >
-                      <span className="text-red-500 mr-3 text-2xl font-bold">
-                        {index + 1}.
-                      </span>
-                      {item}
-                    </motion.li>
-                  ))}
-                </motion.ul> */}
               </div>
 
               <div className="md:w-1/2">
                 <FramedImage
-                  src="/team.jpg"
+                  src="/china4.jpg"
                   alt="Formula Student Competition"
                   caption="The proving ground for future engineers."
                   rotation={-2}
@@ -115,6 +86,8 @@ const AboutPreview = () => {
             </div>
           </div>
         </div>
+{/* 
+        <ImageConnector/> */}
 
         {/* --- Origins Section --- */}
         <div className="py-16 mx-auto px-4 max-w-6xl">
@@ -124,7 +97,7 @@ const AboutPreview = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <FramedImage
-                src="/furiosa.png"
+                src="/car2.jpg"
                 alt="Furiosa 1.0 Race Car"
                 caption="Furiosa 1.0: Our first contender."
                 rotation={-2}

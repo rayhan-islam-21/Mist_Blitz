@@ -14,6 +14,11 @@ textarea,
 select {
   cursor: text !important;
 }
+.motion-path {
+  offset-path: path("M100 20 C 300 150, 300 150, 500 280");
+  offset-rotate: auto;
+}
+
 
 .description-text {
    font-family: "Neuton", serif;
