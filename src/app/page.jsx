@@ -11,7 +11,7 @@ import GalleryPreview from "@/components/sections/GalleryPreview";
 export default function Home() {
   return (
     <>
-      {/* <SmoothCursor/> */}
+      <SmoothCursor/>
      <Navbar/>
      <Hero/>
      <AboutPreview/>
