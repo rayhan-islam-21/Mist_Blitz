@@ -21,28 +21,9 @@ const Hero = () => {
       </video>
 
       {/* Overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/80 via-black/50 to-black/80" />
+      <div className="absolute inset-0 z-10 bg-linear-to-b from-black/80 via-black/50 to-black/80" />
 
-      {/* Circuit Lines Background */}
-      <svg
-        className="absolute inset-0 w-full h-full z-20 pointer-events-none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M0,80 C200,120 400,40 800,100 S1200,60 1600,80"
-          stroke="rgba(255,255,255,0.05)"
-          strokeWidth="2"
-          fill="transparent"
-        >
-          <animate
-            attributeName="stroke-dashoffset"
-            from="0"
-            to="1000"
-            dur="10s"
-            repeatCount="indefinite"
-          />
-        </path>
-      </svg>
+  
 
       {/* Content */}
       <div className="relative z-30 flex flex-col items-center justify-center h-full text-center px-4">
@@ -76,22 +57,22 @@ const Hero = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
           className="
-    mt-3
-    max-w-3xl
-    text-base sm:text-lg md:text-xl
-    leading-relaxed
-    text-white/90
-    tracking-wide
-    text-center
-    relative
-  "
+              mt-3
+              max-w-3xl
+              text-base sm:text-lg md:text-xl
+              leading-relaxed
+              text-white/90
+              tracking-wide
+              text-center
+              relative
+            "
         >
           The Formula Student Team of
           <span className="block text-gray-100">
             Military Institute of Science and Technology, Bangladesh
           </span>
           {/* subtle underline accent */}
-          <span className="absolute left-1/2 -bottom-3 w-24 h-[2px] bg-yellow-400 -translate-x-1/2 opacity-70"></span>
+          <span className="absolute left-1/2 -bottom-3 w-44 h-0.5 bg-gray-400 -translate-x-1/2 opacity-70"></span>
         </motion.p>
 
         {/* CTA Button */}
@@ -99,9 +80,8 @@ const Hero = () => {
           initial={{ y: 16, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
-          className="mt-10 px-10 py-4 w-56 text-xl font-extrabold text-black bg-yellow-300 border-2 border-black rounded-none shadow-[6px_6px_0_0_black] hover:shadow-[4px_4px_0_0-black] hover:bg-yellow-300 hover:scale-105 transition-all duration-300 relative"
+          className="mt-10 px-10 py-4 w-56 text-xl font-extrabold text-white bg-black border-2 border-black  shadow-[3px_3px_0_0_gray] hover:shadow-[4px_4px_0_0-black] hover:bg-black tracking-wide rounded-none cursor-pointer hover:text-white hover:scale-105 transition-all duration-200 relative"
         >
-          <span className="absolute -inset-0.5 bg-yellow-300 blur-xl opacity-30 -z-10 rounded-none"></span>
           CONTACT US
         </motion.button>
       </div>
