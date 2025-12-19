@@ -6,9 +6,6 @@ import Image from "next/image";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import Button from "../ui/retro-btn";
 import { Highlighter } from "../ui/highlighter";
-import { RiDoubleQuotesR } from "react-icons/ri";
-import { BiSolidQuoteAltLeft } from "react-icons/bi";
-import { RiDoubleQuotesL } from "react-icons/ri";
 
 const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
   <motion.h2
@@ -29,7 +26,7 @@ const FramedImage = ({ src, alt, caption, rotation }) => (
     viewport={{ once: true, amount: 0.6 }}
     transition={{ type: "spring", stiffness: 70, damping: 15 }}
     whileHover={{ scale: 1.05, rotate: rotation }}
-    className={`relative w-full  md:aspect-square overflow-hidden border-8 border-black shadow-[16px_16px_0_0_#ffd900]`}
+    className={`relative w-full aspect-4/3 md:aspect-square overflow-hidden border-8 border-black shadow-[16px_16px_0_0_#ffd900]`}
     style={{ transform: `rotate(${rotation}deg)` }}
   >
     <Image src={src} alt={alt} fill className="object-cover" />
@@ -39,6 +36,7 @@ const FramedImage = ({ src, alt, caption, rotation }) => (
   </motion.div>
 );
 
+
 const AboutPreview = () => {
   const handleScroll = () => {
     const section = document.getElementById("what-we-do");
@@ -46,8 +44,8 @@ const AboutPreview = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden font-cousine">
-      <section id="about-mist-blitz-pro" className="relative z-10 bg-white">
+    <div className="relative min-h-screen border-b-6 border-black ">
+      <section id="about-mist-blitz-pro" className="relative bg-white z-10 ">
         <InteractiveGridPattern
           hoverFill="fill-gray-500"
           fadeDelay={200}
@@ -93,7 +91,7 @@ const AboutPreview = () => {
                 </div>
               </div>
 
-              <div className="md:w-1/2">
+              <div className=" md:w-1/2">
                 <FramedImage
                   src="/china4.jpg"
                   alt="Formula Student Competition"
@@ -128,7 +126,7 @@ const AboutPreview = () => {
 
             <div className="order-1 md:order-2">
               <h3 className="text-3xl font-bold w-96 flex items-center  text-gray-100 mb-4">
-                <Highlighter action="highlight"  color="#E4010D">
+                <Highlighter action="highlight" color="#E4010D">
                   Who We Are
                 </Highlighter>
               </h3>
@@ -157,7 +155,7 @@ const AboutPreview = () => {
         </div>
 
         {/* --- CTA Button --- */}
-        <div className="text-center p-20 place-items-center">
+        <div className="text-center py-20 px-4 place-items-center">
           <Button
             variant="outline"
             className="w-72 hover:rotate-0 -rotate-1 hover:bg-yellow-300 z-50 bg-yellow-300"

@@ -96,8 +96,9 @@ export function Pointer(
               <Image 
               src="/sponsers/icons8-f1-car-50.png"
               alt="logo"
-              width={40}
-              height={40}
+              width={35}
+              height={35}
+              className="text-yellow-300"
               />
             )}
           </motion.div>
