@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { DotPattern } from "../ui/dot-pattern";
 import Button from "../ui/retro-btn";
+import { Highlighter } from "../ui/highlighter";
 
 export default function SponsorHero() {
   return (
@@ -20,9 +21,16 @@ export default function SponsorHero() {
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 120, damping: 14 }}
-        className="text-6xl md:text-7xl font-extrabold text-yellow-300 drop-shadow-[4px_4px_0px_black]  leading-tight"
+        className="text-6xl tracking-wide md:text-7xl font-extrabold text-yellow-300 drop-shadow-[4px_4px_0px_black]  leading-tight"
       >
-        Become a Sponsor
+        <Highlighter action="underline" color="#FF9800">
+          Become 
+        </Highlighter>
+        {" "}a
+        {"  "}
+        <Highlighter action="highlight" color="#E4013A">
+          Sponsor
+        </Highlighter>
       </motion.h1>
 
       {/* Subheading */}
@@ -37,9 +45,9 @@ export default function SponsorHero() {
         Student competitions.
       </motion.p>
 
-     <Button className="mt-12 w-52 bg-yellow-300 p-4 text-xl z-40">
-      Join Us
-     </Button>
+      <Button className="mt-12 w-52 bg-yellow-300 p-4 text-xl z-40">
+        Join Us
+      </Button>
 
       {/* Optional spark accents */}
       <div className="absolute top-1/3 left-1/4 w-6 h-6 bg-yellow-300 rounded-full opacity-40 animate-ping"></div>
