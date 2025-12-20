@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Button from "./ui/retro-btn";
 
 const DeptCard = forwardRef(function DeptCard(
   { title, description, image, className, style },
@@ -11,68 +12,39 @@ const DeptCard = forwardRef(function DeptCard(
       ref={ref}
       style={style}
       className={cn(
-        "absolute z-20 w-[380px] rounded-[28px] overflow-hidden",
-        "bg-white border border-black/10",
-        "shadow-[0_30px_80px_-30px_rgba(0,0,0,0.45)]",
-        "transition-all duration-300",
-        "hover:shadow-[0_45px_100px_-30px_rgba(0,0,0,0.6)]",
+        "relative w-95 h-87 overflow-hidden rounded-2xl group cursor-pointer transition-all duration-500",
+        "shadow-lg shadow-black/20 z-50 hover:shadow-2xl hover:shadow-black/40",
         className
       )}
     >
-      {/* IMAGE PANEL */}
-      <div className="relative h-56 overflow-hidden">
+      {/* IMAGE */}
+      <div className="absolute inset-0">
         <Image
           src={image}
           alt={title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-
-        {/* GRADIENT OVERLAY */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-        {/* COMIC DIAGONAL CUT */}
-        <span
-          className="absolute -bottom-10 -right-10
-                     h-24 w-56 rotate-[-12deg]
-                     bg-primary/90"
-        />
-
-        {/* TITLE */}
-        <h3
-          className="absolute bottom-6 left-6 right-6
-                     text-2xl font-extrabold text-white
-                     tracking-wide drop-shadow-md"
-        >
-          {title}
-        </h3>
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-500" />
       </div>
 
-      {/* CONTENT */}
-      <div className="relative p-7">
-        <p className="text-base leading-relaxed text-muted-foreground">
+      {/* TITLE & DESCRIPTION CONTAINER */}
+      <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
+        <h3 className="text-2xl font-extrabold text-white drop-shadow-lg">{title}</h3>
+        
+        {/* DESCRIPTION - slide up on hover */}
+        <p className="mt-2 max-h-0 overflow-hidden text-white text-base leading-relaxed transition-all duration-500 group-hover:max-h-40">
           {description}
         </p>
 
-        {/* CTA */}
-        <button
-          className="mt-6 inline-flex items-center gap-2
-                     rounded-xl bg-primary px-6 py-3
-                     text-sm font-bold text-white
-                     transition-all duration-300
-                     hover:bg-primary/90
-                     hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)]"
-        >
-          Know More
-          <span className="text-lg leading-none">→</span>
-        </button>
+        {/* CTA BUTTON - slide up with description */}
+        <div className="mt-3 opacity-0 transform translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+          <Button className="bg-yellow-300" size="sm"> 
+            Know More →
+          </Button>
+        </div>
       </div>
-
-      {/* COMIC BORDER GLOW */}
-      <span
-        className="pointer-events-none absolute inset-0
-                   rounded-[28px] ring-1 ring-primary/20"
-      />
     </div>
   );
 });
