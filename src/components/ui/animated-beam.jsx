@@ -9,7 +9,7 @@ export const AnimatedBeam = ({
   containerRef,
   fromRef,
   toRef,
-  curvature = 0,
+  curvature = -100,
   reverse = false, // Include the reverse prop
   duration = Math.random() * 3 + 4,
   delay = 0,
@@ -18,7 +18,7 @@ export const AnimatedBeam = ({
   pathOpacity = 0.2,
   gradientStartColor = "#ffaa40",
   gradientStopColor = "#9c40ff",
-  startXOffset = 0,
+  startXOffset = 10,
   startYOffset = 0,
   endXOffset = 0,
   endYOffset = 0,
