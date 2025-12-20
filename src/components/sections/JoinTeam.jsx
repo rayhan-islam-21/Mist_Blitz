@@ -7,14 +7,19 @@ import DeptCard from "../Deptcard";
 import { GridPattern } from "../ui/grid-pattern";
 import { Highlighter } from "../ui/highlighter";
 import Button from "../ui/retro-btn";
-
-const CARD_W = 380;
-const CARD_H = 420;
-const R = Math.min(520, window.innerWidth / 2 - CARD_W / 2);
+import { useEffect, useState } from "react";
 
 const degToRad = (deg) => (deg * Math.PI) / 180;
 
 export default function JoinBlitzTeam() {
+  const [width, setWidth] = useState();
+
+  useEffect(() => {
+    setWidth(window.innerWidth); // safe, runs only on client
+  }, []);
+  const CARD_W = 380;
+  const CARD_H = 420;
+  const R = Math.min(520, width / 2 - CARD_W / 2);
   const containerRef = useRef(null);
   const centerRef = useRef(null);
   const refs = Array.from({ length: 6 }, () => useRef(null));
@@ -62,7 +67,6 @@ export default function JoinBlitzTeam() {
 
   return (
     <section className="relative py-32 bg-white overflow-hidden">
-      
       {/* GRID BACKGROUND */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <GridPattern className="opacity-[0.4]" />
