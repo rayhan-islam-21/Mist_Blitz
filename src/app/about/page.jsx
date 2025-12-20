@@ -5,6 +5,7 @@ import TeamMembers from '@/components/about/TeamMembers';
 import Achievements from '@/components/about/Achievements';
 import Image from 'next/image';
 import Navbar from '@/components/navbar/Navbar';
+import Footer from '@/components/footer/Footer';
 
 const About = () => {
   return (
@@ -12,7 +13,7 @@ const About = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[90vh] flex items-end justify-center overflow-hidden">
         <Image
           src="/team.jpg" 
           fill
@@ -22,12 +23,12 @@ const About = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-black/80 z-10"></div>
         
-        <div className="relative z-20 text-center px-6">
+        <div className="relative z-20 text-center  px-6">
           <h2 className="text-blue-500 font-mono tracking-[0.3em] uppercase text-sm mb-4 animate-fade-in">
             Engineering the Future
           </h2>
-          <h1 className="text-6xl md:text-9xl font-black text-white tracking-tighter italic uppercase">
-            Beyond <span className="text-blue-600">Speed</span>
+          <h1 className="text-6xl md:text-9xl font-black text-white tracking-normal uppercase">
+            About <span className="text-blue-600">blitz</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mt-6 font-light">
             We are a group of passionate engineers from MIST, dedicated to pushing the boundaries of automotive excellence through the Formula Student challenge.
@@ -87,7 +88,7 @@ const About = () => {
       </main>
 
       <footer className="py-12 text-center bg-black border-t border-white/5 text-gray-600 text-xs tracking-widest uppercase">
-        Built by Engineers, For Engineers | MIST BLITZ 2025
+       <Footer/>
       </footer>
     </div>
   );
