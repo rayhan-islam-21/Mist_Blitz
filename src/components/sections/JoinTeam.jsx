@@ -1,105 +1,133 @@
 "use client";
 
-import React, { forwardRef, useRef } from "react";
-import { cn } from "@/lib/utils";
+import { useRef } from "react";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
+import DeptCard from "../Deptcard";
 import Image from "next/image";
-import { Highlighter } from "../ui/highlighter";
 
-const DepartmentCard = forwardRef(({ name, img, className }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "z-20 flex flex-col items-center justify-center rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200 shadow-2xl p-5 w-44 h-52 text-center transition-all duration-500 hover:scale-105 hover:border-yellow-500 group",
-      className
-    )}
-  >
-    <div className="relative h-20 w-20 rounded-xl bg-slate-50 mb-4 overflow-hidden border border-slate-100 shadow-inner group-hover:border-yellow-200 transition-colors">
-      <Image src={img} alt={name} fill className="object-cover p-2" />
-    </div>
-    <h3 className="font-black text-xs uppercase tracking-[0.15em] text-slate-900 mb-4">
-      {name}
-    </h3>
-    <button className="w-full rounded-lg bg-slate-900 py-2 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-yellow-400 hover:text-black transition-all duration-300">
-      Apply Now
-    </button>
-  </div>
-));
-
-DepartmentCard.displayName = "DepartmentCard";
-
-export default function JoinTeamSection() {
+export default function JoinBlitzTeam() {
   const containerRef = useRef(null);
   const centerRef = useRef(null);
 
-  const dep1 = useRef(null);
-  const dep2 = useRef(null);
-  const dep3 = useRef(null);
-  const dep4 = useRef(null);
-  const dep5 = useRef(null);
-  const dep6 = useRef(null);
+  const suspensionRef = useRef(null);
+  const powertrainRef = useRef(null);
+  const technicalRef = useRef(null);
+  const nonTechRef = useRef(null);
 
   return (
-    <section className="w-full py-20 bg-white">
-      {/* SECTION HEADING */}
-      <div className="text-center mb-16 space-y-4">
-        <h2 className="text-5xl md:text-6xl font-black  text-slate-900 uppercase">
-          Build the {" "} <span className="text-yellow-400"><Highlighter>Future</Highlighter></span> of Speed
-        </h2>
-        <p className="text-slate-500 max-w-2xl mx-auto font-medium tracking-tight">
-          Join the MIST BLITZ Formula Student team. We are looking for driven engineers, 
-          innovators, and designers to push the limits of performance.
-        </p>
-      </div>
+    <section className="py-24">
+      <h2 className="text-4xl font-bold text-center mb-20">
+        Join the MIST Blitz Team
+      </h2>
 
-      <div
-        ref={containerRef}
-        className="relative flex h-[750px] w-full items-center justify-center overflow-hidden bg-slate-50/50 rounded-[3rem] border border-slate-200 max-w-7xl mx-auto"
-      >
-        {/* Engineering Grid Background */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-             style={{ backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, size: '40px 40px', backgroundSize: '30px 30px' }} 
-        />
-
-        <div className="flex size-full max-w-5xl flex-row items-stretch justify-between px-10 z-10">
-          {/* Left Wing */}
-          <div className="flex flex-col justify-center gap-12">
-            <DepartmentCard ref={dep1} name="Suspension" img="/teams/suspension.png" />
-            <DepartmentCard ref={dep2} name="Powertrain" img="/teams/powertrain.png" />
-            <DepartmentCard ref={dep3} name="Technical" img="/teams/technical.png" />
-          </div>
-
-          {/* Center Hub */}
-          <div className="flex flex-col justify-center">
-            <div
-              ref={centerRef}
-              className="z-30 flex h-48 w-48 items-center justify-center rounded-full bg-black border-8 border-yellow-400 shadow-[0_0_50px_rgba(250,204,21,0.3)] transition-transform hover:scale-110 duration-700"
-            >
-              <div className="text-center">
-                <p className="text-xs text-yellow-400 font-black tracking-[0.3em] uppercase mb-1">Mist</p>
-                <h2 className="text-white font-black text-4xl italic leading-none tracking-tighter">BLITZ</h2>
-                <div className="h-[2px] w-12 bg-yellow-400 mx-auto my-2" />
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Racing</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Wing */}
-          <div className="flex flex-col justify-center gap-12">
-            <DepartmentCard ref={dep4} name="Non-Tech" img="/teams/nontech.png" />
-            <DepartmentCard ref={dep5} name="Electronics" img="/teams/electronics.png" />
-            <DepartmentCard ref={dep6} name="Aero Design" img="/teams/design.png" />
-          </div>
+      {/* MAIN CONTAINER */}
+      <div ref={containerRef} className="relative mx-auto h-[900px] max-w-6xl">
+        {/* CENTER LOGO */}
+        <div
+          ref={centerRef}
+          className="absolute left-1/2 top-1/2 z-20
+                     h-32 w-32 -translate-x-1/2 -translate-y-1/2
+                     rounded-full overflow-hidden
+                     ring-4 ring-red-500
+                     bg-white shadow-xl
+                     flex items-center justify-center"
+        >
+          <Image
+            src="/furiosalogo.jpg"
+            alt="MIST Blitz"
+            width={100}
+            height={100}
+            className="object-contain"
+          />
         </div>
 
-        {/* --- ANIMATED BEAMS --- */}
-        <AnimatedBeam containerRef={containerRef} fromRef={dep1} toRef={centerRef} curvature={-40} endYOffset={-20} gradientStartColor="#fbbf24" gradientStopColor="#E2E8F0" duration={5} />
-        <AnimatedBeam containerRef={containerRef} fromRef={dep2} toRef={centerRef} curvature={0} gradientStartColor="#fbbf24" gradientStopColor="#E2E8F0" duration={5} />
-        <AnimatedBeam containerRef={containerRef} fromRef={dep3} toRef={centerRef} curvature={40} endYOffset={20} gradientStartColor="#fbbf24" gradientStopColor="#E2E8F0" duration={5} />
+        {/* DEPARTMENT CARDS */}
+        {/* DEPARTMENT CARDS */}
+        <DeptCard
+          ref={suspensionRef}
+          title="Suspension Team"
+          description="Vehicle dynamics, geometry, and handling performance."
+          image="/dept/dept1.jpg"
+          className="top-8 left-1/2 -translate-x-1/2"
+        />
 
-        <AnimatedBeam containerRef={containerRef} fromRef={dep4} toRef={centerRef} curvature={-40} endYOffset={-20} reverse gradientStartColor="#fbbf24" gradientStopColor="#E2E8F0" duration={5} />
-        <AnimatedBeam containerRef={containerRef} fromRef={dep5} toRef={centerRef} curvature={0} reverse gradientStartColor="#fbbf24" gradientStopColor="#E2E8F0" duration={5} />
-        <AnimatedBeam containerRef={containerRef} fromRef={dep6} toRef={centerRef} curvature={40} endYOffset={20} reverse gradientStartColor="#fbbf24" gradientStopColor="#E2E8F0" duration={5} />
+        <DeptCard
+          ref={powertrainRef}
+          title="Powertrain Team"
+          description="Engine, drivetrain, and power delivery systems."
+          image="/dept/dept2.jpg"
+          className="top-1/2 right-6 -translate-y-1/2"
+        />
+
+        <DeptCard
+          ref={technicalRef}
+          title="Technical Team"
+          description="Simulation, testing, and performance optimization."
+          image="/dept/dept5.jpg"
+          className="bottom-8 left-1/2 -translate-x-1/2"
+        />
+
+        <DeptCard
+          ref={nonTechRef}
+          title="Non-Technical Team"
+          description="Management, marketing, and sponsorship operations."
+          image="/dept/dept6.jpg"
+          className="top-1/2 left-6 -translate-y-1/2"
+        />
+
+        {/* TOP */}
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={suspensionRef}
+          toRef={centerRef}
+          curvature={-70}
+          startYOffset={20}
+          endYOffset={-75}
+        />
+
+        {/* RIGHT */}
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={powertrainRef}
+          toRef={centerRef}
+          curvature={0}
+          reverse
+          startXOffset={-20}
+          endXOffset={75}
+        />
+
+        {/* BOTTOM */}
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={technicalRef}
+          toRef={centerRef}
+          curvature={70}
+          startYOffset={-20}
+          endYOffset={75}
+        />
+
+        {/* LEFT */}
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={nonTechRef}
+          toRef={centerRef}
+          curvature={0}
+          reverse
+          startXOffset={20}
+          endXOffset={-75}
+        />
+      </div>
+
+      {/* JOIN NOW CTA */}
+      <div className="mt-24 text-center">
+        <a
+          href="#join-form"
+          className="inline-block rounded-xl bg-primary
+                     px-12 py-4 text-lg font-semibold
+                     text-white transition hover:scale-105"
+        >
+          Join Now
+        </a>
       </div>
     </section>
   );
