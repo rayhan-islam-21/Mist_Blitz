@@ -1,28 +1,27 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 import DeptCard from "../Deptcard";
 import { GridPattern } from "../ui/grid-pattern";
 import { Highlighter } from "../ui/highlighter";
 import Button from "../ui/retro-btn";
-import { useEffect, useState } from "react";
 
+const CARD_W = 380;
+const CARD_H = 420;
 const degToRad = (deg) => (deg * Math.PI) / 180;
 
 export default function JoinBlitzTeam() {
-  const [width, setWidth] = useState();
-
-  useEffect(() => {
-    setWidth(window.innerWidth); // safe, runs only on client
-  }, []);
-  const CARD_W = 380;
-  const CARD_H = 420;
-  const R = Math.min(520, width / 2 - CARD_W / 2);
+  const [R, setR] = useState(null); // start as null
   const containerRef = useRef(null);
   const centerRef = useRef(null);
   const refs = Array.from({ length: 6 }, () => useRef(null));
+
+  useEffect(() => {
+    // calculate radius after mount
+    setR(Math.min(520, window.innerWidth / 2 - CARD_W / 2));
+  }, []);
 
   const departments = [
     {
@@ -65,28 +64,27 @@ export default function JoinBlitzTeam() {
 
   const angles = [-60, 0, 60, 120, 180, 240];
 
+  // Do not render cards until R is calculated on client
+  if (R === null) return null;
+
   return (
     <section className="relative py-32 bg-white overflow-hidden">
       {/* GRID BACKGROUND */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <GridPattern className="opacity-[0.4]" />
-        {/* <InteractiveGridPattern className="opacity-[0.25]" /> */}
       </div>
 
       {/* TITLE */}
       <div className="mb-32 relative overflow-hidden rounded-xl py-16 px-6 text-center ">
-        {/* Decorative shapes */}
         <span className="absolute top-0 left-0 w-40 h-40 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"></span>
         <span className="absolute bottom-0 right-0 w-60 h-60 bg-white/5 rounded-full translate-x-1/4 translate-y-1/4 animate-pulse"></span>
 
-        {/* Header text */}
         <Highlighter action="underline" color="#ffe203">
           <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-yellow-400 drop-shadow-[2px_4px_0_rgba(0,0,0,0.7)]">
             Join the MIST Blitz Team
           </h2>
         </Highlighter>
 
-        {/* Subtitle */}
         <p className="relative z-10 mt-4 text-white text-lg sm:text-xl">
           <Highlighter action="highlight" color="#FF004C">
             Be a part of our innovative and dynamic teams!
@@ -131,10 +129,7 @@ export default function JoinBlitzTeam() {
                 position: "absolute",
                 left: "50%",
                 top: "50%",
-                transform: `
-                  translate(-50%, -50%)
-                  translate(${x}px, ${y}px)
-                `,
+                transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
               }}
             />
           );
@@ -153,7 +148,7 @@ export default function JoinBlitzTeam() {
       </div>
 
       {/* CTA */}
-      <div className="relative z-10 mt-40  text-center">
+      <div className="relative z-10 mt-40 text-center">
         <Button
           className="mx-auto w-44 -rotate-3 hover:rotate-0 bg-yellow-300"
           size="lg"
