@@ -12,7 +12,7 @@ import JoinTeamSection from "@/components/sections/JoinTeam";
 export default function Home() {
   return (
     <>
-      {/* <Pointer/> */}
+      <Pointer/>
      <Navbar/>
      <Hero/>
      <AboutPreview/>
