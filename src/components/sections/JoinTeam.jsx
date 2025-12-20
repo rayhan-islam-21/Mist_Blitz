@@ -14,14 +14,8 @@ const DepartmentCard = forwardRef(({ name, img, className }, ref) => (
       className
     )}
   >
-    {/* Card Image Container */}
     <div className="relative h-20 w-20 rounded-xl bg-slate-50 mb-4 overflow-hidden border border-slate-100 shadow-inner group-hover:border-yellow-200 transition-colors">
-      <Image 
-        src={img} 
-        alt={name} 
-        fill 
-        className="object-contain p-2" // Changed to object-contain for logos
-      />
+      <Image src={img} alt={name} fill className="object-cover p-2" />
     </div>
     <h3 className="font-black text-xs uppercase tracking-[0.15em] text-slate-900 mb-4">
       {name}
@@ -48,13 +42,9 @@ export default function JoinTeamSection() {
   return (
     <section className="w-full py-20 bg-white">
       {/* SECTION HEADING */}
-      <div className="text-center mb-16 space-y-4 px-4">
-        <h2 className="text-4xl md:text-6xl font-black text-slate-900 uppercase tracking-tighter">
-          Build the{" "}
-          <span className="relative inline-block">
-            <Highlighter className="text-yellow-400">Future</Highlighter>
-          </span>{" "}
-          of Speed
+      <div className="text-center mb-16 space-y-4">
+        <h2 className="text-5xl md:text-6xl font-black  text-slate-900 uppercase">
+          Build the {" "} <span className="text-yellow-400"><Highlighter>Future</Highlighter></span> of Speed
         </h2>
         <p className="text-slate-500 max-w-2xl mx-auto font-medium tracking-tight">
           Join the MIST BLITZ Formula Student team. We are looking for driven engineers, 
@@ -64,38 +54,33 @@ export default function JoinTeamSection() {
 
       <div
         ref={containerRef}
-        className="relative flex h-[750px] w-full items-center justify-center overflow-hidden bg-slate-50/50 rounded-[3rem] border border-slate-200 max-w-7xl mx-auto shadow-inner"
+        className="relative flex h-[750px] w-full items-center justify-center overflow-hidden bg-slate-50/50 rounded-[3rem] border border-slate-200 max-w-7xl mx-auto"
       >
         {/* Engineering Grid Background */}
-        <div 
-          className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-          style={{ 
-            backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, 
-            backgroundSize: '30px 30px' 
-          }} 
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+             style={{ backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, size: '40px 40px', backgroundSize: '30px 30px' }} 
         />
 
         <div className="flex size-full max-w-5xl flex-row items-stretch justify-between px-10 z-10">
           {/* Left Wing */}
           <div className="flex flex-col justify-center gap-12">
-            <DepartmentCard ref={dep1} name="Suspension" img="/china4.jpg" />
-            <DepartmentCard ref={dep2} name="Powertrain" img="/china.jpg" />
-            <DepartmentCard ref={dep3} name="Technical" img="/china3.jpg" />
+            <DepartmentCard ref={dep1} name="Suspension" img="/teams/suspension.png" />
+            <DepartmentCard ref={dep2} name="Powertrain" img="/teams/powertrain.png" />
+            <DepartmentCard ref={dep3} name="Technical" img="/teams/technical.png" />
           </div>
 
-          {/* Center Hub - FIXED IMAGE OVERFLOW */}
+          {/* Center Hub */}
           <div className="flex flex-col justify-center">
             <div
               ref={centerRef}
-              className="relative z-30 flex h-48 w-48 items-center justify-center rounded-full bg-black border-8 border-yellow-400 shadow-[0_0_50px_rgba(250,204,21,0.3)] overflow-hidden"
+              className="z-30 flex h-48 w-48 items-center justify-center rounded-full bg-black border-8 border-yellow-400 shadow-[0_0_50px_rgba(250,204,21,0.3)] transition-transform hover:scale-110 duration-700"
             >
-              <Image 
-                src="/hero.png"
-                alt="center logo"
-                fill
-                className="object-contain" // Ensures image fills the circle perfectly
-                priority
-              />
+              <div className="text-center">
+                <p className="text-xs text-yellow-400 font-black tracking-[0.3em] uppercase mb-1">Mist</p>
+                <h2 className="text-white font-black text-4xl italic leading-none tracking-tighter">BLITZ</h2>
+                <div className="h-[2px] w-12 bg-yellow-400 mx-auto my-2" />
+                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Racing</p>
+              </div>
             </div>
           </div>
 

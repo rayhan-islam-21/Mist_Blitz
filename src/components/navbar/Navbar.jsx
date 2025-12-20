@@ -137,7 +137,7 @@ const Navbar = () => {
               pathname === "/join" ? "border-2 border-black" : "text-red-500"
             }`}
           >
-            Join Us
+            Conatact Us
           </NavLink>
         </nav>
 

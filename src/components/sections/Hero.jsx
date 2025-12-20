@@ -75,14 +75,14 @@ const Hero = () => {
         </motion.p>
 
         {/* CTA Button */}
-        <motion.button
+        {/* <motion.button
           initial={{ y: 16, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
           className="mt-10 px-10 py-4 w-56 text-xl font-extrabold text-white bg-black border-2 border-black  shadow-[3px_3px_0_0_gray] hover:shadow-[4px_4px_0_0-black] hover:bg-black tracking-wide rounded-none cursor-pointer hover:text-white hover:scale-105 transition-all duration-200 relative"
         >
           CONTACT US
-        </motion.button>
+        </motion.button> */}
       </div>
     </section>
   );
