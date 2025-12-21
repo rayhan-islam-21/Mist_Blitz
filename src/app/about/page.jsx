@@ -95,10 +95,7 @@ const About = () => {
 
             <Achievements />
 
-            <div className="pt-8">
-              <h2 className="text-center text-5xl font-bold text-white mb-16">
-               <Highlighter> Meet The <span className="text-blue-600">Brains</span></Highlighter>
-              </h2>
+            <div className="py-8">
               <TeamMembers />
             </div>
           </div>
