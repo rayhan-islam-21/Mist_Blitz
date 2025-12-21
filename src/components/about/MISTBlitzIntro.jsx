@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const MISTBlitzIntro = () => {
   return (
-    <section className="relative py-24 bg-gray-900 overflow-hidden">
+    <section className="relative py-12 bg-gray-900 overflow-hidden">
       {/* Subtle Background Accent */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-600/5 blur-[120px] -z-10"></div>
       
@@ -12,7 +12,7 @@ const MISTBlitzIntro = () => {
           
           {/* Image Side with Decorative Frame */}
           <div className="w-full lg:w-1/2 relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div className="absolute -inset-1 bg-linear-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             <div className="relative bg-gray-800 rounded-2xl overflow-hidden border border-white/10">
               <Image
                 src="/mist.jpeg" 
@@ -56,7 +56,7 @@ const MISTBlitzIntro = () => {
             </div>
 
             <div className="pt-4 flex items-center gap-4">
-               <div className="h-[2px] w-12 bg-blue-600"></div>
+               <div className="h-0.5 w-12 bg-blue-600"></div>
                <span className="text-sm text-gray-500 uppercase tracking-[0.2em] font-medium">Innovate • Fabricate • Race</span>
             </div>
           </div>

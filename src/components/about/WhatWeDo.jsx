@@ -36,11 +36,11 @@ const WhatWeDo = () => {
   ];
 
   return (
-    <section className="py-24 bg-gray-900">
+    <section id='what-we-do' className="py-24 bg-gray-900">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-blue-500 font-mono tracking-widest uppercase text-sm mb-4">The Challenge</h2>
-          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight italic">
+          <h1 className="text-4xl md:text-6xl font-black text-white tracking-normal italic">
             WHAT WE <span className="text-blue-600 italic">DO</span>
           </h1>
           <div className="w-20 h-1 bg-blue-600 mx-auto mt-6"></div>
