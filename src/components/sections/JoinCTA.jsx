@@ -23,10 +23,9 @@ export default function JoinCTA() {
         className="text-6xl tracking-wide md:text-7xl font-extrabold text-yellow-300 drop-shadow-[4px_4px_0px_black]  leading-tight"
       >
         <Highlighter action="underline" color="#FF9800">
-          Become 
-        </Highlighter>
-        {" "}a
-        {"  "}
+          Become
+        </Highlighter>{" "}
+        a{"  "}
         <Highlighter action="highlight" color="#E4013A">
           Sponsor
         </Highlighter>
@@ -44,8 +43,10 @@ export default function JoinCTA() {
         Student competitions.
       </motion.p>
 
-      <Button className="mt-12 w-52 -rotate-2 hover:rotate-0 transform transition-all delay-100 bg-yellow-300 p-4 text-xl z-40">
-        Join Us
+      <Button size="lg" className="px-12 mt-12 -rotate-2 hover:rotate-0 transition-all delay-75 py-5 bg-red-600 text-white border-b-4 border-red-900 active:translate-y-1">
+        <span className="font-black uppercase tracking-widest italic">
+          Join us as a Sponsor
+        </span>
       </Button>
 
       {/* Optional spark accents */}

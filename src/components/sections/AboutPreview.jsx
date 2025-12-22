@@ -6,7 +6,7 @@ import Image from "next/image";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import Button from "../ui/retro-btn";
 import { Highlighter } from "../ui/highlighter";
-import { ComicText } from "@/components/ui/comic-text"
+import { ComicText } from "@/components/ui/comic-text";
 
 const ComicHeadline = ({ children, colorClass = "text-red-700" }) => (
   <motion.h2
@@ -36,7 +36,6 @@ const FramedImage = ({ src, alt, caption, rotation }) => (
     </div>
   </motion.div>
 );
-
 
 const AboutPreview = () => {
   const handleScroll = () => {
@@ -158,9 +157,8 @@ const AboutPreview = () => {
         {/* --- CTA Button --- */}
         <div className="text-center py-20 px-4 place-items-center">
           <Button
-            variant="outline"
-            className="w-72 hover:rotate-0 -rotate-1 hover:bg-yellow-300 z-50 bg-yellow-300"
             size="lg"
+            className="w-72 hover:rotate-0 px-12 py-5 active:translate-y-1 -rotate-2 text-white border-b-4 z-50 border-red-900 bg-red-600"
             onClick={handleScroll}
           >
             Read More About Us

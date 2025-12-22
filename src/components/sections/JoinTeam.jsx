@@ -56,7 +56,7 @@ export default function JoinBlitzTeam() {
 
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <GridPattern className="opacity-50" strokeDasharray="4 4" />
+        <GridPattern className="opacity-80" strokeDasharray="4 4" />
       </div>
 
       {/* Title */}
@@ -152,7 +152,7 @@ export default function JoinBlitzTeam() {
 
           {/* Desktop CTA */}
           <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20">
-            <Button className="px-12 py-5 bg-red-600 text-white border-b-4 border-red-900 active:translate-y-1">
+            <Button className="px-12 -rotate-2 hover:rotate-0 transition-all delay-75 py-5 bg-red-600 text-white border-b-4 border-red-900 active:translate-y-1">
               <span className="font-black uppercase tracking-widest italic">
                 Initialize Recruitment
               </span>
