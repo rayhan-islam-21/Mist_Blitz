@@ -15,15 +15,6 @@ export default function JoinCTA() {
 
       {/* Floating shapes for depth */}
       <div className="absolute top-10 left-10 w-24 h-24 bg-yellow-200 rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-32 h-32 bg-red-200 rounded-full opacity-20 animate-pulse"></div>
-      <Image 
-      src="/nobg.png"
-      alt="nobg"
-      width={400}
-      height={400}
-      className="z-20 object-cover mt-0"
-      
-      />
       {/* Heading */}
       <motion.h1
         initial={{ y: -60, opacity: 0 }}
