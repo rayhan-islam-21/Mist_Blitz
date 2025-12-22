@@ -10,7 +10,7 @@ import { Highlighter } from "@/components/ui/highlighter";
 
 const About = () => {
   return (
-    <div className="bg-black min-h-screen selection:bg-blue-500/30">
+    <div className="bg-black min-h-screen selection:bg-red-500/30">
       <Navbar />
 
       {/* Hero Section */}
@@ -22,14 +22,14 @@ const About = () => {
           alt="Mist Blitz Team"
           className="object-cover opacity-50 scale-105 animate-slow-zoom"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-black/80 z-10"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/20 to-black/80 z-10"></div>
 
         <div className="relative z-20 text-center  px-6">
-          <h2 className="text-blue-500 font-mono tracking-[0.3em] uppercase text-sm mb-4 animate-fade-in">
+          <h2 className="text-red-500 font-mono tracking-[0.3em] uppercase text-sm mb-4 animate-fade-in">
             Engineering the Future
           </h2>
           <h1 className="text-6xl md:text-9xl font-black text-white tracking-normal uppercase">
-            About <span className="text-blue-600">blitz</span>
+            About <span className="text-red-600">blitz</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mt-6 font-light">
             We are a group of passionate engineers from MIST, dedicated to
@@ -45,7 +45,7 @@ const About = () => {
           {/* Our Mission Grid */}
           <div className="grid md:grid-cols-2 gap-16 items-center mb-32">
             <div>
-              <h3 className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-2">
+              <h3 className="text-red-500 font-bold uppercase tracking-widest text-sm mb-2">
                 Our Mission
               </h3>
               <h2 className="text-4xl font-bold text-white mb-6">

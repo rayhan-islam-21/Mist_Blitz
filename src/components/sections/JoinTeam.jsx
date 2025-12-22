@@ -52,7 +52,7 @@ export default function JoinBlitzTeam() {
   ];
 
   return (
-    <section className="relative min-h-screen py-24 md:py-40 bg-gray-100 overflow-hidden flex flex-col items-center">
+    <section className="relative min-h-screen py-24 md:py-40 bg-gray-50 overflow-hidden flex flex-col items-center">
 
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -95,7 +95,7 @@ export default function JoinBlitzTeam() {
       {!isMobile && (
         <div
           ref={containerRef}
-          className="relative w-full max-w-400 h-350"
+          className="relative w-full max-w-6xl mx-auto h-350"
         >
           {/* Center Hub */}
           <div
@@ -144,7 +144,7 @@ export default function JoinBlitzTeam() {
               curvature={curvatureMap[i]}
               duration={4}
               delay={i * 0.3}
-              pathColor="#2563eb"
+              pathColor="#3d1512"
               gradientStartColor="#ff001e"
               gradientEndColor="#ff001e"
             />

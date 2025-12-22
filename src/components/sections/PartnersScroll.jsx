@@ -28,14 +28,11 @@ export default function PartnersScroll() {
 
       <div className="relative  py-10">
         <h2 className="text-center tracking-widest text-4xl md:text-5xl font-comic font-extrabold mb-0 mt-6 text-black upercase ">
-          <Highlighter action="underline" color="#E4013A">
-            OUR
-          </Highlighter>
-          {"  "}
-          {" "}
-          <Highlighter action="highlight" color="#E4013A">
-            <span className="text-white">PARTNERS</span>
-          </Highlighter>
+          <span className="text-5xl uppercase md:text-8xl  font-black text-black italic ">
+            <Highlighter>
+              Our <span className="text-red-600">Partners</span>
+            </Highlighter>
+          </span>
         </h2>
 
         {/* Bigger Logo Loop */}

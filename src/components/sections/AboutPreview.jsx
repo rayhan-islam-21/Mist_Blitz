@@ -61,8 +61,8 @@ const AboutPreview = () => {
         <div className="py-16  overflow-hidden">
           <div className="container mx-auto px-4 max-w-6xl">
             <ComicHeadline colorClass="text-yellow-400">
-              <Highlighter action="underline" color="#E4010D">
-                About Us
+              <Highlighter>
+                About <span className="text-red-600">us</span>
               </Highlighter>
             </ComicHeadline>
 

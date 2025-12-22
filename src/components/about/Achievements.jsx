@@ -56,11 +56,11 @@ const Achievements = () => {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-xl">
-            <h2 className="text-blue-600 font-mono tracking-[0.4em] uppercase text-sm mb-4 flex items-center gap-2">
-              <span className="w-8 h-0.5 bg-blue-600"></span> Proven Excellence
+            <h2 className="text-red-600 font-mono tracking-[0.4em] uppercase text-sm mb-4 flex items-center gap-2">
+              <span className="w-8 h-0.5 bg-red-600"></span> Proven Excellence
             </h2>
             <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight uppercase italic">
-             <Highlighter> Hall of <span className="text-blue-700 ">Legacy</span></Highlighter>
+             <Highlighter> Hall of <span className="text-red-700 ">Legacy</span></Highlighter>
             </h1>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-2xl">
@@ -79,7 +79,7 @@ const Achievements = () => {
           {achievements.map((item, index) => (
             <div
               key={index}
-              className={`group relative rounded-3xl overflow-hidden border border-white/10 bg-gray-900 transition-all duration-500 hover:border-blue-500/50 
+              className={`group relative rounded-3xl overflow-hidden border border-white/10 bg-gray-900 transition-all duration-500 hover:border-red-500/50 
                 ${item.size === "lg" ? "md:col-span-2 md:row-span-2" : ""}
                 ${item.size === "md" ? "md:col-span-1 md:row-span-1" : ""}
                 ${item.size === "sm" ? "md:col-span-1 md:row-span-1" : ""}`}
@@ -107,19 +107,19 @@ const Achievements = () => {
                     </span>
                   </div>
 
-                  <div className="inline-block px-2 py-1 rounded-md bg-blue-600/20 border border-blue-600/30 text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-4">
+                  <div className="inline-block px-2 py-1 rounded-md bg-blue-600/20 border border-red-600/30 text-red-400 text-[10px] font-bold uppercase tracking-widest mb-4">
                     {item.tag}
                   </div>
 
                   <h3
-                    className={`font-bold text-white mb-2 group-hover:text-blue-400 transition-colors uppercase  tracking-wider 
+                    className={`font-bold text-white mb-2 group-hover:text-red-600 transition-colors uppercase  tracking-wider 
                     ${item.size === "lg" ? "text-4xl md:text-5xl" : "text-xl"}`}
                   >
                     {item.title}
                   </h3>
 
-                  <p className="text-blue-500 font-mono text-[10px] mb-4 uppercase tracking-[0.2em] flex items-center gap-2">
-                    <span className="w-4 h-[1px] bg-blue-500"></span>{" "}
+                  <p className="text-red-500 font-mono text-[10px] mb-4 uppercase tracking-[0.2em] flex items-center gap-2">
+                    <span className="w-4 h-[1px] bg-red-500"></span>{" "}
                     {item.event}
                   </p>
 
@@ -135,7 +135,7 @@ const Achievements = () => {
                 </div>
 
                 {item.size === "lg" && (
-                  <button className="flex items-center gap-2 text-white/50 text-xs font-mono group-hover:text-blue-500 transition-colors uppercase tracking-widest">
+                  <button className="flex items-center gap-2 text-white/50 text-xs font-mono group-hover:text-red-500 transition-colors uppercase tracking-widest">
                     Explore Technical Details <ChevronRight size={14} />
                   </button>
                 )}
@@ -151,7 +151,7 @@ const Achievements = () => {
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               alt="Action"
             />
-            <div className="absolute inset-0 bg-blue-600/20 mix-blend-multiply"></div>
+            <div className="absolute inset-0 mix-blend-multiply"></div>
             <div className="absolute bottom-4 left-4 text-white font-mono text-[10px] flex items-center gap-2">
               <Camera size={12} /> SHOT AT MIST LAB
             </div>
@@ -173,7 +173,7 @@ const Achievements = () => {
               <p className="text-gray-500 text-[10px] uppercase tracking-[0.3em] mb-2 font-mono">
                 {stat.label}
               </p>
-              <p className="text-4xl font-black text-white group-hover:text-blue-500 transition-colors">
+              <p className="text-4xl font-black text-white group-hover:text-red-500 transition-colors">
                 {stat.val}
               </p>
             </div>
