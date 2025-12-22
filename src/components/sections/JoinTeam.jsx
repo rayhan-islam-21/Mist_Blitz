@@ -6,6 +6,7 @@ import { AnimatedBeam } from "@/components/ui/animated-beam";
 import DeptCard from "../Deptcard";
 import { GridPattern } from "../ui/grid-pattern";
 import Button from "../ui/retro-btn";
+import { Highlighter } from "../ui/highlighter";
 
 export default function JoinBlitzTeam() {
   const containerRef = useRef(null);
@@ -51,17 +52,17 @@ export default function JoinBlitzTeam() {
   ];
 
   return (
-    <section className="relative min-h-screen py-24 md:py-40 bg-white overflow-hidden flex flex-col items-center">
+    <section className="relative min-h-screen py-24 md:py-40 bg-gray-100 overflow-hidden flex flex-col items-center">
 
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <GridPattern className="opacity-10" strokeDasharray="4 4" />
+        <GridPattern className="opacity-50" strokeDasharray="4 4" />
       </div>
 
       {/* Title */}
       <div className="relative z-20 mb-20 md:mb-40 text-center px-4">
         <h2 className="text-5xl md:text-8xl font-black text-black italic tracking-wide">
-          TEAM <span className="text-red-600">BLITZ</span>
+          <Highlighter>TEAM <span className="text-red-600">BLITZ</span></Highlighter>
         </h2>
         <p className="mt-4 text-red-500 font-mono text-xs tracking-[0.35em] uppercase">
           Departmental Structural Overview
@@ -77,7 +78,7 @@ export default function JoinBlitzTeam() {
               title={dept.title}
               description={dept.description}
               image={dept.image}
-              className="w-full h-[420px]"
+              className="w-full h-100"
             />
           ))}
           <div className="flex justify-center mt-8">
@@ -94,17 +95,17 @@ export default function JoinBlitzTeam() {
       {!isMobile && (
         <div
           ref={containerRef}
-          className="relative w-full max-w-[1600px] h-[1400px]"
+          className="relative w-full max-w-400 h-350"
         >
           {/* Center Hub */}
           <div
             ref={centerRef}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50"
           >
-            <div className="relative scale-125">
+            <div className="relative -z-10  scale-125">
               <div className="absolute inset-0 rounded-full bg-red-600/20 blur-3xl animate-pulse" />
               <div className="relative h-32 w-32 rounded-full bg-black border-2 border-red-600 overflow-hidden">
-                <Image src="/furiosalogo.jpg" alt="Logo" fill className="object-cover" />
+                <Image src="/furiosalogo.jpg" alt="Logo" fill className="object-cover " />
               </div>
             </div>
           </div>

@@ -26,7 +26,7 @@ const DeptCard = forwardRef(function DeptCard(
           className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out brightness-75 group-hover:brightness-90"
         />
         {/* Dynamic Gradient Mask */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
       </div>
 
       {/* 2. HUD ELEMENTS (The Engineering Aesthetic) */}
