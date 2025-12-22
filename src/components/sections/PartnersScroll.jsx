@@ -23,18 +23,18 @@ const sponsorLogos = sponsors.map((s) => ({
 
 export default function PartnersScroll() {
   return (
-    <section className="relative bg-white overflow-hidden">
+    <section className="relative bg-white overflow-hidden  py-4">
       <RetroGrid />
 
       <div className="relative  py-10">
-        <h2 className="text-center tracking-widest text-4xl md:text-5xl font-comic font-extrabold mb-0 mt-6 text-yellow-300 drop-shadow-[3px_4px_0_#000000]">
+        <h2 className="text-center tracking-widest text-4xl md:text-5xl font-comic font-extrabold mb-0 mt-6 text-black upercase ">
           <Highlighter action="underline" color="#E4013A">
             OUR
           </Highlighter>
           {"  "}
           {" "}
           <Highlighter action="highlight" color="#E4013A">
-            PARTNERS
+            <span className="text-white">PARTNERS</span>
           </Highlighter>
         </h2>
 

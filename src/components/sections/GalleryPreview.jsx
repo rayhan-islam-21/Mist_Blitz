@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Highlighter } from "../ui/highlighter";
 
 /* ---------------- DATA ---------------- */
 
@@ -13,35 +14,40 @@ const galleryData = [
     image: "/car2.jpg",
     title: "Furiosa 1.0",
     tag: "Furiosa 1.0 • 2024",
-    hoverText: "Track testing and validation of Furiosa 1.0, focusing on vehicle dynamics and performance benchmarking.",
+    hoverText:
+      "Track testing and validation of Furiosa 1.0, focusing on vehicle dynamics and performance benchmarking.",
   },
   {
     id: 2,
     image: "/improve.jpg",
     title: "Manufacturing",
     tag: "Workshop • Chassis",
-    hoverText: "In-house chassis manufacturing involving precision fabrication and final structural assembly.",
+    hoverText:
+      "In-house chassis manufacturing involving precision fabrication and final structural assembly.",
   },
   {
     id: 3,
     image: "/china4.jpg",
     title: "Team MIST BLITZ",
     tag: "Formula Student",
-    hoverText: "MIST BLITZ representing Bangladesh at international Formula Student competitions.",
+    hoverText:
+      "MIST BLITZ representing Bangladesh at international Formula Student competitions.",
   },
   {
     id: 4,
     image: "/car2.jpg",
     title: "Engineering",
     tag: "Design & Simulation",
-    hoverText: "System-level vehicle design driven by CAD modeling and CFD analysis.",
+    hoverText:
+      "System-level vehicle design driven by CAD modeling and CFD analysis.",
   },
   {
     id: 5,
     image: "/china3.jpg",
     title: "Competition",
     tag: "International FS",
-    hoverText: "Participation in global Formula Student static and dynamic events under rigorous regulations.",
+    hoverText:
+      "Participation in global Formula Student static and dynamic events under rigorous regulations.",
   },
 ];
 
@@ -54,7 +60,10 @@ export default function GalleryPreviewCarousel() {
   const delay = 5000;
 
   const next = () => setActiveIndex((prev) => (prev + 1) % galleryData.length);
-  const prev = () => setActiveIndex((prev) => (prev - 1 + galleryData.length) % galleryData.length);
+  const prev = () =>
+    setActiveIndex(
+      (prev) => (prev - 1 + galleryData.length) % galleryData.length
+    );
 
   useEffect(() => {
     if (isAutoPlaying) {
@@ -82,26 +91,34 @@ export default function GalleryPreviewCarousel() {
           <div>
             <div className="flex items-center gap-2 mb-2 md:mb-3">
               <span className="w-8 md:w-10 h-[2px] bg-red-600" />
-              <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-red-600 uppercase">Archive</span>
+              <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-red-600 uppercase">
+                Archive
+              </span>
             </div>
-            <h2 className="text-4xl md:text-7xl font-black text-slate-900 tracking-tight leading-none">
-              Our Journey<span className="text-red-600">.</span>
+            <h2 className="text-5xl md:text-8xl font-black text-black italic tracking-wide">
+              Our<span className="text-red-600">Journey.</span>
             </h2>
           </div>
-          
+
           {/* Nav Buttons - Hidden on very small screens, visible on md+ */}
           <div className="hidden md:flex gap-3">
-            <button onClick={prev} className="p-4 rounded-full border border-slate-200 bg-black hover:bg-slate-900 hover:text-white transition-all shadow-sm">
+            <button
+              onClick={prev}
+              className="p-4 rounded-full border border-slate-200 bg-black hover:bg-slate-900 hover:text-white transition-all shadow-sm"
+            >
               <ChevronLeft size={20} />
             </button>
-            <button onClick={next} className="p-4 rounded-full border border-slate-200 bg-black hover:bg-slate-900 hover:text-white transition-all shadow-sm">
+            <button
+              onClick={next}
+              className="p-4 rounded-full border border-slate-200 bg-black hover:bg-slate-900 hover:text-white transition-all shadow-sm"
+            >
               <ChevronRight size={20} />
             </button>
           </div>
         </div>
 
         {/* Carousel Container */}
-        <div 
+        <div
           className="relative h-[400px] md:h-[550px] flex items-center justify-center touch-pan-y"
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
@@ -131,7 +148,9 @@ export default function GalleryPreviewCarousel() {
               key={i}
               onClick={() => setActiveIndex(i)}
               className={`h-1.5 transition-all duration-500 rounded-full ${
-                activeIndex === i ? "w-8 md:w-10 bg-slate-900" : "w-2 bg-slate-300"
+                activeIndex === i
+                  ? "w-8 md:w-10 bg-slate-900"
+                  : "w-2 bg-slate-300"
               }`}
             />
           ))}
@@ -145,7 +164,7 @@ export default function GalleryPreviewCarousel() {
 
 function GalleryCard({ item, index, activeIndex, total }) {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   let offset = index - activeIndex;
   if (offset > total / 2) offset -= total;
   if (offset < -total / 2) offset += total;
@@ -158,7 +177,10 @@ function GalleryCard({ item, index, activeIndex, total }) {
       initial={false}
       animate={{
         // On mobile (smaller screen width), we reduce the x-offset multiplier
-        x: `calc(-50% + ${offset * (typeof window !== 'undefined' && window.innerWidth < 768 ? 75 : 60)}%)`,
+        x: `calc(-50% + ${
+          offset *
+          (typeof window !== "undefined" && window.innerWidth < 768 ? 75 : 60)
+        }%)`,
         y: "-50%",
         scale: isActive ? 1 : 0.85,
         opacity: Math.abs(offset) <= 1 ? 1 : 0,
@@ -168,7 +190,7 @@ function GalleryCard({ item, index, activeIndex, total }) {
       transition={{ type: "spring", stiffness: 200, damping: 25 }}
       style={{ perspective: 1000 }}
     >
-      <div 
+      <div
         className="relative w-full h-full rounded-2xl md:rounded-3xl overflow-hidden group shadow-xl md:shadow-2xl"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -178,7 +200,9 @@ function GalleryCard({ item, index, activeIndex, total }) {
           src={item.image}
           alt={item.title}
           fill
-          className={`object-cover transition-transform duration-700 ${isActive ? "scale-105" : "scale-110 blur-[1px]"}`}
+          className={`object-cover transition-transform duration-700 ${
+            isActive ? "scale-105" : "scale-110 blur-[1px]"
+          }`}
           sizes="(max-width: 768px) 100vw, 70vw"
         />
 
@@ -188,13 +212,13 @@ function GalleryCard({ item, index, activeIndex, total }) {
         {/* Content Box */}
         <div className="absolute bottom-0 left-0 w-full p-5 md:p-12">
           <motion.div
-            animate={{ y: (isHovered && isActive) ? 0 : 5 }}
+            animate={{ y: isHovered && isActive ? 0 : 5 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             <span className="inline-block px-2 py-0.5 mb-2 md:mb-4 text-[9px] md:text-[10px] font-bold tracking-[0.1em] md:tracking-[0.2em] uppercase text-black bg-yellow-300 rounded">
               {item.tag}
             </span>
-            
+
             <h3 className="text-xl md:text-5xl font-bold text-white tracking-tight mb-1 md:mb-2 leading-tight">
               {item.title}
             </h3>
@@ -202,9 +226,9 @@ function GalleryCard({ item, index, activeIndex, total }) {
             {/* Mobile Strategy: Show text on click/tap for active card */}
             <motion.div
               initial={{ height: 0, opacity: 0 }}
-              animate={{ 
-                height: (isHovered && isActive) ? "auto" : 0, 
-                opacity: (isHovered && isActive) ? 1 : 0 
+              animate={{
+                height: isHovered && isActive ? "auto" : 0,
+                opacity: isHovered && isActive ? 1 : 0,
               }}
               className="overflow-hidden"
             >
@@ -216,9 +240,7 @@ function GalleryCard({ item, index, activeIndex, total }) {
         </div>
 
         {/* Non-active focus overlay */}
-        {!isActive && (
-          <div className="absolute inset-0 bg-slate-900/40" />
-        )}
+        {!isActive && <div className="absolute inset-0 bg-slate-900/40" />}
       </div>
     </motion.div>
   );

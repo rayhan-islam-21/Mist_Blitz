@@ -22,15 +22,11 @@ export default function JoinCTA() {
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true, amount: 0.5 }} // animate when 50% in view, only once
         transition={{ type: "spring", stiffness: 120, damping: 14 }}
-        className="text-6xl tracking-wide md:text-7xl font-extrabold text-yellow-300 drop-shadow-[4px_4px_0px_black] leading-tight"
+        className="text-6xl tracking-wide md:text-7xl font-extrabold text-yellow-300  leading-tight"
       >
-        <Highlighter action="underline" color="#FF9800">
-          Become
-        </Highlighter>{" "}
-        a{"  "}
-        <Highlighter action="highlight" color="#E4013A">
-          Sponsor
-        </Highlighter>
+         <span className="text-5xl uppercase md:text-8xl font-black text-black italic ">
+          <Highlighter>Join {" "}<span className="text-red-600">Sponsers</span></Highlighter>
+        </span>
       </motion.h1>
 
       {/* Subheading */}
