@@ -44,7 +44,7 @@ const AboutPreview = () => {
   };
 
   return (
-    <div className="relative min-h-screen border-b-6 border-black ">
+    <div className="relative min-h-screen border-b-0 border-black ">
       <section id="about-mist-blitz-pro" className="relative bg-white z-10 ">
         <InteractiveGridPattern
           hoverFill="fill-gray-500"
