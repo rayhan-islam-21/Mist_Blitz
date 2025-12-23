@@ -49,8 +49,6 @@ const Achievements = () => {
 
   return (
     <section className="py-24  relative overflow-hidden">
-      {/* Carbon Fiber Background Effect */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header Section */}
@@ -59,15 +57,15 @@ const Achievements = () => {
             <h2 className="text-red-600 font-mono tracking-[0.4em] uppercase text-sm mb-4 flex items-center gap-2">
               <span className="w-8 h-0.5 bg-red-600"></span> Proven Excellence
             </h2>
-            <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight uppercase italic">
+            <h1 className="text-5xl md:text-7xl font-black text-black tracking-tight uppercase italic">
              <Highlighter> Hall of <span className="text-red-700 ">Legacy</span></Highlighter>
             </h1>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-2xl">
-            <p className="text-gray-500 font-mono text-[10px] uppercase tracking-widest">
+            <p className="text-gray-900 font-mono text-[10px] uppercase tracking-widest">
               Global Ranking Status
             </p>
-            <p className="text-2xl font-bold text-white uppercase italic flex items-center gap-2">
+            <p className="text-2xl font-bold text-black uppercase italic flex items-center gap-2">
               <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
               Active Contender
             </p>
@@ -159,7 +157,7 @@ const Achievements = () => {
         </div>
 
         {/* Footer Stats Bar */}
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-sm">
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-black/10 rounded-3xl overflow-hidden backdrop-blur-sm">
           {[
             { label: "Trophies", val: "12" },
             { label: "Design Score", val: "94%" },
@@ -168,12 +166,12 @@ const Achievements = () => {
           ].map((stat, i) => (
             <div
               key={i}
-              className="bg-black/80 p-8 text-center group hover:bg-gray-900 transition-colors"
+              className="bg-white/80 p-8 text-center group hover:bg-gray-900 transition-colors"
             >
               <p className="text-gray-500 text-[10px] uppercase tracking-[0.3em] mb-2 font-mono">
                 {stat.label}
               </p>
-              <p className="text-4xl font-black text-white group-hover:text-red-500 transition-colors">
+              <p className="text-4xl font-black text-black group-hover:text-red-500 transition-colors">
                 {stat.val}
               </p>
             </div>

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const MISTBlitzIntro = () => {
   return (
-    <section className="relative py-12 bg-gray-900 overflow-hidden">
+    <section className="relative py-12 bg-white overflow-hidden">
       {/* Subtle Background Accent */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-red-600/5 blur-[120px] -z-10"></div>
       
@@ -12,8 +12,8 @@ const MISTBlitzIntro = () => {
           
           {/* Image Side with Decorative Frame */}
           <div className="w-full lg:w-1/2 relative group">
-            <div className="absolute -inset-1 bg-linear-to-r from-red-600 to-red-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-            <div className="relative bg-gray-800 rounded-2xl overflow-hidden border border-white/10">
+            <div className="absolute  bg-linear-to-r from-red-600 to-red-500 rounded-2xl  opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div className="relative bg-gray-800 rounded-2xl overflow-hidden border border-white/60">
               <Image
                 src="/mist.jpeg" 
                 alt="Furiosa 1.0 Race Car"
@@ -34,7 +34,7 @@ const MISTBlitzIntro = () => {
               Establishment 2024
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">
+            <h2 className="text-4xl md:text-5xl font-black text-black leading-tight">
               THE GENESIS OF <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
                 MIST BLITZ

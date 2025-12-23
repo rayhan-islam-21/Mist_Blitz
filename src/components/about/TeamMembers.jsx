@@ -117,15 +117,15 @@ const TeamMembers = () => {
   const currentYearData = teamData[activeYear];
 
   return (
-    <section className="py-24  text-white relative overflow-hidden font-sans">
-      {/* Background Realism Layers */}
+    <section className="py-24  text-black relative overflow-hidden font-sans">
+      {/* Background Realism Layers
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-900/10 via-transparent to-transparent opacity-50"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-900/10 via-transparent to-transparent opacity-50"></div> */}
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* HEADER */}
-        <div className="flex flex-col lg:flex-row items-end justify-between gap-12 mb-32 border-b border-white/5 pb-12">
+        <div className="flex flex-col lg:flex-row items-end justify-between gap-12 mb-32 border-b border-black/10 pb-12">
           <div className="relative">
             <div className="absolute -top-8 left-0 flex items-center gap-2 text-red-500 font-mono text-[10px] tracking-[0.4em] uppercase">
               <Activity size={12} className="animate-pulse" /> Live Team Database
@@ -135,7 +135,7 @@ const TeamMembers = () => {
             </h1>
           </div>
 
-          <div className="flex bg-neutral-900 border border-white/10 p-1.5 rounded-full">
+          <div className="flex bg-neutral-900 border border-black/10 p-1.5 rounded-full">
             {Object.keys(teamData).map((year) => (
               <button
                 key={year}

@@ -14,7 +14,7 @@ const About = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-end justify-center overflow-hidden">
+      <section className="relative h-screen flex items-end justify-center overflow-hidden">
         <Image
           src="/team.jpg"
           fill
@@ -40,7 +40,7 @@ const About = () => {
       </section>
 
       {/* Narrative Section */}
-      <main className="bg-gray-900 relative">
+      <main className="bg-white relative">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24">
           {/* Our Mission Grid */}
           <div className="grid md:grid-cols-2 gap-16 items-center mb-32">
@@ -48,10 +48,10 @@ const About = () => {
               <h3 className="text-red-500 font-bold uppercase tracking-widest text-sm mb-2">
                 Our Mission
               </h3>
-              <h2 className="text-4xl font-bold text-white mb-6">
+              <h2 className="text-4xl font-semibold text-black mb-6">
                 Building More Than Just Race Cars.
               </h2>
-              <p className="text-gray-400 leading-relaxed mb-6">
+              <p className="text-gray-500 leading-relaxed mb-6">
                 Founded at the Military Institute of Science and Technology,
                 **MIST Blitz** represents the pinnacle of student engineering.
                 Our journey isn't just about the finish line; it’s about the
@@ -61,15 +61,15 @@ const About = () => {
               </p>
               <div className="flex gap-8 border-t border-white/10 pt-8">
                 <div>
-                  <p className="text-3xl font-bold text-white">40+</p>
+                  <p className="text-3xl font-bold text-black">40+</p>
                   <p className="text-gray-500 text-sm">Active Members</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-white">03</p>
+                  <p className="text-3xl font-bold text-black">03</p>
                   <p className="text-gray-500 text-sm">Prototypes</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-white">100%</p>
+                  <p className="text-3xl font-bold text-black">100%</p>
                   <p className="text-gray-500 text-sm">In-house Design</p>
                 </div>
               </div>
