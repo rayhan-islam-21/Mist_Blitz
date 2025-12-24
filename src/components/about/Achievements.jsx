@@ -90,7 +90,7 @@ const Achievements = () => {
                   fill
                   className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-120 transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-linear-to-br from-gray-900/70 via-gray-900/70 to-black/10"></div>
+                <div className="absolute inset-0 bg-linear-to-br from-gray-900/70 to-black/10"></div>
               </div>
 
               {/* Content Layer */}

@@ -32,7 +32,7 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
   // Captain/Vice Captain Variant
   if (variant === "admin") {
     return (
-      <div className="group relative w-full h-[500px] bg-black overflow-hidden transition-all duration-500 hover:shadow-[15px_15px_0px_rgba(220,38,38,1)]">
+      <div className="group relative w-full h-125 bg-black overflow-hidden transition-all duration-500 hover:shadow-[15px_15px_0px_rgba(220,38,38,1)]">
         <Image
           src={member.image}
           fill
@@ -58,7 +58,7 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
   return (
     <div 
       onClick={handleClick}
-      className={`group relative w-full h-[450px] bg-white overflow-hidden border border-black/10 transition-all duration-500 
+      className={`group relative w-full h-125 bg-white overflow-hidden border border-black/10 transition-all duration-500 
         ${isLead ? "cursor-pointer hover:border-red-600" : "cursor-default"}
         hover:shadow-[10px_10px_0px_rgba(220,38,38,1)]`}
     >
@@ -176,7 +176,7 @@ const TeamMembers = () => {
           id: "management",
           name: "Management",
           icon: <Briefcase size={20} />,
-          lead: { name: "Maliha Chowdhury", role: "Management Lead", image: "/p1.jpg", linkedin: "#" },
+          lead: { name: "Maliha", role: "Management Lead", image: "/p1.jpg", linkedin: "#" },
           members: [
             { name: "Samiha Ahmed", role: "Sponsorship", image: "/p1.jpg", linkedin: "#" },
             { name: "Omar Faruq", role: "Logistics", image: "/p1.jpg", linkedin: "#" },
@@ -189,17 +189,13 @@ const TeamMembers = () => {
   const currentYearData = teamData[activeYear];
 
   return (
-    <section className="bg-[#fafafa] text-black py-20 px-6 font-sans">
+    <section className="bg-white text-black py-20 px-6 font-sans">
       <div className="max-w-7xl mx-auto">
         
         {/* HEADER AREA */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-24 border-b-2 border-black pb-10">
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-24 border-b-2 border-black/20 pb-10">
           <div>
-            <div className="flex items-center gap-2 text-red-600 mb-4">
-              <Activity size={18} className="animate-pulse" />
-              <span className="font-mono text-xs font-bold tracking-[0.3em] uppercase">Roster System v5.0</span>
-            </div>
-            <h1 className="text-7xl md:text-9xl font-black uppercase italic leading-[0.8] tracking-tighter">
+            <h1 className="text-7xl md:text-8xl font-black uppercase italic leading-[0.8] tracking-tighter">
               THE <span className="text-red-600">CREW</span>
             </h1>
           </div>
