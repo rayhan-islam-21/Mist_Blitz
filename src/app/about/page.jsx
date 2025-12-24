@@ -22,7 +22,9 @@ const About = () => {
           alt="Mist Blitz Team"
           className="object-cover object-center opacity-50 scale-105 animate-slow-zoom"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/20 to-black/80 z-10"></div>
+         <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/20 to-[#000000]" />
+        
+        {/* <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/20 to-black/80 z-10"></div> */}
 
         <div className="relative z-20 text-center  px-6">
           <h2 className="text-red-500 font-mono tracking-[0.3em] uppercase text-sm mb-4 animate-fade-in">
