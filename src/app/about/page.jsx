@@ -14,13 +14,13 @@ const About = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-end justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center    justify-center overflow-hidden">
         <Image
           src="/team.jpg"
           fill
           priority
           alt="Mist Blitz Team"
-          className="object-cover opacity-50 scale-105 animate-slow-zoom"
+          className="object-cover object-center opacity-50 scale-105 animate-slow-zoom"
         />
         <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/20 to-black/80 z-10"></div>
 

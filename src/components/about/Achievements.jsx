@@ -77,7 +77,7 @@ const Achievements = () => {
           {achievements.map((item, index) => (
             <div
               key={index}
-              className={`group relative rounded-3xl overflow-hidden border border-white/10 bg-gray-900 transition-all duration-500 hover:border-red-500/50 
+              className={`group relative rounded-3xl overflow-hidden border border-white/10 bg-red-100 transition-all duration-500 hover:border-red-500/50 
                 ${item.size === "lg" ? "md:col-span-2 md:row-span-2" : ""}
                 ${item.size === "md" ? "md:col-span-1 md:row-span-1" : ""}
                 ${item.size === "sm" ? "md:col-span-1 md:row-span-1" : ""}`}
@@ -105,7 +105,7 @@ const Achievements = () => {
                     </span>
                   </div>
 
-                  <div className="inline-block px-2 py-1 rounded-md bg-blue-600/20 border border-red-600/30 text-red-400 text-[10px] font-bold uppercase tracking-widest mb-4">
+                  <div className="inline-block px-2 py-1 rounded-md bg-red-600/20 border border-red-600/30 text-red-400 text-[10px] font-bold uppercase tracking-widest mb-4">
                     {item.tag}
                   </div>
 
@@ -154,28 +154,6 @@ const Achievements = () => {
               <Camera size={12} /> SHOT AT MIST LAB
             </div>
           </div>
-        </div>
-
-        {/* Footer Stats Bar */}
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-black/10 rounded-3xl overflow-hidden backdrop-blur-sm">
-          {[
-            { label: "Trophies", val: "12" },
-            { label: "Design Score", val: "94%" },
-            { label: "Podiums", val: "05" },
-            { label: "Global Events", val: "03" },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              className="bg-white/80 p-8 text-center group hover:bg-gray-900 transition-colors"
-            >
-              <p className="text-gray-500 text-[10px] uppercase tracking-[0.3em] mb-2 font-mono">
-                {stat.label}
-              </p>
-              <p className="text-4xl font-black text-black group-hover:text-red-500 transition-colors">
-                {stat.val}
-              </p>
-            </div>
-          ))}
         </div>
       </div>
     </section>
