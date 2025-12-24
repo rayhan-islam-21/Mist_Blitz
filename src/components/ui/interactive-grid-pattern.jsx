@@ -3,8 +3,8 @@ import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 export function InteractiveGridPattern({
-  width = 40,
-  height = 40,
+  width = 60,
+  height = 60,
   squares = [24, 24],
   hoverFill = "fill-yellow-400",
   fadeDelay = 600, // 👈 how long box stays lit (ms)
