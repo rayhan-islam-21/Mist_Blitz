@@ -32,7 +32,7 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="relative bg-gray-900 text-white overflow-hidden"
+      className="relative bg-black text-white overflow-hidden"
     >
       {/* Comic rays */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
