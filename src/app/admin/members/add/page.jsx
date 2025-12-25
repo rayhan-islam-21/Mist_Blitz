@@ -111,7 +111,7 @@ const AddMemberPage = () => {
           </div>
           <div className="text-left md:text-right border-l md:border-l-0 md:pl-0 pl-4 border-slate-200">
             <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">System Version</p>
-            <p className="text-[10px] font-bold text-slate-900">BLITZ-ADMIN v4.0.2</p>
+            <p className="text-[10px] font-bold text-slate-900">BLITZ-ADMIN PANEL</p>
           </div>
         </header>
 
