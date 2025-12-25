@@ -48,10 +48,11 @@ const AddMemberPage = () => {
     "flex items-center gap-3 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-800 mb-6";
   const inputBase =
     "w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-900 transition-all duration-300 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-50";
-  const notify = toast.success("Member Added Successfully!", {
-    duration: 4000,
-    position: "top-center",
-  });
+  const notify = () =>
+    toast.success("Member Added Successfully!", {
+      duration: 4000,
+      position: "top-center",
+    });
   const onSubmit = async (data) => {
     console.log("🚀 Member Deployment Data:", data);
     await saveMemberToDB(data);

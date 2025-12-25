@@ -27,7 +27,7 @@ export async function GET() {
   try {
     await connectDB();
 
-    const users = await User.find(); 
+    const users = await member.find(); 
     return NextResponse.json(users, { status: 200 });
   } catch (error) {
     console.error("Error fetching users:", error);
