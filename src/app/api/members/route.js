@@ -7,14 +7,16 @@ export async function POST(req) {
     await connectDB();
 
     const body = await req.json();
-    const { name, roll, dept, image, linkedin } = body;
+    const { name, roll, dept, image, linkedin, position } = body;
+    console.log("Incoming body:", body);
+
 
     const existingUser = await member.findOne({ roll });
     if (existingUser) {
       return NextResponse.json({ message: "User already exists" }, { status: 409 });
     }
 
-    const newUser = await member.create({ name, roll, dept, image, linkedin });
+    const newUser = await member.create({ name, roll, dept, image, linkedin, position });
     return NextResponse.json(newUser, { status: 201 });
   } catch (error) {
     console.error("Error creating user:", error);

@@ -8,6 +8,7 @@ const saveMemberToDB = async (member) => {
             dept: member.dept,
             image: member.image,
             linkedin: member.linkedin || "",
+            position: member.position
         })
     }
     catch (err) {

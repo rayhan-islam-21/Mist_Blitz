@@ -7,12 +7,14 @@ export async function POST(req) {
         await connectDB();
 
         const body = await req.json();
-        const { name, email,uid } = body;
+        const { name, email, uid } = body;
+        console.log("Incoming body:", body);
+
         const existingAdmin = await Admin.findOne({ email });
         if (existingAdmin) {
             return NextResponse.json({ message: "Admin already exists" }, { status: 409 });
         }
-        const newAdmin = await Admin.create({ name, email,uid });
+        const newAdmin = await Admin.create({ name, email, uid });
         return NextResponse.json(newAdmin, { status: 201 });
     }
     catch (error) {

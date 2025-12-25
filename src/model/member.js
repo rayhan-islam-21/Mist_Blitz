@@ -1,36 +1,22 @@
 import mongoose from "mongoose";
 
 const MemberSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, "Name is required"]
-    },
-    roll: {
-        type: String,
-        required: [true, "Student ID/Roll is required"],
-        unique: true
-    },
+    name: { type: String, required: true },
+    roll: { type: String, required: true, unique: true },
     dept: {
         type: String,
-        required: true,
-        enum: ["Powertrain", "Chassis", "Aerodynamics", "Documentation", "Management", "Media", "Non-Technical"]
+        enum: ["Powertrain", "Chassis", "Aerodynamics", "Documentation", "Management", "Media", "Non-Technical"],
+        required: true
     },
-    image: {
+    image: { type: String, required: true },
+    linkedin: { type: String, default: "" },
+    position: {
         type: String,
-        required: [true, "Profile image is required"]
+        enum: ["Member", "Lead", "Sub-Lead", "Advisor"],
+        default: "Member"
     },
-    linkedin: {
-        type: String,
-        default: ""
-    },
-    role: {
-        type: String,
-        default: "user",
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+    createdAt: { type: Date, default: Date.now }
 });
 
-export default mongoose.models.Member || mongoose.model("Member", MemberSchema);
+// 🔥 FORCE NEW MODEL
+export default mongoose.model("MemberV2", MemberSchema);

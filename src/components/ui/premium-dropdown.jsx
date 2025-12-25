@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaUniversity, FaChevronDown, FaCheck, FaSearch } from "react-icons/fa";
+import { AiOutlineTeam } from 'react-icons/ai';
 
 const PremiumDropdown = ({ options, selected, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,25 +27,34 @@ const PremiumDropdown = ({ options, selected, onSelect }) => {
 
   return (
     <div className="relative w-full" ref={dropdownRef}>
-      <label className="text-[11px] font-black uppercase tracking-[0.1em] text-slate-400 ml-1 mb-2 block">
-        Department
-      </label>
-      
       {/* The Control Button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex items-center justify-between pl-11 pr-5 py-3.5 rounded-2xl border transition-all duration-300 outline-none
-          ${isOpen 
-            ? "border-red-500 ring-4 ring-red-500/10 bg-white shadow-lg shadow-red-50" 
-            : "border-slate-200 bg-slate-50/50 hover:border-red-300 hover:bg-white"
+          ${
+            isOpen
+              ? "border-red-500 ring-4 ring-red-500/10 bg-white shadow-lg shadow-red-50"
+              : "border-slate-200 bg-slate-50/50 hover:border-red-300 hover:bg-white"
           }`}
       >
-        <FaUniversity className={`absolute left-4 transition-colors duration-300 ${isOpen ? "text-red-500" : "text-slate-400"}`} />
-        <span className={`text-sm font-semibold ${selected ? "text-slate-900" : "text-slate-400"}`}>
+        <AiOutlineTeam
+          className={`absolute left-4 transition-colors duration-300 ${
+            isOpen ? "text-red-500" : "text-slate-400"
+          }`}
+        />
+        <span
+          className={`text-sm font-semibold ${
+            selected ? "text-slate-900" : "text-slate-400"
+          }`}
+        >
           {selected || "Select Department"}
         </span>
-        <FaChevronDown className={`text-xs transition-transform duration-300 ${isOpen ? "rotate-180 text-red-500" : "text-slate-400"}`} />
+        <FaChevronDown
+          className={`text-xs transition-transform duration-300 ${
+            isOpen ? "rotate-180 text-red-500" : "text-slate-400"
+          }`}
+        />
       </button>
 
       {/* The Animated Menu */}
@@ -85,9 +95,10 @@ const PremiumDropdown = ({ options, selected, onSelect }) => {
                       setSearchTerm("");
                     }}
                     className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm transition-all
-                      ${selected === option 
-                        ? "bg-red-50 text-red-600 font-bold" 
-                        : "text-slate-600 hover:bg-slate-50 hover:text-red-600"
+                      ${
+                        selected === option
+                          ? "bg-red-50 text-red-600 font-bold"
+                          : "text-slate-600 hover:bg-slate-50 hover:text-red-600"
                       }`}
                   >
                     {option}
