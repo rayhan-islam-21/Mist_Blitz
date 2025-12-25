@@ -34,11 +34,7 @@ const MemberSchema = new mongoose.Schema({
       "Senior Engineer",
       "Junior Engineer",
       "Apprentice Engineer",
-      "Trainee",
-      "Member",
-      "Lead",
-      "Sub-Lead",
-      "Advisor"
+      "Trainee"
     ],
     default: "Trainee"
   },

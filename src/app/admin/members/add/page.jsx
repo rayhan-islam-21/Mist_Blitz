@@ -62,10 +62,6 @@ const AddMemberPage = () => {
     "Junior Engineer",
     "Apprentice Engineer",
     "Trainee",
-    "Member",
-    "Lead",
-    "Sub-Lead",
-    "Advisor",
   ];
 
   const handleMultiSelect = (field, value) => {
