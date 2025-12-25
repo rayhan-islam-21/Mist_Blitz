@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   FaUser,
   FaLinkedin,
@@ -12,8 +11,6 @@ import {
   FaRocket,
   FaInfoCircle,
   FaShieldAlt,
-  FaCrown,
-  FaUserFriends,
 } from "react-icons/fa";
 import PremiumDropdown from "@/components/ui/premium-dropdown";
 import Image from "next/image";
@@ -22,12 +19,20 @@ import saveMemberToDB from "@/lib/savememberToDb";
 import toast, { Toaster } from "react-hot-toast";
 
 const AddMemberPage = () => {
-  const { register, handleSubmit, setValue, watch, reset, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       name: "",
       roll: "",
-      dept: "Powertrain",
-      position: "Member",
+      techDept: [],
+      nonTechDept: [],
+      position: "Trainee",
       image: "",
       linkedin: "",
     },
@@ -36,37 +41,69 @@ const AddMemberPage = () => {
   const formData = watch();
   const [uploading, setUploading] = useState(false);
 
-  const departments = [
+  const technicalTeams = [
+    "Suspension, Steering and Braking",
+    "Chassis and Aerodynamics",
     "Powertrain",
-    "Chassis",
-    "Aerodynamics",
-    "Documentation",
-    "Management",
-    "Media",
-    "Non-Technical",
+    "Electronics",
   ];
 
-  const roles = ["Member", "Lead", "Sub-Lead", "Advisor"];
+  const nonTechnicalTeams = [
+    "Management",
+    "Finance",
+    "Logistics",
+    "Documentation",
+    "Business Plan Presentation",
+    "Media",
+  ];
+
+  const commandLevels = [
+    "Senior Engineer",
+    "Junior Engineer",
+    "Apprentice Engineer",
+    "Trainee",
+    "Member",
+    "Lead",
+    "Sub-Lead",
+    "Advisor",
+  ];
+
+  const handleMultiSelect = (field, value) => {
+    const currentValues = formData[field] || [];
+    const updatedValues = currentValues.includes(value)
+      ? currentValues.filter((item) => item !== value)
+      : [...currentValues, value];
+
+    setValue(field, updatedValues);
+  };
 
   const sectionTitle =
     "flex items-center gap-3 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-800 mb-6";
   const inputBase =
     "w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-900 transition-all duration-300 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-50";
-
   const onSubmit = async (data) => {
-    // Basic check for image since it's not a standard input
+    // Validate required fields
     if (!data.image) {
       toast.error("Please upload a profile photo.");
       return;
     }
+    if (!data.techDept || data.techDept.length === 0) {
+      toast.error("Please select at least one Technical Team.");
+      return;
+    }
+    if (!data.nonTechDept || data.nonTechDept.length === 0) {
+      toast.error("Please select at least one Non-Technical Team.");
+      return;
+    }
 
     try {
-      console.log("🚀 Member Deployment Data:", data);
+      console.log("Submitting data:", data);
       await saveMemberToDB(data);
-      toast.success(`${data.name} deployed to ${data.dept}!`);
+      toast.success(`${data.name} deployed successfully!`);
       reset();
     } catch (error) {
-      toast.error("Deployment failed. Check console.");
+      console.error(error);
+      toast.error("Deployment failed. Check console for details.");
     }
   };
 
@@ -110,15 +147,22 @@ const AddMemberPage = () => {
             </p>
           </div>
           <div className="text-left md:text-right border-l md:border-l-0 md:pl-0 pl-4 border-slate-200">
-            <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">System Version</p>
-            <p className="text-[10px] font-bold text-slate-900">BLITZ-ADMIN PANEL</p>
+            <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+              System Version
+            </p>
+            <p className="text-[10px] font-bold text-slate-900">
+              BLITZ-ADMIN PANEL
+            </p>
           </div>
         </header>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start"
+        >
+          {/* Form Content */}
           <div className="lg:col-span-7 space-y-10 order-2 lg:order-1">
-            
-            {/* --- SECTION 1: IDENTITY --- */}
+            {/* Identity section remains same... */}
             <section>
               <div className={sectionTitle}>
                 <span className="h-1 w-8 md:w-12 bg-red-600 rounded-full" />
@@ -126,65 +170,94 @@ const AddMemberPage = () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">Full Name</label>
+                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">
+                    Full Name
+                  </label>
                   <input
                     {...register("name", { required: "Name is required" })}
-                    className={`${inputBase} ${errors.name ? 'border-red-500 ring-4 ring-red-50' : ''}`}
+                    className={`${inputBase} ${
+                      errors.name ? "border-red-500 ring-4 ring-red-50" : ""
+                    }`}
                     placeholder="Tahimd Auhin"
                   />
-                  {errors.name && <p className="text-red-500 text-[9px] font-bold uppercase tracking-tighter ml-1">{errors.name.message}</p>}
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">Student ID</label>
+                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">
+                    Student ID
+                  </label>
                   <input
-                    {...register("roll", { required: "Student ID is required" })}
-                    className={`${inputBase} ${errors.roll ? 'border-red-500 ring-4 ring-red-50' : ''}`}
+                    {...register("roll", {
+                      required: "Student ID is required",
+                    })}
+                    className={`${inputBase} ${
+                      errors.roll ? "border-red-500 ring-4 ring-red-50" : ""
+                    }`}
                     placeholder="ID Number"
                   />
-                  {errors.roll && <p className="text-red-500 text-[9px] font-bold uppercase tracking-tighter ml-1">{errors.roll.message}</p>}
                 </div>
               </div>
             </section>
 
-            {/* --- SECTION 2: RANK & DEPT --- */}
+            {/* Other sections remain same... */}
             <section>
               <div className={sectionTitle}>
                 <span className="h-1 w-8 md:w-12 bg-red-600 rounded-full" />
-                Affiliation & Rank
+                Team Assignment
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">Assigned Team</label>
+                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">
+                    Technical Team (Multi)
+                  </label>
                   <PremiumDropdown
-                    options={departments}
-                    selected={formData.dept}
-                    onSelect={(val) => setValue("dept", val)}
+                    options={technicalTeams}
+                    selected={formData.techDept}
+                    onSelect={(val) => handleMultiSelect("techDept", val)}
+                    multi={true}
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">Command Level (Position)</label>
+                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">
+                    Non-Technical Team (Multi)
+                  </label>
                   <PremiumDropdown
-                    options={roles}
-                    selected={formData.position}
-                    onSelect={(val) => setValue("position", val)}
+                    options={nonTechnicalTeams}
+                    selected={formData.nonTechDept}
+                    onSelect={(val) => handleMultiSelect("nonTechDept", val)}
+                    multi={true}
                   />
                 </div>
               </div>
+
               <div className="mt-6 space-y-1.5">
-                <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">LinkedIn Username</label>
+                <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">
+                  Position / Command Level
+                </label>
+                <PremiumDropdown
+                  options={commandLevels}
+                  selected={formData.position}
+                  onSelect={(val) => setValue("position", val)}
+                />
+              </div>
+
+              <div className="mt-6 space-y-1.5">
+                <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">
+                  LinkedIn Username
+                </label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-[9px]">IN/</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-[9px]">
+                    IN/
+                  </span>
                   <input
-                    {...register("linkedin", { required: "LinkedIn handle is required" })}
-                    className={`${inputBase} pl-10 ${errors.linkedin ? 'border-red-500 ring-4 ring-red-50' : ''}`}
+                    {...register("linkedin")}
+                    className={`${inputBase} pl-10
+                    }`}
                     placeholder="username"
                   />
                 </div>
-                {errors.linkedin && <p className="text-red-500 text-[9px] font-bold uppercase tracking-tighter ml-1">{errors.linkedin.message}</p>}
               </div>
             </section>
 
-            {/* --- SECTION 3: MEDIA --- */}
             <section>
               <div className={sectionTitle}>
                 <span className="h-1 w-8 md:w-12 bg-red-600 rounded-full" />
@@ -192,7 +265,9 @@ const AddMemberPage = () => {
               </div>
               <div
                 className={`relative h-32 md:h-48 rounded-2xl border-2 border-dashed transition-all flex flex-col items-center justify-center cursor-pointer ${
-                  formData.image ? "border-red-500 bg-red-50/10" : errors.image ? "border-red-400 bg-red-50/5" : "border-slate-200 bg-slate-50"
+                  formData.image
+                    ? "border-red-500 bg-red-50/10"
+                    : "border-slate-200 bg-slate-50"
                 }`}
               >
                 <input
@@ -202,63 +277,122 @@ const AddMemberPage = () => {
                   onChange={handleImageUpload}
                   accept="image/*"
                 />
-                <label htmlFor="fileUpload" className="cursor-pointer flex flex-col items-center px-4 text-center w-full h-full justify-center">
-                  {uploading ? <FaCircleNotch className="animate-spin text-red-500 mb-2" size={20} /> : 
-                   formData.image ? <FaCheckCircle className="text-red-500 mb-2" size={24} /> : 
-                   <FaCloudUploadAlt className={`${errors.image ? 'text-red-400' : 'text-slate-300'} mb-2`} size={32} />}
-                  <span className={`text-[10px] font-black uppercase tracking-widest ${errors.image ? 'text-red-500' : 'text-slate-500'}`}>
-                    {uploading ? "Uploading to Cloud..." : formData.image ? "Change Photo" : "Upload Photo"}
+                <label
+                  htmlFor="fileUpload"
+                  className="cursor-pointer flex flex-col items-center px-4 text-center w-full h-full justify-center"
+                >
+                  {uploading ? (
+                    <FaCircleNotch
+                      className="animate-spin text-red-500 mb-2"
+                      size={20}
+                    />
+                  ) : formData.image ? (
+                    <FaCheckCircle className="text-red-500 mb-2" size={24} />
+                  ) : (
+                    <FaCloudUploadAlt
+                      className="text-slate-300 mb-2"
+                      size={32}
+                    />
+                  )}
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                    {uploading
+                      ? "Uploading..."
+                      : formData.image
+                      ? "Change Photo"
+                      : "Upload Photo"}
                   </span>
                 </label>
               </div>
-              {/* Hidden input to help react-hook-form track the image requirement */}
-              <input type="hidden" {...register("image", { required: "Profile photo is required" })} />
-              {errors.image && <p className="text-red-500 text-[9px] font-bold uppercase tracking-tighter mt-2 ml-1 text-center">{errors.image.message}</p>}
+              <input
+                type="hidden"
+                {...register("image", {
+                  required: "Profile photo is required",
+                })}
+              />
             </section>
           </div>
 
-          {/* --- SIDEBAR: LIVE CARD PREVIEW --- */}
-          <div className="lg:col-span-5 lg:sticky lg:top-8 space-y-6  order-1 lg:order-2">
-            <div className="w-full flex justify-center  rounded-lg lg:block overflow-hidden">
-              <div className="w-full max-w-100  sm:max-w-none transform scale-[0.85] xs:scale-90 sm:scale-100 origin-top">
-                <div className="bg-white rounded-[0.5rem] p-1">
-                  <div className="bg-slate-900 rounded-[1.8rem] p-5 md:p-8 text-white relative overflow-hidden aspect-[1.6/1] flex flex-col justify-between">
+          {/* Sidebar Preview - FIXED FOR MOBILE VISIBILITY */}
+          <div className="lg:col-span-5 lg:sticky lg:top-8 space-y-6 order-1 lg:order-2 flex flex-col items-center">
+            <div className="w-full flex justify-center">
+              <div className="w-full max-w-108 bg-amber-400 rounded-2xl transform scale-[0.85] xs:scale-95 sm:scale-100 origin-top">
+                <div className="bg-white rounded-2xl p-1 shadow-xl">
+                  {/* Changed p-5 md:p-8 to p-4 md:p-8 and reduced spacing to fit mobile */}
+                  <div className="bg-slate-900 rounded-2xl p-4 md:p-8 text-white relative overflow-hidden aspect-[1.58/1] flex flex-col justify-between">
                     <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-                    <div className="relative z-10 flex justify-between items-start">
-                      <span className="text-[8px] font-black tracking-[0.3em] uppercase opacity-40">MIST Blitz</span>
-                      <div className="flex gap-2">
+
+                    <div className="relative z-10 flex justify-between items-start gap-2">
+                      <span className="text-[7px] md:text-[8px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase opacity-40 shrink-0">
+                        MIST Blitz
+                      </span>
+                      <div className="flex flex-wrap justify-end gap-1 md:gap-2">
                         {formData.linkedin && (
-                          <div className="flex items-center gap-1 px-2 py-0.5 bg-[#0077b5]/20 rounded-full border border-[#0077b5]/30 text-[8px] font-black uppercase text-[#71c9f8]">
-                            <FaLinkedin /> Linked
+                          <div className="flex items-center gap-1 px-1.5 py-0.5 bg-[#0077b5]/20 rounded-full border border-[#0077b5]/30 text-[7px] font-black uppercase text-[#71c9f8]">
+                            <FaLinkedin className="hidden xs:block" /> LINKED
                           </div>
                         )}
-                        <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full border text-[8px] font-black uppercase ${formData.position === "Lead" ? "bg-amber-500/20 border-amber-500/40 text-amber-500" : "bg-slate-700/50 border-slate-600 text-slate-400"}`}>
-                          {formData.position === "Lead" ? <FaCrown /> : <FaUserFriends />} {formData.position}
+                        <div
+                          className={`flex items-center gap-1 px-1.5 py-0.5 rounded-full border text-[7px] font-black uppercase ${
+                            formData.position === "Lead"
+                              ? "bg-amber-500/20 border-amber-500/40 text-amber-500"
+                              : "bg-slate-700/50 border-slate-600 text-slate-400"
+                          }`}
+                        >
+                          {formData.position}
                         </div>
-                        <div className="px-2 py-0.5 bg-red-500/10 rounded-full border border-red-500/30 text-[8px] font-black uppercase text-red-500">Verified</div>
+                        <div className="px-1.5 py-0.5 bg-red-500/10 rounded-full border border-red-500/30 text-[7px] font-black uppercase text-red-500">
+                          VERIFIED
+                        </div>
                       </div>
                     </div>
-                    <div className="relative z-10 flex gap-4 md:gap-6 items-center">
-                      <div className="relative h-20 w-20 md:h-28 md:w-28 shrink-0 rounded-2xl border-2 border-white/10 overflow-hidden bg-slate-800">
-                        {formData.image ? <Image src={formData.image} alt="Preview" fill className="object-cover" unoptimized /> : 
-                         <div className="flex items-center justify-center h-full opacity-10"><FaUser size={30} /></div>}
-                        {formData.position === "Lead" && <div className="absolute top-1 right-1 bg-amber-500 text-slate-900 p-1 rounded-lg"><FaCrown size={10} /></div>}
+
+                    <div className="relative z-10 flex gap-10 md:gap-6 items-center">
+                      <div className="relative h-28 w-28 xs:h-28 xs:w-28 md:h-32 md:w-32 shrink-0 rounded-xl md:rounded-2xl border border-white/10 overflow-hidden bg-slate-800">
+                        {formData.image ? (
+                          <Image
+                            src={formData.image}
+                            alt="Preview"
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center h-full opacity-10">
+                            <FaUser size={24} />
+                          </div>
+                        )}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-[7px] font-black text-slate-500 uppercase tracking-widest mb-1">Card Holder</p>
-                        <h4 className="text-lg md:text-2xl font-black uppercase italic tracking-tighter leading-none text-white truncate">{formData.name || "New Member"}</h4>
-                        <div className="mt-3">
-                          <p className="text-[7px] font-black text-slate-500 uppercase tracking-widest mb-0.5">Department</p>
-                          <p className="text-xs font-bold text-red-500 uppercase truncate">{formData.dept}</p>
+                        <p className="text-[6px] md:text-[7px] font-black text-slate-500 uppercase tracking-widest mb-0.5">
+                          Card Holder
+                        </p>
+                        <h4 className="text-lg md:text-2xl font-black uppercase italic tracking-tighter text-white truncate leading-none">
+                          {formData.name || "New Member"}
+                        </h4>
+                        <div className="mt-2 md:mt-3">
+                          <p className="text-[6px] md:text-[7px] font-black text-slate-500 uppercase tracking-widest mb-0.5">
+                            Assigned Teams
+                          </p>
+                          <p className="text-[8px] md:text-[10px] font-bold text-red-500 uppercase truncate leading-tight">
+                            {[
+                              ...formData.techDept,
+                              ...formData.nonTechDept,
+                            ].join(" • ") || "No Teams Selected"}
+                          </p>
                         </div>
                       </div>
                     </div>
+
                     <div className="relative z-10 flex justify-between items-end">
                       <div>
-                        <p className="text-[7px] font-black text-slate-500 uppercase tracking-widest mb-0.5">ID Number</p>
-                        <p className="text-sm md:text-lg font-mono font-bold tracking-widest text-slate-300">{formData.roll || "00000000"}</p>
+                        <p className="text-[6px] md:text-[7px] font-black text-slate-500 uppercase tracking-widest mb-0.5">
+                          ID Number
+                        </p>
+                        <p className="text-xs md:text-lg font-mono font-bold tracking-widest text-slate-300 leading-none">
+                          {formData.roll || "00000000"}
+                        </p>
                       </div>
-                      <FaRocket size={30} className="opacity-20 text-red-500" />
+                      <FaRocket className="opacity-20 text-red-500 w-5 h-5 md:w-8 md:h-8" />
                     </div>
                   </div>
                 </div>
@@ -268,17 +402,18 @@ const AddMemberPage = () => {
             <Button
               type="submit"
               disabled={uploading}
-              className="w-full py-4 rounded bg-red-600 text-white active:scale-95 transition-transform disabled:opacity-50"
+              className="w-full py-4 rounded bg-red-600 text-white active:scale-95 transition-transform"
             >
               <span className="uppercase tracking-widest italic text-sm">
                 {uploading ? "Uploading..." : "Deploy Member"}
               </span>
             </Button>
 
-            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3">
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3 w-full">
               <FaInfoCircle className="text-slate-300 shrink-0 text-sm" />
               <p className="text-[10px] leading-relaxed text-slate-500 font-medium">
-                Designated <span className="text-red-600 font-bold">Leads</span> will have elevated visibility and authority within the Blitz Member ecosystem.
+                Designated <span className="text-red-600 font-bold">Leads</span>{" "}
+                will have elevated visibility and authority.
               </p>
             </div>
           </div>

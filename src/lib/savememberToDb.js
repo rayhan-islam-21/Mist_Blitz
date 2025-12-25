@@ -1,15 +1,18 @@
 import api from "./axios";
 
-const saveMemberToDB = async (member) => {
+const saveMemberToDB = async (data) => {
     try {
         await api.post("/members", {
-            name: member.name || "No Name",
-            roll: member.roll,
-            dept: member.dept,
-            image: member.image,
-            linkedin: member.linkedin || "",
-            position: member.position
-        })
+            name: data.name,
+            roll: data.roll,
+            techDept: data.techDept,
+            nonTechDept: data.nonTechDept,
+            image: data.image,
+            linkedin: data.linkedin,
+            position: data.position
+        });
+
+
     }
     catch (err) {
         console.error("Axios error:", err);

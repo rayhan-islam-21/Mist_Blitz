@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaUniversity, FaChevronDown, FaCheck, FaSearch } from "react-icons/fa";
+import { FaChevronDown, FaCheck, FaSearch } from "react-icons/fa";
 import { AiOutlineTeam } from 'react-icons/ai';
 
 const PremiumDropdown = ({ options, selected, onSelect }) => {
@@ -10,7 +10,14 @@ const PremiumDropdown = ({ options, selected, onSelect }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const dropdownRef = useRef(null);
 
-  // Close when clicking outside
+  // Helper to check if an option is selected (handles both string and array)
+  const isSelected = (option) => {
+    if (Array.isArray(selected)) {
+      return selected.includes(option);
+    }
+    return selected === option;
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -27,7 +34,6 @@ const PremiumDropdown = ({ options, selected, onSelect }) => {
 
   return (
     <div className="relative w-full" ref={dropdownRef}>
-      {/* The Control Button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -44,20 +50,24 @@ const PremiumDropdown = ({ options, selected, onSelect }) => {
           }`}
         />
         <span
-          className={`text-sm font-semibold ${
-            selected ? "text-slate-900" : "text-slate-400"
+          className={`text-sm font-semibold truncate pr-2 ${
+            selected && (Array.isArray(selected) ? selected.length > 0 : true) 
+              ? "text-slate-900" 
+              : "text-slate-400"
           }`}
         >
-          {selected || "Select Department"}
+          {/* Display logic: comma separated if array, else single string */}
+          {Array.isArray(selected) 
+            ? (selected.length > 0 ? selected.join(", ") : "Select Departments")
+            : (selected || "Select Option")}
         </span>
         <FaChevronDown
-          className={`text-xs transition-transform duration-300 ${
+          className={`text-xs transition-transform duration-300 shrink-0 ${
             isOpen ? "rotate-180 text-red-500" : "text-slate-400"
           }`}
         />
       </button>
 
-      {/* The Animated Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -67,14 +77,13 @@ const PremiumDropdown = ({ options, selected, onSelect }) => {
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="absolute z-[100] w-full mt-2 bg-white rounded-2xl shadow-2xl shadow-red-900/10 border border-slate-100 overflow-hidden"
           >
-            {/* Search Input inside Dropdown */}
             <div className="p-3 border-b border-slate-50">
               <div className="relative">
                 <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 text-xs" />
                 <input
                   autoFocus
                   type="text"
-                  placeholder="Search department..."
+                  placeholder="Search..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 rounded-xl border-none focus:ring-2 focus:ring-red-500/20 outline-none"
@@ -82,32 +91,35 @@ const PremiumDropdown = ({ options, selected, onSelect }) => {
               </div>
             </div>
 
-            {/* Options List */}
             <div className="max-h-60 overflow-y-auto custom-scrollbar p-2">
               {filteredOptions.length > 0 ? (
-                filteredOptions.map((option) => (
-                  <button
-                    key={option}
-                    type="button"
-                    onClick={() => {
-                      onSelect(option);
-                      setIsOpen(false);
-                      setSearchTerm("");
-                    }}
-                    className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm transition-all
-                      ${
-                        selected === option
-                          ? "bg-red-50 text-red-600 font-bold"
-                          : "text-slate-600 hover:bg-slate-50 hover:text-red-600"
-                      }`}
-                  >
-                    {option}
-                    {selected === option && <FaCheck size={10} />}
-                  </button>
-                ))
+                filteredOptions.map((option) => {
+                  const active = isSelected(option);
+                  return (
+                    <button
+                      key={option}
+                      type="button"
+                      onClick={() => {
+                        onSelect(option);
+                        // If it's a single select (Position), close it. 
+                        // If it's multi (Array), keep it open for more selections.
+                        if (!Array.isArray(selected)) setIsOpen(false);
+                      }}
+                      className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm transition-all text-left
+                        ${
+                          active
+                            ? "bg-red-50 text-red-600 font-bold"
+                            : "text-slate-600 hover:bg-slate-50 hover:text-red-600"
+                        }`}
+                    >
+                      <span className="flex-1">{option}</span>
+                      {active && <FaCheck size={10} className="shrink-0 ml-2" />}
+                    </button>
+                  );
+                })
               ) : (
                 <div className="p-4 text-center text-xs text-slate-400 font-medium">
-                  No departments found
+                  No results found
                 </div>
               )}
             </div>
