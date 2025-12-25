@@ -6,11 +6,13 @@ import Footer from "@/components/footer/Footer";
 import JoinCTA from "@/components/sections/JoinCTA";
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import JoinTeamSection from "@/components/sections/JoinTeam";
+import ProtectedRoute from "@/components/protected/Protected";
 
 export default function Home() {
   return (
     <>
-     <Navbar/>
+     <ProtectedRoute>
+      <Navbar/>
      <Hero/>
      <AboutPreview/>
      <PartnersScroll/>
@@ -18,6 +20,7 @@ export default function Home() {
      <GalleryPreview/>
      <JoinTeamSection/>
      <Footer/>
+     </ProtectedRoute>
     </>
   );
 }

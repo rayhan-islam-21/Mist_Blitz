@@ -7,12 +7,12 @@ export async function POST(req) {
         await connectDB();
 
         const body = await req.json();
-        const { name, email } = body;
+        const { name, email,uid } = body;
         const existingAdmin = await Admin.findOne({ email });
         if (existingAdmin) {
             return NextResponse.json({ message: "Admin already exists" }, { status: 409 });
         }
-        const newAdmin = await Admin.create({ name, email });
+        const newAdmin = await Admin.create({ name, email,uid });
         return NextResponse.json(newAdmin, { status: 201 });
     }
     catch (error) {
@@ -25,7 +25,7 @@ export async function POST(req) {
 export async function GET() {
     try {
         await connectDB();
-        const admins = await admin.find();
+        const admins = await Admin.find();
         return NextResponse.json(admins, { status: 200 });
 
     }

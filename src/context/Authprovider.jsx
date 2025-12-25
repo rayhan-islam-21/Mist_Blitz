@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 
@@ -19,11 +20,20 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // SIGN UP
-  const signUpwithEmail = (email, password) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
+const signUpwithEmail = async (name, email, password) => {
+  setLoading(true);
+  try {
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(result.user, { displayName: name });
+    setUser({ ...result.user });
 
+    return result.user; 
+  } catch (error) {
+    throw error;
+  } finally {
+    setLoading(false);
+  }
+};
   // SIGN IN
   const signInWithEmail = (email, password) => {
     setLoading(true);
@@ -35,7 +45,6 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, provider);
   };
-
 
   // LOG OUT
   const logOut = () => {

@@ -3,7 +3,7 @@ import api from "./axios";
 const saveAdminToDB = async (admin) => {
     try {
         await api.post("/admin", {
-            name: admin.displayName || "No Name",
+            name: admin.name,
             email: admin.email,
             uid: admin.uid,
         });
