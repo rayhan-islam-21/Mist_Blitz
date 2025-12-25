@@ -36,7 +36,6 @@ const AddMemberPage = () => {
     "Powertrain", "Chassis", "Aerodynamics", "Documentation", "Management", "Media", "Non-Technical",
   ];
 
-  // SECTION STYLES - Made responsive
   const sectionTitle = "flex items-center gap-3 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-800 mb-6";
   const inputBase = "w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-900 transition-all duration-300 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-50";
 
@@ -44,23 +43,47 @@ const AddMemberPage = () => {
     console.log("🚀 Member Deployment Data:", data);
   };
 
+  // --- CLOUDINARY UPLOAD LOGIC ---
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
     setUploading(true);
-    setTimeout(() => {
-      const imageUrl = URL.createObjectURL(file);
-      setValue("image", imageUrl);
+
+    // 1. Prepare form data for Cloudinary
+    const uploadData = new FormData();
+    uploadData.append("file", file);
+    uploadData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET);
+
+    try {
+      // 2. Execute upload request
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: uploadData,
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.secure_url) {
+        // 3. Set the permanent Cloudinary URL to the form state
+        setValue("image", data.secure_url);
+      }
+    } catch (error) {
+      console.error("Cloudinary Error:", error);
+      alert("Failed to upload image. Check your internet or environment variables.");
+    } finally {
       setUploading(false);
-    }, 1000);
+    }
   };
+  // -------------------------------
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-red-100 selection:text-red-900 overflow-x-hidden">
-      {/* Container: Changed max-width and reduced padding for mobile */}
       <div className="max-w-6xl mx-auto py-8 md:py-16 px-4 sm:px-6">
         
-        {/* Header Block: Responsive alignment and font size */}
         <header className="mb-8 md:mb-12 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-100 pb-6 gap-4">
           <div>
             <h1 className="text-2xl md:text-4xl font-black tracking-tighter uppercase italic leading-none">
@@ -78,10 +101,7 @@ const AddMemberPage = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Left Side: Form Fields (Stack first on mobile) */}
           <div className="lg:col-span-7 space-y-10 order-2 lg:order-1">
-            
-            {/* Identity Details */}
             <section>
               <div className={sectionTitle}>
                 <span className="h-1 w-8 md:w-12 bg-red-600 rounded-full" />
@@ -99,7 +119,6 @@ const AddMemberPage = () => {
               </div>
             </section>
 
-            {/* Affiliation */}
             <section>
               <div className={sectionTitle}>
                 <span className="h-1 w-8 md:w-12 bg-red-600 rounded-full" />
@@ -119,38 +138,31 @@ const AddMemberPage = () => {
               </div>
             </section>
 
-            {/* Profile Media */}
             <section>
               <div className={sectionTitle}>
                 <span className="h-1 w-8 md:w-12 bg-red-600 rounded-full" />
                 Profile Media
               </div>
+              {/* Note: The image input triggers handleImageUpload now */}
               <div className={`relative h-32 md:h-48 rounded-2xl border-2 border-dashed transition-all flex flex-col items-center justify-center cursor-pointer ${formData.image ? "border-red-500 bg-red-50/10" : "border-slate-200 bg-slate-50"}`}>
-                <input type="file" className="hidden" id="fileUpload" onChange={handleImageUpload} />
-                <label htmlFor="fileUpload" className="cursor-pointer flex flex-col items-center px-4 text-center">
+                <input type="file" className="hidden" id="fileUpload" onChange={handleImageUpload} accept="image/*" />
+                <label htmlFor="fileUpload" className="cursor-pointer flex flex-col items-center px-4 text-center w-full h-full justify-center">
                   {uploading ? <FaCircleNotch className="animate-spin text-red-500 mb-2" size={20} /> : 
                    formData.image ? <FaCheckCircle className="text-red-500 mb-2" size={24} /> : 
                    <FaCloudUploadAlt className="text-slate-300 mb-2" size={32} />}
                   <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-                    {uploading ? "Uploading..." : formData.image ? "Change Photo" : "Upload Photo"}
+                    {uploading ? "Uploading to Cloud..." : formData.image ? "Change Photo" : "Upload Photo"}
                   </span>
                 </label>
               </div>
             </section>
           </div>
 
-          {/* Right Side: Preview Card (Appears on top or sticky) */}
           <div className="lg:col-span-5 lg:sticky lg:top-8 space-y-6 order-1 lg:order-2">
-            
-            {/* CARD SCALER: Ensures card fits any screen width */}
             <div className="w-full flex justify-center lg:block overflow-hidden">
               <div className="w-full max-w-100 sm:max-w-none transform scale-[0.85] xs:scale-90 sm:scale-100 origin-top">
-                
-                {/* ID Card UI */}
                 <div className="bg-white border border-slate-200 rounded-[2rem] p-1.5 shadow-xl">
                   <div className="bg-slate-900 rounded-[1.8rem] p-5 md:p-8 text-white relative overflow-hidden aspect-[1.6/1] flex flex-col justify-between">
-                    
-                    {/* Background Texture */}
                     <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
                     
                     <div className="relative z-10 flex justify-between items-start">
@@ -168,7 +180,7 @@ const AddMemberPage = () => {
                     <div className="relative z-10 flex gap-4 md:gap-6 items-center">
                       <div className="relative h-20 w-20 md:h-28 md:w-28 shrink-0 rounded-2xl border-2 border-white/10 overflow-hidden bg-slate-800">
                         {formData.image ? (
-                          <Image src={formData.image} alt="Preview" fill className="object-cover" />
+                          <Image src={formData.image} alt="Preview" fill className="object-cover" unoptimized />
                         ) : (
                           <div className="flex items-center justify-center h-full opacity-10"><FaUser size={30} /></div>
                         )}
@@ -194,12 +206,13 @@ const AddMemberPage = () => {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
 
-            <Button  type="submit" className="w-full py-4 rounded-2xl bg-red-600 text-white shadow-lg active:scale-95 transition-transform">
-              <span className=" uppercase tracking-widest italic text-sm">Deploy Member</span>
+            <Button type="submit" disabled={uploading} className="w-full py-4 rounded-2xl bg-red-600 text-white shadow-lg active:scale-95 transition-transform disabled:opacity-50">
+              <span className=" uppercase tracking-widest italic text-sm">
+                {uploading ? "Uploading..." : "Deploy Member"}
+              </span>
             </Button>
 
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3">
