@@ -10,17 +10,15 @@ import ProtectedRoute from "@/components/protected/Protected";
 
 export default function Home() {
   return (
-    <>
-     <ProtectedRoute>
-      <Navbar/>
-     <Hero/>
-     <AboutPreview/>
-     <PartnersScroll/>
-     <JoinCTA/>
-     <GalleryPreview/>
-     <JoinTeamSection/>
-     <Footer/>
-     </ProtectedRoute>
-    </>
+    <ProtectedRoute>
+      <Navbar />
+      <Hero />
+      <AboutPreview />
+      <PartnersScroll />
+      <JoinCTA />
+      <GalleryPreview />
+      <JoinTeamSection />
+      <Footer />
+    </ProtectedRoute>
   );
 }

@@ -25,9 +25,21 @@ const AdminLogin = () => {
   const { signInWithEmail, signInWithGoogle } = useContext(AuthContext);
   const router = useRouter();
 
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithGoogle();
+      toast.success("Identity Verified via Google. Access Granted.");
+      router.push("/admin/dashboard");
+    }
+    catch (error) { 
+        toast.error(error.message);
+    }
+  }
+
   const onSubmit = async (data) => {
     try {
       await signInWithEmail(data.email, data.password);
+
       toast.success("Identity Verified. Access Granted.");
       router.push("/admin/dashboard");
     } catch (error) {
@@ -45,7 +57,7 @@ const AdminLogin = () => {
       {/* --- BACKGROUND LAYER: Subtle Grid & Glow --- */}
       <div className="absolute inset-0 z-0 opacity-20" 
            style={{ backgroundImage: `radial-gradient(#334155 1px, transparent 1px)`, backgroundSize: '30px 30px' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-red-900/10 rounded-full blur-[120px] z-0" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
@@ -73,7 +85,7 @@ const AdminLogin = () => {
 
             {/* --- GOOGLE AUTH --- */}
             <button
-              onClick={() => signInWithGoogle()}
+              onClick={() => handleGoogleLogin()}
               className="w-full flex items-center justify-center gap-3 bg-slate-800/40 border border-slate-700 py-3 rounded-xl hover:bg-slate-800 hover:border-slate-600 transition-all duration-200 group mb-8"
             >
               <FcGoogle size={18} />
