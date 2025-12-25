@@ -1,3 +1,4 @@
+import AuthProvider from "@/context/Authprovider";
 import "./globals.css";
 import { Mouse_Memoirs, Cousine } from "next/font/google";
 
@@ -6,12 +7,6 @@ const comicFont = Mouse_Memoirs({
   weight: "400",
   variable: "--font-comic",
 });
-
-// export const descriptionFont = Cousine({
-//   subsets: ["latin"],
-//   weight: "400",
-//   variable: "--font-desc",
-// });
 
 export const metadata = {
   title: "MIST BLITZ",
@@ -22,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${comicFont.className} bg-black text-white`}>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
