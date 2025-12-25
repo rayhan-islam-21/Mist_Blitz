@@ -19,22 +19,6 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const pathname = usePathname();
   const [openSubmenus, setOpenSubmenus] = useState({});
 
-  // Automatically keep submenus open if a child route is active
-  useEffect(() => {
-    menuItems.forEach((item) => {
-      if (item.subMenu?.some((sub) => sub.path === pathname)) {
-        setOpenSubmenus((prev) => ({ ...prev, [item.name]: true }));
-      }
-    });
-  }, [pathname]);
-
-  const toggleSubmenu = (key) => {
-    setOpenSubmenus((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
   const menuItems = [
     { name: "Dashboard", icon: <FaTachometerAlt />, path: "/admin/dashboard" },
     {
@@ -73,6 +57,22 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
     },
     { name: "Tasks", icon: <FaClipboardList />, path: "/admin/tasks" },
   ];
+
+  // Automatically keep submenus open if a child route is active
+  useEffect(() => {
+    menuItems.forEach((item) => {
+      if (item.subMenu?.some((sub) => sub.path === pathname)) {
+        setOpenSubmenus((prev) => ({ ...prev, [item.name]: true }));
+      }
+    });
+  }, [pathname]);
+
+  const toggleSubmenu = (key) => {
+    setOpenSubmenus((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
 
   return (
     <>
