@@ -218,10 +218,10 @@ const AddMemberPage = () => {
           </div>
 
           {/* --- SIDEBAR: LIVE CARD PREVIEW --- */}
-          <div className="lg:col-span-5 lg:sticky lg:top-8 space-y-6 order-1 lg:order-2">
-            <div className="w-full flex justify-center lg:block overflow-hidden">
-              <div className="w-full max-w-100 sm:max-w-none transform scale-[0.85] xs:scale-90 sm:scale-100 origin-top">
-                <div className="bg-white border border-slate-200 rounded-[2rem] p-1.5 shadow-xl">
+          <div className="lg:col-span-5 lg:sticky lg:top-8 space-y-6  order-1 lg:order-2">
+            <div className="w-full flex justify-center  rounded-lg lg:block overflow-hidden">
+              <div className="w-full max-w-100  sm:max-w-none transform scale-[0.85] xs:scale-90 sm:scale-100 origin-top">
+                <div className="bg-white rounded-[0.5rem] p-1">
                   <div className="bg-slate-900 rounded-[1.8rem] p-5 md:p-8 text-white relative overflow-hidden aspect-[1.6/1] flex flex-col justify-between">
                     <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
                     <div className="relative z-10 flex justify-between items-start">
