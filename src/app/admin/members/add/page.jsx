@@ -178,7 +178,7 @@ const AddMemberPage = () => {
                     className={`${inputBase} ${
                       errors.name ? "border-red-500 ring-4 ring-red-50" : ""
                     }`}
-                    placeholder="Tahimd Auhin"
+                    placeholder="e.g. Rayhan Islam"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -192,7 +192,7 @@ const AddMemberPage = () => {
                     className={`${inputBase} ${
                       errors.roll ? "border-red-500 ring-4 ring-red-50" : ""
                     }`}
-                    placeholder="ID Number"
+                    placeholder="e.g. 202318102"
                   />
                 </div>
               </div>
