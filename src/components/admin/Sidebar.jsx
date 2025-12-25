@@ -30,13 +30,12 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         { name: "Tiers", path: "/admin/partners/tiers" },
       ],
     },
-
     {
       name: "Members",
-      icon: <FaUserPlus />, // or use FaUserPlus from react-icons/fa
+      icon: <FaUserPlus />,
       subMenu: [
         { name: "All Members", path: "/admin/members/all" },
-        { name: "Add Member", path: "/admin/members/add" }, // This is the route for our form
+        { name: "Add Member", path: "/admin/members/add" },
       ],
     },
     {
@@ -58,13 +57,20 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
     { name: "Tasks", icon: <FaClipboardList />, path: "/admin/tasks" },
   ];
 
-  // Automatically keep submenus open if a child route is active
+  // Auto-open submenu based on current path
   useEffect(() => {
     menuItems.forEach((item) => {
       if (item.subMenu?.some((sub) => sub.path === pathname)) {
         setOpenSubmenus((prev) => ({ ...prev, [item.name]: true }));
       }
     });
+  }, [pathname]);
+
+  // Close sidebar automatically on mobile when a route changes
+  useEffect(() => {
+    if (window.innerWidth < 768 && sidebarOpen) {
+      toggleSidebar();
+    }
   }, [pathname]);
 
   const toggleSubmenu = (key) => {
@@ -77,14 +83,15 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   return (
     <>
       <aside
-        className={`fixed top-0 left-0 h-full z-50 transition-all duration-300 ease-in-out border-r border-gray-200
-          bg-white text-slate-600 shadow-sm
-          ${sidebarOpen ? "w-64 translate-x-0" : "w-0 -translate-x-full"}
-          md:w-64 md:translate-x-0 md:flex md:flex-col
+        className={`fixed top-0 left-0 h-full z-50 transition-all  duration-300 ease-in-out border-r border-gray-200
+          bg-white text-slate-600 shadow-xl md:shadow-sm flex flex-col
+          ${sidebarOpen 
+            ? "w-[280px] translate-x-0" 
+            : "w-[280px] -translate-x-full md:translate-x-0 md:w-64"}
         `}
       >
         {/* Logo Section */}
-        <div className="flex items-center justify-between p-6 h-20 border-b border-gray-50">
+        <div className="flex items-center justify-between p-6 h-20 border-b border-gray-50 shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold shadow-md">
               M
@@ -93,45 +100,37 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
               MIST Blitz
             </span>
           </div>
-          <button onClick={toggleSidebar} className="md:hidden text-slate-400">
+          {/* Close button visible only on mobile */}
+          <button 
+            onClick={toggleSidebar} 
+            className="md:hidden p-2 -mr-2 text-slate-400 hover:text-slate-600 active:scale-95 transition-transform"
+          >
             <FaTimes size={20} />
           </button>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        {/* Navigation - Scrollable area */}
+        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-hide">
           {menuItems.map((item, index) => {
             const isActive = pathname === item.path;
             const isSubMenuOpen = openSubmenus[item.name];
-
-            // Check if any child route is active
-            const hasActiveChild = item.subMenu?.some(
-              (sub) => sub.path === pathname
-            );
+            const hasActiveChild = item.subMenu?.some((sub) => sub.path === pathname);
 
             return (
               <div key={index} className="relative">
                 {!item.subMenu ? (
                   <Link
                     href={item.path}
-                    className={`flex items-center px-4 py-3 rounded-lg transition-all duration-200 group relative ${
+                    className={`flex items-center px-4 py-3 rounded-xl transition-all duration-200 group relative ${
                       isActive
                         ? "bg-red-50 text-red-700 font-semibold"
                         : "hover:bg-gray-50 text-slate-500 hover:text-slate-900"
                     }`}
                   >
-                    {/* Active Indicator Bar */}
                     {isActive && (
                       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-red-600 rounded-r-full" />
                     )}
-
-                    <span
-                      className={`text-lg ${
-                        isActive
-                          ? "text-red-600"
-                          : "text-slate-400 group-hover:text-slate-600"
-                      }`}
-                    >
+                    <span className={`text-lg ${isActive ? "text-red-600" : "text-slate-400 group-hover:text-slate-600"}`}>
                       {item.icon}
                     </span>
                     <span className="ml-3 text-sm">{item.name}</span>
@@ -140,31 +139,21 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                   <div>
                     <button
                       onClick={() => toggleSubmenu(item.name)}
-                      className={`flex items-center w-full px-4 py-3 rounded-lg transition-all group ${
-                        hasActiveChild
-                          ? "text-red-700 font-normal"
-                          : "hover:bg-gray-50"
+                      className={`flex items-center w-full px-4 py-3 rounded-xl transition-all group ${
+                        hasActiveChild ? "text-red-700 font-semibold bg-red-50/30" : "hover:bg-gray-50"
                       }`}
                     >
-                      <span
-                        className={`text-lg ${
-                          hasActiveChild
-                            ? "text-red-600"
-                            : "text-slate-400 group-hover:text-slate-600"
-                        }`}
-                      >
+                      <span className={`text-lg ${hasActiveChild ? "text-red-600" : "text-slate-400 group-hover:text-slate-600"}`}>
                         {item.icon}
                       </span>
                       <span className="ml-3 text-sm">{item.name}</span>
                       <FaChevronDown
                         size={10}
-                        className={`ml-auto transition-transform duration-300 ${
-                          isSubMenuOpen ? "rotate-180" : ""
-                        }`}
+                        className={`ml-auto transition-transform duration-300 ${isSubMenuOpen ? "rotate-180" : ""}`}
                       />
                     </button>
 
-                    <AnimatePresence>
+                    <AnimatePresence initial={false}>
                       {isSubMenuOpen && (
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
@@ -172,16 +161,16 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                           exit={{ height: 0, opacity: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="ml-10 mt-1 space-y-1 border-l border-gray-100">
+                          <div className="ml-9 mt-1 space-y-1 border-l-2 border-gray-100">
                             {item.subMenu.map((sub, i) => {
                               const isSubActive = pathname === sub.path;
                               return (
                                 <Link
                                   key={i}
                                   href={sub.path}
-                                  className={`block px-4 py-2 text-sm rounded-r-md transition-colors ${
+                                  className={`block px-5 py-2.5 text-sm transition-colors rounded-r-lg ${
                                     isSubActive
-                                      ? "text-red-600 font-normal bg-red-50/50"
+                                      ? "text-red-600 font-medium bg-red-50"
                                       : "text-slate-500 hover:text-red-600 hover:bg-gray-50"
                                   }`}
                                 >
@@ -201,29 +190,27 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         </nav>
 
         {/* User Footer */}
-        <div className="p-4 border-t border-gray-100 bg-gray-50/30">
-          <div className="flex items-center p-2 rounded-lg transition-colors cursor-pointer hover:bg-white border border-transparent hover:border-gray-200 shadow-sm">
-            <div className="w-8 h-8 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold mr-3">
+        <div className="p-4 border-t border-gray-100 bg-gray-50/50">
+          <div className="flex items-center p-3 rounded-xl transition-all cursor-pointer hover:bg-white border border-transparent hover:border-gray-200 shadow-sm">
+            <div className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold mr-3 shadow-inner">
               JS
             </div>
             <div className="flex-1 overflow-hidden">
-              <p className="text-sm font-bold text-slate-900 truncate">
-                John Smith
-              </p>
-              <p className="text-[10px] text-slate-500 truncate">Super Admin</p>
+              <p className="text-sm font-bold text-slate-900 truncate">rayhan</p>
+              <p className="text-[10px] text-slate-500 truncate uppercase tracking-widest font-medium">Super Admin</p>
             </div>
           </div>
         </div>
       </aside>
 
-      {/* Mobile Overlay */}
+      {/* Mobile Overlay - Blur effect */}
       <AnimatePresence>
         {sidebarOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-slate-900/10 backdrop-blur-[2px] z-40 md:hidden"
+            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 md:hidden"
             onClick={toggleSidebar}
           />
         )}

@@ -1,214 +1,217 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaUser,
   FaIdCard,
-  FaUniversity,
-  FaLink,
   FaLinkedin,
-  FaCamera,
+  FaCloudUploadAlt,
+  FaCircleNotch,
+  FaCheckCircle,
+  FaRocket,
+  FaInfoCircle,
+  FaShieldAlt,
 } from "react-icons/fa";
 import PremiumDropdown from "@/components/ui/premium-dropdown";
 import Image from "next/image";
 import Button from "@/components/ui/retro-btn";
 
 const AddMemberPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    roll: "",
-    dept: "Computer Science",
-    image: "",
-    linkedin: "",
+  const { register, handleSubmit, setValue, watch } = useForm({
+    defaultValues: {
+      name: "",
+      roll: "",
+      dept: "Powertrain",
+      image: "",
+      linkedin: "",
+    },
   });
 
+  const formData = watch();
+  const [uploading, setUploading] = useState(false);
+
   const departments = [
-    "Computer Science",
-    "Electrical",
-    "Mechanical",
-    "Civil",
-    "Business",
+    "Powertrain", "Chassis", "Aerodynamics", "Documentation", "Management", "Media", "Non-Technical",
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Member added successfully!");
+  // SECTION STYLES - Made responsive
+  const sectionTitle = "flex items-center gap-3 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-800 mb-6";
+  const inputBase = "w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-900 transition-all duration-300 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-50";
+
+  const onSubmit = (data) => {
+    console.log("🚀 Member Deployment Data:", data);
   };
 
-  // Standardized Style Classes
-  const inputWrapperStyle = "group relative flex items-center bg-white border-2 border-slate-100 rounded-2xl transition-all duration-200 focus-within:border-red-500 focus-within:ring-4 focus-within:ring-red-50";
-  const iconBoxStyle = "flex items-center justify-center px-4 py-3 border-r border-slate-100   transition-colors";
-  const inputFieldStyle = "flex-1 bg-transparent px-4 py-3 text-sm font-semibold text-slate-900 outline-none placeholder:text-slate-300";
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploading(true);
+    setTimeout(() => {
+      const imageUrl = URL.createObjectURL(file);
+      setValue("image", imageUrl);
+      setUploading(false);
+    }, 1000);
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="max-w-3xl mx-auto py-10 px-4"
-    >
-      <div className="bg-white rounded-3xl shadow-xl shadow-red-100/50 border border-slate-100 overflow-hidden">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-red-100 selection:text-red-900 overflow-x-hidden">
+      {/* Container: Changed max-width and reduced padding for mobile */}
+      <div className="max-w-6xl mx-auto py-8 md:py-16 px-4 sm:px-6">
         
-        {/* Header Section */}
-        <div className="bg-gradient-to-r from-red-600 via-red-500 to-orange-500 p-8 text-white relative">
-          <div className="absolute top-0 right-0 p-4 opacity-10">
-            <FaUser size={120} />
+        {/* Header Block: Responsive alignment and font size */}
+        <header className="mb-8 md:mb-12 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-100 pb-6 gap-4">
+          <div>
+            <h1 className="text-2xl md:text-4xl font-black tracking-tighter uppercase italic leading-none">
+              Member <span className="text-red-600">Onboarding</span>
+            </h1>
+            <p className="text-slate-500 text-xs md:text-sm mt-2 font-medium flex items-center gap-2">
+              <FaShieldAlt className="text-red-500/50" /> Secure Admin Database
+            </p>
           </div>
-          <h2 className="text-3xl font-extrabold tracking-tight italic uppercase">
-            Add New Member
-          </h2>
-          <p className="text-red-100 mt-2 opacity-90 font-medium">
-            Onboard a new student to the MIST Blitz platform.
-          </p>
-        </div>
+          <div className="text-left md:text-right border-l md:border-l-0 md:pl-0 pl-4 border-slate-200">
+            <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">System Version</p>
+            <p className="text-[10px] font-bold text-slate-900">BLITZ-ADMIN v4.0.2</p>
+          </div>
+        </header>
 
-        <form onSubmit={handleSubmit} className="p-8 space-y-10">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Section 1: Basic Identity */}
-          <section className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-red-50 pb-2">
-              <div className="w-1.5 h-6 bg-red-600 rounded-full" />
-              <h3 className="text-lg font-bold text-slate-800">Identity Information</h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Name Input */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Full Name</label>
-                <div className={inputWrapperStyle}>
-                  <div className={iconBoxStyle}>
-                    <FaUser className="text-red-500" />
-                  </div>
-                  <input
-                    type="text"
-                    required
-                    className={inputFieldStyle}
-                    placeholder="Tahmid Muntasir Auhin"
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  />
+          {/* Left Side: Form Fields (Stack first on mobile) */}
+          <div className="lg:col-span-7 space-y-10 order-2 lg:order-1">
+            
+            {/* Identity Details */}
+            <section>
+              <div className={sectionTitle}>
+                <span className="h-1 w-8 md:w-12 bg-red-600 rounded-full" />
+                Identity Details
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">Full Name</label>
+                  <input {...register("name", { required: true })} className={inputBase} placeholder="Tahimd Auhin" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">Student ID</label>
+                  <input {...register("roll", { required: true })} className={inputBase} placeholder="ID Number" />
                 </div>
               </div>
+            </section>
 
-              {/* Student ID Input */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Student ID</label>
-                <div className={inputWrapperStyle}>
-                  <div className={iconBoxStyle}>
-                    <FaIdCard className="text-red-500" />
+            {/* Affiliation */}
+            <section>
+              <div className={sectionTitle}>
+                <span className="h-1 w-8 md:w-12 bg-red-600 rounded-full" />
+                Affiliation & Social
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <div className="space-y-1.5">
+                  <PremiumDropdown options={departments} selected={formData.dept} onSelect={(val) => setValue("dept", val)} />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">LinkedIn Username</label>
+                  <div className="relative">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-[9px]">IN/</span>
+                    <input {...register("linkedin")} className={`${inputBase} pl-10`} placeholder="username" />
                   </div>
-                  <input
-                    type="text"
-                    required
-                    className={inputFieldStyle}
-                    placeholder="202318102"
-                    onChange={(e) => setFormData({ ...formData, roll: e.target.value })}
-                  />
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* Section 2: Department & Media */}
-          <section className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-red-50 pb-2">
-              <div className="w-1.5 h-6 bg-red-600 rounded-full" />
-              <h3 className="text-lg font-bold text-slate-800">Academic & Media</h3>
-            </div>
+            {/* Profile Media */}
+            <section>
+              <div className={sectionTitle}>
+                <span className="h-1 w-8 md:w-12 bg-red-600 rounded-full" />
+                Profile Media
+              </div>
+              <div className={`relative h-32 md:h-48 rounded-2xl border-2 border-dashed transition-all flex flex-col items-center justify-center cursor-pointer ${formData.image ? "border-red-500 bg-red-50/10" : "border-slate-200 bg-slate-50"}`}>
+                <input type="file" className="hidden" id="fileUpload" onChange={handleImageUpload} />
+                <label htmlFor="fileUpload" className="cursor-pointer flex flex-col items-center px-4 text-center">
+                  {uploading ? <FaCircleNotch className="animate-spin text-red-500 mb-2" size={20} /> : 
+                   formData.image ? <FaCheckCircle className="text-red-500 mb-2" size={24} /> : 
+                   <FaCloudUploadAlt className="text-slate-300 mb-2" size={32} />}
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                    {uploading ? "Uploading..." : formData.image ? "Change Photo" : "Upload Photo"}
+                  </span>
+                </label>
+              </div>
+            </section>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-              <div className="md:col-span-2 space-y-6">
-                {/* Custom Dropdown (Assuming it follows the same style) */}
-                <PremiumDropdown
-                  options={departments}
-                  selected={formData.dept}
-                  onSelect={(val) => setFormData({ ...formData, dept: val })}
-                />
-
-                {/* Image URL Input */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Profile Image URL</label>
-                  <div className={inputWrapperStyle}>
-                    <div className={iconBoxStyle}>
-                      <FaCamera className="text-red-500" />
+          {/* Right Side: Preview Card (Appears on top or sticky) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-8 space-y-6 order-1 lg:order-2">
+            
+            {/* CARD SCALER: Ensures card fits any screen width */}
+            <div className="w-full flex justify-center lg:block overflow-hidden">
+              <div className="w-full max-w-100 sm:max-w-none transform scale-[0.85] xs:scale-90 sm:scale-100 origin-top">
+                
+                {/* ID Card UI */}
+                <div className="bg-white border border-slate-200 rounded-[2rem] p-1.5 shadow-xl">
+                  <div className="bg-slate-900 rounded-[1.8rem] p-5 md:p-8 text-white relative overflow-hidden aspect-[1.6/1] flex flex-col justify-between">
+                    
+                    {/* Background Texture */}
+                    <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+                    
+                    <div className="relative z-10 flex justify-between items-start">
+                      <span className="text-[8px] font-black tracking-[0.3em] uppercase opacity-40">MIST Blitz</span>
+                      <div className="flex gap-2">
+                        {formData.linkedin && (
+                          <div className="flex items-center gap-1 px-2 py-0.5 bg-[#0077b5]/20 rounded-full border border-[#0077b5]/30 text-[8px] font-black uppercase text-[#71c9f8]">
+                            <FaLinkedin /> Linked
+                          </div>
+                        )}
+                        <div className="px-2 py-0.5 bg-red-500/10 rounded-full border border-red-500/30 text-[8px] font-black uppercase text-red-500">Verified</div>
+                      </div>
                     </div>
-                    <input
-                      type="url"
-                      className={inputFieldStyle}
-                      placeholder="https://images.unsplash.com/..."
-                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    />
-                  </div>
-                </div>
-              </div>
 
-              {/* Live Preview Card */}
-              <div className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-red-100 rounded-3xl bg-red-50/30 min-h-[200px] transition-all">
-                <span className="text-[10px] font-black text-red-400 uppercase tracking-widest mb-4">Preview</span>
-                <div className="relative w-28 h-28 rounded-full border-4 border-white shadow-2xl shadow-red-200 overflow-hidden bg-red-100">
-                  {formData.image ? (
-                    <Image
-                      src={formData.image}
-                      alt="Preview"
-                      fill
-                      className="object-cover"
-                      unoptimized // Useful if using external random URLs
-                      onError={(e) => { e.target.src = "https://via.placeholder.com/150?text=Error"; }}
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center h-full text-red-300">
-                      <FaUser size={40} />
+                    <div className="relative z-10 flex gap-4 md:gap-6 items-center">
+                      <div className="relative h-20 w-20 md:h-28 md:w-28 shrink-0 rounded-2xl border-2 border-white/10 overflow-hidden bg-slate-800">
+                        {formData.image ? (
+                          <Image src={formData.image} alt="Preview" fill className="object-cover" />
+                        ) : (
+                          <div className="flex items-center justify-center h-full opacity-10"><FaUser size={30} /></div>
+                        )}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[7px] font-black text-slate-500 uppercase tracking-widest mb-1">Card Holder</p>
+                        <h4 className="text-lg md:text-2xl font-black uppercase italic tracking-tighter leading-none text-white truncate">
+                          {formData.name || "New Member"}
+                        </h4>
+                        <div className="mt-3">
+                          <p className="text-[7px] font-black text-slate-500 uppercase tracking-widest mb-0.5">Department</p>
+                          <p className="text-xs font-bold text-red-500 uppercase truncate">{formData.dept}</p>
+                        </div>
+                      </div>
                     </div>
-                  )}
-                </div>
-                <p className="mt-4 text-sm font-black text-red-600 truncate max-w-full italic uppercase tracking-tight">
-                  {formData.name || "New Member"}
-                </p>
-              </div>
-            </div>
-          </section>
 
-          {/* Section 3: Social Links */}
-          <section className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-red-50 pb-2">
-              <div className="w-1.5 h-6 bg-red-600 rounded-full" />
-              <h3 className="text-lg font-bold text-slate-800">Social Presence</h3>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-slate-500 ml-1 uppercase tracking-wider">LinkedIn Profile</label>
-              <div className={inputWrapperStyle}>
-                <div className={iconBoxStyle}>
-                  <FaLinkedin className="text-red-600" size={18} />
-                  <span className="text-sm font-bold text-slate-400 ml-1">/in/</span>
-                </div>
-                <input
-                  type="text"
-                  placeholder="username"
-                  className={inputFieldStyle}
-                  onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })}
-                />
-                {formData.linkedin.length > 2 && (
-                  <div className="pr-4 animate-in fade-in zoom-in duration-300">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.4)]" />
+                    <div className="relative z-10 flex justify-between items-end">
+                      <div>
+                        <p className="text-[7px] font-black text-slate-500 uppercase tracking-widest mb-0.5">ID Number</p>
+                        <p className="text-sm md:text-lg font-mono font-bold tracking-widest text-slate-300">{formData.roll || "00000000"}</p>
+                      </div>
+                      <FaRocket size={30} className="opacity-20 text-red-500" />
+                    </div>
                   </div>
-                )}
+                </div>
+
               </div>
             </div>
-          </section>
 
-          {/* Submit Button */}
-          <div className="pt-6">
-            <Button
-              className="w-full py-4 rounded bg-red-600 hover:bg-red-700 text-white border-b-4 border-red-900 shadow-xl  transition-all hover:-translate-y-1 active:translate-y-0.5 active:border-b-0"
-            >
-              <span className="font-black uppercase tracking-[0.2em] italic text-lg">
-                Create Member Profile
-              </span>
+            <Button  type="submit" className="w-full py-4 rounded-2xl bg-red-600 text-white shadow-lg active:scale-95 transition-transform">
+              <span className=" uppercase tracking-widest italic text-sm">Deploy Member</span>
             </Button>
+
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3">
+              <FaInfoCircle className="text-slate-300 shrink-0 text-sm" />
+              <p className="text-[10px] leading-relaxed text-slate-500 font-medium">
+                Verified LinkedIn profiles will display a blue badge upon deployment to the Blitz ecosystem.
+              </p>
+            </div>
           </div>
         </form>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
