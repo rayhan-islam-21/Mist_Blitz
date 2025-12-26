@@ -11,7 +11,7 @@ import ProtectedRoute from "@/components/protected/Protected";
 export default function Home() {
   return (
     <>
-
+      <ProtectedRoute>
         <Navbar />
         <Hero />
         <AboutPreview />
@@ -20,7 +20,7 @@ export default function Home() {
         <GalleryPreview />
         <JoinTeamSection />
         <Footer />
-
+      </ProtectedRoute>
     </>
   );
 }
