@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import api from "@/lib/axios";
 import {
   Linkedin,
   Shield,
@@ -91,8 +92,8 @@ const TeamMembers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/members");
-        const data = await response.json();
+        const response = await api.get("/members");
+        const data = response.data;
         
         // Transform the flat API list into your Subsystem structure
         const subsystemsMap = {
