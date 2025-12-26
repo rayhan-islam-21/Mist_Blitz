@@ -7,11 +7,13 @@ import JoinCTA from "@/components/sections/JoinCTA";
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import JoinTeamSection from "@/components/sections/JoinTeam";
 import ProtectedRoute from "@/components/protected/Protected";
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 export default function Home() {
   return (
     <>
       <ProtectedRoute>
+        <SmoothCursor />
         <Navbar />
         <Hero />
         <AboutPreview />

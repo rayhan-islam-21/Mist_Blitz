@@ -8,7 +8,6 @@ import api from "@/lib/axios";
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const router = useRouter();
-  console.log("ProtectedRoute user:", user.uid);
 
   const [checking, setChecking] = useState(true);
   const [authorized, setAuthorized] = useState(false);
@@ -28,7 +27,7 @@ const ProtectedRoute = ({ children }) => {
 
         // FIND current user in admin list
         const isAdmin = res.data.find(
-          (u) => u.uid === user.uid && u.role === "admin"
+          (u) => u.email === user.email && u.role === "admin"
         );
 
         if (!isAdmin) {
