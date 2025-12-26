@@ -49,7 +49,6 @@ const Achievements = () => {
 
   return (
     <section className="py-24  relative overflow-hidden">
-
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -57,15 +56,15 @@ const Achievements = () => {
             <h2 className="text-red-600 font-mono tracking-[0.4em] uppercase text-sm mb-4 flex items-center gap-2">
               <span className="w-8 h-0.5 bg-red-600"></span> Proven Excellence
             </h2>
-            <h1 className="text-5xl md:text-7xl font-black text-black tracking-tight uppercase italic">
-             <Highlighter> Hall of <span className="text-red-700 ">Legacy</span></Highlighter>
+            <h1 className="text-5xl md:text-7xl font-black text-white font-sans  tracking-tighter uppercase italic">
+              Hall of <span className="text-red-700 ">Legacy</span>
             </h1>
           </div>
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-2xl">
-            <p className="text-gray-900 font-mono text-[10px] uppercase tracking-widest">
+          <div className="bg-white/5 backdrop-blur-md border border-white/20 p-4 rounded-2xl">
+            <p className="text-gray-100 font-mono text-[10px] uppercase tracking-widest">
               Global Ranking Status
             </p>
-            <p className="text-2xl font-bold text-black uppercase italic flex items-center gap-2">
+            <p className="text-2xl font-bold text-white uppercase italic flex items-center gap-2">
               <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
               Active Contender
             </p>
@@ -77,7 +76,7 @@ const Achievements = () => {
           {achievements.map((item, index) => (
             <div
               key={index}
-              className={`group relative rounded-3xl overflow-hidden border border-white/10 bg-red-100 transition-all duration-500 hover:border-red-500/50 
+              className={`group relative rounded overflow-hidden border border-white/10 bg-red-100 transition-all duration-500 hover:border-red-500/50 
                 ${item.size === "lg" ? "md:col-span-2 md:row-span-2" : ""}
                 ${item.size === "md" ? "md:col-span-1 md:row-span-1" : ""}
                 ${item.size === "sm" ? "md:col-span-1 md:row-span-1" : ""}`}
@@ -151,7 +150,7 @@ const Achievements = () => {
             />
             <div className="absolute inset-0 mix-blend-multiply"></div>
             <div className="absolute bottom-4 left-4 text-white font-mono text-[10px] flex items-center gap-2">
-              <Camera size={12} /> SHOT AT MIST LAB
+              <Camera size={12} /> SHOT AT CHINA
             </div>
           </div>
         </div>
