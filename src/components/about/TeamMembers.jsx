@@ -30,7 +30,7 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
     return (
       <div className="group relative w-full h-125 bg-black overflow-hidden transition-all duration-500 hover:shadow-[15px_15px_0px_rgba(220,38,38,1)]">
         <Image src={member.image} fill className="object-cover opacity-80 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000" alt={member.name} />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent" />
         <div className="absolute bottom-0 left-0 p-8 w-full">
           <div className="flex items-center gap-2 mb-2">
             <div className="p-2 bg-red-600 text-white">{member.icon}</div>
@@ -63,9 +63,6 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
       </div>
       <div className="absolute bottom-0 left-0 w-full p-6 bg-white">
         <div className="flex flex-col gap-1">
-          <span className="text-[10px] font-mono font-bold text-red-600 uppercase tracking-tighter">
-            {isLead ? "// Lead Specialist" : "// Unit Member"}
-          </span>
           <h4 className="text-2xl font-black uppercase italic tracking-tight text-black leading-none">{member.name}</h4>
           <p className="text-gray-500 text-xs font-medium uppercase mt-1">{member.role}</p>
         </div>
@@ -164,13 +161,13 @@ const TeamMembers = () => {
   if (loading) return <div className="min-h-screen bg-white flex items-center justify-center font-mono">LOADING_SYSTEM_DATA...</div>;
 
   return (
-    <section className="bg-white text-black py-20 px-6 font-sans">
+    <section className="bg-black text-black py-20 px-6 font-sans">
       <div className="max-w-7xl mx-auto">
         
         {/* HEADER AREA */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-24 border-b-2 border-black/20 pb-10">
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-24 border-b-4 border-white pb-10">
           <div>
-            <h1 className="text-7xl md:text-8xl font-black uppercase italic leading-[0.8] tracking-tighter">
+            <h1 className="text-7xl text-white md:text-8xl font-black uppercase italic leading-[0.8] tracking-tighter">
               THE <span className="text-red-600">CREW</span>
             </h1>
           </div>
@@ -182,7 +179,7 @@ const TeamMembers = () => {
         {/* CORE COMMITTEE SECTION */}
         <div className="mb-32">
           <div className="flex items-center gap-4 mb-12">
-            <h2 className="text-3xl font-black uppercase italic tracking-tight">Core Committee</h2>
+            <h2 className="text-3xl font-black text-white uppercase italic tracking-tight">Core Committee</h2>
             <div className="h-[2px] flex-grow bg-black/5" />
           </div>
 
@@ -209,7 +206,7 @@ const TeamMembers = () => {
               <div className="flex items-center gap-6 mb-16">
                 <div className="bg-red-600 text-white p-4 shadow-xl">{sub.icon}</div>
                 <div>
-                  <h3 className="text-5xl md:text-6xl font-black uppercase italic tracking-tighter">{sub.name}</h3>
+                  <h3 className="text-5xl md:text-6xl text-white font-black uppercase italic tracking-tighter">{sub.name}</h3>
                   <p className="text-sm font-mono text-gray-400 uppercase tracking-widest">Department_Registry</p>
                 </div>
               </div>

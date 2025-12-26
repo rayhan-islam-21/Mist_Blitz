@@ -6,11 +6,10 @@ import Achievements from "@/components/about/Achievements";
 import Image from "next/image";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
-import { Highlighter } from "@/components/ui/highlighter";
 
 const About = () => {
   return (
-    <div className="bg-black min-h-screen selection:bg-red-500/30">
+    <div className="bg-black min-h-screen selection:bg-red-600 selection:text-white">
       <Navbar />
 
       {/* Hero Section */}
@@ -30,7 +29,7 @@ const About = () => {
           <h2 className="text-red-500 font-mono tracking-[0.3em] uppercase text-sm mb-4 animate-fade-in">
             Engineering the Future
           </h2>
-          <h1 className="text-6xl md:text-9xl font-black text-white tracking-normal uppercase">
+          <h1 className="text-6xl md:text-9xl  font-black text-white tracking-normal uppercase">
             About <span className="text-red-600">blitz</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mt-6 font-light">
