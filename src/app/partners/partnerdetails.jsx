@@ -13,6 +13,7 @@ import {
   Cpu,
   ShieldCheck,
 } from "lucide-react";
+import SponsorButton from "@/components/ui/sponser-btn";
 const DATA = [
   {
     id: "platinum",
@@ -250,12 +251,7 @@ export default function PremiumPartners() {
                 Next Intake • 2026
               </span>
 
-              <Link
-                href="mailto:partnerships@yourdomain.com"
-                className="px-6 py-2 bg-white text-black text-[9px] font-black uppercase hover:bg-red-600 hover:text-white transition-all"
-              >
-                Sponsor Us
-              </Link>
+              <SponsorButton/>
             </div>
           </div>
         </section>
