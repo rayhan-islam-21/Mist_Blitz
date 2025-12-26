@@ -16,6 +16,7 @@ import toast, { Toaster } from "react-hot-toast";
 import PremiumDropdown from "@/components/ui/premium-dropdown";
 import Button from "@/components/ui/retro-btn";
 import Image from "next/image";
+import saveEquipmentToDb from "@/lib/saveEquipmentToDb";
 
 const AddEquipmentPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -99,6 +100,7 @@ const AddEquipmentPage = () => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
+        await saveEquipmentToDb(data);
       console.log("Submitting data:", data);
       toast.success(`${data.name} deployed successfully!`);
       reset();

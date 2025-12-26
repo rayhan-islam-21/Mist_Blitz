@@ -5,8 +5,6 @@ const equipmentSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true,
-      uppercase: true,
     },
 
     ownerType: {
@@ -29,7 +27,7 @@ const equipmentSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["Electronics", "Mechanical", "Optics", "Tools", "Safety Gear"],
+      enum: ["Electronics", "Mechanical", "Tools", "Safety Gear"],
     },
 
     bash: {
@@ -40,12 +38,12 @@ const equipmentSchema = new mongoose.Schema(
     },
 
     image: {
-      type: String, // Cloudinary URL
+      type: String, 
       default: null,
     },
   },
   {
-    timestamps: true, // adds createdAt and updatedAt
+    timestamps: true, 
   }
 );
 
