@@ -40,7 +40,7 @@ export default function PartnersScroll() {
   const xMove = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
   return (
-    <section ref={containerRef} className="relative selection:text-white selection:bg-red-600 bg-[#050505] overflow-hidden py-32 border-t border-white/5">
+    <section ref={containerRef} className="relative selection:text-white selection:bg-red-600 bg-[#050505] max-w-7xl mx-auto overflow-hidden py-32 border-t border-white/5">
       
       {/* 1. MASSIVE BACKGROUND TEXT (PARALLAX) */}
       <motion.div 
@@ -54,7 +54,7 @@ export default function PartnersScroll() {
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
            style={{ backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`, backgroundSize: '30px 30px' }} />
 
-      <div className="max-w-[1800px] mx-auto px-6 relative z-10">
+      <div className="max-w-450 mx-auto px-6 relative z-10">
         
         {/* 3. HEADING: MAXIMUM IMPACT */}
         <div className="flex flex-col gap-2 mb-20">
@@ -67,7 +67,7 @@ export default function PartnersScroll() {
             <span className="font-mono text-[10px] text-red-600 font-bold uppercase tracking-[0.6em]">Supporters_Infrastructure</span>
           </motion.div>
           
-          <h2 className="text-5xl font-sans md:text-[9rem] text-center font-black uppercase italic leading-[0.8] text-balance  tracking-[ -0.05em] text-white">
+          <h2 className="text-5xl font-sans md:text-[9rem]  font-black uppercase italic leading-[0.8]   tracking-[ -0.05em] text-white">
             OUR <br /> 
             <span className="text-transparent stroke-text">PARTNERS.</span>
           </h2>
@@ -82,12 +82,12 @@ export default function PartnersScroll() {
              <span className="font-mono text-[9px] text-gray-600 uppercase tracking-widest italic">Scanning_Entity_Assets...</span>
           </div>
 
-          <div className="relative py-24 border-y border-white/5 bg-white/[0.01] backdrop-blur-3xl group">
+          <div className="relative py-12 border-y border-white/1 bg-white/0.5 backdrop-blur-3xl group">
             {/* Edge Glows */}
             <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-[#050505] to-transparent z-20 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-[#050505] to-transparent z-20 pointer-events-none" />
             
-            <div className="relative items-center flex justify-center overflow-hidden opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 ease-in-out">
+            <div className="relative items-center flex justify-center overflow-hidden opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 ease-in-out">
               <LogoLoop
                 logos={sponsorLogos}
                 speed={60} 

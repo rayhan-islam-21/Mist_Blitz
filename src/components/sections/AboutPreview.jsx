@@ -161,7 +161,7 @@ const AboutPreview = () => {
                 </span>
               </div>
               <h2 className="text-6xl md:text-9xl font-black uppercase italic leading-none tracking-tighter mb-8">
-                OUR<span className="text-red-600">ORIGIN</span>
+                OUR {" "}<span className="text-red-600">ORIGIN</span>
               </h2>
               <div className="grid md:grid-cols-2 font-sans gap-10 text-gray-300 text-lg leading-relaxed font-normal">
                 <p>
