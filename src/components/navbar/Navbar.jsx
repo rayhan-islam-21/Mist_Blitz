@@ -1,119 +1,108 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import Button from "../ui/retro-btn";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
+  const [systemTime, setSystemTime] = useState("");
 
-  const navLinks = [
-    { id: "01", name: "CORE", href: "/" },
-    { id: "02", name: "CELLS", href: "/about/who-we-are" },
-    { id: "03", name: "NODE", href: "/partners" },
-    { id: "04", name: "DATA", href: "/gallery" },
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date();
+      setSystemTime(now.toLocaleTimeString("en-US", { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const navItems = [
+    { id: "SYS_01", name: "Home", href: "/" },
+    { id: "SYS_02", name: "About", href: "/about/who-we-are" },
+    { id: "SYS_03", name: "Partners", href: "/partners" },
+    { id: "SYS_04", name: "Gallery", href: "/gallery" },
+    { id: "SYS_05", name: "Shop", href: "/shop" },
   ];
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[100]">
-      
-      {/* 1. THE HUB (Fixed Top Left) */}
-      <div className="absolute top-10 left-10 pointer-events-auto">
-        <div 
-          className="relative w-20 h-20 flex items-center justify-center cursor-pointer group"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {/* Rotating Outer Ring */}
-          <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 border border-dashed border-red-600/40 rounded-full"
-          />
-          
-          {/* Inner Static Core */}
-          <div className="relative w-14 h-14 bg-black border border-white/20 rounded-full flex items-center justify-center overflow-hidden">
-            <Image 
-              src="/hero.png" 
-              alt="B" 
-              width={40} 
-              height={40} 
-              className="brightness-200 object-contain scale-150" 
-            />
-            {/* Pulsing Status Overlay */}
-            <div className="absolute inset-0 bg-red-600/10 animate-pulse" />
-          </div>
-
-          {/* Label Indicator */}
-          <div className="absolute -right-24 top-1/2 -translate-y-1/2 flex flex-col">
-            <span className="font-mono text-[8px] text-red-600 font-black">SYSTEM_ACCESS</span>
-            <span className="font-mono text-[10px] text-white/40">{isOpen ? "CLOSE_X" : "EXPAND_V"}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. THE ORBITAL LINKS (Expandable) */}
-      <AnimatePresence>
-        {isOpen && (
-          <div className="absolute top-36 left-16 flex flex-col gap-6 pointer-events-auto">
-            {navLinks.map((link, idx) => {
-              const active = pathname === link.href;
-              return (
-                <motion.div
-                  key={link.name}
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: -20, opacity: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                >
-                  <Link href={link.href} className="flex items-center group">
-                    {/* The "Coordinate" Line */}
-                    <div className={`w-8 h-px transition-all duration-500 ${active ? "w-16 bg-red-600" : "bg-white/20 group-hover:bg-red-600"}`} />
-                    
-                    <div className="ml-4 flex flex-col">
-                      <span className={`font-mono text-[7px] ${active ? "text-red-600" : "text-white/20"}`}>
-                        COORD_0{idx + 1}
-                      </span>
-                      <span className={`text-xl font-black italic tracking-tighter transition-all ${
-                        active ? "text-white" : "text-white/20 group-hover:text-red-500 group-hover:translate-x-2"
-                      }`}>
-                        {link.name}
-                      </span>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-
-            {/* THE EXECUTE TRIGGER */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-10"
-            >
-              <Link 
-                href="/join" 
-                className="inline-block px-6 py-2 border border-red-600 text-red-600 font-mono text-[10px] font-black tracking-widest hover:bg-red-600 hover:text-white transition-all"
-              >
-                $RUN_INITIATE
+    <>
+      {/* 1. TOP BAR - Scaled for Mobile */}
+      <div className="absolute top-0 left-0 w-full h-24 flex justify-between items-start px-6 md:px-12 pt-6 md:pt-10 z-[140] pointer-events-none">
+        
+        {/* LEFT: Logo Section */}
+        <div className="flex gap-3 md:gap-6 items-center pointer-events-auto">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2 md:gap-4 group">
+              <div className="w-[2px] h-4 md:h-6 bg-red-600 shadow-[0_0_8px_#ef4444]" />
+              <Link href="/">
+                <Image src="/hero.png" alt="BLITZ" width={90} height={22} className="brightness-200 contrast-125 md:w-[115px] md:h-[28px]" priority />
               </Link>
-            </motion.div>
+            </div>
           </div>
-        )}
-      </AnimatePresence>
+        </div>
 
-      {/* 3. PERIPHERAL DATA (The "Scan" Viewport) */}
-      <div className="absolute inset-0 border-[20px] border-white/[0.02] pointer-events-none">
-        <div className="absolute top-4 right-10 flex gap-10 font-mono text-[8px] text-white/10">
-          <span>FRAME_STABILITY: 98%</span>
-          <span>SENSORS: NOMINAL</span>
-          <span>BUFFER: 0.002ms</span>
+        {/* RIGHT: Time & Initialize */}
+        <div className="flex gap-4 md:gap-10 pointer-events-auto items-start">
+          <div className="flex flex-col items-end font-mono">
+            <div className="flex items-center gap-2">
+              <span className="text-[8px] md:text-[10px] text-white font-bold tracking-widest">{systemTime}</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
+            </div>
+            <div className="hidden sm:flex mt-2 gap-1">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className={`h-[2px] w-3 md:w-4 ${i < 4 ? "bg-red-600" : "bg-white/10"}`} />
+              ))}
+            </div>
+          </div>
+
+          <Button href="/join" className="group relative h-8 md:h-11 px-4 md:px-10 bg-red-600 text-white font-mono text-[9px] md:text-[11px] font-black flex items-center justify-center skew-x-[-20deg] hover:bg-white hover:text-red-600 transition-all duration-300">
+            <Link href="/contact"> <span className="skew-x-[20deg] tracking-widest">Contact Us</span></Link>
+          </Button>
         </div>
       </div>
-    </div>
+
+      {/* 2. STICKY NAV - Repositioned for Mobile Screens */}
+      <nav className="fixed inset-0 pointer-events-none z-[150]">
+        
+        {/* RIGHT SIDE NAV - Responsive widths & font sizes */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-end gap-1 md:gap-1 pointer-events-auto pr-4 md:pr-8">
+          {navItems.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link key={item.id} href={item.href} className="group relative flex items-center gap-3 md:gap-6 py-2 md:py-3">
+                <div className="flex flex-col items-end">
+                  <span className={`font-mono text-[6px] md:text-[7px] mb-0.5 transition-colors ${active ? "text-red-600" : "text-white/20"}`}>
+                    {item.id}
+                  </span>
+                  <span className={`text-base md:text-2xl font-sans italic font-black tracking-tighter transition-all duration-500 uppercase ${
+                    active ? "text-white scale-110 pr-0" : "text-white/10 group-hover:text-red-600 group-hover:pr-1"
+                  }`}>
+                    {item.name}
+                  </span>
+                </div>
+                
+                <div className={`w-[2px] md:w-1 h-10 md:h-14 transition-all duration-700 ${
+                  active ? "bg-red-600 shadow-[0_0_15px_#ff0000]" : "bg-white/5 group-hover:bg-red-600/40"
+                }`} />
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* CENTER CROSSHAIR - Hidden on very small screens to clear the view */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05] hidden sm:block">
+          <div className="relative w-32 h-32 md:w-48 md:h-48 border border-white/20 rounded-full flex items-center justify-center">
+             <div className="w-1.5 h-1.5 bg-red-600 rotate-45" />
+          </div>
+        </div>
+
+        {/* PERIPHERAL BORDER - Mobile Adjusted Padding */}
+        <div className="absolute top-0 left-0 w-full h-full border-[1px] border-white/5 m-2 md:m-4 pointer-events-none" />
+      </nav>
+    </>
   );
 };
 

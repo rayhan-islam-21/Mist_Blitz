@@ -67,7 +67,7 @@ export default function PartnersScroll() {
             <span className="font-mono text-[10px] text-red-600 font-bold uppercase tracking-[0.6em]">Supporters_Infrastructure</span>
           </motion.div>
           
-          <h2 className="text-8xl font-sans md:text-[13rem] font-black uppercase italic leading-[0.7] tracking-[ -0.05em] text-white">
+          <h2 className="text-5xl font-sans md:text-[9rem] text-center font-black uppercase italic leading-[0.8] text-balance  tracking-[ -0.05em] text-white">
             OUR <br /> 
             <span className="text-transparent stroke-text">PARTNERS.</span>
           </h2>
