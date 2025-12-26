@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { Highlighter } from '../ui/highlighter';
 
 const MISTBlitzIntro = () => {
   return (
@@ -43,14 +44,14 @@ const MISTBlitzIntro = () => {
             
             <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
               <p>
-                MIST BLITZ is the official Formula Student team of the 
-                <span className="text-white font-semibold"> Military Institute of Science and Technology (MIST)</span>. 
+                MIST BLITZ is the official Formula Student team of the {""}
+                <span className="text-gray-200"><Highlighter action='highlight' color='#17cf48'>{" "}Military Institute of Science and Technology (MIST)</Highlighter> </span>. 
                 Born out of a passion for precision engineering and speed, we are a collective of dreamers and doers.
               </p>
               <p>
                 Founded in <span className="text-red-500 font-mono">April 2024</span>, our team embarked on a mission 
                 to bridge the gap between classroom theory and the roar of the racetrack. Our debut project, 
-                <span className="italic text-white"> Furiosa 1.0</span>, serves as the cornerstone of our engineering legacy, 
+                <span className=" text-white"> Furiosa 1.0</span>, serves as the cornerstone of our engineering legacy, 
                 showcasing our ability to design, simulate, and manufacture a high-performance formula-style race car.
               </p>
             </div>

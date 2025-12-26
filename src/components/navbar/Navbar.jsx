@@ -21,7 +21,7 @@ const Navbar = () => {
 
   const navItems = [
     { id: "SYS_01", name: "Home", href: "/" },
-    { id: "SYS_02", name: "About", href: "/about/who-we-are" },
+    { id: "SYS_02", name: "About", href: "/about" },
     { id: "SYS_03", name: "Partners", href: "/partners" },
     { id: "SYS_04", name: "Gallery", href: "/gallery" },
     { id: "SYS_05", name: "Shop", href: "/shop" },

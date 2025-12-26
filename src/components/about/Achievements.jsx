@@ -76,54 +76,62 @@ const Achievements = () => {
           {achievements.map((item, index) => (
             <div
               key={index}
-              className={`group relative rounded overflow-hidden border border-white/10 bg-red-100 transition-all duration-500 hover:border-red-500/50 
-                ${item.size === "lg" ? "md:col-span-2 md:row-span-2" : ""}
-                ${item.size === "md" ? "md:col-span-1 md:row-span-1" : ""}
-                ${item.size === "sm" ? "md:col-span-1 md:row-span-1" : ""}`}
+              className={`group relative rounded overflow-hidden border border-white/10 bg-black/40 backdrop-blur-sm
+        transition-all duration-500 hover:border-red-500/10 hover:shadow-[0_0_40px_-10px_rgba(239,68,68,0.35)]
+        ${item.size === "lg" ? "md:col-span-2 md:row-span-2" : ""}
+        ${item.size !== "lg" ? "md:col-span-1 md:row-span-1" : ""}`}
             >
-              {/* Background Image with Overlay */}
+              {/* Background */}
               <div className="absolute inset-0 z-0">
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-120 transition-all duration-700"
+                  className="object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-linear-to-br from-gray-900/70 to-black/10"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent" />
               </div>
 
-              {/* Content Layer */}
+              {/* Content */}
               <div className="relative z-10 h-full p-8 flex flex-col justify-between">
                 <div>
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="p-3 bg-black/50 backdrop-blur-lg rounded-2xl border border-white/10 group-hover:scale-110 transition-transform duration-500">
+                  <div className="flex justify-between items-start mb-5">
+                    <div
+                      className="p-3 bg-black/60 backdrop-blur-xl rounded-xl border border-white/10 
+                            group-hover:scale-110 transition-transform duration-500"
+                    >
                       {item.icon}
                     </div>
-                    <span className="text-4xl font-black text-white/10 font-mono group-hover:text-blue-500/20 transition-colors">
+                    <span className="text-4xl font-black text-white/10 font-mono group-hover:text-red-500/20 transition-colors">
                       {item.year}
                     </span>
                   </div>
 
-                  <div className="inline-block px-2 py-1 rounded-md bg-red-600/20 border border-red-600/30 text-red-400 text-[10px] font-bold uppercase tracking-widest mb-4">
+                  <div
+                    className="inline-flex items-center px-3 py-1 rounded-md 
+                          bg-red-500/10 border border-red-500/30 
+                          text-red-400 text-[10px] font-bold uppercase tracking-widest mb-4"
+                  >
                     {item.tag}
                   </div>
 
                   <h3
-                    className={`font-bold text-white mb-2 group-hover:text-red-600 transition-colors uppercase  tracking-wider 
-                    ${item.size === "lg" ? "text-4xl md:text-5xl" : "text-xl"}`}
+                    className={`font-black text-white mb-2 uppercase tracking-wide 
+              group-hover:text-red-500 transition-colors
+              ${item.size === "lg" ? "text-4xl md:text-5xl" : "text-xl"}`}
                   >
                     {item.title}
                   </h3>
 
-                  <p className="text-red-500 font-mono text-[10px] mb-4 uppercase tracking-[0.2em] flex items-center gap-2">
-                    <span className="w-4 h-[1px] bg-red-500"></span>{" "}
+                  <p className="text-red-400 font-mono text-[10px] mb-4 uppercase tracking-[0.25em] flex items-center gap-2">
+                    <span className="w-5 h-px bg-red-500/70" />
                     {item.event}
                   </p>
 
                   <p
-                    className={`text-gray-400 leading-relaxed font-light ${
+                    className={`text-white/60 leading-relaxed font-light ${
                       item.size === "lg"
-                        ? "text-lg max-w-md"
+                        ? "text-base max-w-md"
                         : "text-xs max-w-xs"
                     }`}
                   >
@@ -132,7 +140,10 @@ const Achievements = () => {
                 </div>
 
                 {item.size === "lg" && (
-                  <button className="flex items-center gap-2 text-white/50 text-xs font-mono group-hover:text-red-500 transition-colors uppercase tracking-widest">
+                  <button
+                    className="mt-6 flex items-center gap-2 text-white/50 text-xs font-mono 
+                             group-hover:text-red-500 transition-colors uppercase tracking-widest"
+                  >
                     Explore Technical Details <ChevronRight size={14} />
                   </button>
                 )}
@@ -140,16 +151,16 @@ const Achievements = () => {
             </div>
           ))}
 
-          {/* Special Visual "Filler" Card - Pure Image */}
-          <div className="hidden md:block relative rounded-3xl overflow-hidden border border-white/10 group">
+          {/* Visual Filler Card */}
+          <div className="hidden md:block relative rounded overflow-hidden border border-white/10 group">
             <Image
               src="/china4.jpg"
               fill
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              className="object-cover brightness-100 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-300"
               alt="Action"
             />
-            <div className="absolute inset-0 mix-blend-multiply"></div>
-            <div className="absolute bottom-4 left-4 text-white font-mono text-[10px] flex items-center gap-2">
+            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute bottom-4 left-4 text-white/80 font-mono text-[10px] flex items-center gap-2">
               <Camera size={12} /> SHOT AT CHINA
             </div>
           </div>

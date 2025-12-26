@@ -47,15 +47,15 @@ const About = () => {
           {/* Our Mission Grid */}
           <div className="grid md:grid-cols-2 gap-16 items-center mb-32">
             <div>
-              <h3 className="text-red-500 font-bold uppercase tracking-widest text-sm mb-2">
+              <h3 className="text-red-500 font-sans italic font-bold uppercase tracking-widest text-sm mb-2">
                 Our Mission
               </h3>
-              <h2 className="text-4xl font-semibold text-black mb-6">
-                Building More Than Just Race Cars.
+              <h2 className="text-5xl uppercase text-white font-sans font-black italic mb-6">
+                Building More Than <span className="text-red-600">Just Race Cars.</span>
               </h2>
-              <p className="text-gray-500 leading-relaxed mb-6">
+              <p className="text-gray-400 leading-relaxed mb-6">
                 Founded at the Military Institute of Science and Technology,
-                **MIST Blitz** represents the pinnacle of student engineering.
+                MIST Blitz represents the pinnacle of student engineering.
                 Our journey isn't just about the finish line; it’s about the
                 thousands of hours spent in the lab, the precision of our CAD
                 designs, and the grit required to build a high-performance
