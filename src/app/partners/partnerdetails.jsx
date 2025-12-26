@@ -213,26 +213,50 @@ export default function PremiumPartners() {
         </AnimatePresence>
 
         {/* 4. FOOTER STATUS */}
-        <section className="mt-1 flex flex-col md:flex-row gap-1">
-          <div className="flex-1 bg-red-600/5 border border-white/5 p-8 flex items-center gap-6">
-            <ShieldCheck className="text-red-600 animate-pulse" />
+        <section className="mt-12 flex flex-col md:flex-row gap-1">
+          {/* LEFT: WHY SPONSOR */}
+          <div className="flex-1 bg-white/[0.02] border border-white/5 p-8">
+            <h4 className="text-[10px] font-black uppercase tracking-widest text-red-500">
+              Partner With Us
+            </h4>
+            <p className="mt-3 text-white/40 text-xs leading-relaxed max-w-md">
+              Join an elite network of industry leaders, innovators, and global
+              brands. Our partners gain strategic visibility, direct access to
+              top engineering talent, and long-term collaboration opportunities
+              across technology, manufacturing, and research domains.
+            </p>
+
+            <ul className="mt-4 space-y-2 text-[9px] uppercase tracking-widest text-white/40">
+              <li>• Brand Visibility & Recognition</li>
+              <li>• Direct Talent & Research Access</li>
+              <li>• Long-Term Strategic Collaboration</li>
+            </ul>
+          </div>
+
+          {/* RIGHT: CTA */}
+          <div className="flex-1 bg-red-600/5 border border-white/5 p-8 flex flex-col justify-between">
             <div>
               <h4 className="text-[10px] font-black uppercase tracking-widest">
-                Global Integrity Check
+                Become a Sponsor
               </h4>
-              <p className="text-[9px] text-white/40 uppercase mt-1">
-                All {activeTier.id} level nodes verified and operational. System
-                fully secured.
+              <p className="mt-2 text-[9px] text-white/40 uppercase max-w-sm">
+                Sponsorship tiers are limited. Applications are reviewed based
+                on strategic alignment and impact potential.
               </p>
             </div>
-          </div>
-          <div className="flex-1 bg-white/[0.02] border border-white/5 p-8 flex items-center justify-between">
-            <span className="text-[9px] uppercase tracking-widest text-white/40 font-bold">
-              Request Access to 2026 Registry
-            </span>
-            <button className="px-6 py-2 bg-white text-black text-[9px] font-black uppercase hover:bg-red-600 hover:text-white transition-all">
-              Execute_Inquiry
-            </button>
+
+            <div className="mt-6 flex items-center justify-between">
+              <span className="text-[9px] uppercase tracking-widest text-white/30">
+                Next Intake • 2026
+              </span>
+
+              <Link
+                href="mailto:partnerships@yourdomain.com"
+                className="px-6 py-2 bg-white text-black text-[9px] font-black uppercase hover:bg-red-600 hover:text-white transition-all"
+              >
+                Sponsor Us
+              </Link>
+            </div>
           </div>
         </section>
       </main>
