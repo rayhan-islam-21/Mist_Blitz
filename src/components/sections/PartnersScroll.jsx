@@ -5,16 +5,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Activity, Cpu, Box } from "lucide-react";
 import { useRef } from "react";
 
-const sponsors = [
-  { logo: "/sponsers/sp1.png", website: "https://sponsor1.com" },
-  { logo: "/sponsers/sp2.png", website: "https://sponsor2.com" },
-  { logo: "/sponsers/sp3.png", website: "https://sponsor3.com" },
-  { logo: "/sponsers/sp4.png", website: "https://sponsor4.com" },
-  { logo: "/sponsers/sp5.png", website: "https://sponsor5.com" },
-  { logo: "/sponsers/sp6.png", website: "https://sponsor6.com" },
-  { logo: "/sponsers/sp7.png", website: "https://sponsor7.com" },
-  { logo: "/sponsers/sp8.png", website: "https://sponsor8.com" },
-  { logo: "/sponsers/sp1.png", website: "https://sponsor1.com" },
+const spon = [
+  { logo: "/sponsers/sp9.png", website: "https://sponsor1.com" },
   { logo: "/sponsers/sp2.png", website: "https://sponsor2.com" },
   { logo: "/sponsers/sp3.png", website: "https://sponsor3.com" },
   { logo: "/sponsers/sp4.png", website: "https://sponsor4.com" },
@@ -24,6 +16,7 @@ const sponsors = [
   { logo: "/sponsers/sp8.png", website: "https://sponsor8.com" },
 ];
 
+const sponsors = [...spon, ...spon];
 const sponsorLogos = sponsors.map((s) => ({
   src: s.logo,
   alt: "Strategic Partner",

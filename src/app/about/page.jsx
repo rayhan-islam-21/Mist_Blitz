@@ -42,7 +42,7 @@ const About = () => {
       </section>
 
       {/* Narrative Section */}
-      <main className="bg-white relative">
+      <main className="bg-black relative">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24">
           {/* Our Mission Grid */}
           <div className="grid md:grid-cols-2 gap-16 items-center mb-32">

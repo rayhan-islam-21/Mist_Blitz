@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const MISTBlitzIntro = () => {
   return (
-    <section className="relative py-12 bg-white overflow-hidden">
+    <section className="relative py-12 bg-black overflow-hidden">
       {/* Subtle Background Accent */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-red-600/5 blur-[120px] -z-10"></div>
       
@@ -33,8 +33,8 @@ const MISTBlitzIntro = () => {
             <div className="inline-block px-3 py-1 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 text-xs font-bold uppercase tracking-widest">
               Establishment 2024
             </div>
-            
-            <h2 className="text-4xl md:text-5xl font-black text-black leading-tight">
+
+            <h2 className="text-4xl font-sans italic md:text-6xl  font-black text-white leading-[0.85]">
               THE GENESIS OF <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
                 MIST BLITZ

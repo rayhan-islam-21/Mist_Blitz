@@ -7,24 +7,14 @@ import { MoveRight, Zap, Target, Activity, ShieldAlert } from "lucide-react";
 export default function JoinCTA() {
   return (
     <section className="relative py-40 bg-[#050505] border-t border-white/5 flex flex-col items-center justify-center text-center overflow-hidden">
-      
-      {/* SECTION IDENTIFIER (HUD) */}
-      <div className="absolute top-10 left-10 hidden md:flex items-center gap-3">
-        <div className="w-1 h-6 bg-red-600" />
-        <span className="font-mono text-[10px] text-gray-500 uppercase tracking-[0.5em]">
-          Strategic // Alliance_Terminal
-        </span>
-      </div>
-
       {/* BACKGROUND DECORATIVE ELEMENT */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vw] font-black text-white/[0.01] italic select-none pointer-events-none uppercase tracking-tighter">
         FSC_2024
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
         {/* TOP STATUS BAR */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           className="inline-flex items-center gap-4 mb-8 bg-red-600/5 border border-red-600/20 px-6 py-2"
@@ -54,11 +44,13 @@ export default function JoinCTA() {
           className="max-w-3xl mx-auto mb-16"
         >
           <p className="text-xl md:text-3xl font-bold italic text-gray-100 uppercase leading-tight mb-6">
-            Join MIST BLITZ in engineering the next era of <span className="text-red-600">Global Motorsports.</span>
+            Join MIST BLITZ in engineering the next era of{" "}
+            <span className="text-red-600">Global Motorsports.</span>
           </p>
           <p className="text-lg font-sans text-gray-500 font-medium leading-relaxed">
-            Partner with the vanguard of the Military Institute of Science and Technology. 
-            Invest in high-tier technical innovation and gain international visibility at the 
+            Partner with the vanguard of the Military Institute of Science and
+            Technology. Invest in high-tier technical innovation and gain
+            international visibility at the
             <span className="text-white"> Formula Student China circuits.</span>
           </p>
         </motion.div>
@@ -76,9 +68,12 @@ export default function JoinCTA() {
 
           <button className="relative bg-white text-black px-12 md:px-20 py-8 font-black uppercase tracking-[0.3em] italic text-xl md:text-2xl transition-all hover:bg-red-600 hover:text-white flex items-center gap-8 shadow-[20px_20px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-2">
             SECURE PARTNERSHIP
-            <MoveRight size={32} className="transition-transform group-hover:translate-x-4" />
+            <MoveRight
+              size={32}
+              className="transition-transform group-hover:translate-x-4"
+            />
           </button>
-          
+
           <div className="mt-10 flex flex-wrap justify-center gap-8 opacity-30">
             <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest">
               <Target size={12} /> GLOBAL_EXPOSURE
@@ -96,8 +91,11 @@ export default function JoinCTA() {
       {/* FOOTER STRIP: DATA STREAM */}
       <div className="absolute bottom-0 w-full bg-white text-black py-2 overflow-hidden select-none">
         <div className="flex whitespace-nowrap gap-10 animate-marquee font-mono text-[10px] font-black uppercase">
-          {[1,2,3,4].map((i) => (
-            <span key={i}>Initiating Alliance Protocol // FSC China 2024 // MIST Blitz Command Dhaka // Join the Revolution</span>
+          {[1, 2, 3, 4].map((i) => (
+            <span key={i}>
+              Initiating Alliance Protocol // FSC China 2024 // MIST Blitz
+              Command Dhaka // Join the Revolution
+            </span>
           ))}
         </div>
       </div>
@@ -108,8 +106,12 @@ export default function JoinCTA() {
           color: transparent;
         }
         @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-33.3%); }
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-33.3%);
+          }
         }
         .animate-marquee {
           display: inline-flex;
