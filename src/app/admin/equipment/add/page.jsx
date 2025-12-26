@@ -60,57 +60,51 @@ const AddEquipmentPage = () => {
   const inputBase =
     "w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-900 transition-all duration-300 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-50";
 
-const handleImageChange = (e) => {
-  const file = e.target.files?.[0];
-  if (!file) return;
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setIsSubmitting(true);
 
-  if (file.size > 5 * 1024 * 1024) {
-    toast.error("Image must be under 5MB");
-    return;
-  }
+    const uploadData = new FormData();
+    uploadData.append("file", file);
+    uploadData.append(
+      "upload_preset",
+      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+    );
 
-  setValue("image", file);
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        { method: "POST", body: uploadData }
+      );
+      const data = await response.json();
+      if (data.secure_url)
+        if (data.secure_url) {
+          setImagePreview(data.secure_url);
 
-  const reader = new FileReader();
-  reader.onloadend = () => setImagePreview(reader.result);
-  reader.readAsDataURL(file);
-};
-
+          // 🔴 THIS IS THE MISSING LINE
+          setValue("image", data.secure_url, {
+            shouldValidate: true,
+            shouldDirty: true,
+          });
+        }
+    } catch (error) {
+      toast.error("Image upload failed.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   /* ---------- submit ---------- */
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-
     try {
-      const payload = new FormData();
-      payload.append("name", data.name);
-      payload.append("category", data.category);
-      payload.append("quantity", data.quantity);
-      payload.append(
-        "owner",
-        data.ownerType === "Blitz Official Inventory"
-          ? "Blitz"
-          : data.memberName
-      );
-      payload.append("bash", data.bash);
-      if (data.image) payload.append("image", data.image);
-
-      console.log("SUBMIT DATA:", Object.fromEntries(payload));
-
-      toast.success("Asset added successfully");
-
-      reset({
-        name: "",
-        ownerType: "Blitz Official Inventory",
-        memberName: "",
-        quantity: 1,
-        category: "Electronics",
-        bash: generateBash(),
-        image: null,
-      });
-      setImagePreview(null);
-    } catch (err) {
-      toast.error("Failed to add asset");
+      console.log("Submitting data:", data);
+      toast.success(`${data.name} deployed successfully!`);
+      reset();
+    } catch (error) {
+      console.error(error);
+      toast.error("Deployment failed. Check console for details.");
     } finally {
       setIsSubmitting(false);
     }
@@ -246,7 +240,6 @@ const handleImageChange = (e) => {
                 <input
                   type="file"
                   {...register("image")}
-                  
                   ref={fileInputRef}
                   onChange={handleImageChange}
                   className="hidden"
@@ -310,7 +303,7 @@ const handleImageChange = (e) => {
                       </div>
                     </div>
 
-                    <div className="relative z-10 flex gap-6 items-center">
+                    <div className="relative z-10 flex gap-10 md:pl-0 pl-4 items-center">
                       <div className="relative h-20 w-20 md:h-24 md:w-24 shrink-0 rounded-xl border border-white/10 flex items-center justify-center bg-slate-800 shadow-inner overflow-hidden">
                         {imagePreview ? (
                           <Image
@@ -352,8 +345,7 @@ const handleImageChange = (e) => {
                           System Hash
                         </p>
                         <p className="text-[10px] md:text-sm font-mono font-bold tracking-widest text-slate-300 leading-none uppercase">
-                         {formData.bash}
-
+                          {formData.bash}
                         </p>
                       </div>
                       <FaBarcode className="opacity-20 text-white w-8 h-8 md:w-12 md:h-12" />
@@ -366,20 +358,11 @@ const handleImageChange = (e) => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3.5 rounded bg-red-500 text-white active:scale-95 transition-all shadow-xl shadow-red-100 hover:bg-red-600 disabled:bg-slate-200"
+              className="w-full py-4 rounded bg-red-600  text-white active:scale-95 transition-transform"
             >
-              <div className="flex items-center justify-center gap-3">
-                {isSubmitting ? (
-                  <FaCircleNotch className="animate-spin" />
-                ) : (
-                  <>
-                    <FaWarehouse className="text-sm" />
-                    <span className="uppercase tracking-[0.2em] font-black italic text-sm">
-                      Deploy to Database
-                    </span>
-                  </>
-                )}
-              </div>
+              <span className="uppercase tracking-widest italic font-black text-sm">
+                {isSubmitting ? "Deploying..." : "Deploy Product"}
+              </span>
             </Button>
 
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 flex gap-3 w-full">
