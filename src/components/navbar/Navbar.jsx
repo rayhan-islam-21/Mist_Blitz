@@ -1,222 +1,119 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { HiMenu, HiX } from "react-icons/hi";
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
-  NavigationMenuLink,
-} from "../ui/navigation-menu"; // adjust path
 import { usePathname } from "next/navigation";
-import NavLink from "./NavLink"; // your NavLink component
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Check if the current route is an About sub-route
-  const isAboutActive = pathname.startsWith("/about");
+  const navLinks = [
+    { id: "01", name: "CORE", href: "/" },
+    { id: "02", name: "CELLS", href: "/about/who-we-are" },
+    { id: "03", name: "NODE", href: "/partners" },
+    { id: "04", name: "DATA", href: "/gallery" },
+  ];
 
   return (
-    <header
-      className={`fixed top-0 w-full z-50! transition-all duration-300 ${
-        scrolled
-          ? "bg-neutral-950 border-b border-red-500/40"
-          : "bg-transparent/30 backdrop-blur-md"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <Image src="/hero.png" alt="BLITZ Logo" width={110} height={110} priority />
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-10 text-lg font-medium text-white">
-          <NavLink
-            href="/"
-            className={`hover:text-yellow-400 transition ${
-              pathname === "/" ? "text-yellow-400 border-b-2 border-yellow-400" : ""
-            }`}
-          >
-            Home
-          </NavLink>
-
-          {/* About Flyout */}
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger
-                  className={`bg-transparent m-0 text-lg transition ${
-                    isAboutActive
-                      ? "text-yellow-400 border-b-2 border-yellow-400"
-                      : "text-white hover:text-yellow-400"
-                  }`}
-                >
-                  About
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-neutral-900 text-white border border-neutral-800 rounded-md shadow-lg min-w-60 p-4">
-                  <ul className="flex flex-col gap-1">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <NavLink
-                          href="/about/what-we-do"
-                          className="block px-3 py-2 hover:bg-neutral-800 rounded-md transition"
-                        >
-                          What We Do
-                        </NavLink>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <NavLink
-                          href="/about/who-we-are"
-                          className="block px-3 py-2 hover:bg-neutral-800 rounded-md transition"
-                        >
-                          Who We Are
-                        </NavLink>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <NavLink
-                          href="/about/our-aim"
-                          className="block px-3 py-2 hover:bg-neutral-800 rounded-md transition"
-                        >
-                          Our Aim
-                        </NavLink>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-
-          <NavLink
-            href="/partners"
-            className={`hover:text-yellow-400 transition ${
-              pathname === "/partners" ? "text-yellow-400 border-b-2 border-yellow-400" : ""
-            }`}
-          >
-            Partners
-          </NavLink>
-          <NavLink
-            href="/shop"
-            className={`hover:text-yellow-400 transition ${
-              pathname === "/shop" ? "text-yellow-400 border-b-2 border-yellow-400" : ""
-            }`}
-          >
-            Shop
-          </NavLink>
-          <NavLink
-            href="/gallery"
-            className={`hover:text-yellow-400 transition ${
-              pathname === "/gallery" ? "text-yellow-400 border-b-2 border-yellow-400" : ""
-            }`}
-          >
-            Gallery
-          </NavLink>
-
-          <NavLink
-            href="/join"
-            className={`ml-0 rounded-md bg-yellow-400 px-4 py-2 text-black! font-semibold hover:bg-yellow-300 transition ${
-              pathname === "/join" ? "border-2 border-black" : "text-red-500"
-            }`}
-          >
-            Conatact Us
-          </NavLink>
-        </nav>
-
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden text-white text-3xl focus:outline-none"
-          onClick={() => setMobileOpen(!mobileOpen)}
+    <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[100]">
+      
+      {/* 1. THE HUB (Fixed Top Left) */}
+      <div className="absolute top-10 left-10 pointer-events-auto">
+        <div 
+          className="relative w-20 h-20 flex items-center justify-center cursor-pointer group"
+          onClick={() => setIsOpen(!isOpen)}
         >
-          {mobileOpen ? <HiX /> : <HiMenu />}
-        </button>
+          {/* Rotating Outer Ring */}
+          <motion.div 
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0 border border-dashed border-red-600/40 rounded-full"
+          />
+          
+          {/* Inner Static Core */}
+          <div className="relative w-14 h-14 bg-black border border-white/20 rounded-full flex items-center justify-center overflow-hidden">
+            <Image 
+              src="/hero.png" 
+              alt="B" 
+              width={40} 
+              height={40} 
+              className="brightness-200 object-contain scale-150" 
+            />
+            {/* Pulsing Status Overlay */}
+            <div className="absolute inset-0 bg-red-600/10 animate-pulse" />
+          </div>
+
+          {/* Label Indicator */}
+          <div className="absolute -right-24 top-1/2 -translate-y-1/2 flex flex-col">
+            <span className="font-mono text-[8px] text-red-600 font-black">SYSTEM_ACCESS</span>
+            <span className="font-mono text-[10px] text-white/40">{isOpen ? "CLOSE_X" : "EXPAND_V"}</span>
+          </div>
+        </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
-      {mobileOpen && (
-        <div className="md:hidden bg-neutral-900 text-white w-full absolute top-full left-0 border-t border-yellow-500/40 z-40">
-          <ul className="flex flex-col gap-4 p-6 text-lg font-medium">
-            <li>
-              <NavLink
-                href="/"
-                className={`hover:text-yellow-400 transition ${
-                  pathname === "/" ? "text-yellow-400" : ""
-                }`}
+      {/* 2. THE ORBITAL LINKS (Expandable) */}
+      <AnimatePresence>
+        {isOpen && (
+          <div className="absolute top-36 left-16 flex flex-col gap-6 pointer-events-auto">
+            {navLinks.map((link, idx) => {
+              const active = pathname === link.href;
+              return (
+                <motion.div
+                  key={link.name}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -20, opacity: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <Link href={link.href} className="flex items-center group">
+                    {/* The "Coordinate" Line */}
+                    <div className={`w-8 h-px transition-all duration-500 ${active ? "w-16 bg-red-600" : "bg-white/20 group-hover:bg-red-600"}`} />
+                    
+                    <div className="ml-4 flex flex-col">
+                      <span className={`font-mono text-[7px] ${active ? "text-red-600" : "text-white/20"}`}>
+                        COORD_0{idx + 1}
+                      </span>
+                      <span className={`text-xl font-black italic tracking-tighter transition-all ${
+                        active ? "text-white" : "text-white/20 group-hover:text-red-500 group-hover:translate-x-2"
+                      }`}>
+                        {link.name}
+                      </span>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+
+            {/* THE EXECUTE TRIGGER */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-10"
+            >
+              <Link 
+                href="/join" 
+                className="inline-block px-6 py-2 border border-red-600 text-red-600 font-mono text-[10px] font-black tracking-widest hover:bg-red-600 hover:text-white transition-all"
               >
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                href="/about/what-we-do"
-                className={`hover:text-yellow-400 transition ${
-                  pathname.startsWith("/about") ? "text-yellow-400" : ""
-                }`}
-              >
-                About
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                href="/partners"
-                className={`hover:text-yellow-400 transition ${
-                  pathname === "/partners" ? "text-yellow-400" : ""
-                }`}
-              >
-                Partners
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                href="/shop"
-                className={`hover:text-yellow-400 transition ${
-                  pathname === "/shop" ? "text-yellow-400" : ""
-                }`}
-              >
-                Shop
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                href="/gallery"
-                className={`hover:text-yellow-400 transition ${
-                  pathname === "/gallery" ? "text-yellow-400" : ""
-                }`}
-              >
-                Gallery
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                href="/join"
-                className="rounded-md bg-yellow-400 px-4 py-2
-                 text-black font-semibold hover:bg-yellow-300 transition"
-              >
-                Join Us
-              </NavLink>
-            </li>
-          </ul>
+                $RUN_INITIATE
+              </Link>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* 3. PERIPHERAL DATA (The "Scan" Viewport) */}
+      <div className="absolute inset-0 border-[20px] border-white/[0.02] pointer-events-none">
+        <div className="absolute top-4 right-10 flex gap-10 font-mono text-[8px] text-white/10">
+          <span>FRAME_STABILITY: 98%</span>
+          <span>SENSORS: NOMINAL</span>
+          <span>BUFFER: 0.002ms</span>
         </div>
-      )}
-    </header>
+      </div>
+    </div>
   );
 };
 
