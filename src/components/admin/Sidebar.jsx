@@ -39,6 +39,14 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       ],
     },
     {
+      name: "Equipment",
+      icon: <FaClipboardList />,
+      subMenu: [
+        { name: "All Equipment", path: "/admin/equipment/all-equipment" },
+        { name: "Add Equipment", path: "/admin/equipment/add" },
+      ]
+    },
+    {
       name: "Teams",
       icon: <FaUsers />,
       subMenu: [

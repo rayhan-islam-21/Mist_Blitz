@@ -16,7 +16,7 @@ const Hero = () => {
         playsInline
         preload="auto"
       >
-        <source src="/blitz.mp4" type="video/mp4" />
+        <source src="https://res.cloudinary.com/dnrubj8x4/video/upload/v1766765555/hero-viedo_yzq8zl.mov" type="video/mp4" />
       </video>
 
       {/* Overlay */}
