@@ -1,9 +1,11 @@
 // model/member.js
 import mongoose from "mongoose";
+import crypto from "crypto";
 
 const MemberSchema = new mongoose.Schema({
   name: { type: String, required: true },
   roll: { type: String, required: true, unique: true },
+  blitzId: { type: String, unique: true },
   techDept: {
     type: [String],
     enum: [
@@ -39,6 +41,14 @@ const MemberSchema = new mongoose.Schema({
     default: "Trainee"
   },
   createdAt: { type: Date, default: Date.now }
+});
+
+MemberSchema.pre("save", function (next) {
+  if (!this.blitzId) {
+    const randomHex = crypto.randomBytes(3).toString("hex").toUpperCase();
+    this.blitzId = `MB-${randomHex}`;
+  }
+  next();
 });
 
 // Prevent "OverwriteModelError" on hot reload
