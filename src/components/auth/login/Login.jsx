@@ -74,13 +74,12 @@ const AdminLogin = () => {
             <div className="mb-10 text-center">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 mb-6">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Admin Login</span>
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">User Login</span>
               </div>
               
-              <h1 className="text-3xl font-light text-white tracking-[0.1em] uppercase">
+              <h1 className="text-3xl font-black italic text-white tracking-[0.1em] uppercase">
                 Mist <span className="font-black text-red-600">Blitz</span>
               </h1>
-              <p className="text-slate-500 text-xs mt-3 tracking-wide">Admin Terminal </p>
             </div>
 
             {/* --- GOOGLE AUTH --- */}

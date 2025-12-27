@@ -116,16 +116,13 @@ const AdminRegister = () => {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 mb-6">
                 <FaUserShield className="text-red-500 text-[10px]" />
                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                  Admin access request
+                  Acount access request
                 </span>
               </div>
 
-              <h1 className="text-3xl font-light text-white tracking-[0.1em] uppercase">
-                Admin <span className="font-black text-red-600">Register</span>
+              <h1 className="text-3xl font-black italic text-white tracking-[0.1em] uppercase">
+                User <span className="font-black text-red-600">Register</span>
               </h1>
-              <p className="text-slate-500 text-xs mt-3 tracking-wide">
-                Create secure administrator credentials
-              </p>
             </div>
 
             {/* --- GOOGLE AUTH --- */}
@@ -212,7 +209,7 @@ const AdminRegister = () => {
                   "Syncing Node..."
                 ) : (
                   <>
-                    Initialize Account{" "}
+                    Register Account{" "}
                     <FaChevronRight className="text-[10px] group-hover:translate-x-0.5 transition-transform" />
                   </>
                 )}
@@ -221,7 +218,7 @@ const AdminRegister = () => {
 
             <div className="mt-10 text-center">
               <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">
-                Existing Node?
+                Existing User?
                 <Link
                   href="/auth/login"
                   className="ml-2 text-slate-300 hover:text-red-500 transition-colors underline underline-offset-4 decoration-slate-700 hover:decoration-red-500"

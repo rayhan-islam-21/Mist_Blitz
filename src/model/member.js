@@ -52,4 +52,4 @@ MemberSchema.pre("save", function (next) {
 });
 
 // Prevent "OverwriteModelError" on hot reload
-export default mongoose.models.MemberV3 || mongoose.model("MemberV3", MemberSchema);
+export default mongoose.models.MemberV3 || mongoose.model("MemberV3", MemberSchema, "members");

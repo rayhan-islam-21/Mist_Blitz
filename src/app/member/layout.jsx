@@ -12,7 +12,7 @@ const AdminLayout = ({ children }) => {
 
   return (
     // Added overflow-x-hidden to prevent the "outside" white space
-    <MemberProtectedRoute>
+    // <MemberProtectedRoute>
         <div className="min-h-screen bg-slate-50 flex overflow-x-hidden">
       
       {/* 1. Sidebar Component */}
@@ -48,7 +48,7 @@ const AdminLayout = ({ children }) => {
         </main>
       </div>
     </div>
-    </MemberProtectedRoute>
+    // </MemberProtectedRoute>
   );
 };
 
