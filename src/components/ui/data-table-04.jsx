@@ -64,6 +64,7 @@ const DataTableEquipment = () => {
   const [editingRow, setEditingRow] = useState(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
+    const [nameToDelete, setNameToDelete] = useState(null);
 
   // Form State
   const [editForm, setEditForm] = useState({
@@ -93,6 +94,10 @@ const DataTableEquipment = () => {
   // Opens the modal and stores the ID
   const initiateDelete = (id) => {
     setIdToDelete(id);
+    setDeleteModalOpen(true);
+  };
+  const initiateDeleteName = (name) => {
+    setNameToDelete(name);
     setDeleteModalOpen(true);
   };
 
@@ -187,7 +192,7 @@ const DataTableEquipment = () => {
               {row.getValue("name")}
             </span>
             <span className="text-[10px] font-mono font-bold text-slate-400 mt-1 uppercase">
-              ID: {row.original._id?.substring(0, 8) || "UNT-092"}
+              ID: {row.original.bash}
             </span>
           </div>
         </div>
@@ -269,7 +274,10 @@ const DataTableEquipment = () => {
           <Button
             size="sm"
             className="bg-white cursor-pointer rounded border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
-            onClick={() => initiateDelete(row.original._id)}
+            onClick={() => {
+                initiateDelete(row.original._id)
+                initiateDeleteName(row.original.name)
+            }}
           >
             <Trash2 size={14} />
           </Button>
@@ -336,10 +344,10 @@ const DataTableEquipment = () => {
 
               <div className="bg-slate-50 p-4 border-l-4 border-slate-950">
                 <span className="text-[10px] font-mono font-bold text-slate-400 block mb-1">
-                  TARGET_ID:
+                  TARGET_NAME:
                 </span>
                 <span className="text-sm font-mono font-black text-slate-950">
-                  {idToDelete || "NULL_PTR"}
+                  {nameToDelete || "NULL_PTR"}
                 </span>
               </div>
             </div>
@@ -364,8 +372,8 @@ const DataTableEquipment = () => {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <div className="w-2 h-16 bg-red-600" />
-            <h2 className="text-5xl italic font-sans font-black text-slate-900 uppercase tracking-tighter leading-none">
-              Asset <span className="text-red-600">Ledger</span>
+            <h2 className="text-4xl italic font-sans font-black text-slate-900 uppercase tracking-tighter leading-none">
+              All <span className="text-red-600">Equipmnets</span>
             </h2>
           </div>
           <p className="text-[11px] text-slate-400 font-black uppercase tracking-[0.4em] ml-4">

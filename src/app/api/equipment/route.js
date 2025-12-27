@@ -8,7 +8,7 @@ export async function POST(req) {
         const body = await req.json();
         const { name, quantity, image, ownerType, category, bash, memberName } = body;
 
-        const existingEquipment = await Equipment.findOne({ bash });
+        const existingEquipment = await Equipment.findOne({ name });
         if (existingEquipment) {
             return NextResponse.json({ message: "Equipment already exists" }, { status: 409 });
         }
