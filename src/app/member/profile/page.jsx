@@ -24,7 +24,7 @@ const MyProfile = () => {
   const sectionTitle = "flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-8";
   
   return (
-    <div className="min-h-screen bg-[#ffffff] text-slate-300 font-sans selection:bg-red-600 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#ffffff] text-slate-300 font-sans italic selection:bg-red-600 selection:text-white overflow-x-hidden">
       {/* Subtle Grid Background */}
       <div className="fixed inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')]" />
 
@@ -72,35 +72,13 @@ const MyProfile = () => {
                   { label: "Current Status", val: user.status, color: "text-green-500" }
                 ].map((item, i) => (
                   <div key={i} className="group bg-white/[0.02] border border-black/5 p-5 rounded-xl hover:bg-white/[0.04] transition-all duration-300">
-                    <p className="text-[8px] font-black text-slate-900 uppercase tracking-widest mb-1">{item.label}</p>
-                    <p className={`text-lg text-slate-900 font-bold uppercase tracking-tight ${item.color || "text-slate-200"}`}>{item.val}</p>
+                    <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">{item.label}</p>
+                    <p className={`text-lg text-slate-600 font-bold  tracking-tight ${item.color || "text-slate-200"}`}>{item.val}</p>
                   </div>
                 ))}
               </div>
             </section>
 
-            {/* Performance Metrics */}
-            <section>
-              <div className={sectionTitle}>
-                <div className="h-[1px] w-12 bg-red-600" />
-                Operational Telemetry
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {[
-                  { label: "Neural Link", val: "98.2%", icon: <FaWaveSquare className="text-blue-500" /> },
-                  { label: "Ops Conducted", val: user.operations, icon: <FaTerminal className="text-red-500" /> },
-                  { label: "Threat Level", val: "Minimal", icon: <FaShieldAlt className="text-green-500" /> }
-                ].map((stat, i) => (
-                  <div key={i} className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-100 transition-opacity">
-                      {stat.icon}
-                    </div>
-                    <span className="text-[9px] font-black text-slate-500 uppercase block mb-1">{stat.label}</span>
-                    <span className="text-3xl font-black text-white tracking-tighter italic">{stat.val}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
 
             {/* Terminal Access Log */}
             <section>
