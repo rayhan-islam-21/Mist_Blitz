@@ -39,7 +39,7 @@ const AdminLayout = ({ children }) => {
 
         {/* 3. Page Content */}
         {/* Ensure the main container doesn't exceed screen width */}
-        <main className="p-1 md:p-8 lg:p-10 w-full bg-white max-w-full">
+        <main className="p-1 md:p-8 lg:p-4 w-full bg-white max-w-full">
           <div className="max-w-full overflow-hidden">
             {children}
           </div>

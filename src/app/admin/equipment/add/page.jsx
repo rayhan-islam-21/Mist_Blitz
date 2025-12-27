@@ -125,7 +125,7 @@ const AddEquipmentPage = () => {
   return (
     <div className="min-h-screen  text-slate-900 font-sans selection:bg-red-600 selection:text-white overflow-x-hidden">
       <Toaster position="top-center" />
-      <div className="max-w-6xl mx-auto py-8 md:py-16 px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto py-8 md:py-12   px-4 sm:px-6">
         {/* Header */}
         <header className="mb-8 md:mb-12 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-100 pb-6 gap-4">
           <div>

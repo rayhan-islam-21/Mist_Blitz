@@ -138,7 +138,7 @@ const DataTableEquipment = () => {
   const handleSaveChanges = async () => {
     if (!editingRow) return;
     try {
-      // We send the current editForm (which contains the updated quantity)
+
       const res = await api.put(`/equipment/${editingRow._id}`, editForm);
 
       setEquipment((prev) =>
@@ -303,7 +303,7 @@ const DataTableEquipment = () => {
   console.log(editingRow);
   if (loading)
     return (
-      <div className="flex flex-col items-center justify-center p-32 space-y-6">
+      <div className="flex flex-col h-screen items-center justify-center p-32 space-y-6">
         <div className="relative">
           <div className="w-16 h-16 border-4 border-slate-100 border-t-red-600 rounded-full animate-spin" />
           <Package
@@ -318,7 +318,7 @@ const DataTableEquipment = () => {
     );
 
   return (
-    <div className="w-full p-6 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="w-full px-6 py-12  space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
@@ -371,12 +371,12 @@ const DataTableEquipment = () => {
         </Dialog>
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <div className="w-2 h-16 bg-red-600" />
+            {/* <div className="w-2 h-16 bg-red-600" /> */}
             <h2 className="text-4xl italic font-sans font-black text-slate-900 uppercase tracking-tighter leading-none">
               All <span className="text-red-600">Equipmnets</span>
             </h2>
           </div>
-          <p className="text-[11px] text-slate-400 font-black uppercase tracking-[0.4em] ml-4">
+          <p className="text-[11px] text-slate-400 font-black uppercase tracking-[0.4em] ml-1">
             Inventory Management
           </p>
         </div>
