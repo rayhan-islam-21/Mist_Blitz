@@ -27,7 +27,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const [openSubmenus, setOpenSubmenus] = useState({});
 
   // ----- USER ROLE -----
-  const userRole = ROLE.ADMIN; // Replace with your auth/session role
+  const userRole = ROLE.MEMBER; // Replace with your auth/session role
 
   // ----- MENU ITEMS -----
   const menuItems = [
@@ -35,7 +35,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       name: "Dashboard",
       icon: <FaTachometerAlt />,
       path: "/admin/dashboard",
-      roles: [ROLE.ADMIN],
+      roles: [ROLE.ADMIN],gi
     },
     {
       name: "My Profile",

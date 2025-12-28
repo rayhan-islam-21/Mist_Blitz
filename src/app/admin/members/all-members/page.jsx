@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { 
   FaLinkedin, FaSearch, FaTrash, FaEdit, 
-  FaShieldAlt, FaRocket, FaTerminal, FaUser 
+  FaShieldAlt, FaRocket, FaTerminal, FaUser, 
+  FaCheck,
+  FaTimes
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import api from "@/lib/axios";
@@ -13,6 +15,9 @@ import Link from "next/link";
 const AllMembersTable = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  // Add these two lines below your searchTerm state
+  const [editingMember, setEditingMember] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -36,19 +41,28 @@ const AllMembersTable = () => {
   );
 
 
-  const handleDelete = async (id) => {
-    try {
-      console.log("Deleting member with ID:", id);
-      // await api.delete(`/members/${id}`);
-      // setMembers(prev => prev.filter(m => m._id !== id));
-      // toast.success("Member removed successfully.");
+// Function to open the modal with the selected member's data
+  const handleEditClick = (member) => {
+    setEditingMember({ ...member }); 
+    setIsModalOpen(true);
+  };
 
-    }
-    catch (error) {
-      console.error("Delete failed:", error);
+  // Function to send the updated data to your API
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const loadingToast = toast.loading("UPDATING REGISTRY...");
+    try {
+      await api.put(`/members/${editingMember._id}`, editingMember);
       
+      // Update the table locally so it changes instantly
+      setMembers(prev => prev.map(m => m._id === editingMember._id ? editingMember : m));
+      
+      toast.success("MEMBER DATA UPDATED", { id: loadingToast });
+      setIsModalOpen(false); // Close the modal
+    } catch (error) {
+      toast.error("UPDATE FAILED", { id: loadingToast });
     }
-  }
+  };
 
 
 
@@ -167,7 +181,7 @@ const AllMembersTable = () => {
                   {/* ACTIONS */}
                   <td className="p-4">
                     <div className="flex items-center justify-center gap-2   transition-opacity">
-                      <button className="p-2 bg-slate-100 hover:bg-slate-900 rounded-full cursor-pointer! hover:text-white transition-all">
+                      <button onClick={() => handleEditClick(member._id)} className="p-2 bg-slate-100 hover:bg-slate-900 rounded-full cursor-pointer! hover:text-white transition-all">
                         <FaEdit size={14} />
                       </button>
                       <button  className="p-2   hover:text-red-600 hover:bg-slate-900 cursor-pointer! rounded-full transition-colors">
@@ -192,6 +206,60 @@ const AllMembersTable = () => {
             <FaRocket className="text-red-500 animate-pulse" size={12} />
         </div>
       </footer>
+      {/* --- EDIT MODAL --- */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+          <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+            <div className="bg-slate-50 p-6 border-b border-slate-200 flex justify-between items-center">
+              <h2 className="font-black uppercase italic tracking-tighter text-xl text-slate-900">
+                Edit <span className="text-red-600">Personnel</span>
+              </h2>
+              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-red-600">
+                <FaTimes />
+              </button>
+            </div>
+            
+            <form onSubmit={handleUpdate} className="p-6 space-y-4">
+              <div>
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Name</label>
+                <input 
+                  type="text" 
+                  value={editingMember.name} 
+                  onChange={(e) => setEditingMember({...editingMember, name: e.target.value})}
+                  className="w-full mt-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm font-bold focus:border-red-500 outline-none"
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Position</label>
+                  <input 
+                    type="text" 
+                    value={editingMember.position} 
+                    onChange={(e) => setEditingMember({...editingMember, position: e.target.value})}
+                    className="w-full mt-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm font-bold focus:border-red-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Blitz ID</label>
+                  <input 
+                    type="text" 
+                    value={editingMember.blitzId} 
+                    onChange={(e) => setEditingMember({...editingMember, blitzId: e.target.value})}
+                    className="w-full mt-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm font-bold focus:border-red-500 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-4 flex gap-3">
+                <button type="submit" className="flex-1 bg-red-600 hover:bg-red-700 text-white font-black uppercase italic py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+                  <FaCheck /> Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
