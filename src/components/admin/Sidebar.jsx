@@ -35,7 +35,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       name: "Dashboard",
       icon: <FaTachometerAlt />,
       path: "/admin/dashboard",
-      roles: [ROLE.ADMIN],gi
+      roles: [ROLE.ADMIN],
     },
     {
       name: "My Profile",
