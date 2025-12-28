@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import api from "@/lib/axios";
+import Link from "next/link";
 
 const AllMembersTable = () => {
   const [members, setMembers] = useState([]);
@@ -34,8 +35,25 @@ const AllMembersTable = () => {
     m.roll.includes(searchTerm)
   );
 
+
+  const handleDelete = async (id) => {
+    try {
+      console.log("Deleting member with ID:", id);
+      // await api.delete(`/members/${id}`);
+      // setMembers(prev => prev.filter(m => m._id !== id));
+      // toast.success("Member removed successfully.");
+
+    }
+    catch (error) {
+      console.error("Delete failed:", error);
+      
+    }
+  }
+
+
+
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans p-4 md:p-10 selection:bg-red-50">
+    <div className="min-h-screen bg-white selection:bg-red-600 selection:text-white text-slate-900 font-sans p-4 md:p-10">
       <Toaster position="top-center" />
       
       {/* HEADER: Matching your Onboarding header style */}
@@ -66,10 +84,10 @@ const AllMembersTable = () => {
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-slate-50 border-b border-slate-200">
-                <th className="p-5 text-left text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Identity Card</th>
+                <th className="p-5 text-left text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Member Identity</th>
                 <th className="p-5 text-left text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Command Level</th>
-                <th className="p-5 text-left text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Team Mesh</th>
-                <th className="p-5 text-left text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Serial ID</th>
+                <th className="p-5 text-left text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Team Assigned</th>
+                <th className="p-5 text-left text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">BLITZ ID</th>
                 <th className="p-5 text-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Mod</th>
               </tr>
             </thead>
@@ -86,7 +104,7 @@ const AllMembersTable = () => {
                   <td className="p-4">
                     <div className="flex items-center gap-4">
                       {/* Mini ID Card Frame */}
-                      <div className="relative h-14 w-14 shrink-0 bg-amber-400 p-0.5 rounded-lg hover:rotate-2 group-hover:rotate-0 transition-transform">
+                      <div className="relative h-14 w-14 shrink-0 ring-1 ring-white/10  rounded-lg hover:rotate-2 group-hover:rotate-0 transition-transform">
                         <div className="relative h-full w-full bg-slate-800 rounded-md overflow-hidden">
                           {member.image ? (
                             <Image src={member.image} alt="" fill className="object-cover" />
@@ -101,9 +119,9 @@ const AllMembersTable = () => {
                         </h4>
                         <div className="flex items-center gap-2 mt-1.5">
                           {member.linkedin && (
-                            <a href={`https://linkedin.com/in/${member.linkedin}`} target="_blank" className="text-[#0077b5] hover:text-red-600 transition-colors">
+                            <Link href={`https://linkedin.com/in/${member.linkedin}`} target="_blank" className="text-[#0077b5] hover:text-red-600 transition-colors">
                               <FaLinkedin size={12} />
-                            </a>
+                            </Link>
                           )}
                           <span className="text-[10px] font-bold text-slate-400">ID: {member.roll}</span>
                         </div>
@@ -138,9 +156,9 @@ const AllMembersTable = () => {
                     </div>
                   </td>
 
-                  {/* SERIAL ID (Monospace) */}
+                    {/* BLITZ ID */}
                   <td className="p-4 font-mono">
-                    <div className="flex items-center gap-2 text-[10px] font-bold text-slate-700">
+                    <div className="flex items-center gap-2 text-[12px] font-bold text-slate-700">
                       <FaTerminal size={8} className="text-red-500" />
                       {member.blitzId || "UNASSIGNED"}
                     </div>
@@ -148,12 +166,12 @@ const AllMembersTable = () => {
 
                   {/* ACTIONS */}
                   <td className="p-4">
-                    <div className="flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="p-2 bg-slate-100 hover:bg-slate-900 hover:text-white rounded-lg transition-all">
+                    <div className="flex items-center justify-center gap-2   transition-opacity">
+                      <button className="p-2 bg-slate-100 hover:bg-slate-900 rounded-full cursor-pointer! hover:text-white transition-all">
                         <FaEdit size={14} />
                       </button>
-                      <button className="p-2 text-slate-300 hover:text-red-600 transition-colors">
-                        <FaTrash size={14} />
+                      <button  className="p-2   hover:text-red-600 hover:bg-slate-900 cursor-pointer! rounded-full transition-colors">
+                        <FaTrash className="text-red-600" size={14} />
                       </button>
                     </div>
                   </td>
@@ -170,7 +188,7 @@ const AllMembersTable = () => {
           Showing {filteredMembers.length} Active Personnel
         </p>
         <div className="flex items-center gap-3">
-            <span className="text-[10px] font-bold text-slate-900 uppercase">Mist Blitz © 2025</span>
+            <span className="text-[10px] font-bold text-slate-900 uppercase">Mist Blitz</span>
             <FaRocket className="text-red-500 animate-pulse" size={12} />
         </div>
       </footer>

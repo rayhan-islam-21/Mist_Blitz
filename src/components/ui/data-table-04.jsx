@@ -113,11 +113,10 @@ const DataTableEquipment = () => {
 
       // Close modal and show success
       setDeleteModalOpen(false);
-      toast.success("ASSET_PURGED: Ledger updated successfully.");
+      toast.success("updated successfully.");
       setIdToDelete(null);
     } catch (err) {
-      console.error("Delete failed:", err);
-      toast.error("SYSTEM_ERROR: Deletion protocol failed.");
+      toast.error("SYSTEM_ERROR:failed.");
     }
   };
 

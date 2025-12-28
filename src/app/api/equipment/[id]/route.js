@@ -7,7 +7,6 @@ export async function DELETE(request, { params }) {
   try {
     await connectDB();
     const { id } = await params; 
-    console.log("Deleting asset with ID:", id);
 
     const deletedItem = await Equipment.findByIdAndDelete(id);
 
@@ -38,7 +37,7 @@ export async function PUT(request, { params }) {
     const { id } = await params;
     const body = await request.json();
 
-    // We only want to allow updating the quantity based on your UI logic
+  
     const updatedItem = await Equipment.findByIdAndUpdate(
       id,
       { quantity: body.quantity },
