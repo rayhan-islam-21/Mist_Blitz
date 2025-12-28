@@ -43,13 +43,16 @@ const MemberSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-MemberSchema.pre("save", function (next) {
+MemberSchema.pre("save", function () {
   if (!this.blitzId) {
     const randomHex = crypto.randomBytes(3).toString("hex").toUpperCase();
     this.blitzId = `MB-${randomHex}`;
   }
-  next();
 });
 
+if (mongoose.models.MemberV3) {
+  delete mongoose.models.MemberV3;
+}
+
 // Prevent "OverwriteModelError" on hot reload
-export default mongoose.models.MemberV3 || mongoose.model("MemberV3", MemberSchema, "members");
+export default mongoose.models.MemberV3 || mongoose.model("MemberV3", MemberSchema);

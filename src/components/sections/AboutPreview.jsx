@@ -47,32 +47,29 @@ const AboutPreview = () => {
             >
               <Activity size={14} className="text-red-600 animate-pulse" />
               <span className="text-red-500 font-mono font-bold tracking-[0.3em] uppercase text-[10px]">
-                Formula Student Program // MIST
+                Formula Student-MIST BLITZ
               </span>
             </motion.div>
 
-            <h1 className="text-7xl md:text-[9rem] font-black uppercase italic leading-[0.75] tracking-tighter mb-10">
+            <h1 className="text-5xl md:text-[9rem] font-black uppercase italic leading-[0.8] tracking-tighter mb-10">
               SPEED <br />
-              <span className="text-transparent stroke-text">DEFINED.</span>
+              <span className=" text-red-600">DEFINED.</span>
             </h1>
 
             <div className="space-y-8">
-              <p className="text-2xl md:text-3xl font-bold leading-tight tracking-tight text-gray-100 uppercase italic">
+              <p className="text-xl md:text-3xl text-balance font-bold leading-tight tracking-tight text-gray-100 uppercase italic">
                 Bangladesh’s emerging force in{"  "}
-                <span className="text-red-600 underline decoration-2 underline-offset-8">
+                <span className="text-red-600  decoration-2 ">
                   Formula Student engineering.
                 </span>{" "}
               </p>
-              <p className="text-lg text-gray-400 font-semibold italic leading-relaxed max-w-lg">
-                MIST BLITZ is the official Formula Student team of the
-                <Highlighter action="highlight" color="#17cf48">
-                  {" "}
-                  <span className="text-white font-bold italic">
-                    {" "}
+              <p className="text-sm  text-gray-400 text-balance font-semibold italic leading-relaxed max-w-lg">
+                MIST BLITZ is the official Formula Student team of the {" "}
+                  <span className="text-white font-semibold italic">
+
                     Military Institute of Science and Technology (MIST).
                   </span>
                   .
-                </Highlighter>
                 The team designs, manufactures, and validates a single-seat,
                 open-wheel race car in compliance with international Formula
                 Student regulations, representing Bangladesh on a global
@@ -160,10 +157,10 @@ const AboutPreview = () => {
                   The Blueprint
                 </span>
               </div>
-              <h2 className="text-6xl md:text-9xl font-black uppercase italic leading-none tracking-tighter mb-8">
+              <h2 className="text-5xl md:text-9xl font-black uppercase italic leading-none tracking-tighter mb-8">
                 OUR {" "}<span className="text-red-600">ORIGIN</span>
               </h2>
-              <div className="grid md:grid-cols-2 font-sans gap-10 text-gray-300 text-lg leading-relaxed font-normal">
+              <div className="grid md:grid-cols-2 text-balance font-sans gap-10 text-gray-300 text-sm md:text-lg leading-relaxed font-normal">
                 <p>
                   Founded in 2024, MIST BLITZ was established to bridge the gap
                   between academic theory and real-world motorsport engineering.
@@ -193,12 +190,12 @@ const AboutPreview = () => {
 
           {/* BRUTALIST GRID GRID */}
           <div className="grid lg:grid-cols-12 gap-8">
-            <div className="lg:col-span-8 relative h-[650px] border border-white/10 group overflow-hidden bg-zinc-900">
+            <div className="lg:col-span-8 relative h-160 border border-white/10 group overflow-hidden bg-zinc-900">
               <Image
                 src="/car2.jpg"
                 alt="Engine Prototype"
                 fill
-                className="object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-[2s]"
+                className="object-cover  opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-[2s]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
               <div className="absolute top-10 right-10 flex gap-2">
@@ -214,12 +211,12 @@ const AboutPreview = () => {
                     Internal Codename: MB-01
                   </span>
                 </div>
-                <h3 className="text-7xl font-black italic uppercase mb-8 tracking-tighter">
+                <h3 className="md:text-7xl text-5xl font-black italic uppercase mb-8 tracking-tighter">
                   FURIOSA 1.0
                 </h3>
-                <button className="flex items-center gap-6 group/btn bg-white px-10 py-5 transition-all hover:bg-red-600 shadow-[10px_10px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none">
+                <button className="flex   items-center gap-6 group/btn bg-white px-4 py-5 transition-all hover:bg-red-600 shadow-[10px_10px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none">
                   <span className="text-black font-black uppercase tracking-widest text-sm group-hover/btn:text-white transition-colors">
-                    Technical Specifications
+                  Specifications
                   </span>
                   <MoveRight className="text-black group-hover/btn:text-white group-hover/btn:translate-x-2 transition-all" />
                 </button>

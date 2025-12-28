@@ -62,7 +62,7 @@ export default function PartnersScroll() {
           
           <h2 className="text-5xl font-sans md:text-[9rem]  font-black uppercase italic leading-[0.8]   tracking-[ -0.05em] text-white">
             OUR <br /> 
-            <span className="text-transparent stroke-text">PARTNERS.</span>
+            <span className="text-red-600">PARTNERS</span>!
           </h2>
         </div>
 

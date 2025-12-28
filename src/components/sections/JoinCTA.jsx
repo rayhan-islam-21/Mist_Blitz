@@ -33,7 +33,7 @@ export default function JoinCTA() {
           className="text-7xl font-sans tracking-tighter md:text-[11rem] font-black uppercase italic leading-[0.75]  mb-12"
         >
           FUEL THE <br />
-          <span className="text-transparent stroke-text">FUTURE.</span>
+          <span className="text-red-600">FUTURE</span>!
         </motion.h2>
 
         {/* SUBHEADING: TECHNICAL COPY */}

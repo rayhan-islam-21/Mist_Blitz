@@ -5,7 +5,6 @@ import Member from "@/model/member";
 export async function POST(req) {
   try {
     await connectDB();
-
     const body = await req.json();
     const { name, roll, techDept, nonTechDept, image, linkedin, position } = body;
 
