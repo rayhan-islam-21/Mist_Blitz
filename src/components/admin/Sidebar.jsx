@@ -50,7 +50,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       subMenu: [
         {
           name: "All Members",
-          path: "/admin/members/all",
+          path: "/admin/members/all-members",
           roles: [ROLE.ADMIN],
         },
         { name: "Add Member", path: "/admin/members/add", roles: [ROLE.ADMIN] },
