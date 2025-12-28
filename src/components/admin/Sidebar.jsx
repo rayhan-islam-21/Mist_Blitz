@@ -27,7 +27,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const [openSubmenus, setOpenSubmenus] = useState({});
 
   // ----- USER ROLE -----
-  const userRole = ROLE.MEMBER; // Replace with your auth/session role
+  const userRole = ROLE.ADMIN; // Replace with your auth/session role
 
   // ----- MENU ITEMS -----
   const menuItems = [
@@ -40,7 +40,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
     {
       name: "My Profile",
       icon: <FaUser />,
-      path: "/member/profile",
+      path: "/member/profilesss",
       roles: [ROLE.MEMBER],
     },
     {
@@ -50,7 +50,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       subMenu: [
         {
           name: "All Members",
-          path: "/admin/members/all-members",
+          path: "/admin/members/all-membersss",
           roles: [ROLE.ADMIN],
         },
         { name: "Add Member", path: "/admin/members/add", roles: [ROLE.ADMIN] },
@@ -63,12 +63,12 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       subMenu: [
         {
           name: "All Equipment",
-          path: "/admin/equipment/all-equipment",
+          path: "/admin/equipment/all-equipmentss",
           roles: [ROLE.ADMIN],
         },
         {
           name: "Equipment Shop",
-          path: "/member/equipment-shop",
+          path: "/member/equipment-shopss",
           roles: [ROLE.MEMBER],
         },
         {
@@ -78,7 +78,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         },
         {
           name: "Add Equipment",
-          path: "/admin/equipment/add",
+          path: "/admin/equipment/addss",
           roles: [ROLE.ADMIN],
         },
       ],
