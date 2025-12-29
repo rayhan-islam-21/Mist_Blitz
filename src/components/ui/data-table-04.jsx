@@ -17,6 +17,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Button from "./retro-btn";
 
 const DataTableEquipment = () => {
   const [equipment, setEquipment] = useState([]);
@@ -88,7 +89,7 @@ const DataTableEquipment = () => {
   };
 
   const handleSaveChanges = async () => {
-    const loadId = toast.loading("UPDATING LEDGER...");
+    const loadId = toast.loading("UPDATING DATA...");
     try {
       const res = await api.put(`/equipment/${editingRow._id}`, editForm);
       setEquipment(prev => prev.map(eq => (eq._id === editingRow._id ? res.data : eq)));
@@ -133,12 +134,12 @@ const DataTableEquipment = () => {
       ),
     },
     {
-      header: "Custodian",
+      header: "Owner Name",
       accessorKey: "memberName",
       cell: ({ row }) => (
         <div className="flex items-center gap-2 text-[11px] font-bold text-slate-700 uppercase italic">
           <Terminal size={10} className="text-red-500" />
-          {row.getValue("memberName") || "FREE_STOCK"}
+          {row.getValue("memberName") || "-----"}
         </div>
       ),
     },
@@ -148,7 +149,7 @@ const DataTableEquipment = () => {
       cell: ({ row }) => {
         const qty = row.getValue("quantity");
         return (
-          <span className={`px-2 py-1 rounded text-[10px] font-mono font-black ${
+          <span className={`px-2 py-1 rounded text-[14px] font-mono font-black ${
             qty > 0 ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'
           }`}>
             {qty.toString().padStart(2, '0')} UNITS
@@ -280,38 +281,85 @@ const DataTableEquipment = () => {
       </Dialog>
 
       {/* EDIT MODAL: Re-styled to match the clean Admin look */}
-      <Dialog open={editModalOpen} onOpenChange={setEditModalOpen}>
-        <DialogContent className="sm:max-w-xl rounded-2xl border-none p-0 overflow-hidden bg-white shadow-2xl">
-          <div className="bg-slate-900 px-6 py-4 flex justify-between items-center text-white">
-            <div className="flex items-center gap-2">
-              <Activity size={16} className="text-red-500" />
-              <span className="text-[10px] font-black uppercase tracking-widest">Update_Resource</span>
-            </div>
-            <button onClick={() => setEditModalOpen(false)} className="hover:rotate-90 transition-transform"><X size={18} /></button>
+    <Dialog open={editModalOpen} onOpenChange={setEditModalOpen}>
+  <DialogContent className="sm:max-w-xl rounded-none border-[6px] border-black/20 p-0 overflow-hidden bg-white shadow-2xl">
+    {/* TOP STATUS BAR */}
+
+
+    <div className="p-8 space-y-8">
+      {/* HEADER SECTION */}
+      <div>
+        <h2 className="text-4xl font-sans md:text-4xl font-black uppercase italic tracking-tighter text-slate-950 leading-none">
+          Modify <span className="text-red-600">Equipment</span>
+        </h2>
+        <p className="text-[10px] font-bold text-slate-400 font-mono uppercase tracking-widest mt-2">
+          Asset UID: {editingRow?.bash || "UNKNOWN_ID"}
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-x-6 gap-y-8">
+        {/* READ ONLY IDENTIFIER */}
+        <div className="col-span-2 space-y-2">
+          <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
+            <div className="w-1 h-3 bg-slate-300" /> Asset Designation
+          </Label>
+          <div className="bg-slate-50 p-4 border-l-4 border-slate-950 shadow-inner group">
+             <span className="text-lg font-mono font-black text-slate-950 uppercase italic  transition-colors">
+              {editForm.name}
+            </span>
           </div>
-          <div className="p-8 space-y-8">
-            <h2 className="text-4xl font-black uppercase italic tracking-tighter text-slate-900 leading-none">Modify <span className="text-red-600">Asset</span></h2>
-            <div className="grid grid-cols-2 gap-6">
-              <div className="col-span-2 space-y-2">
-                <Label className="text-[10px] font-black uppercase text-slate-400">Asset Designation</Label>
-                <Input value={editForm.name} readOnly className="rounded-xl border-slate-200 bg-slate-50 h-12 font-bold uppercase italic text-slate-400 cursor-not-allowed" />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-[10px] font-black uppercase text-slate-900">Inventory Count</Label>
-                <Input type="number" value={editForm.quantity} onChange={(e) => setEditForm({...editForm, quantity: Number(e.target.value)})} className="rounded-xl border-slate-200 h-12 font-black text-xl focus:ring-red-500 focus:border-red-500" />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-[10px] font-black uppercase text-slate-900">Current Category</Label>
-                <Input value={editForm.category} readOnly className="rounded-xl border-slate-200 bg-slate-50 h-12 font-bold uppercase text-slate-400" />
-              </div>
-            </div>
+        </div>
+
+        {/* EDITABLE INPUT */}
+        <div className="space-y-3">
+          <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+            Inventory Count
+          </Label>
+          <div className="relative group">
+            <Input 
+              type="number" 
+              min={0}
+              max={1000}
+              value={editForm.quantity} 
+              onChange={(e) => setEditForm({...editForm, quantity: Number(e.target.value)})} 
+              className="rounded border-2 text-black border-slate-200 h-14 font-black text-3xl  focus:ring-0 transition-all pl-4" 
+            />
           </div>
-          <div className="p-6 bg-slate-50 flex justify-end gap-4 border-t border-slate-100">
-            <button onClick={() => setEditModalOpen(false)} className="px-6 py-2 text-[10px] font-black uppercase text-slate-400 hover:text-slate-900">Cancel</button>
-            <button onClick={handleSaveChanges} className="px-10 py-3 bg-red-600 text-white rounded-xl text-[10px] font-black uppercase italic tracking-widest hover:bg-red-700 transition-colors shadow-lg shadow-red-200">Commit Changes</button>
+        </div>
+
+        {/* READ ONLY CATEGORY */}
+        <div className="space-y-3">
+          <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+            Category
+          </Label>
+          <div className="h-14 bg-slate-100 flex font-sans italic items-center px-4 border border-slate-200">
+             <span className="text-[11px] font-black uppercase tracking-tighter text-slate-500">
+              {editForm.category || "UNCLASSIFIED"}
+            </span>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
+      </div>
+    </div>
+
+    {/* ACTION FOOTER */}
+    <div className="bg-slate-950 p-6 flex items-center justify-between gap-4">
+      <button 
+        onClick={() => setEditModalOpen(false)} 
+        className="px-16 py-4 rounded text-[11px] hover:border border-slate-600 font-black uppercase tracking-[0.2em] text-slate-500 hover:text-white transition-colors"
+      >
+       Cancel
+      </button>
+      
+      <Button
+
+        onClick={handleSaveChanges} 
+        className="  bg-red-600 hover:bg-red-700 text-white py-2 font-black uppercase italic tracking-[0.15em] transition-all border-b-4 border-red-800 active:border-b-0 active:translate-y-1 flex items-center justify-center gap-2"
+      >
+        Change save <Rocket size={16} className="animate-bounce" />
+      </Button>
+    </div>
+  </DialogContent>
+</Dialog>
     </div>
   );
 };
