@@ -212,7 +212,7 @@ const AdminDashboard = () => {
               <div className="flex items-center gap-2">
                 <FaRocket className="text-red-500 animate-bounce" size={14} />
                 <span className="text-[11px] font-black uppercase italic">
-                  Mist_Blitz_V2.0
+                  Mist_Blitz_V1.0
                 </span>
               </div>
             </div>
@@ -220,10 +220,7 @@ const AdminDashboard = () => {
         </div>
       </main>
 
-      {/* FOOTER */}
-      <footer className="max-w-7xl mx-auto mt-10 text-[9px] font-black uppercase tracking-[0.4em] text-slate-300">
-        © 2024 Mist Blitz // Internal Registry Network
-      </footer>
+    
     </div>
   );
 };

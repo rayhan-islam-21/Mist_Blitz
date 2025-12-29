@@ -14,6 +14,9 @@ import {
   FaChevronDown,
   FaUserPlus,
   FaUser,
+  FaExchangeAlt, // New Icon
+  FaHistory,     // New Icon
+  FaBoxOpen      // New Icon
 } from "react-icons/fa";
 
 // ----- ROLE CONSTANTS -----
@@ -27,7 +30,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const [openSubmenus, setOpenSubmenus] = useState({});
 
   // ----- USER ROLE -----
-  const userRole = ROLE.ADMIN; // Replace with your auth/session role
+  const userRole = ROLE.MEMBER; // Replace with your auth/session role
 
   // ----- MENU ITEMS -----
   const menuItems = [
@@ -67,6 +70,11 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           roles: [ROLE.ADMIN],
         },
         {
+          name: "Add Equipment",
+          path: "/admin/equipment/add",
+          roles: [ROLE.ADMIN],
+        },
+        {
           name: "Equipment Shop",
           path: "/member/equipment-shop",
           roles: [ROLE.MEMBER],
@@ -76,9 +84,21 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           path: "/member/my-equipment",
           roles: [ROLE.MEMBER],
         },
+      ],
+    },
+    {
+      name: "Logistics",
+      icon: <FaExchangeAlt />,
+      roles: [ROLE.ADMIN],
+      subMenu: [
         {
-          name: "Add Equipment",
-          path: "/admin/equipment/add",
+          name: "Current Handouts",
+          path: "/admin/logistics/handouts",
+          roles: [ROLE.ADMIN],
+        },
+        {
+          name: "Transaction Logs",
+          path: "/admin/logistics/history",
           roles: [ROLE.ADMIN],
         },
       ],
@@ -89,25 +109,6 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       path: "/member/teams",
       roles: [ROLE.MEMBER],
     },
-    // {
-    //   name: "Events",
-    //   icon: <FaFlag />,
-    //   roles: [ROLE.ADMIN],
-    //   subMenu: [
-    //     { name: "All Events", path: "/admin/events/all", roles: [ROLE.ADMIN] },
-    //     {
-    //       name: "Create Event",
-    //       path: "/admin/events/add",
-    //       roles: [ROLE.ADMIN],
-    //     },
-    //   ],
-    // },
-    // {
-    //   name: "Tasks",
-    //   icon: <FaClipboardList />,
-    //   path: "/admin/tasks",
-    //   roles: [ROLE.ADMIN],
-    // },
   ];
 
   // Auto-open submenu based on current path
@@ -121,9 +122,12 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
 
   // Close sidebar automatically on mobile when a route changes
   useEffect(() => {
-    if (window.innerWidth < 768 && sidebarOpen) {
-      toggleSidebar();
-    }
+    const handleResize = () => {
+      if (window.innerWidth < 768 && sidebarOpen) {
+        toggleSidebar();
+      }
+    };
+    handleResize();
   }, [pathname]);
 
   const toggleSubmenu = (key) => {
@@ -140,8 +144,8 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           bg-white text-slate-600 shadow-xl md:shadow-sm flex flex-col
           ${
             sidebarOpen
-              ? "w-[280px] translate-x-0"
-              : "w-[280px] -translate-x-full md:translate-x-0 md:w-64"
+              ? "w-70 translate-x-0"
+              : "w-70 -translate-x-full md:translate-x-0 md:w-64"
           }
         `}
       >
@@ -166,7 +170,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         {/* Navigation - Scrollable area */}
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-hide">
           {menuItems
-            .filter((item) => item.roles.includes(userRole)) // <-- FILTER MAIN MENU BY ROLE
+            .filter((item) => item.roles.includes(userRole))
             .map((item, index) => {
               const isActive = pathname === item.path;
               const isSubMenuOpen = openSubmenus[item.name];
@@ -237,7 +241,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                           >
                             <div className="ml-9 mt-1 space-y-1 border-l-2 border-gray-100">
                               {item.subMenu
-                                .filter((sub) => sub.roles.includes(userRole)) // <-- FILTER SUBMENU BY ROLE
+                                .filter((sub) => sub.roles.includes(userRole))
                                 .map((sub, i) => {
                                   const isSubActive = pathname === sub.path;
                                   return (
@@ -283,7 +287,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         </div>
       </aside>
 
-      {/* Mobile Overlay - Blur effect */}
+      {/* Mobile Overlay */}
       <AnimatePresence>
         {sidebarOpen && (
           <motion.div
