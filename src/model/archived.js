@@ -26,9 +26,9 @@ const LogisticsRecordSchema = new mongoose.Schema({
   },
 
 
-  // THE TIMELINE
+
   createdAt: { type: Date, default: Date.now },
-  returnedAt: { type: Date }, // Will be filled when status changes to 'RETURNED'
+  returnedAt: { type: Date }, 
   
   // LOGISTICS STATUS
   status: { 
@@ -37,10 +37,8 @@ const LogisticsRecordSchema = new mongoose.Schema({
     default: 'ACTIVE' 
   },
 
-  // OPTIONAL: Add a note field for any specific checkout details
-  remarks: { type: String, default: "" }
 }, { 
-  timestamps: true // Automatically creates 'createdAt' and 'updatedAt'
+  timestamps: true 
 });
 
 // Indexing for faster history lookups
