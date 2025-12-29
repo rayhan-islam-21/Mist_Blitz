@@ -181,7 +181,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                       href={item.path}
                       className={`flex items-center px-4 py-3 rounded-xl transition-all duration-200 group relative ${
                         isActive
-                          ? "bg-red-50 text-red-300 font-semibold"
+                          ? "bg-red-50 text-red-500 font-semibold"
                           : "hover:bg-gray-50 text-slate-500 hover:text-slate-900"
                       }`}
                     >
