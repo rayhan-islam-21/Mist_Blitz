@@ -11,6 +11,7 @@ import {
 import toast, { Toaster } from "react-hot-toast";
 import api from "@/lib/axios";
 import Link from "next/link";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const AllMembersTable = () => {
   const [members, setMembers] = useState([]);
@@ -188,37 +189,59 @@ const AllMembersTable = () => {
       </footer>
 
       {/* --- 5. DELETE CONFIRMATION MODAL --- */}
-      {memberToDelete && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-          <div className="bg-white w-full max-w-sm rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
-            <div className="p-6 text-center">
-              <div className="w-16 h-16 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FaTrash size={24} />
-              </div>
-              <h3 className="text-xl font-black uppercase italic tracking-tighter text-slate-900">
-                Confirm <span className="text-red-600">Deletion</span>
-              </h3>
-              <p className="text-slate-500 text-sm mt-2 font-medium">
-                Are you sure you want to remove <span className="font-bold text-slate-900">{memberToDelete.name}</span>? This action is irreversible.
-              </p>
-            </div>
-            <div className="flex border-t border-slate-100">
-              <button 
-                onClick={() => setMemberToDelete(null)}
-                className="flex-1 px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:bg-slate-50 transition-colors border-r border-slate-100"
-              >
-                Abort
-              </button>
-              <button 
-                onClick={handleDelete}
-                className="flex-1 px-6 py-4 text-[10px] font-black uppercase tracking-widest text-red-600 hover:bg-red-50 transition-colors"
-              >
-                Confirm Delete
-              </button>
-            </div>
-          </div>
+  <Dialog
+  open={!!memberToDelete} 
+  onOpenChange={(open) => !open && setMemberToDelete(null)}
+>
+  <DialogContent className="sm:max-w-md rounded-none border-[6px] border-black/20 p-0 overflow-hidden bg-white shadow-2xl">
+    {/* HEADER SECTION */}
+    <div className="p-8 space-y-6">
+      <div className="flex items-start gap-4">
+        {/* Warning Icon Box */}
+        <div className="w-12 h-12 bg-red-100 flex items-center justify-center shrink-0 border border-red-200">
+          <FaTrash size={22} className="text-red-600" />
         </div>
-      )}
+        
+        <div className="space-y-2">
+          <h3 className="text-2xl font-sans font-black uppercase italic tracking-tighter text-slate-950">
+            Confirm <span className="text-red-600">Action</span>?
+          </h3>
+          <p className="text-[11px] font-mono font-semibold text-slate-600 leading-relaxed uppercase tracking-tighter">
+            You are about to permanently remove this asset from the
+            Data Base. This action is logged and{" "}
+            <span className="text-red-600 underline decoration-2 underline-offset-2">irreversible</span>.
+          </p>
+        </div>
+      </div>
+
+      {/* TARGET DATA BOX */}
+      <div className="bg-slate-50 p-4 border-l-4 border-slate-950 shadow-inner">
+        <span className="text-[10px] font-mono font-bold text-slate-400 block mb-1 tracking-widest">
+          TARGET_NAME:
+        </span>
+        <span className="text-sm font-mono font-black text-slate-950 break-all">
+          {memberToDelete?.name || "NULL_ENTITY"}
+        </span>
+      </div>
+    </div>
+
+    {/* ACTION FOOTER */}
+    <div className="bg-slate-950 p-6 flex gap-4">
+      <button
+        onClick={() => setMemberToDelete(null)}
+        className="flex-1 px-4 py-3 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors border border-transparent hover:border-slate-700"
+      >
+        Cancel
+      </button>
+      <button
+        onClick={handleDelete}
+        className="flex-1 bg-red-600 hover:bg-red-700 text-white py-4 font-black uppercase italic tracking-widest transition-all border-b-4 border-red-800 active:border-b-0 active:translate-y-0.5"
+      >
+        CONFIRM_DELETE
+      </button>
+    </div>
+  </DialogContent>
+</Dialog>
     </div>
   );
 };
