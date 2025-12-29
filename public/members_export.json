@@ -2,7 +2,7 @@
   {
     "_id": "69512ff72f5a3ce7a96b2092",
     "name": "Miraz Morshed ",
-    "roll": "202318088 ",
+    "roll": "202318088",
     "techDept": [
       "Chassis and Aerodynamics"
     ],
@@ -14,7 +14,8 @@
     "position": "Junior Engineer",
     "createdAt": "2025-12-28T13:26:15.931Z",
     "blitzId": "MB-0D8817",
-    "__v": 0
+    "__v": 0,
+    "email": "mirazmorshed99@gmail.com"
   },
   {
     "_id": "695132702d327ea1e2ef1c3d",
@@ -49,7 +50,8 @@
     "position": "Apprentice Engineer",
     "createdAt": "2025-12-28T14:02:36.225Z",
     "blitzId": "MB-6D9551",
-    "__v": 0
+    "__v": 0,
+    "email": "sauravbiswassscppt564@gmail.com"
   },
   {
     "_id": "69513e74a693c016278329ff",
@@ -65,7 +67,7 @@
     "linkedin": "Musa Al Kazim",
     "position": "Trainee",
     "blitzId": "MB-A7B2C9",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "createdAt": "2025-12-29T16:58:20.100Z"
   },
   {
     "_id": "69513e74a693c01627832a00",
@@ -81,7 +83,8 @@
     "linkedin": "Arshad Navid",
     "position": "Trainee",
     "blitzId": "MB-E4F1A8",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "email": "navidarshad66@gmail.com",
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513e74a693c01627832a01",
@@ -97,7 +100,8 @@
     "linkedin": "rafiul-islam-manik-4288463a1",
     "position": "Trainee",
     "blitzId": "MB-9D3C2B",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "email": "rafiul2275@gmail.com",
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513e74a693c01627832a02",
@@ -114,7 +118,7 @@
     "linkedin": "Ashfia Oshin ",
     "position": "Trainee",
     "blitzId": "MB-F0A6E3",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513e74a693c01627832a03",
@@ -130,7 +134,7 @@
     "linkedin": "",
     "position": "Trainee",
     "blitzId": "MB-2B8D4C",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513e74a693c01627832a04",
@@ -146,7 +150,8 @@
     "linkedin": "Wasif Tahmid ",
     "position": "Trainee",
     "blitzId": "MB-7E1A9D",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "email": "wasiftahmid47@gmail.com",
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513e74a693c01627832a05",
@@ -162,7 +167,8 @@
     "linkedin": "md-mostafizur-rashid-9962aa374",
     "position": "Trainee",
     "blitzId": "MB-5C2F8B",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "email": "uttsho2623@gmail.com",
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513e74a693c01627832a06",
@@ -178,7 +184,8 @@
     "linkedin": "Riju Ahammed Sami ",
     "position": "Trainee",
     "blitzId": "MB-8A4D1F",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "email": "rifatsani500@gmail.com",
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513e74a693c01627832a07",
@@ -194,7 +201,8 @@
     "linkedin": "Ahnaf Sayed",
     "position": "Junior Engineer",
     "blitzId": "MB-1D9C6E",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "email": "sayed.ahnaf08@gmail.com",
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513e74a693c01627832a08",
@@ -211,7 +219,7 @@
     "linkedin": "abid-ikram-893884297",
     "position": "Apprentice Engineer",
     "blitzId": "MB-6B0E2A",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513e74a693c01627832a09",
@@ -227,7 +235,7 @@
     "linkedin": "https://www.linkedin.com/in/hassan-tahmid-tazwar-760822279",
     "position": "Trainee",
     "blitzId": "MB-DFA811",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513e74a693c01627832a0b",
@@ -243,7 +251,7 @@
     "linkedin": "Mrinmoye Piu",
     "position": "Junior Engineer",
     "blitzId": "MB-57E209",
-    "createdAt": "2025-12-29T12:03:25.756Z"
+    "createdAt": "2025-12-29T16:58:20.101Z"
   },
   {
     "_id": "69513f2ab77d1179c916209b",
@@ -260,7 +268,8 @@
     "position": "Trainee",
     "createdAt": "2025-12-28T14:31:06.382Z",
     "blitzId": "MB-574FA6",
-    "__v": 0
+    "__v": 0,
+    "email": "mzannah745@gmail.com"
   },
   {
     "_id": "69513f614472874d01d06831",
@@ -277,7 +286,8 @@
     "position": "Trainee",
     "createdAt": "2025-12-28T14:32:01.991Z",
     "blitzId": "MB-1B31CE",
-    "__v": 0
+    "__v": 0,
+    "email": "azmayeen45@gmail.com"
   },
   {
     "_id": "69513f644472874d01d06835",
@@ -294,7 +304,8 @@
     "position": "Trainee",
     "createdAt": "2025-12-28T14:32:04.702Z",
     "blitzId": "MB-53C55D",
-    "__v": 0
+    "__v": 0,
+    "email": "shahriarnaim46@gmail.com"
   },
   {
     "_id": "69514a744c498808272c0270",
@@ -329,7 +340,8 @@
     "position": "Junior Engineer",
     "createdAt": "2025-12-28T15:35:04.766Z",
     "blitzId": "MB-8E45FD",
-    "__v": 0
+    "__v": 0,
+    "email": "shadidrashid1@gmail.com"
   },
   {
     "_id": "69514e62ad25ed61ab6f4b33",
@@ -346,7 +358,8 @@
     "position": "Senior Engineer",
     "createdAt": "2025-12-28T15:36:02.472Z",
     "blitzId": "MB-37EFC5",
-    "__v": 0
+    "__v": 0,
+    "email": "tausifnawaz08@gmail.com"
   },
   {
     "_id": "69515106a501e91c3b3cd3ed",
@@ -381,7 +394,8 @@
     "position": "Trainee",
     "createdAt": "2025-12-28T16:04:41.335Z",
     "blitzId": "MB-562768",
-    "__v": 0
+    "__v": 0,
+    "email": "lazimrashha01@gmail.com"
   },
   {
     "_id": "69515d1090a97934efc28338",
@@ -398,7 +412,8 @@
     "position": "Junior Engineer",
     "createdAt": "2025-12-28T16:38:40.341Z",
     "blitzId": "MB-30EC68",
-    "__v": 0
+    "__v": 0,
+    "email": "abrarshahria2003@gmail.com"
   },
   {
     "_id": "69515f5acc6d4af07e818ff4",
@@ -415,7 +430,8 @@
     "position": "Trainee",
     "createdAt": "2025-12-28T16:48:26.993Z",
     "blitzId": "MB-960832",
-    "__v": 0
+    "__v": 0,
+    "email": "mdjannatulferdoussayem014@gmail.com"
   },
   {
     "_id": "695167a96308500d8b0f746e",
@@ -433,7 +449,8 @@
     "position": "Apprentice Engineer",
     "createdAt": "2025-12-28T17:23:53.142Z",
     "blitzId": "MB-FA6DB3",
-    "__v": 0
+    "__v": 0,
+    "email": "mehedihasanfahim8231@gmail.com"
   },
   {
     "_id": "69520429327696dbf5d2055b",
@@ -451,6 +468,112 @@
     "position": "Trainee",
     "createdAt": "2025-12-29T04:31:37.633Z",
     "blitzId": "MB-B89A23",
+    "__v": 0,
+    "email": "202518079@student.mist.ac.bd"
+  },
+  {
+    "_id": "6952764945612db453535278",
+    "name": "Tahmid Muntasir Auhin",
+    "roll": "202218106",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Management"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767011897/yk1c0zmijihgaumufgxl.jpg",
+    "linkedin": "auhin",
+    "position": "Senior Engineer",
+    "createdAt": "2025-12-29T12:38:33.565Z",
+    "blitzId": "MB-160DBB",
+    "__v": 0
+  },
+  {
+    "_id": "695284f2a61d4f29f1f3ccf3",
+    "name": "Tasneem Hassan Adib ",
+    "roll": "202418019",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Management",
+      "Business Plan Presentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767015635/mx6etjwlezfndryflzhr.jpg",
+    "linkedin": "Tasneem Hassan Adib ",
+    "position": "Apprentice Engineer",
+    "createdAt": "2025-12-29T13:41:06.627Z",
+    "blitzId": "MB-96D895",
+    "__v": 0
+  },
+  {
+    "_id": "69528b88a508d711203fb207",
+    "name": "Mayesha Farzana",
+    "roll": "202318002",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Finance",
+      "Business Plan Presentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767017340/iepdzjobbfq9vk1hrucg.jpg",
+    "linkedin": "Mayesha Farzana",
+    "position": "Junior Engineer",
+    "createdAt": "2025-12-29T14:09:12.167Z",
+    "blitzId": "MB-207A01",
+    "__v": 0,
+    "email": "mayeshafarzana182@gmail.com"
+  },
+  {
+    "_id": "6952955d0773757383a31536",
+    "name": "Labeed Lohani Khan Labeed",
+    "roll": "202518083",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Logistics"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767019849/yb3pkwkk3dn06stb3yyz.jpg",
+    "linkedin": "labeed-lohani-khan",
+    "position": "Trainee",
+    "createdAt": "2025-12-29T14:51:09.512Z",
+    "blitzId": "MB-A08422",
+    "__v": 0
+  },
+  {
+    "_id": "6952a80e1e0c884871a2730a",
+    "name": "Md. Istiak Ahmed Joy",
+    "roll": "202318063",
+    "techDept": [
+      "Powertrain"
+    ],
+    "nonTechDept": [
+      "Documentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767024638/yrf28dlh7dyr7vqlnruq.jpg",
+    "linkedin": "istiakahmedjoy",
+    "position": "Junior Engineer",
+    "createdAt": "2025-12-29T16:10:54.761Z",
+    "blitzId": "MB-F04AD2",
+    "__v": 0
+  },
+  {
+    "_id": "6952b21fa2b7cac730748f87",
+    "name": "Tasfi Rahman Rafi",
+    "roll": "202318104",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Media"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767027185/eorezkgdjqaucnnzj964.jpg",
+    "linkedin": "",
+    "position": "Junior Engineer",
+    "createdAt": "2025-12-29T16:53:51.252Z",
+    "blitzId": "MB-DC792B",
     "__v": 0
   }
 ]

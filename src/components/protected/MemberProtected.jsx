@@ -1,28 +1,31 @@
 "use client";
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthContext from "@/context/Authcontext";
-import { useState } from "react";
 import api from "@/lib/axios";
 
 const MemberProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const router = useRouter();
-  console.log("MemberProtectedRoute user:", user);
+
   const [checking, setChecking] = useState(true);
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (loading) return;
+
+    if (!user) {
       router.replace("/auth/login");
+      return;
     }
 
     const verifyMember = async () => {
       try {
-        await api.get("/admin");
+        const res = await api.get("/admin");
+
         const isMember = res.data.find(
-          (u) => u.email === user.email && u.role === "member"
+          (u) => u.email === user.email && u.role === "user"
         );
 
         if (!isMember) {
@@ -44,7 +47,7 @@ const MemberProtectedRoute = ({ children }) => {
   if (loading || checking) {
     return (
       <div className="h-screen flex items-center justify-center">
-        Checking access...
+        Checking access…
       </div>
     );
   }

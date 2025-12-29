@@ -5,6 +5,7 @@ import crypto from "crypto";
 const MemberSchema = new mongoose.Schema({
   name: { type: String, required: true },
   roll: { type: String, required: true, unique: true },
+  email: { type: String, unique: true, sparse: true },
   blitzId: { type: String, unique: true },
   techDept: {
     type: [String],
