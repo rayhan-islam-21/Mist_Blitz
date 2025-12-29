@@ -1,142 +1,456 @@
 [
   {
-    "name": "Musa Al Kazim",
-    "roll": "202218077",
-    "techDept": ["Electronics"],
-    "nonTechDept": ["Documentation"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766739728/rahhx53s5ifqseje9mig.jpg",
-    "linkedin": "Musa Al Kazim",
-    "position": "Trainee"
-  },
-  {
-    "name": "Arshad Anwar Navid",
-    "roll": "202518010",
-    "techDept": ["Suspension, Steering and Braking"],
-    "nonTechDept": ["Media"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766742314/zmpcuepm3uathvn6rand.jpg",
-    "linkedin": "Arshad Navid",
-    "position": "Trainee"
-  },
-  {
-    "name": "Rafiul Islam Manik",
-    "roll": "202518051",
-    "techDept": ["Suspension, Steering and Braking"],
-    "nonTechDept": ["Documentation"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766758840/erxndmoe4msnd4riakq7.jpg",
-    "linkedin": "rafiul-islam-manik-4288463a1",
-    "position": "Trainee"
-  },
-  {
-    "name": "Ashfia Oshin",
-    "roll": "202518057",
-    "techDept": ["Suspension, Steering and Braking"],
-    "nonTechDept": ["Finance", "Business Plan Presentation"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766770220/fj2osvae2c8ybkljd0ap.jpg",
-    "linkedin": "Ashfia Oshin ",
-    "position": "Trainee"
-  },
-  {
-    "name": "Md.Tajun Ahmed Emon",
-    "roll": "202418081",
-    "techDept": ["Powertrain"],
-    "nonTechDept": ["Logistics"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766770631/riem1twshyhyuewg4faw.jpg",
-    "linkedin": "",
-    "position": "Trainee"
-  },
-  {
-    "name": "Mir Md. Wasif Tahmid ",
-    "roll": "202518050",
-    "techDept": ["Chassis and Aerodynamics"],
-    "nonTechDept": ["Logistics"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766770782/p6v6pr4rauhshos0rxo2.png",
-    "linkedin": "Wasif Tahmid ",
-    "position": "Trainee"
-  },
-  {
-    "name": "Md. Mostafizur Rashid ",
-    "roll": "202518048",
-    "techDept": ["Powertrain"],
-    "nonTechDept": ["Media"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766771028/z6js0x4poni0ud9hbqt7.jpg",
-    "linkedin": "md-mostafizur-rashid-9962aa374",
-    "position": "Trainee"
-  },
-  {
-    "name": "Riju Ahammed Sami ",
-    "roll": "202518041",
-    "techDept": ["Electronics"],
-    "nonTechDept": ["Finance"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766771834/ikhqowzdfvfeydn69txx.jpg",
-    "linkedin": "Riju Ahammed Sami ",
-    "position": "Trainee"
-  },
-  {
-    "name": "Md. Ahnaf Sayed ",
-    "roll": "202418044",
-    "techDept": ["Chassis and Aerodynamics"],
-    "nonTechDept": ["Management"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766773558/tfrwkwoualoujrsdgl0a.jpg",
-    "linkedin": "Ahnaf Sayed",
-    "position": "Junior Engineer"
-  },
-  {
-    "name": "Abid Ikram",
-    "roll": "202418006",
-    "techDept": ["Powertrain"],
-    "nonTechDept": ["Management", "Business Plan Presentation"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766774943/r1rdsetbjp2scb3ltriz.jpg",
-    "linkedin": "abid-ikram-893884297",
-    "position": "Apprentice Engineer"
-  },
-  {
-    "name": "Hassan Tahmid Tazwar",
-    "roll": "202518005",
-    "techDept": ["Powertrain"],
-    "nonTechDept": ["Documentation"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766922918/csupe5oomjzhldepngs2.jpg",
-    "linkedin": "https://www.linkedin.com/in/hassan-tahmid-tazwar-760822279",
-    "position": "Trainee",
-    "blitzId": "MB-DFA811"
-  },
-  {
-    "name": "Kazi Zawad",
-    "roll": "202318091",
-    "techDept": ["Suspension, Steering and Braking"],
-    "nonTechDept": ["Logistics"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766926350/x24m3mr7d1bibqubaid0.jpg",
-    "linkedin": "Kazi Zawad",
-    "position": "Junior Engineer",
-    "blitzId": "MB-015595"
-  },
-  {
-    "name": "Mrinmoye Das Piu",
-    "roll": "202318014",
-    "techDept": ["Electronics"],
-    "nonTechDept": ["Management"],
-    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766926966/txo3x0qq9wm0cpl6rjyu.jpg",
-    "linkedin": "Mrinmoye Piu",
-    "position": "Junior Engineer",
-    "blitzId": "MB-57E209"
-  },
-  {
-    "name": "Miraz Morshed Oni",
+    "_id": "69512ff72f5a3ce7a96b2092",
+    "name": "Miraz Morshed ",
     "roll": "202318088 ",
-    "techDept": ["Chassis and Aerodynamics"],
-    "nonTechDept": ["Logistics"],
+    "techDept": [
+      "Chassis and Aerodynamics"
+    ],
+    "nonTechDept": [
+      "Logistics"
+    ],
     "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766928352/o0strfzbn1fleycgvksi.jpg",
     "linkedin": "Miraz Morshed Oni ",
     "position": "Junior Engineer",
-    "blitzId": "MB-0D8817"
+    "createdAt": "2025-12-28T13:26:15.931Z",
+    "blitzId": "MB-0D8817",
+    "__v": 0
   },
   {
+    "_id": "695132702d327ea1e2ef1c3d",
     "name": "Nazifa Rafa",
     "roll": "202218080",
-    "techDept": ["Suspension, Steering and Braking"],
-    "nonTechDept": ["Documentation", "Business Plan Presentation"],
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Documentation",
+      "Business Plan Presentation"
+    ],
     "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766928923/q9x6wpxz4p1ynjdcohjo.jpg",
     "linkedin": "Nazifa Rafa",
     "position": "Senior Engineer",
-    "blitzId": "MB-33B1A3"
+    "createdAt": "2025-12-28T13:36:48.022Z",
+    "blitzId": "MB-33B1A3",
+    "__v": 0
+  },
+  {
+    "_id": "6951387ce437fe9761a5cfef",
+    "name": "Saurav Biswas",
+    "roll": "202418045",
+    "techDept": [
+      "Electronics"
+    ],
+    "nonTechDept": [
+      "Finance"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766930525/fgg5l0dx7pf8fgkf9wsh.jpg",
+    "linkedin": "",
+    "position": "Apprentice Engineer",
+    "createdAt": "2025-12-28T14:02:36.225Z",
+    "blitzId": "MB-6D9551",
+    "__v": 0
+  },
+  {
+    "_id": "69513e74a693c016278329ff",
+    "name": "Musa Al Kazim",
+    "roll": "202218077",
+    "techDept": [
+      "Electronics"
+    ],
+    "nonTechDept": [
+      "Documentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766739728/rahhx53s5ifqseje9mig.jpg",
+    "linkedin": "Musa Al Kazim",
+    "position": "Trainee",
+    "blitzId": "MB-A7B2C9",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a00",
+    "name": "Arshad Anwar Navid",
+    "roll": "202518010",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Media"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766742314/zmpcuepm3uathvn6rand.jpg",
+    "linkedin": "Arshad Navid",
+    "position": "Trainee",
+    "blitzId": "MB-E4F1A8",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a01",
+    "name": "Rafiul Islam Manik",
+    "roll": "202518051",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Documentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766758840/erxndmoe4msnd4riakq7.jpg",
+    "linkedin": "rafiul-islam-manik-4288463a1",
+    "position": "Trainee",
+    "blitzId": "MB-9D3C2B",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a02",
+    "name": "Ashfia Oshin",
+    "roll": "202518057",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Finance",
+      "Business Plan Presentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766770220/fj2osvae2c8ybkljd0ap.jpg",
+    "linkedin": "Ashfia Oshin ",
+    "position": "Trainee",
+    "blitzId": "MB-F0A6E3",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a03",
+    "name": "Md.Tajun Ahmed Emon",
+    "roll": "202418081",
+    "techDept": [
+      "Powertrain"
+    ],
+    "nonTechDept": [
+      "Logistics"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766770631/riem1twshyhyuewg4faw.jpg",
+    "linkedin": "",
+    "position": "Trainee",
+    "blitzId": "MB-2B8D4C",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a04",
+    "name": "Mir Md. Wasif Tahmid ",
+    "roll": "202518050",
+    "techDept": [
+      "Chassis and Aerodynamics"
+    ],
+    "nonTechDept": [
+      "Logistics"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766770782/p6v6pr4rauhshos0rxo2.png",
+    "linkedin": "Wasif Tahmid ",
+    "position": "Trainee",
+    "blitzId": "MB-7E1A9D",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a05",
+    "name": "Md. Mostafizur Rashid ",
+    "roll": "202518048",
+    "techDept": [
+      "Powertrain"
+    ],
+    "nonTechDept": [
+      "Media"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766771028/z6js0x4poni0ud9hbqt7.jpg",
+    "linkedin": "md-mostafizur-rashid-9962aa374",
+    "position": "Trainee",
+    "blitzId": "MB-5C2F8B",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a06",
+    "name": "Riju Ahammed Sami ",
+    "roll": "202518041",
+    "techDept": [
+      "Electronics"
+    ],
+    "nonTechDept": [
+      "Finance"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766771834/ikhqowzdfvfeydn69txx.jpg",
+    "linkedin": "Riju Ahammed Sami ",
+    "position": "Trainee",
+    "blitzId": "MB-8A4D1F",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a07",
+    "name": "Md. Ahnaf Sayed ",
+    "roll": "202418044",
+    "techDept": [
+      "Chassis and Aerodynamics"
+    ],
+    "nonTechDept": [
+      "Management"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766773558/tfrwkwoualoujrsdgl0a.jpg",
+    "linkedin": "Ahnaf Sayed",
+    "position": "Junior Engineer",
+    "blitzId": "MB-1D9C6E",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a08",
+    "name": "Abid Ikram",
+    "roll": "202418006",
+    "techDept": [
+      "Powertrain"
+    ],
+    "nonTechDept": [
+      "Management",
+      "Business Plan Presentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766774943/r1rdsetbjp2scb3ltriz.jpg",
+    "linkedin": "abid-ikram-893884297",
+    "position": "Apprentice Engineer",
+    "blitzId": "MB-6B0E2A",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a09",
+    "name": "Hassan Tahmid Tazwar",
+    "roll": "202518005",
+    "techDept": [
+      "Powertrain"
+    ],
+    "nonTechDept": [
+      "Documentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766922918/csupe5oomjzhldepngs2.jpg",
+    "linkedin": "https://www.linkedin.com/in/hassan-tahmid-tazwar-760822279",
+    "position": "Trainee",
+    "blitzId": "MB-DFA811",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513e74a693c01627832a0b",
+    "name": "Mrinmoye Das Piu",
+    "roll": "202318014",
+    "techDept": [
+      "Electronics"
+    ],
+    "nonTechDept": [
+      "Management"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766926966/txo3x0qq9wm0cpl6rjyu.jpg",
+    "linkedin": "Mrinmoye Piu",
+    "position": "Junior Engineer",
+    "blitzId": "MB-57E209",
+    "createdAt": "2025-12-29T12:03:25.756Z"
+  },
+  {
+    "_id": "69513f2ab77d1179c916209b",
+    "name": "Miftahul Zannah",
+    "roll": "202518074",
+    "techDept": [
+      "Chassis and Aerodynamics"
+    ],
+    "nonTechDept": [
+      "Finance"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766932232/or31ovhfjwwsjg6vzvs8.jpg",
+    "linkedin": "",
+    "position": "Trainee",
+    "createdAt": "2025-12-28T14:31:06.382Z",
+    "blitzId": "MB-574FA6",
+    "__v": 0
+  },
+  {
+    "_id": "69513f614472874d01d06831",
+    "name": "Azmayeen Adil ",
+    "roll": "202518075",
+    "techDept": [
+      "Powertrain"
+    ],
+    "nonTechDept": [
+      "Documentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766932287/wjwqnq0qlxzs0tvmifs8.jpg",
+    "linkedin": "Azmayeen Adil",
+    "position": "Trainee",
+    "createdAt": "2025-12-28T14:32:01.991Z",
+    "blitzId": "MB-1B31CE",
+    "__v": 0
+  },
+  {
+    "_id": "69513f644472874d01d06835",
+    "name": "Md Shahriar Ahmed Naim ",
+    "roll": "202518078",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Management"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766932307/dw9uqmujgihelglsibdp.jpg",
+    "linkedin": "Shahriar Naim",
+    "position": "Trainee",
+    "createdAt": "2025-12-28T14:32:04.702Z",
+    "blitzId": "MB-53C55D",
+    "__v": 0
+  },
+  {
+    "_id": "69514a744c498808272c0270",
+    "name": "Tasnimul Hasan Joarder ",
+    "roll": "202318069",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Documentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766935073/ycoko41plv8iibarbzyf.jpg",
+    "linkedin": "",
+    "position": "Junior Engineer",
+    "createdAt": "2025-12-28T15:19:16.831Z",
+    "blitzId": "MB-68E66D",
+    "__v": 0
+  },
+  {
+    "_id": "69514e28ad25ed61ab6f4b2f",
+    "name": "Quazi Shadid Rashid",
+    "roll": "202318012",
+    "techDept": [
+      "Powertrain"
+    ],
+    "nonTechDept": [
+      "Management",
+      "Business Plan Presentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766936095/htkfxzl31p5rrxx77z3d.jpg",
+    "linkedin": "",
+    "position": "Junior Engineer",
+    "createdAt": "2025-12-28T15:35:04.766Z",
+    "blitzId": "MB-8E45FD",
+    "__v": 0
+  },
+  {
+    "_id": "69514e62ad25ed61ab6f4b33",
+    "name": "Tausif Nawaz",
+    "roll": "202218111",
+    "techDept": [
+      "Chassis and Aerodynamics"
+    ],
+    "nonTechDept": [
+      "Logistics"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766936123/njywv7dudnesollan3vn.jpg",
+    "linkedin": "tausif-nawaz-05a82b201",
+    "position": "Senior Engineer",
+    "createdAt": "2025-12-28T15:36:02.472Z",
+    "blitzId": "MB-37EFC5",
+    "__v": 0
+  },
+  {
+    "_id": "69515106a501e91c3b3cd3ed",
+    "name": "Marzan Marzuk",
+    "roll": "202318057",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Management"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766936822/lslcj4sgvplof7pd2hgb.jpg",
+    "linkedin": "",
+    "position": "Junior Engineer",
+    "createdAt": "2025-12-28T15:47:18.215Z",
+    "blitzId": "MB-FB6A2C",
+    "__v": 0
+  },
+  {
+    "_id": "6951551903fc1a45a735e894",
+    "name": "Mohammad Lazim Rash-Ha",
+    "roll": "202518085",
+    "techDept": [
+      "Chassis and Aerodynamics"
+    ],
+    "nonTechDept": [
+      "Documentation",
+      "Business Plan Presentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766937839/uyvc3xqghz5nsjo7zsed.jpg",
+    "linkedin": "lazimrashha",
+    "position": "Trainee",
+    "createdAt": "2025-12-28T16:04:41.335Z",
+    "blitzId": "MB-562768",
+    "__v": 0
+  },
+  {
+    "_id": "69515d1090a97934efc28338",
+    "name": "Abrar Shahria",
+    "roll": "202318090",
+    "techDept": [
+      "Chassis and Aerodynamics"
+    ],
+    "nonTechDept": [
+      "Management"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766939863/to3uhtuzpscmtb0leooc.jpg",
+    "linkedin": "Abrar Shahria",
+    "position": "Junior Engineer",
+    "createdAt": "2025-12-28T16:38:40.341Z",
+    "blitzId": "MB-30EC68",
+    "__v": 0
+  },
+  {
+    "_id": "69515f5acc6d4af07e818ff4",
+    "name": "Md Jannatul Ferdous Sayem ",
+    "roll": "202518022",
+    "techDept": [
+      "Electronics"
+    ],
+    "nonTechDept": [
+      "Business Plan Presentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766940470/rxs7n0e8moeerjfdgpy8.jpg",
+    "linkedin": "",
+    "position": "Trainee",
+    "createdAt": "2025-12-28T16:48:26.993Z",
+    "blitzId": "MB-960832",
+    "__v": 0
+  },
+  {
+    "_id": "695167a96308500d8b0f746e",
+    "name": "mehedi hasan fahim",
+    "roll": "202418015",
+    "techDept": [
+      "Chassis and Aerodynamics"
+    ],
+    "nonTechDept": [
+      "Business Plan Presentation",
+      "Logistics"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766942617/lvlagihgvl3zr4rf0nks.jpg",
+    "linkedin": "mh Fahim",
+    "position": "Apprentice Engineer",
+    "createdAt": "2025-12-28T17:23:53.142Z",
+    "blitzId": "MB-FA6DB3",
+    "__v": 0
+  },
+  {
+    "_id": "69520429327696dbf5d2055b",
+    "name": "Shakib Al Hasan (Siam)",
+    "roll": "202518079",
+    "techDept": [
+      "Electronics"
+    ],
+    "nonTechDept": [
+      "Logistics",
+      "Media"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1766982673/tsjfb3lhypgdhhn7lvvq.jpg",
+    "linkedin": "Shakib Siam",
+    "position": "Trainee",
+    "createdAt": "2025-12-29T04:31:37.633Z",
+    "blitzId": "MB-B89A23",
+    "__v": 0
   }
 ]

@@ -40,7 +40,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
     {
       name: "My Profile",
       icon: <FaUser />,
-      path: "/member/profilesss",
+      path: "/member/profile",
       roles: [ROLE.MEMBER],
     },
     {
@@ -50,7 +50,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       subMenu: [
         {
           name: "All Members",
-          path: "/admin/members/all-membersss",
+          path: "/admin/members/all-members",
           roles: [ROLE.ADMIN],
         },
         { name: "Add Member", path: "/admin/members/add", roles: [ROLE.ADMIN] },
@@ -63,12 +63,12 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       subMenu: [
         {
           name: "All Equipment",
-          path: "/admin/equipment/all-equipmentss",
+          path: "/admin/equipment/all-equipment",
           roles: [ROLE.ADMIN],
         },
         {
           name: "Equipment Shop",
-          path: "/member/equipment-shopss",
+          path: "/member/equipment-shop",
           roles: [ROLE.MEMBER],
         },
         {
@@ -78,7 +78,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         },
         {
           name: "Add Equipment",
-          path: "/admin/equipment/addss",
+          path: "/admin/equipment/add",
           roles: [ROLE.ADMIN],
         },
       ],

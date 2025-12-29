@@ -1,5 +1,7 @@
 import { connectDB } from "@/lib/db";
 import Member from "@/model/member"
+import { NextResponse } from "next/server";
+
 
 
 export async function DELETE(request, { params }) {
@@ -50,7 +52,7 @@ export async function PUT(request, { params }) {
             );
         }
 
-        return NextResponse.json(updatedItem, { status: 200 });
+        return NextResponse.json(updatedMember, { status: 200 });
 
     }
     catch (error) {
