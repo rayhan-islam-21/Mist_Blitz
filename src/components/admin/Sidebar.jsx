@@ -84,39 +84,30 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       ],
     },
     {
-      name: "Teams",
-      icon: <FaUsers />,
-      roles: [ROLE.ADMIN],
-      subMenu: [
-        { name: "All Teams", path: "/admin/teams/all", roles: [ROLE.ADMIN] },
-        { name: "Add Team", path: "/admin/teams/add", roles: [ROLE.ADMIN] },
-      ],
-    },
-    {
       name: "My Teams",
       icon: <FaUsers />,
       path: "/member/teams",
       roles: [ROLE.MEMBER],
     },
-    {
-      name: "Events",
-      icon: <FaFlag />,
-      roles: [ROLE.ADMIN],
-      subMenu: [
-        { name: "All Events", path: "/admin/events/all", roles: [ROLE.ADMIN] },
-        {
-          name: "Create Event",
-          path: "/admin/events/add",
-          roles: [ROLE.ADMIN],
-        },
-      ],
-    },
-    {
-      name: "Tasks",
-      icon: <FaClipboardList />,
-      path: "/admin/tasks",
-      roles: [ROLE.ADMIN],
-    },
+    // {
+    //   name: "Events",
+    //   icon: <FaFlag />,
+    //   roles: [ROLE.ADMIN],
+    //   subMenu: [
+    //     { name: "All Events", path: "/admin/events/all", roles: [ROLE.ADMIN] },
+    //     {
+    //       name: "Create Event",
+    //       path: "/admin/events/add",
+    //       roles: [ROLE.ADMIN],
+    //     },
+    //   ],
+    // },
+    // {
+    //   name: "Tasks",
+    //   icon: <FaClipboardList />,
+    //   path: "/admin/tasks",
+    //   roles: [ROLE.ADMIN],
+    // },
   ];
 
   // Auto-open submenu based on current path
@@ -190,7 +181,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                       href={item.path}
                       className={`flex items-center px-4 py-3 rounded-xl transition-all duration-200 group relative ${
                         isActive
-                          ? "bg-red-50 text-red-700 font-semibold"
+                          ? "bg-red-50 text-red-300 font-semibold"
                           : "hover:bg-gray-50 text-slate-500 hover:text-slate-900"
                       }`}
                     >
@@ -214,7 +205,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                         onClick={() => toggleSubmenu(item.name)}
                         className={`flex items-center w-full px-4 py-3 rounded-xl transition-all group ${
                           hasActiveChild
-                            ? "text-red-700 font-semibold bg-red-50/30"
+                            ? "text-red-500 font-semibold tracking-wider bg-red-50/30"
                             : "hover:bg-gray-50"
                         }`}
                       >
