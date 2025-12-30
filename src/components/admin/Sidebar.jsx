@@ -79,12 +79,6 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         { name: "Transaction Logs", path: "/admin/logistics/history", roles: [ROLE.ADMIN] },
       ],
     },
-    {
-      name: "My Teams",
-      icon: <FaUsers />,
-      path: "/member/teams",
-      roles: [ROLE.MEMBER],
-    },
   ];
 
   useEffect(() => {
