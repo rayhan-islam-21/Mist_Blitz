@@ -2,12 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useContext } from "react"; // Added useContext
+import { useState, useEffect, useContext } from "react"; 
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image"; // Added for profile photo
-import AuthContext from "@/context/Authcontext"; // Path to your context
+import Image from "next/image"; 
+import AuthContext from "@/context/Authcontext"; 
 import {
-  FaUsers,
   FaTachometerAlt,
   FaExchangeAlt,
   FaClipboardList,
@@ -15,7 +14,7 @@ import {
   FaChevronDown,
   FaUserPlus,
   FaUser,
-  FaSignOutAlt // Logout icon
+  FaSignOutAlt 
 } from "react-icons/fa";
 
 // ----- ROLE CONSTANTS -----
@@ -27,29 +26,15 @@ const ROLE = {
 const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const pathname = usePathname();
   const [openSubmenus, setOpenSubmenus] = useState({});
-  
-  // ----- AUTH CONTEXT -----
   const { user, logout } = useContext(AuthContext);
 
-  // Derive role safely from your MongoDB data (e.g., user.info.position)
-  // Logic: if position is 'Super Admin' or 'Admin' -> ROLE.ADMIN, else ROLE.MEMBER
-  const isAdmin = user?.info?.position?.toLowerCase().includes("admin");
+
+  const isAdmin = user?.admindata?.role?.toLowerCase().includes("admin");
   const userRole = isAdmin ? ROLE.ADMIN : ROLE.MEMBER;
 
-  // ----- MENU ITEMS -----
   const menuItems = [
-    {
-      name: "Dashboard",
-      icon: <FaTachometerAlt />,
-      path: "/admin/dashboard",
-      roles: [ROLE.ADMIN],
-    },
-    {
-      name: "My Profile",
-      icon: <FaUser />,
-      path: "/member/profile",
-      roles: [ROLE.MEMBER, ROLE.ADMIN], // Admins usually have profiles too
-    },
+    { name: "Dashboard", icon: <FaTachometerAlt />, path: "/admin/dashboard", roles: [ROLE.ADMIN] },
+    { name: "My Profile", icon: <FaUser />, path: "/member/profile", roles: [ROLE.MEMBER, ROLE.ADMIN] },
     {
       name: "Members",
       icon: <FaUserPlus />,
@@ -107,7 +92,6 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           ${sidebarOpen ? "w-70 translate-x-0" : "w-70 -translate-x-full md:translate-x-0 md:w-64"}
         `}
       >
-        {/* Logo Section */}
         <div className="flex items-center justify-between p-6 h-20 border-b border-gray-50 shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold shadow-md">B</div>
@@ -118,7 +102,12 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           </button>
         </div>
 
-        {/* Navigation */}
+        {/* 🕵️‍♂️ ON-SCREEN DATA VIEWER (Optional: Delete after checking) */}
+        {/* <div className="p-2 text-[10px] bg-yellow-50 overflow-auto max-h-32 border-b">
+           <p className="font-bold">DEBUG USER:</p>
+           <pre>{JSON.stringify(user, null, 2)}</pre>
+        </div> */}
+
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-hide">
           {menuItems
             .filter((item) => item.roles.includes(userRole))
@@ -174,9 +163,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
             })}
         </nav>
 
-        {/* User Footer with Logout */}
         <div className="p-4 border-t border-gray-100 bg-gray-50/20 space-y-2">
-          {/* Profile Card */}
           <div className="flex items-center p-3 rounded-xl bg-white border border-gray-200 shadow-sm">
             <div className="relative w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold mr-3 overflow-hidden shadow-inner">
               {user?.info?.image ? (
@@ -190,12 +177,11 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                 {user?.info?.name || user?.displayName || "User"}
               </p>
               <p className="text-[10px] text-slate-500 truncate uppercase tracking-widest font-medium">
-                {user?.info?.position || "Member"}
+                {user?.admindata?.role || "Member"}
               </p>
             </div>
           </div>
 
-          {/* Logout Button */}
           <button
             onClick={handleLogout}
             className="flex items-center font-mono justify-center w-full gap-2 px-4 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-transparent hover:border-red-100"
@@ -206,7 +192,6 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         </div>
       </aside>
 
-      {/* Mobile Overlay */}
       <AnimatePresence>
         {sidebarOpen && (
           <motion.div

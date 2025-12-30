@@ -27,8 +27,11 @@ const AuthProvider = ({ children }) => {
         try {
          const response = await api.get(`/members/${encodeURIComponent(loggedUser.email)}`);
          const info = response.data
+         const userresponse = await api.get(`/admin/${(loggedUser.email)}`)
+         const admindata = userresponse.data
           setUser({
             ...loggedUser,
+            admindata,
             info,
             isMember: true 
           });
