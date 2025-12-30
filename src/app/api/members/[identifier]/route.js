@@ -40,15 +40,19 @@ export async function DELETE(request, { params }) {
     }
 }
 
-// --- PUT: Update by ID ---
+// --- PUT: Update by ID or Email ---
 export async function PUT(request, { params }) {
     try {
         await connectDB();
         const { identifier } = await params;
         const body = await request.json();
 
-        const updatedMember = await Member.findByIdAndUpdate(
-            identifier,
+        // Check if the identifier is an email or a MongoDB ID
+        const isEmail = identifier.includes("@");
+        const filter = isEmail ? { email: identifier } : { _id: identifier };
+
+        const updatedMember = await Member.findOneAndUpdate(
+            filter, // Dynamic filter based on input
             {
                 name: body.name, 
                 roll: body.roll, 
@@ -58,16 +62,18 @@ export async function PUT(request, { params }) {
                 techDept: body.techDept, 
                 nonTechDept: body.nonTechDept,
                 image: body.image,
-                email: body.email // Added email update support
+                email: body.email 
             },
-            { new: true }
+            { new: true, runValidators: true } // runValidators ensures data integrity
         );
 
         if (!updatedMember) {
-            return NextResponse.json({ error: "Asset not found" }, { status: 404 });
+            return NextResponse.json({ error: "Member not found" }, { status: 404 });
         }
+
         return NextResponse.json(updatedMember, { status: 200 });
     } catch (error) {
+        console.error("PUT Error:", error); // Logs actual error to your terminal
         return NextResponse.json({ error: "Failed to commit changes" }, { status: 500 });
     }
 }

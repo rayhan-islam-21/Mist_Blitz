@@ -67,7 +67,7 @@
     "linkedin": "Musa Al Kazim",
     "position": "Trainee",
     "blitzId": "MB-A7B2C9",
-    "createdAt": "2025-12-29T16:58:20.100Z"
+    "createdAt": "2025-12-30T10:38:22.310Z"
   },
   {
     "_id": "69513e74a693c01627832a00",
@@ -84,7 +84,7 @@
     "position": "Trainee",
     "blitzId": "MB-E4F1A8",
     "email": "navidarshad66@gmail.com",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "createdAt": "2025-12-30T10:38:22.310Z"
   },
   {
     "_id": "69513e74a693c01627832a01",
@@ -101,7 +101,7 @@
     "position": "Trainee",
     "blitzId": "MB-9D3C2B",
     "email": "rafiul2275@gmail.com",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "createdAt": "2025-12-30T10:38:22.310Z"
   },
   {
     "_id": "69513e74a693c01627832a02",
@@ -118,7 +118,8 @@
     "linkedin": "Ashfia Oshin ",
     "position": "Trainee",
     "blitzId": "MB-F0A6E3",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "email": "ashfiaoshin02@gmail.com",
+    "createdAt": "2025-12-30T10:38:22.310Z"
   },
   {
     "_id": "69513e74a693c01627832a03",
@@ -134,7 +135,7 @@
     "linkedin": "",
     "position": "Trainee",
     "blitzId": "MB-2B8D4C",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "createdAt": "2025-12-30T10:38:22.311Z"
   },
   {
     "_id": "69513e74a693c01627832a04",
@@ -151,7 +152,7 @@
     "position": "Trainee",
     "blitzId": "MB-7E1A9D",
     "email": "wasiftahmid47@gmail.com",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "createdAt": "2025-12-30T10:38:22.312Z"
   },
   {
     "_id": "69513e74a693c01627832a05",
@@ -168,7 +169,7 @@
     "position": "Trainee",
     "blitzId": "MB-5C2F8B",
     "email": "uttsho2623@gmail.com",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "createdAt": "2025-12-30T10:38:22.312Z"
   },
   {
     "_id": "69513e74a693c01627832a06",
@@ -185,7 +186,7 @@
     "position": "Trainee",
     "blitzId": "MB-8A4D1F",
     "email": "rifatsani500@gmail.com",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "createdAt": "2025-12-30T10:38:22.312Z"
   },
   {
     "_id": "69513e74a693c01627832a07",
@@ -202,7 +203,7 @@
     "position": "Junior Engineer",
     "blitzId": "MB-1D9C6E",
     "email": "sayed.ahnaf08@gmail.com",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "createdAt": "2025-12-30T10:38:22.312Z"
   },
   {
     "_id": "69513e74a693c01627832a08",
@@ -219,7 +220,7 @@
     "linkedin": "abid-ikram-893884297",
     "position": "Apprentice Engineer",
     "blitzId": "MB-6B0E2A",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "createdAt": "2025-12-30T10:38:22.312Z"
   },
   {
     "_id": "69513e74a693c01627832a09",
@@ -235,7 +236,7 @@
     "linkedin": "https://www.linkedin.com/in/hassan-tahmid-tazwar-760822279",
     "position": "Trainee",
     "blitzId": "MB-DFA811",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "createdAt": "2025-12-30T10:38:22.312Z"
   },
   {
     "_id": "69513e74a693c01627832a0b",
@@ -251,7 +252,7 @@
     "linkedin": "Mrinmoye Piu",
     "position": "Junior Engineer",
     "blitzId": "MB-57E209",
-    "createdAt": "2025-12-29T16:58:20.101Z"
+    "createdAt": "2025-12-30T10:38:22.312Z"
   },
   {
     "_id": "69513f2ab77d1179c916209b",
@@ -322,7 +323,8 @@
     "position": "Junior Engineer",
     "createdAt": "2025-12-28T15:19:16.831Z",
     "blitzId": "MB-68E66D",
-    "__v": 0
+    "__v": 0,
+    "email": "tasnimjoarder69@gmail.com"
   },
   {
     "_id": "69514e28ad25ed61ab6f4b2f",
@@ -376,7 +378,8 @@
     "position": "Junior Engineer",
     "createdAt": "2025-12-28T15:47:18.215Z",
     "blitzId": "MB-FB6A2C",
-    "__v": 0
+    "__v": 0,
+    "email": "marzanmarzuk13@gmail.com"
   },
   {
     "_id": "6951551903fc1a45a735e894",
@@ -486,7 +489,8 @@
     "position": "Senior Engineer",
     "createdAt": "2025-12-29T12:38:33.565Z",
     "blitzId": "MB-160DBB",
-    "__v": 0
+    "__v": 0,
+    "email": "tahmidmuntasirauhin@gmail.com"
   },
   {
     "_id": "695284f2a61d4f29f1f3ccf3",
@@ -504,7 +508,8 @@
     "position": "Apprentice Engineer",
     "createdAt": "2025-12-29T13:41:06.627Z",
     "blitzId": "MB-96D895",
-    "__v": 0
+    "__v": 0,
+    "email": "tasneemhassanadib@gmail.com"
   },
   {
     "_id": "69528b88a508d711203fb207",
@@ -574,6 +579,97 @@
     "position": "Junior Engineer",
     "createdAt": "2025-12-29T16:53:51.252Z",
     "blitzId": "MB-DC792B",
+    "__v": 0
+  },
+  {
+    "_id": "6952b45e69b853ab6a305513",
+    "name": "Ashef Iftihaj Munir",
+    "roll": "202218012",
+    "techDept": [
+      "Electronics"
+    ],
+    "nonTechDept": [
+      "Business Plan Presentation",
+      "Documentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767027770/rnpcbc1f1ccnnm3qtuzf.jpg",
+    "linkedin": "ashefiftihaj",
+    "position": "Senior Engineer",
+    "createdAt": "2025-12-29T17:03:26.546Z",
+    "blitzId": "MB-57E3D0",
+    "__v": 0
+  },
+  {
+    "_id": "6952b7259d8caab6ae9a3290",
+    "name": "Shah Maksul Minar",
+    "roll": "202318048",
+    "techDept": [
+      "Suspension, Steering and Braking"
+    ],
+    "nonTechDept": [
+      "Management",
+      "Media"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767028509/pdunqggjqqvmd9ylws0r.jpg",
+    "linkedin": "",
+    "position": "Junior Engineer",
+    "createdAt": "2025-12-29T17:15:17.845Z",
+    "blitzId": "MB-8E0F4F",
+    "__v": 0,
+    "email": "minarstu2003@gmail.com"
+  },
+  {
+    "_id": "6952baf404a834bed571ba96",
+    "name": "Rayhan Islam",
+    "roll": "202318102",
+    "techDept": [
+      "Powertrain"
+    ],
+    "nonTechDept": [
+      "Finance",
+      "Media"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767029480/dafp7c9nju0zzztflolq.png",
+    "linkedin": "rayhan18102",
+    "position": "Trainee",
+    "createdAt": "2025-12-29T17:31:32.449Z",
+    "blitzId": "MB-19995A",
+    "__v": 0,
+    "email": "mario@gmail.com"
+  },
+  {
+    "_id": "695310b2fde525bf46cc07c3",
+    "name": "Anindita Das Swarna",
+    "roll": "202318018",
+    "techDept": [
+      "Powertrain"
+    ],
+    "nonTechDept": [
+      "Documentation",
+      "Business Plan Presentation"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767045071/exlrsymglofwymddclaq.jpg",
+    "linkedin": "Anindita Das",
+    "position": "Junior Engineer",
+    "createdAt": "2025-12-29T23:37:22.097Z",
+    "blitzId": "MB-944752",
+    "__v": 0
+  },
+  {
+    "_id": "69537bdc11a266a615c1040c",
+    "name": "MD MEHEDI HASSAN ",
+    "roll": "202218054",
+    "techDept": [
+      "Powertrain"
+    ],
+    "nonTechDept": [
+      "Logistics"
+    ],
+    "image": "https://res.cloudinary.com/dnrubj8x4/image/upload/v1767078804/hs6jkl2psya0ai9o3aht.jpg",
+    "linkedin": "md-mehedi-hassan-056358313",
+    "position": "Senior Engineer",
+    "createdAt": "2025-12-30T07:14:36.264Z",
+    "blitzId": "MB-44D8AD",
     "__v": 0
   }
 ]
