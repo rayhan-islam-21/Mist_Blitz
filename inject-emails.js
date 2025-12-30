@@ -1,46 +1,60 @@
 const csv = require('csvtojson');
 const mongoose = require('mongoose');
 
-// 1. UPDATED CONNECTION STRING (Added 'jerseyzbd' as the database)
-const MONGO_URI = "mongodb+srv://merayhanislam21_db_user:2f3ftqWBFOePQbeq@cluster0.bjbvxu2.mongodb.net/jerseyzbd?appName=Cluster0"; 
+const MONGO_URI = ""; 
 
-// 2. UPDATED MODEL (Matches 'memberv3' exactly from your screenshot)
+// Updated to target 'memberv3' specifically
 const MemberV3 = mongoose.models.MemberV3 || mongoose.model('MemberV3', new mongoose.Schema({
   roll: String,
   email: String,
   name: String
-}), 'memberv3'); 
+}, { strict: false }), 'memberv3'); 
 
 async function startInjection() {
   try {
     await mongoose.connect(MONGO_URI);
-    console.log("Connected to MongoDB [jerseyzbd]...");
+    console.log("Connected to MongoDB...");
 
-    // Using headers:false and output:csv to avoid header mismatch errors
-    const rows = await csv({ noheader: false, output: "csv" }).fromFile("members.csv");
+    // Assuming your CSV is: Column1=Roll, Column2=Email
+    const rows = await csv({ noheader: true }).fromFile("member.csv");
     
-    console.log(`Processing ${rows.length - 1} members...`);
+    let updated = 0;
+    let skipped = 0;
+    let notFound = 0;
 
-    for (let i = 1; i < rows.length; i++) {
-      const row = rows[i];
-      const csvEmail = row[0].toString().trim().toLowerCase();
-      const csvRoll = row[1].toString().trim();
+    for (const row of rows) {
+      const csvRoll = row.field1?.trim(); 
+      const csvEmail = row.field2?.trim().toLowerCase();
 
-      // THE FIX: Using a Regex that ignores spaces at the beginning or end of the DB roll
-      const result = await MemberV3.findOneAndUpdate(
-        { roll: { $regex: new RegExp(`^\\s*${csvRoll}\\s*$`) } }, 
-        { $set: { email: csvEmail } },
-        { new: true }
-      );
+      if (!csvRoll || csvRoll === "Mist Roll" || !csvEmail) continue;
 
-      if (result) {
-        console.log(`✅ Success: [${csvRoll}] -> [${csvEmail}] (Found: ${result.name})`);
+      // Finding the document in the 'memberv3' collection
+      const member = await MemberV3.findOne({ roll: csvRoll });
+
+      if (member) {
+        // Only update if the email field is missing, null, or empty string
+        if (!member.email || member.email.trim() === "") {
+          member.email = csvEmail;
+          await member.save();
+          console.log(`✅ UPDATED: ${member.name || 'No Name'} (${csvRoll})`);
+          updated++;
+        } else {
+          console.log(`⏩ SKIPPED: ${member.name || csvRoll} already has email: ${member.email}`);
+          skipped++;
+        }
       } else {
-        console.log(`❌ Not Found in DB: Roll [${csvRoll}]`);
+        console.log(`❌ NOT FOUND: Roll [${csvRoll}] not found in memberv3 collection.`);
+        notFound++;
       }
     }
 
-    console.log("\n--- INJECTION COMPLETE ---");
+    console.log(`
+--- OPERATION COMPLETE ---
+Records Updated: ${updated}
+Skipped (Existing): ${skipped}
+Rolls Not Found: ${notFound}
+--------------------------`);
+
     process.exit(0);
   } catch (err) {
     console.error("Critical Error:", err);
