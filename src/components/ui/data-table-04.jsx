@@ -213,7 +213,7 @@ const DataTableEquipment = () => {
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
-              <tr className="bg-slate-500 border-b border-slate-200">
+              <tr className="bg-slate-50 border-b border-slate-200">
                 {table.getHeaderGroups()[0].headers.map(header => (
                   <th key={header.id} className="p-5 text-left text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
                     {flexRender(header.column.columnDef.header, header.getContext())}
