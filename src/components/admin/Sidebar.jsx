@@ -14,8 +14,12 @@ import {
   FaChevronDown,
   FaUserPlus,
   FaUser,
-  FaSignOutAlt 
+  FaSignOutAlt,
+  FaPowerOff // Replacing Trash icon with Power icon for logout
 } from "react-icons/fa";
+
+// Import Dialog components
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 // ----- ROLE CONSTANTS -----
 const ROLE = {
@@ -26,8 +30,8 @@ const ROLE = {
 const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const pathname = usePathname();
   const [openSubmenus, setOpenSubmenus] = useState({});
-  const { user, logout } = useContext(AuthContext);
-
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false); // Modal state
+  const { user, logOut } = useContext(AuthContext);
 
   const isAdmin = user?.admindata?.role?.toLowerCase().includes("admin");
   const userRole = isAdmin ? ROLE.ADMIN : ROLE.MEMBER;
@@ -78,10 +82,9 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
     setOpenSubmenus((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const handleLogout = () => {
-    if (window.confirm("Are you sure you want to logout?")) {
-      logout();
-    }
+  const handleConfirmLogout = () => {
+    logOut();
+    setLogoutModalOpen(false);
   };
 
   return (
@@ -101,12 +104,6 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
             <FaTimes size={20} />
           </button>
         </div>
-
-        {/* 🕵️‍♂️ ON-SCREEN DATA VIEWER (Optional: Delete after checking) */}
-        {/* <div className="p-2 text-[10px] bg-yellow-50 overflow-auto max-h-32 border-b">
-           <p className="font-bold">DEBUG USER:</p>
-           <pre>{JSON.stringify(user, null, 2)}</pre>
-        </div> */}
 
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-hide">
           {menuItems
@@ -183,7 +180,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           </div>
 
           <button
-            onClick={handleLogout}
+            onClick={() => setLogoutModalOpen(true)} // Open Modal instead of window.confirm
             className="flex items-center font-mono justify-center w-full gap-2 px-4 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-transparent hover:border-red-100"
           >
             <FaSignOutAlt />
@@ -191,6 +188,47 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           </button>
         </div>
       </aside>
+
+      {/* --- LOGOUT CONFIRMATION MODAL --- */}
+      <Dialog open={logoutModalOpen} onOpenChange={setLogoutModalOpen}>
+        <DialogContent className="sm:max-w-md rounded-none border-[6px] border-black/20 p-0 overflow-hidden bg-white shadow-2xl">
+          <div className="p-8 space-y-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-red-100 flex items-center justify-center shrink-0 border border-red-200">
+                <FaPowerOff size={22} className="text-red-600" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-2xl font-black font-sans uppercase italic tracking-tighter text-slate-950">
+                  End <span className="text-red-600">Session</span>?
+                </h3>
+                <p className="text-[11px] font-mono font-semibold text-slate-600 leading-relaxed uppercase tracking-tighter">
+                  You are about to Logout from the dashboard
+                </p>
+              </div>
+            </div>
+            <div className="bg-slate-50 p-4 border-l-4 border-slate-950 shadow-inner">
+              <span className="text-[10px] font-mono font-bold text-slate-400 block mb-1 tracking-widest">ACTIVE_OPERATOR:</span>
+              <span className="text-sm font-mono font-black text-slate-950 break-all uppercase italic">
+                {user?.info?.name || user?.displayName || "NULL_USER"}
+              </span>
+            </div>
+          </div>
+          <div className="bg-slate-950 p-6 flex gap-4">
+            <button 
+              onClick={() => setLogoutModalOpen(false)} 
+              className="flex-1 px-4 py-3 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors border border-transparent hover:border-slate-700"
+            >
+              CANCEL
+            </button>
+            <button 
+              onClick={handleConfirmLogout} 
+              className="flex-1 bg-red-600 hover:bg-red-700 text-white py-4 font-black uppercase italic tracking-widest transition-all border-b-4 border-red-800 active:border-b-0 active:translate-y-0.5"
+            >
+              LOGOUT
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <AnimatePresence>
         {sidebarOpen && (
