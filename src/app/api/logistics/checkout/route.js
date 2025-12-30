@@ -1,40 +1,40 @@
 import { connectDB } from "@/lib/db";
-import { LogisticsRecord } from "@/model/archived"; // The model we just created
-import Equipment from "@/model/product";       // Your Equipment model
+import { LogisticsRecord } from "@/model/archived";
+import Equipment from "@/model/product";
+import TransitionLog from "@/model/history"; 
 import { NextResponse } from "next/server";
 
+// --- POST: Create a new checkout ---
 export async function POST(request) {
   try {
     await connectDB();
     const body = await request.json();
-
     const { equipmentId, quantity, item, receiver } = body;
 
-    // 1. VALIDATION: Check if equipment exists and has enough stock
     const asset = await Equipment.findById(equipmentId);
-    if (!asset) {
-      return NextResponse.json({ error: "Asset not found" }, { status: 404 });
-    }
+    if (!asset) return NextResponse.json({ error: "Asset not found" }, { status: 404 });
+    if (asset.quantity < quantity) return NextResponse.json({ error: "Insufficient stock" }, { status: 400 });
 
-    if (asset.quantity < quantity) {
-      return NextResponse.json({ error: "Insufficient stock level" }, { status: 400 });
-    }
-
-    // 2. UPDATE INVENTORY: Reduce the quantity in the Equipment collection
-    // We use $inc with a negative number to subtract
     const updatedAsset = await Equipment.findByIdAndUpdate(
       equipmentId,
       { $inc: { quantity: -quantity } },
       { new: true }
     );
 
-    // 3. CREATE LOGISTICS RECORD: Save the history
     const newRecord = await LogisticsRecord.create({
       equipmentId,
       quantity,
       item,
       receiver,
-      status: "ACTIVE" // Default status
+      status: "ACTIVE"
+    });
+
+    await TransitionLog.create({
+      type: "ACTIVE", 
+      equipmentId,
+      item,
+      receiver,
+      quantity,
     });
 
     return NextResponse.json({
@@ -44,25 +44,22 @@ export async function POST(request) {
     }, { status: 201 });
 
   } catch (error) {
-    console.error("LOGISTICS_ERROR:", error);
-    return NextResponse.json(
-      { error: "System failed to process transfer" }, 
-      { status: 500 }
-    );
+    console.error("LOGISTICS_POST_ERROR:", error);
+    return NextResponse.json({ error: "System failure" }, { status: 500 });
   }
 }
 
-// --- GET: Fetch Checkout History ---
-export async function GET(request) {
+// --- GET: Fetch all active handouts (This feeds your "Tracking Assets" table) ---
+export async function GET() {
   try {
     await connectDB();
     
-    // Fetch all active handouts, sorted by newest first
-    const history = await LogisticsRecord.find({})
-      .sort({ createdAt: -1 });
+    // We fetch from LogisticsRecord because that's where "Active" items live
+    const handouts = await LogisticsRecord.find({}).sort({ createdAt: -1 });
 
-    return NextResponse.json(history, { status: 200 });
+    return NextResponse.json(handouts, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch history" }, { status: 500 });
+    console.error("LOGISTICS_GET_ERROR:", error);
+    return NextResponse.json({ error: "Failed to fetch live data" }, { status: 500 });
   }
 }

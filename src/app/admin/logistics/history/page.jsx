@@ -2,205 +2,244 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { 
-  History, 
-  ArrowUpRight, 
-  ArrowDownLeft, 
-  SearchIcon, 
-  Filter, 
+import {
+  History,
+  Search,
+  ArrowUpRight,
+  ArrowDownLeft,
+  Filter,
   Download,
-  Calendar
 } from "lucide-react";
-import { 
-  flexRender, getCoreRowModel, getFilteredRowModel, 
-  useReactTable 
-} from "@tanstack/react-table";
 import api from "@/lib/axios";
-import toast from "react-hot-toast";
 
-const TransitionLogs = () => {
+const AdminHistoryPage = () => {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const fetchLogs = async () => {
+    const fetchMasterLogs = async () => {
       try {
-        // Replace with your actual history/logs endpoint
         const res = await api.get("/logistics/history");
         setLogs(res.data);
-      } catch (err) {
-        toast.error("FAILED_TO_SYNC_HISTORY");
       } finally {
         setLoading(false);
       }
     };
-    fetchLogs();
+    fetchMasterLogs();
   }, []);
 
-  const columns = [
-    {
-      header: "Event",
-      accessorKey: "type", // e.g., 'CHECKOUT' or 'RETURN'
-      cell: ({ row }) => {
-        const isCheckout = row.original.type === "CHECKOUT";
-        return (
-          <div className={`flex items-center gap-2 font-black italic text-[10px] uppercase tracking-widest ${isCheckout ? 'text-blue-600' : 'text-emerald-600'}`}>
-            {isCheckout ? <ArrowUpRight size={14} /> : <ArrowDownLeft size={14} />}
-            {row.original.type}
-          </div>
-        );
-      }
-    },
-    {
-      header: "Asset",
-      accessorKey: "item.name",
-      cell: ({ row }) => (
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 relative bg-slate-100 rounded border border-slate-200 shrink-0">
-             <Image src={row.original.item.photo} alt="" fill className="object-cover opacity-80" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[11px] font-black uppercase text-slate-900 leading-none">{row.original.item.name}</span>
-            <span className="text-[9px] font-mono text-slate-400 mt-1">#{row.original.item.productCode}</span>
-          </div>
-        </div>
-      )
-    },
-    {
-      header: "Operator",
-      accessorKey: "receiver.name",
-      cell: ({ row }) => (
-        <div className="flex items-center gap-2">
-          <div className="h-6 w-6 rounded-full overflow-hidden border border-slate-200 relative">
-             <Image src={row.original.receiver.photo} alt="" fill className="object-cover grayscale" />
-          </div>
-          <span className="text-[10px] font-bold text-slate-600 uppercase">{row.original.receiver.name}</span>
-        </div>
-      )
-    },
-    {
-        header: "Timestamp",
-        accessorKey: "createdAt",
-        cell: ({ row }) => (
-          <div className="flex flex-col font-mono text-[10px]">
-            <span className="text-slate-900 font-bold">{new Date(row.getValue("createdAt")).toLocaleDateString()}</span>
-            <span className="text-slate-400">{new Date(row.getValue("createdAt")).toLocaleTimeString()}</span>
-          </div>
-        )
-    },
-    {
-      header: "System Note",
-      accessorKey: "note",
-      cell: ({ row }) => (
-        <div className="max-w-[200px]">
-          <p className="text-[10px] text-slate-500 font-medium italic truncate">
-            {row.original.note || "Auto-logged by System"}
-          </p>
-        </div>
-      )
+  const filteredLogs = logs.filter(
+    (log) =>
+      log.item.name.toLowerCase().includes(search.toLowerCase()) ||
+      log.receiver.name.toLowerCase().includes(search.toLowerCase()) ||
+      log.receiver.blitzId.toLowerCase().includes(search.toLowerCase())
+  );
+  const exportToCSV = () => {
+    if (logs.length === 0) {
+      toast.error("NO DATA AVAILABLE TO EXPORT");
+      return;
     }
-  ];
 
-  const table = useReactTable({
-    data: logs,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-  });
+    // 1. Define CSV Headers
+    const headers = [
+      "Event Type,Asset Name,Product Code,Operator Name,Blitz ID,Date,Time\n",
+    ];
 
+    // 2. Format Data Rows
+    const rows = filteredLogs.map((log) => {
+      const date = new Date(log.createdAt).toLocaleDateString();
+      const time = new Date(log.createdAt).toLocaleTimeString();
+
+      return [
+        log.type,
+        `"${log.item.name}"`, // Quotes handle names with commas
+        log.item.productCode,
+        `"${log.receiver.name}"`,
+        log.receiver.blitzId,
+        date,
+        time,
+      ].join(",");
+    });
+
+    // 3. Create the Blob and Download
+    const csvContent = headers.concat(rows.join("\n")).join("");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute(
+      "download",
+      `Blitz_Logistics_Audit_${new Date().toISOString().split("T")[0]}.csv`
+    );
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Cleanup
+    URL.revokeObjectURL(url);
+  };
   return (
-    <div className="min-h-screen bg-[#FDFDFD] p-6 md:p-10 font-sans">
-      {/* HEADER SECTION */}
-      <div className="max-w-7xl mx-auto mb-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+    <div className="p-8 bg-[#F8FAFC] min-h-screen font-sans">
+      <div className="max-w-7xl mx-auto">
+        {/* HEADER */}
+        <div className="flex justify-between items-end mb-8">
           <div>
-            <div className="flex items-center gap-2 text-red-600 mb-2">
-              <History size={20} />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em]">Registry_Archives</span>
-            </div>
-            <h1 className="text-4xl font-black text-slate-950 uppercase italic tracking-tighter">
-              Transition <span className="text-slate-400 underline decoration-slate-200">Logs</span>
+            <h1 className="text-4xl font-black italic tracking-tighter uppercase text-slate-900">
+              Master <span className="text-red-600">Archives</span>
             </h1>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] mt-2">
+              Global Transition Log & Audit Trail
+            </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative group">
-               <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-               <input 
-                  type="text" 
-                  placeholder="SEARCH ARCHIVES..."
-                  className="bg-white border border-slate-200 rounded-lg pl-10 pr-4 py-2 text-[10px] font-bold uppercase focus:ring-2 focus:ring-slate-100 outline-none w-64"
-                  value={searchTerm}
-                  onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                    table.setGlobalFilter(e.target.value);
-                  }}
-               />
+          <div className="flex gap-4">
+            <div className="relative">
+              <Search
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                size={16}
+              />
+              <input
+                type="text"
+                placeholder="SEARCH BY ITEM, NAME, OR ID..."
+                className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-[10px] font-bold w-72 focus:ring-2 focus:ring-red-500 outline-none transition-all"
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
-            <button className="p-2 border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600">
-               <Filter size={18} />
-            </button>
-            <button className="flex items-center gap-2 bg-slate-950 text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all">
-               <Download size={14} /> Export_CSV
+            <button
+              onClick={exportToCSV}
+              className="bg-slate-900 text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-red-600 transition-colors cursor-pointer"
+            >
+              <Download size={14} /> Export_CSV
             </button>
           </div>
         </div>
-      </div>
 
-      {/* LOGS TABLE */}
-      <div className="max-w-7xl mx-auto bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-        <div className="overflow-x-auto">
+        {/* LOG TABLE */}
+        <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
           <table className="w-full text-left">
             <thead className="bg-slate-50 border-b border-slate-200">
-              {table.getHeaderGroups().map(headerGroup => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map(header => (
-                    <th key={header.id} className="px-6 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                      {flexRender(header.column.columnDef.header, header.getContext())}
-                    </th>
-                  ))}
-                </tr>
-              ))}
+              <tr>
+                <th className="p-5 text-[9px] font-black uppercase text-slate-400">
+                  Event
+                </th>
+                <th className="p-5 text-[9px] font-black uppercase text-slate-400">
+                  Asset Details
+                </th>
+                <th className="p-5 text-[9px] font-black uppercase text-slate-400">
+                  Operator (User)
+                </th>
+                <th className="p-5 text-[9px] font-black uppercase text-slate-400">
+                  Timestamp
+                </th>
+              </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
               {loading ? (
                 <tr>
-                   <td colSpan="5" className="py-20 text-center text-slate-300 font-black italic animate-pulse uppercase tracking-[0.5em]">Syncing_Archives...</td>
-                </tr>
-              ) : logs.length === 0 ? (
-                <tr>
-                   <td colSpan="5" className="py-20 text-center text-slate-300 font-black italic uppercase tracking-[0.5em]">No_History_Found</td>
+                  <td
+                    colSpan="4"
+                    className="p-20 text-center animate-pulse font-black text-slate-300"
+                  >
+                    SYNCHRONIZING_ARCHIVES...
+                  </td>
                 </tr>
               ) : (
-                table.getRowModel().rows.map(row => (
-                  <tr key={row.id} className="hover:bg-slate-50/50 transition-colors">
-                    {row.getVisibleCells().map(cell => (
-                      <td key={cell.id} className="px-6 py-4 border-l border-transparent first:border-l-0">
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
-                    ))}
+                filteredLogs.map((log) => (
+                  <tr
+                    key={log._id}
+                    className="hover:bg-slate-50 transition-colors"
+                  >
+                    <td className="p-5">
+                      <span
+                        className={`flex items-center gap-1 text-[10px] font-black italic tracking-widest ${
+                          log.type === "RETURN"
+                            ? "text-emerald-500"
+                            : "text-blue-600"
+                        }`}
+                      >
+                        {/* Visual Directional Icons */}
+                        {log.type === "RETURN" ? (
+                          <>
+                            <ArrowDownLeft size={14} className="stroke-[3px]" />
+                            <span>RETURNED</span>
+                          </>
+                        ) : (
+                          <>
+                            <ArrowUpRight size={14} className="stroke-[3px]" />
+                            <span>CHECKOUT</span>
+                          </>
+                        )}
+                      </span>
+                    </td>
+                    <td className="p-5">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 relative rounded bg-slate-100 border border-slate-200 overflow-hidden grayscale opacity-70">
+                          <Image
+                            src={log.item.photo}
+                            alt=""
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[11px] font-black uppercase text-slate-800 leading-none">
+                            {log.item.name}
+                          </span>
+                          <span className="text-[9px] font-mono font-bold text-slate-400 mt-1">
+                            ID: {log.item.productCode}
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-5">
+                      <div className="flex items-center gap-2">
+                        <div className="h-6 w-6 relative rounded-full overflow-hidden border border-slate-200">
+                          <Image
+                            src={log.receiver.photo}
+                            alt=""
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[10px] font-bold text-slate-700 uppercase leading-none">
+                            {log.receiver.name}
+                          </span>
+                          <span className="text-[8px] font-mono text-slate-400 uppercase tracking-tighter">
+                            {log.receiver.blitzId}
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-5 font-mono text-[10px]">
+                      <div className="flex flex-col">
+                        <span className="text-slate-900 font-bold">
+                          {new Date(log.createdAt).toLocaleDateString()}
+                        </span>
+                        <span className="text-slate-400">
+                          {new Date(log.createdAt).toLocaleTimeString()}
+                        </span>
+                      </div>
+                    </td>
                   </tr>
                 ))
               )}
             </tbody>
           </table>
         </div>
-      </div>
 
-      {/* FOOTER STATS */}
-      <div className="max-w-7xl mx-auto mt-6 flex justify-between items-center text-[9px] font-bold text-slate-400 uppercase tracking-widest">
-         <div className="flex items-center gap-4">
-            <span>Total Transitions: {logs.length}</span>
-            <span>Archive Depth: 90 Days</span>
-         </div>
-         <div className="flex items-center gap-1">
-            <Calendar size={12} />
-            <span>Updated: {new Date().toLocaleTimeString()}</span>
-         </div>
+        {/* FOOTER STATS */}
+        <div className="mt-4 flex justify-between text-[9px] font-black text-slate-400 uppercase tracking-widest px-2">
+          <span>Total Archives Recorded: {logs.length}</span>
+          <span className="flex items-center gap-1">
+            <History size={10} /> Data_Integrity: Verified
+          </span>
+        </div>
       </div>
     </div>
   );
 };
 
-export default TransitionLogs;
+export default AdminHistoryPage;
