@@ -237,7 +237,7 @@ const MyEquipmentTable = () => {
               ) : (
                 <tr>
                   <td colSpan="5" className="p-20 text-center font-black text-slate-300 uppercase italic tracking-widest text-sm">
-                    Registry Clear: No data found in this node
+                    No data found in this node
                   </td>
                 </tr>
               )}

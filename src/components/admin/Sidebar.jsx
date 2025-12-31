@@ -31,7 +31,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const pathname = usePathname();
   const [openSubmenus, setOpenSubmenus] = useState({});
   const [logoutModalOpen, setLogoutModalOpen] = useState(false); // Modal state
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut,loading } = useContext(AuthContext);
 
   const isAdmin = user?.admindata?.role?.toLowerCase().includes("admin");
   const userRole = isAdmin ? ROLE.ADMIN : ROLE.MEMBER;
@@ -87,6 +87,14 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
     setLogoutModalOpen(false);
   };
 
+
+  if (loading) {
+  return (
+    <aside className="fixed top-0 left-0 h-full w-70 md:w-64 bg-white border-r border-gray-200 z-50 flex items-center justify-center">
+    </aside>
+  );
+}
+
   return (
     <>
       <aside
@@ -97,7 +105,14 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       >
         <div className="flex items-center justify-between p-6 h-20 border-b border-gray-50 shrink-0">
           <div className="flex items-center gap-3">
-            <span className="text-xl font-bold tracking-wider text-slate-900">MIST Blitz</span>
+            <span className="text-xl font-bold tracking-wider text-slate-900">
+              <Image
+                src="/logo_black.png"
+                width={100}
+                height={100}
+                alt="logo"
+              />
+            </span>
           </div>
           <button onClick={toggleSidebar} className="md:hidden p-2 -mr-2 text-slate-400 hover:text-slate-600">
             <FaTimes size={20} />
@@ -161,7 +176,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
 
         <div className="p-4 border-t border-gray-100 bg-gray-50/20 space-y-2">
           <div className="flex items-center p-3 rounded-xl bg-white border border-gray-200 shadow-sm">
-            <div className="relative w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold mr-3 overflow-hidden shadow-inner">
+            <div className="relative w-10 h-10 rounded-full  text-white flex items-center justify-center text-xs font-bold mr-3 overflow-hidden shadow-inner">
               {user?.info?.image ? (
                 <Image src={user.info.image} alt="profile" fill className="object-cover" />
               ) : (

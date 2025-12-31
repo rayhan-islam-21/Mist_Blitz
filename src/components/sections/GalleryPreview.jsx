@@ -79,7 +79,7 @@ export default function GalleryPreviewCarousel() {
         ARCHIVE_RECORD
       </div>
 
-      <div className="max-w-[1800px] mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* 2. HEADER: BRUTALIST STYLE */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
@@ -87,11 +87,11 @@ export default function GalleryPreviewCarousel() {
             <div className="flex items-center gap-3 mb-4">
               <Activity size={16} className="text-red-600 animate-pulse" />
               <span className="text-[10px] font-bold tracking-[0.5em] text-red-600 uppercase font-mono">
-                Historical_Data // Archive
+                Archive
               </span>
             </div>
             <h2 className="text-7xl font-sans md:text-[11rem] font-black text-white italic leading-[0.75] tracking-tighter uppercase">
-              THE<br /><span className="text-transparent stroke-text">JOURNEY.</span>
+              THE<br /><span className="text-red-600">JOURNEY</span>
             </h2>
           </div>
 
@@ -107,7 +107,7 @@ export default function GalleryPreviewCarousel() {
 
         {/* 3. CAROUSEL */}
         <div
-          className="relative h-[450px] md:h-[650px] flex items-center justify-center touch-pan-y"
+          className="relative h-110 md:h-162 flex items-center justify-center touch-pan-y"
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
@@ -132,21 +132,19 @@ export default function GalleryPreviewCarousel() {
         {/* 4. FOOTER STATUS BAR */}
         <div className="flex flex-col md:flex-row items-center justify-between mt-16 gap-6 pt-10 border-t border-white/10 font-mono text-[9px] text-gray-600 uppercase tracking-widest italic">
           <div className="flex gap-10">
-            <span>[X_COORD: 102.4]</span>
-            <span>[Y_COORD: 900.2]</span>
           </div>
           <div className="flex gap-2">
             {galleryData.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setActiveIndex(i)}
-                className={`h-[2px] transition-all duration-500 ${
+                className={`h-0.5 transition-all duration-500 ${
                   activeIndex === i ? "w-12 bg-red-600" : "w-4 bg-gray-800"
                 }`}
               />
             ))}
           </div>
-          <span>Ref: BLITZ_ARCHIVE_2024</span>
+          <span>Ref: BLITZ_ARCHIVE_2025</span>
         </div>
       </div>
 
@@ -225,7 +223,7 @@ function GalleryCard({ item, index, activeIndex, total }) {
                </span>
             </div>
 
-            <h3 className="text-3xl md:text-7xl font-black text-white uppercase italic tracking-tighter mb-4 leading-none">
+            <h3 className="text-3xl font-sans md:text-7xl font-black text-white uppercase italic tracking-tighter mb-4 leading-none">
               {item.title}
             </h3>
 
@@ -237,16 +235,11 @@ function GalleryCard({ item, index, activeIndex, total }) {
               }}
               className="overflow-hidden"
             >
-              <p className="text-gray-400 font-mono text-xs md:text-sm max-w-xl leading-relaxed mt-4 border-l-4 border-red-600 pl-6 uppercase">
+              <p className="text-gray-400 font-mono text-xs md:text-sm max-w-xl leading-relaxed mt-4  border-red-600 pl-6 uppercase">
                 {item.hoverText}
               </p>
             </motion.div>
           </motion.div>
-        </div>
-
-        {/* 6. CORNER ICON */}
-        <div className="absolute top-6 right-6 opacity-40 group-hover:opacity-100 transition-opacity">
-           <Maximize2 size={20} className="text-white" />
         </div>
       </div>
     </motion.div>

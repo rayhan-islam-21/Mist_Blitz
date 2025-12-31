@@ -101,7 +101,6 @@ const MyProfile = () => {
   if (loading) {
     return (
       <div className="h-screen w-full flex items-center justify-center">
-        <h1 className="text-xl md:text-3xl font-black text-slate-400 font-sans uppercase italic">Loading....</h1>
       </div>
     );
   }

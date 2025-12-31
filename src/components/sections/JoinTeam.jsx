@@ -58,16 +58,9 @@ export default function JoinBlitzTeam() {
 
       {/* 2. HEADER: MASSIVE BRUTALIST STYLE */}
       <div className="relative z-20 mb-32 text-center px-4">
-        <div className="flex items-center justify-center gap-3 mb-6">
-           <Cpu size={18} className="text-red-600 animate-pulse" />
-           <span className="font-mono text-xs text-red-600 font-bold tracking-[0.5em] uppercase">Structural_Nexus</span>
-        </div>
         <h2 className="text-6xl font-sans md:text-[10rem] font-black text-white italic leading-[0.8] tracking-tighter uppercase">
-          TEAM <br /> <span className="text-transparent stroke-text">BLITZ.</span>
+          TEAM <br /> <span className="text-red-600">BLITZ!</span>
         </h2>
-        <p className="mt-8 text-gray-500 font-mono text-[10px] tracking-[0.3em] uppercase max-w-lg mx-auto leading-relaxed border-t border-white/10 pt-6">
-          // Cross-Functional Departmental Interconnectivity System // Version 1.0_FSC
-        </p>
       </div>
 
       {/* ---------- MOBILE / VERTICAL CARDS ---------- */}
@@ -113,9 +106,6 @@ export default function JoinBlitzTeam() {
               <div className="absolute inset-0 rounded-full bg-red-600/30 blur-[60px] animate-pulse group-hover:bg-red-600/50 transition-all duration-700" />
               <div className="relative h-44 w-44 rounded-full bg-black border-[3px] border-red-600 overflow-hidden shadow-[0_0_30px_rgba(220,38,38,0.5)]">
                 <Image src="/furiosalogo.jpg" alt="Logo" fill className="object-cover transition-transform group-hover:scale-110 duration-700" />
-              </div>
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] text-red-600 font-bold uppercase tracking-[0.4em]">
-                Core_Node
               </div>
             </div>
           </div>
@@ -173,38 +163,6 @@ export default function JoinBlitzTeam() {
         .stroke-text {
           -webkit-text-stroke: 1.5px white;
           color: transparent;
-        }
-      `}</style>
-
-      {/* 7. BRUTALIST DATA MARQUEE */}
-      <div className="absolute bottom-0 -rotate-0.5 left-0 w-full bg-red-600 py-6 overflow-hidden whitespace-nowrap border-y border-black z-50">
-        <div className="flex animate-marquee">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="flex items-center">
-              <span className="text-white font-mono text-[16px] md:text-lg font-black uppercase tracking-[0.3em] mx-10">
-                SYSTEM_STATUS: OPTIMIZED // RECRUITMENT_PHASE: ACTIVE // CORE_TEMP: NOMINAL // ALLIANCE_SYNC: 100% // 
-              </span>
-              <span className="text-white font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-10">
-                MIST_BLITZ_FSC_2024 // FURIA_1.0_CHASSIS_STABLE // 
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <style jsx>{`
-        .stroke-text {
-          -webkit-text-stroke: 1.5px white;
-          color: transparent;
-        }
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          display: flex;
-          width: fit-content;
-          animation: marquee 30s linear infinite;
         }
       `}</style>
     </section>
