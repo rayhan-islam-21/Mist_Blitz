@@ -95,21 +95,11 @@ export default function PremiumPartners() {
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-red-600/50 to-transparent" />
         <div className="flex flex-col md:flex-row justify-between items-end gap-8">
           <div className="space-y-4">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-3 text-red-500"
-            >
-              <Target size={14} className="animate-pulse" />
-              <span className="text-[10px] uppercase tracking-[0.4em] font-bold">
-                Registry_Database
-              </span>
-            </motion.div>
             <h1 className="text-6xl font-sans italic md:text-8xl font-black tracking-tighter leading-[0.8]">
-              OUR PARTNER'S
+              OUR <span className="text-red-600">PARTNER'S</span>
               <br />
             </h1>
-            <p className="text-white/40 text-sm md:text-base max-w-xl italic">
+            <p className="text-white/40 text-sm font-sans md:text-base max-w-xl italic">
               Connected strategic partners driving innovation, security, and
               high-precision infrastructure across the network.
             </p>

@@ -53,7 +53,7 @@ const AboutPreview = () => {
 
             <h1 className="text-5xl md:text-[9rem] font-black uppercase italic leading-[0.8] tracking-tighter mb-10">
               MIST <br />
-              <span className=" text-red-600">BLITZ.</span>
+              <span className=" text-red-600">BLITZ</span>!
             </h1>
 
             <div className="space-y-8">

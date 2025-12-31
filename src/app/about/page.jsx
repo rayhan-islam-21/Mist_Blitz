@@ -49,8 +49,8 @@ const About = () => {
               <h3 className="text-red-500 font-sans italic font-bold uppercase tracking-widest text-sm mb-2">
                 Our Mission
               </h3>
-              <h2 className="text-5xl uppercase text-white font-sans font-black italic mb-6">
-                Building More Than <span className="text-red-600">Just Race Cars.</span>
+              <h2 className="text-3xl md:text-5xl uppercase text-white font-sans font-black italic mb-6">
+                Building More Than  <span className="text-red-600">Just Race Cars.</span>
               </h2>
               <p className="text-gray-400 leading-relaxed mb-6">
                 Founded at the Military Institute of Science and Technology,
