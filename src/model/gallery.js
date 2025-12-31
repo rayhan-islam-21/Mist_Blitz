@@ -1,21 +1,14 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const GallerySchema = new mongoose.Schema({
-  // The direct link to the image
-  imageUrl: { 
-    type: String, 
-    required: true 
-  },
-  year: { 
-    type: String, 
-    required: true,
-    default: "2025"
-  },
+  imageUrl: { type: String, required: true },
+  year: { type: String, default: "2025" },
+}, { 
+  timestamps: true,
+  collection: 'galleries' // This forces Mongoose to use your existing collection
+});
 
-  createdAt: { 
-    type: Date, 
-    default: Date.now 
-  }
-}, { timestamps: true });
+// The check for mongoose.models is still required for Next.js
+const Gallery = mongoose.models.Gallery || mongoose.model("Gallery", GallerySchema);
 
-module.exports = mongoose.model('Gallery', GallerySchema);
+export default Gallery;
