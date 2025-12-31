@@ -23,7 +23,7 @@ const DeptCard = forwardRef(function DeptCard(
           src={image}
           alt={title}
           fill
-          className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out brightness-75 group-hover:brightness-90"
+          className="object-cover   group-hover:scale-105 transition-all duration-1000 ease-out brightness-105 group-hover:brightness-100"
         />
         {/* Dynamic Gradient Mask */}
         <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
@@ -31,10 +31,6 @@ const DeptCard = forwardRef(function DeptCard(
 
       {/* 2. HUD ELEMENTS (The Engineering Aesthetic) */}
       <div className="absolute top-6 left-6 z-20 flex flex-col gap-1">
-        <div className="flex items-center gap-2 bg-red-600/10 backdrop-blur-md px-3 py-1 rounded-full border border-blue-500/20">
-          <Zap size={10} className="text-red-500 fill-red-600 animate-pulse" />
-          <span className="text-[9px] font-mono text-red-400 uppercase tracking-widest font-bold">Sector_0{title.length}</span>
-        </div>
       </div>
 
       {/* 3. CENTER CONTENT CONTAINER */}
@@ -47,12 +43,8 @@ const DeptCard = forwardRef(function DeptCard(
 
         {/* Title & Static Info */}
         <div className="relative space-y-2">
-          <div className="flex items-center gap-2 translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-             <div className="w-8 h-0.5 bg-red-600" />
-             <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">Department Module</span>
-          </div>
           
-          <h3 className="text-4xl font-black italic uppercase  text-white transition-all duration-500 group-hover:text-red-600">
+          <h3 className="text-2xl border-l-4 border-l-red-500 p-2 font-black italic font-sans uppercase  text-white transition-all duration-500 ">
             {title}
           </h3>
         </div>
@@ -62,24 +54,6 @@ const DeptCard = forwardRef(function DeptCard(
           <p className="mt-4 text-neutral-300 text-sm leading-relaxed font-medium line-clamp-3">
             {description}
           </p>
-
-          <div className="mt-6 flex items-center justify-between">
-            <button className="flex items-center gap-2 group/btn relative">
-              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-white group-hover/btn:text-red-500 transition-colors">
-                Initialize Protocol
-              </span>
-              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover/btn:bg-red-600 group-hover/btn:border-red-600 transition-all">
-                 <ChevronRight size={14} className="text-white group-hover/btn:translate-x-0.5 transition-transform" />
-              </div>
-            </button>
-            
-            {/* Visual Telemetry Detail */}
-            <div className="hidden sm:flex gap-1">
-               {[...Array(4)].map((_, i) => (
-                 <div key={i} className="w-1 h-3 bg-white/10 group-hover:bg-red-600/40 transition-all" style={{ transitionDelay: `${i * 50}ms` }} />
-               ))}
-            </div>
-          </div>
         </div>
       </div>
 

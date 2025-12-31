@@ -11,7 +11,7 @@ export const AnimatedBeam = ({
   toRef,
   curvature = -100,
   reverse = false, // Include the reverse prop
-  duration = Math.random() * 3 + 4,
+  duration = Math.random() * 30 + 40,
   delay = 0,
   pathColor = "gray",
   pathWidth = 2,
