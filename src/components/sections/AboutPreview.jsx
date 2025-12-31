@@ -64,13 +64,11 @@ const AboutPreview = () => {
                 </span>{" "}
               </p>
               <p className="text-sm  text-gray-400 text-balance font-semibold italic leading-relaxed max-w-lg">
-                MIST BLITZ is the official Formula Student team of the {" "}
-                  <span className="text-white font-semibold italic">
-
-                    Military Institute of Science and Technology (MIST).
-                  </span>
-                  .
-                The team designs, manufactures, and validates a single-seat,
+                MIST BLITZ is the official Formula Student team of the{" "}
+                <span className="text-white font-semibold italic">
+                  Military Institute of Science and Technology (MIST).
+                </span>
+                . The team designs, manufactures, and validates a single-seat,
                 open-wheel race car in compliance with international Formula
                 Student regulations, representing Bangladesh on a global
                 motorsport platform.
@@ -158,7 +156,7 @@ const AboutPreview = () => {
                 </span>
               </div>
               <h2 className="text-5xl md:text-9xl font-black uppercase italic leading-none tracking-tighter mb-8">
-                OUR {" "}<span className="text-red-600">ORIGIN</span>
+                OUR <span className="text-red-600">ORIGIN</span>
               </h2>
               <div className="grid md:grid-cols-2 text-balance font-sans gap-10 text-gray-300 text-sm md:text-lg leading-relaxed font-normal">
                 <p>
@@ -179,10 +177,10 @@ const AboutPreview = () => {
             </div>
             <div className="lg:w-1/3 w-full bg-gradient-to-br from-white/5 to-transparent p-10 border-l-4 border-red-600 backdrop-blur-md">
               <h4 className="font-black uppercase tracking-widest text-white text-xs mb-6">
-                 TEAM PHILOSOPHY
+                TEAM PHILOSOPHY
               </h4>
               <p className="text-2xl font-black italic leading-tight uppercase text-white mb-4">
-                "DESIGN WITH PURPOSE. BUILD WITH <br /> 
+                "DESIGN WITH PURPOSE. BUILD WITH <br />
                 <span className="text-red-600">PRECISION.</span>"
               </p>
             </div>
@@ -193,62 +191,100 @@ const AboutPreview = () => {
             <div className="lg:col-span-8 relative h-160 border border-white/10 group overflow-hidden bg-zinc-900">
               <Image
                 src="/car2.jpg"
-                alt="Engine Prototype"
+                alt="Furiosa 1.0 Prototype"
                 fill
-                className="object-cover  opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-[2s]"
+                className="object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-[2s]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
               <div className="absolute top-10 right-10 flex gap-2">
                 <div className="h-2 w-2 rounded-full bg-red-600 animate-pulse" />
-                <span className="font-mono text-[10px] uppercase tracking-widest">
-                  Live_Proto_Testing
+                <span className="font-mono text-[10px] uppercase tracking-widest text-white">
+                  FSC_China_2024_Entry
                 </span>
               </div>
               <div className="absolute bottom-12 left-12">
                 <div className="flex items-center gap-4 mb-4">
                   <span className="w-16 h-[2px] bg-red-600" />
-                  <span className="font-mono text-xs uppercase tracking-widest">
-                    Internal Codename: MB-01
+                  <span className="font-mono text-xs uppercase tracking-widest text-gray-300">
+                    Power Unit: KTM 390 DUKE // 373.3cc
                   </span>
                 </div>
-                <h3 className="md:text-7xl text-5xl font-black italic uppercase mb-8 tracking-tighter">
+                <h3 className="md:text-7xl text-5xl font-black italic uppercase mb-8 tracking-tighter text-white">
                   FURIOSA 1.0
                 </h3>
-                <button className="flex   items-center gap-6 group/btn bg-white px-4 py-5 transition-all hover:bg-red-600 shadow-[10px_10px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none">
+
+                {/* New Data Overlay for Technical Highlights */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 border-l border-red-600 pl-6">
+                  <div>
+                    <p className="text-[10px] text-gray-500 uppercase font-mono">
+                      Weight
+                    </p>
+                    <p className="text-xl font-bold text-white">
+                      290kg (40:60)
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-gray-500 uppercase font-mono">
+                      Max Output
+                    </p>
+                    <p className="text-xl font-bold text-white">
+                      33.8tkW @8.5k
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-gray-500 uppercase font-mono">
+                      Max Torque
+                    </p>
+                    <p className="text-xl font-bold text-white">39Nm @6.5k</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-gray-500 uppercase font-mono">
+                      Chassis
+                    </p>
+                    <p className="text-xl font-bold text-white">
+                      Steel Spaceframe
+                    </p>
+                  </div>
+                </div>
+{/* 
+                <button className="flex items-center gap-6 group/btn bg-white px-4 py-5 transition-all hover:bg-red-600 shadow-[10px_10px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none">
                   <span className="text-black font-black uppercase tracking-widest text-sm group-hover/btn:text-white transition-colors">
-                  Specifications
+                    Full Specifications
                   </span>
                   <MoveRight className="text-black group-hover/btn:text-white group-hover/btn:translate-x-2 transition-all" />
-                </button>
+                </button> */}
               </div>
             </div>
 
             <div className="lg:col-span-4 grid gap-8">
+              {/* Structural Integrity Card */}
               <div className="bg-red-600 p-12 flex flex-col justify-between hover:translate-y-[-5px] transition-transform shadow-xl">
                 <div className="space-y-4">
                   <h4 className="font-black text-4xl italic uppercase leading-none text-white tracking-tighter">
-                    STRUCTURAL <br /> INTEGRITY
+                    STEEL <br /> SPACEFRAME
                   </h4>
                   <p className="text-sm font-bold opacity-90 uppercase tracking-tight text-white leading-tight">
-                    Optimized Space-Frame Chassis utilizing High-Tensile Steel
-                    alloys.
+                    Node triangulation using graded carbon steel for optimal
+                    strength-to-weight ratio.
                   </p>
                 </div>
                 <Shield size={48} className="self-end opacity-20 text-white" />
               </div>
+
+              {/* Suspension & Dynamics Card */}
               <div className="bg-zinc-900 border border-white/10 p-12 flex flex-col justify-between hover:translate-y-[-5px] transition-transform shadow-xl">
                 <div className="space-y-4">
                   <h4 className="font-black text-4xl italic uppercase leading-none text-white tracking-tighter">
-                    TELEMETRIC <br /> PRECISION
+                    KINETIC <br /> DYNAMICS
                   </h4>
                   <p className="text-sm font-medium text-gray-400 uppercase tracking-tight leading-tight">
-                    Live 50Hz Data Acquisition for thermal and engine
-                    management.
+                    Double Wishbone pushrod suspension system for precision
+                    handling and stability.
                   </p>
                 </div>
                 <div className="flex justify-between items-center border-t border-white/10 pt-6">
                   <span className="font-mono text-[10px] text-gray-500 uppercase tracking-widest tracking-tighter">
-                    Blitz Command // 2024
+                    Tires: Apollo Amazer 4G Life // R13
                   </span>
                   <Activity size={16} className="text-red-600" />
                 </div>
@@ -259,19 +295,27 @@ const AboutPreview = () => {
       </section>
 
       {/* MARQUEE TEXT DECORATION - Refined speed and weight */}
-      <div className="py-8 bg-red-600  z-50 -rotate-1 w-[115%] -ml-[7.5%] border-y-4 border-black group cursor-default">
+      <div className="py-8 bg-red-600  z-50 -rotate-[0.95] w-[115%] -ml-[7.5%] border-y-4 border-black group cursor-default">
         <div className="flex whitespace-nowrap z-50 gap-12 animate-marquee font-black italic uppercase text-5xl text-white select-none">
-          <span>Formula Student China Entry</span>
+          <span>FSC CHINA 2024 ENTRY</span>
           <span>•</span>
           <span>MIST BLITZ // DHAKA</span>
           <span>•</span>
-          <span>Weight: 240kg // Peak RPM: 12,000</span>
+          <span>Weight: 290kg (40:60)</span>
           <span>•</span>
-          <span> Designed to Compete</span>
+          <span>KTM 390 DUKE POWER UNIT</span>
           <span>•</span>
-          <span>FSC CHINA 2024</span>
+          <span>373.3cc Engine</span>
           <span>•</span>
-          <span>Furiosa 1.0 Chassis</span>
+          <span>Peak Torque: 39Nm @ 6500rpm</span>
+          <span>•</span>
+          <span>Output: 33.8tkW @ 8500rpm</span>
+          <span>•</span>
+          <span>Steel Spaceframe Chassis</span>
+          <span>•</span>
+          <span>Double Wishbone Geometry</span>
+          <span>•</span>
+          <span>Furiosa 1.0</span>
         </div>
       </div>
 
