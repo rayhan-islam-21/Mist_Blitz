@@ -129,7 +129,7 @@ const AddEquipmentPage = () => {
         {/* Header */}
         <header className="mb-8 md:mb-12 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-100 pb-6 gap-4">
           <div>
-            <h1 className="text-2xl md:text-4xl font-black tracking-tighter uppercase italic leading-none">
+            <h1 className="text-2xl md:text-5xl font-black tracking-tighter uppercase italic leading-none">
               Add <span className="text-red-600">Equipment</span>
             </h1>
             <p className="text-slate-500 text-xs md:text-sm mt-2 font-medium flex items-center gap-2">

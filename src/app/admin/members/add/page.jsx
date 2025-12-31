@@ -130,12 +130,12 @@ const AddMemberPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-red-100 selection:text-red-900 overflow-x-hidden">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-red-600 selection:text-white overflow-x-hidden">
       <Toaster position="top-center" />
       <div className="max-w-6xl mx-auto py-8 md:py-16 px-4 sm:px-6">
         <header className="mb-8 md:mb-12 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-100 pb-6 gap-4">
           <div>
-            <h1 className="text-2xl md:text-4xl font-black tracking-tighter uppercase italic leading-none">
+            <h1 className="text-2xl md:text-5xl font-black tracking-tighter uppercase italic leading-none">
               Member <span className="text-red-600">Onboarding</span>
             </h1>
             <p className="text-slate-500 text-xs md:text-sm mt-2 font-medium flex items-center gap-2">

@@ -146,7 +146,7 @@ const MyEquipmentTable = () => {
           </button>
         ) : (
           <div className="flex items-center gap-2 text-emerald-600 text-[10px] font-black uppercase italic">
-            <CheckCircle2 size={16} /> Locked
+            <CheckCircle2 size={16} /> returned
           </div>
         )
       )

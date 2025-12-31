@@ -81,16 +81,16 @@ const AdminHistoryPage = () => {
     URL.revokeObjectURL(url);
   };
   return (
-    <div className="p-8 bg-[#F8FAFC] min-h-screen font-sans">
+    <div className="p-8 bg- min-h-screen font-sans">
       <div className="max-w-7xl mx-auto">
         {/* HEADER */}
         <div className="flex justify-between items-end mb-8">
           <div>
-            <h1 className="text-4xl font-black italic tracking-tighter uppercase text-slate-900">
-              Master <span className="text-red-600">Archives</span>
+            <h1 className="text-5xl font-black italic tracking-tighter uppercase text-slate-900">
+              Admin {" "}<span className="text-red-600">Archives</span>
             </h1>
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] mt-2">
-              Global Transition Log & Audit Trail
+              Transition History
             </p>
           </div>
 
@@ -103,7 +103,7 @@ const AdminHistoryPage = () => {
               <input
                 type="text"
                 placeholder="SEARCH BY ITEM, NAME, OR ID..."
-                className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-[10px] font-bold w-72 focus:ring-2 focus:ring-red-500 outline-none transition-all"
+                className="pl-10 pr-4 py-2 text-slate-900 bg-white border border-slate-200 rounded-lg text-[10px] font-bold w-72 focus:ring-2 focus:ring-red-500 outline-none transition-all"
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>

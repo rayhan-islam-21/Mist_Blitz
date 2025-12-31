@@ -56,7 +56,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         { name: "All Equipment", path: "/admin/equipment/all-equipment", roles: [ROLE.ADMIN] },
         { name: "Add Equipment", path: "/admin/equipment/add", roles: [ROLE.ADMIN] },
         { name: "Equipment Shop", path: "/member/equipment-shop", roles: [ROLE.MEMBER, ROLE.ADMIN] },
-        { name: "My Equipment", path: "/member/my-equipment", roles: [ROLE.MEMBER] },
+        { name: "My Equipment", path: "/member/my-equipment", roles: [ROLE.MEMBER,ROLE.ADMIN] },
       ],
     },
     {
@@ -97,7 +97,6 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       >
         <div className="flex items-center justify-between p-6 h-20 border-b border-gray-50 shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold shadow-md">B</div>
             <span className="text-xl font-bold tracking-wider text-slate-900">MIST Blitz</span>
           </div>
           <button onClick={toggleSidebar} className="md:hidden p-2 -mr-2 text-slate-400 hover:text-slate-600">
