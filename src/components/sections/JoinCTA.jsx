@@ -5,6 +5,21 @@ import { motion } from "framer-motion";
 import { MoveRight, Zap, Target, Activity, ShieldAlert } from "lucide-react";
 
 export default function JoinCTA() {
+
+    const handleClick = () => {
+    window.location.href =
+      "mailto:sponsor@mistblitz.com" +
+      "?subject=Sponsorship%20Inquiry%20%E2%80%93%20Mist%20Blitz" +
+      "&body=Assalamualaikum%2C%0A%0A" +
+      "I%20hope%20this%20email%20finds%20you%20well.%0A%0A" +
+      "I%20am%20interested%20in%20sponsoring%20Mist%20Blitz%20and%20would%20like%20to%20learn%20more%20about%20your%20sponsorship%20opportunities%2C%20audience%20reach%2C%20and%20collaboration%20models.%0A%0A" +
+      "Please%20let%20me%20know%20the%20next%20steps%20and%20any%20relevant%20details.%0A%0A" +
+      "Best%20regards%2C%0A" +
+      "Name%3A%0A" +
+      "Company%20%2F%20Organization%3A%0A" +
+      "Phone%3A%0A" +
+      "Email%3A";
+  };
   return (
     <section className="relative py-40 bg-[#050505] border-t border-white/5 flex flex-col items-center justify-center text-center overflow-hidden">
       {/* BACKGROUND DECORATIVE ELEMENT */}
@@ -13,19 +28,6 @@ export default function JoinCTA() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* TOP STATUS BAR */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-4 mb-8 bg-red-600/5 border border-red-600/20 px-6 py-2"
-        >
-          <Activity size={14} className="text-red-600 animate-pulse" />
-          <span className="text-red-500 font-mono font-bold tracking-[0.3em] uppercase text-[10px]">
-            Alliance Opportunities // Open
-          </span>
-        </motion.div>
-
-        {/* HEADING: BRUTALIST STYLE */}
         <motion.h2
           initial={{ y: 60, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -66,7 +68,7 @@ export default function JoinCTA() {
           <div className="absolute -top-4 -left-4 w-8 h-8 border-t-2 border-l-2 border-red-600 transition-all group-hover:-top-6 group-hover:-left-6" />
           <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b-2 border-r-2 border-red-600 transition-all group-hover:-bottom-6 group-hover:-right-6" />
 
-          <button className="relative bg-white text-black px-12 md:px-20 py-8 font-black uppercase tracking-[0.3em] italic text-xl md:text-2xl transition-all hover:bg-red-600 hover:text-white flex items-center gap-8 shadow-[20px_20px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-2">
+          <button onClick={handleClick} className="relative bg-white text-black px-12 md:px-20 py-8 font-black uppercase tracking-[0.3em] italic text-xl md:text-2xl transition-all hover:bg-red-600 hover:text-white flex items-center gap-8 shadow-[20px_20px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-2">
             SECURE PARTNERSHIP
             <MoveRight
               size={32}
@@ -87,37 +89,6 @@ export default function JoinCTA() {
           </div>
         </motion.div>
       </div>
-
-      {/* FOOTER STRIP: DATA STREAM */}
-      <div className="absolute bottom-0 w-full bg-white text-black py-2 overflow-hidden select-none">
-        <div className="flex whitespace-nowrap gap-10 animate-marquee font-mono text-[10px] font-black uppercase">
-          {[1, 2, 3, 4].map((i) => (
-            <span key={i}>
-              Initiating Alliance Protocol // FSC China 2024 // MIST Blitz
-              Command Dhaka // Join the Revolution
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <style jsx>{`
-        .stroke-text {
-          -webkit-text-stroke: 2px white;
-          color: transparent;
-        }
-        @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-33.3%);
-          }
-        }
-        .animate-marquee {
-          display: inline-flex;
-          animation: marquee 30s linear infinite;
-        }
-      `}</style>
     </section>
   );
 }

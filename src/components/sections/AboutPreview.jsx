@@ -52,8 +52,8 @@ const AboutPreview = () => {
             </motion.div>
 
             <h1 className="text-5xl md:text-[9rem] font-black uppercase italic leading-[0.8] tracking-tighter mb-10">
-              SPEED <br />
-              <span className=" text-red-600">DEFINED.</span>
+              MIST <br />
+              <span className=" text-red-600">BLITZ.</span>
             </h1>
 
             <div className="space-y-8">

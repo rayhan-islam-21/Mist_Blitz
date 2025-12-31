@@ -177,7 +177,7 @@ export default function JoinBlitzTeam() {
       {!isMobile && (
         <div
           ref={containerRef}
-          className="relative w-full max-w-[1800px] h-[1800px] flex items-center justify-center"
+          className="relative w-full max-w-450 h-450 flex items-center justify-center"
         >
           {/* HUD Status Elements */}
           <div className="absolute top-0 left-10 p-6  font-mono text-[9px] text-gray-500 uppercase"></div>

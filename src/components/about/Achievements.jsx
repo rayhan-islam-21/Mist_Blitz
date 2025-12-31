@@ -1,169 +1,66 @@
 import React from "react";
-import { Award, Trophy, Target, Zap, ChevronRight, Camera } from "lucide-react";
 import Image from "next/image";
-import { Highlighter } from "../ui/highlighter";
 
 const Achievements = () => {
   const achievements = [
     {
-      year: "2025",
-      title: "PR & Design Excellence",
-      event: "International FS Competition",
-      desc: "Dominated the static events with a flawless Engineering Design Report and a market-leading Business Plan.",
-      icon: <Award className="w-8 h-8 text-blue-500" />,
       size: "lg",
-      tag: "Top Tier",
-      image: "/china3.jpg", // Add your image path
+      image: "/ach/best.jpg",
     },
     {
-      year: "2024",
-      title: "Global 1st Place",
-      event: "FSAE Japan",
-      desc: "Rookie category champions. Top marks in Acceleration.",
-      icon: <Trophy className="w-6 h-6 text-yellow-500" />,
       size: "sm",
-      tag: "Winner",
-      image: "/china3.jpg",
+      image: "/ach/no1.jpg",
     },
     {
-      year: "2024",
-      title: "Furiosa 1.0",
-      event: "Project Launch",
-      desc: "MIST's first combustion prototype cleared tech inspection.",
-      icon: <Zap className="w-6 h-6 text-emerald-500" />,
       size: "sm",
-      tag: "Milestone",
-      image: "/china3.jpg",
+      image: "/ach/bf.jpg",
     },
     {
-      year: "2023",
-      title: "Concept Innovation",
-      event: "Design Phase",
-      desc: "Secured funding for the first carbon-fiber aero-package concept.",
-      icon: <Target className="w-6 h-6 text-purple-500" />,
       size: "md",
-      tag: "Innovation",
-      image: "/china.jpg",
+      image: "/ach/4th.jpg",
     },
+    {
+      size: "sm",
+      image: "/china4.jpg",
+    }
   ];
 
   return (
-    <section className="py-24  relative overflow-hidden">
+    <section className="py-24 relative overflow-hidden bg-black">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-xl">
             <h2 className="text-red-600 font-mono tracking-[0.4em] uppercase text-sm mb-4 flex items-center gap-2">
               <span className="w-8 h-0.5 bg-red-600"></span> Proven Excellence
             </h2>
-            <h1 className="text-5xl md:text-7xl font-black text-white font-sans  tracking-tighter uppercase italic">
+            <h1 className="text-5xl md:text-7xl font-black text-white font-sans tracking-tighter uppercase italic">
               Hall of <span className="text-red-700 ">Legacy</span>
             </h1>
           </div>
-          <div className="bg-white/5 backdrop-blur-md border border-white/20 p-4 rounded-2xl">
-            <p className="text-gray-100 font-mono text-[10px] uppercase tracking-widest">
-              Global Ranking Status
-            </p>
-            <p className="text-2xl font-bold text-white uppercase italic flex items-center gap-2">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-              Active Contender
-            </p>
-          </div>
         </div>
 
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[240px]">
+        {/* Bento Grid Layout - Images Only */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[270px]">
           {achievements.map((item, index) => (
             <div
               key={index}
-              className={`group relative rounded overflow-hidden border border-white/10 bg-black/40 backdrop-blur-sm
-        transition-all duration-500 hover:border-red-500/10 hover:shadow-[0_0_40px_-10px_rgba(239,68,68,0.35)]
-        ${item.size === "lg" ? "md:col-span-2 md:row-span-2" : ""}
-        ${item.size !== "lg" ? "md:col-span-1 md:row-span-1" : ""}`}
+              className={`group relative rounded overflow-hidden border border-white/10 bg-zinc-900
+                transition-all duration-700 hover:border-red-600/50 hover:shadow-[0_0_40px_-10px_rgba(239,68,68,0.3)]
+                ${item.size === "lg" ? "md:col-span-2 md:row-span-2" : "md:col-span-1 md:row-span-1"}`}
             >
-              {/* Background */}
-              <div className="absolute inset-0 z-0">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent" />
-              </div>
-
-              {/* Content */}
-              <div className="relative z-10 h-full p-8 flex flex-col justify-between">
-                <div>
-                  <div className="flex justify-between items-start mb-5">
-                    <div
-                      className="p-3 bg-black/60 backdrop-blur-xl rounded-xl border border-white/10 
-                            group-hover:scale-110 transition-transform duration-500"
-                    >
-                      {item.icon}
-                    </div>
-                    <span className="text-4xl font-black text-white/10 font-mono group-hover:text-red-500/20 transition-colors">
-                      {item.year}
-                    </span>
-                  </div>
-
-                  <div
-                    className="inline-flex items-center px-3 py-1 rounded-md 
-                          bg-red-500/10 border border-red-500/30 
-                          text-red-400 text-[10px] font-bold uppercase tracking-widest mb-4"
-                  >
-                    {item.tag}
-                  </div>
-
-                  <h3
-                    className={`font-black text-white mb-2 uppercase tracking-wide 
-              group-hover:text-red-500 transition-colors
-              ${item.size === "lg" ? "text-4xl md:text-5xl" : "text-xl"}`}
-                  >
-                    {item.title}
-                  </h3>
-
-                  <p className="text-red-400 font-mono text-[10px] mb-4 uppercase tracking-[0.25em] flex items-center gap-2">
-                    <span className="w-5 h-px bg-red-500/70" />
-                    {item.event}
-                  </p>
-
-                  <p
-                    className={`text-white/60 leading-relaxed font-light ${
-                      item.size === "lg"
-                        ? "text-base max-w-md"
-                        : "text-xs max-w-xs"
-                    }`}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
-
-                {item.size === "lg" && (
-                  <button
-                    className="mt-6 flex items-center gap-2 text-white/50 text-xs font-mono 
-                             group-hover:text-red-500 transition-colors uppercase tracking-widest"
-                  >
-                    Explore Technical Details <ChevronRight size={14} />
-                  </button>
-                )}
-              </div>
+              <Image
+                src={item.image}
+                alt={`Achievement ${index}`}
+                fill
+                className="object-cover opacity-80 group-hover:scale-105 transition-all duration-700 ease-in-out"
+              />
+              
+              {/* Subtle Red Edge Highlight on Hover */}
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-red-600/20 transition-colors duration-700 pointer-events-none" />
             </div>
           ))}
-
-          {/* Visual Filler Card */}
-          <div className="hidden md:block relative rounded overflow-hidden border border-white/10 group">
-            <Image
-              src="/china4.jpg"
-              fill
-              className="object-cover brightness-100 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-300"
-              alt="Action"
-            />
-            <div className="absolute inset-0 bg-black/40" />
-            <div className="absolute bottom-4 left-4 text-white/80 font-mono text-[10px] flex items-center gap-2">
-              <Camera size={12} /> SHOT AT CHINA
-            </div>
-          </div>
         </div>
       </div>
     </section>
