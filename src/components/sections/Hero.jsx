@@ -24,6 +24,22 @@ const Hero = () => {
 
       {/* Overlay */}
       <div className="absolute inset-0 z-10 bg-linear-to-b from-black/80 via-black/50 to-black/80" />
+      {/* Bottom Shadow Fade */}
+      <div
+        className="
+    pointer-events-none
+    absolute
+    bottom-0
+    left-0
+    right-0
+    h-40
+    z-20
+    bg-linear-to-t
+    from-black/90
+    via-black/50
+    to-transparent
+  "
+      />
 
       {/* Content */}
       <div className="relative z-30 flex flex-col items-center justify-center h-full text-center px-4">
@@ -74,16 +90,6 @@ const Hero = () => {
           {/* subtle underline accent */}
           <span className="absolute left-1/2 -bottom-3 w-44 h-0.5 bg-gray-400 -translate-x-1/2 opacity-70"></span>
         </motion.p>
-
-        {/* CTA Button */}
-        {/* <motion.button
-          initial={{ y: 16, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
-          className="mt-10 px-10 py-4 w-56 text-xl font-extrabold text-white bg-black border-2 border-black  shadow-[3px_3px_0_0_gray] hover:shadow-[4px_4px_0_0-black] hover:bg-black tracking-wide rounded-none cursor-pointer hover:text-white hover:scale-105 transition-all duration-200 relative"
-        >
-          CONTACT US
-        </motion.button> */}
       </div>
     </section>
   );

@@ -58,7 +58,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Button href="/join" className="group relative h-8 md:h-11 px-4 md:px-10 bg-red-600 text-white font-mono text-[9px] md:text-[11px] font-black flex items-center justify-center skew-x-[-20deg] hover:bg-white hover:text-red-600 transition-all duration-300">
+          <Button href="/join" className="group relative h-8 md:h-11 px-4 md:px-10 bg-red-600 text-white font-mono text-[9px] md:text-[11px] font-black flex items-center justify-center skew-x-[-10deg] hover:bg-white hover:text-red-600 transition-all duration-300">
             <Link href="/contact"> <span className="skew-x-[20deg] tracking-widest">Contact Us</span></Link>
           </Button>
         </div>
