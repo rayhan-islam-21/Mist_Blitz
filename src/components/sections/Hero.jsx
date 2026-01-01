@@ -14,15 +14,16 @@ const Hero = () => {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
       >
-        <source src="https://res.cloudinary.com/dnrubj8x4/video/upload/v1766765555/hero-viedo_yzq8zl.mov" type="video/mp4" />
+        <source
+          src="https://res.cloudinary.com/dnrubj8x4/video/upload/f_mp4,q_auto/hero-viedo_yzq8zl"
+          type="video/mp4"
+        />
       </video>
 
       {/* Overlay */}
       <div className="absolute inset-0 z-10 bg-linear-to-b from-black/80 via-black/50 to-black/80" />
-
-  
 
       {/* Content */}
       <div className="relative z-30 flex flex-col items-center justify-center h-full text-center px-4">
