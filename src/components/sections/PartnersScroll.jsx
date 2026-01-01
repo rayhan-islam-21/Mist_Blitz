@@ -37,15 +37,6 @@ export default function PartnersScroll() {
       ref={containerRef}
       className="relative selection:text-white selection:bg-red-600 bg-[#050505] max-w-7xl mx-auto overflow-hidden py-32 border-t border-white/5"
     >
-      {/* 1. MASSIVE BACKGROUND TEXT (PARALLAX) */}
-      <motion.div
-        style={{ x: xMove }}
-        className="absolute top-1/2 left-0 -translate-y-1/2 whitespace-nowrap text-[25vw] font-black text-white/2 italic select-none pointer-events-none uppercase tracking-tighter"
-      >
-        Strategic Alliances // Tech Partners //
-      </motion.div>
-
-      {/* 2. TECHNICAL GRID & HUD */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
@@ -55,22 +46,30 @@ export default function PartnersScroll() {
       />
 
       <div className="max-w-450 mx-auto px-6 relative z-10">
-        {/* 3. HEADING: MAXIMUM IMPACT */}
         <div className="flex flex-col gap-2 mb-20">
-          <h2 className="text-5xl font-sans md:text-[9rem]  font-black uppercase italic leading-[0.8]   tracking-[ -0.05em] text-white">
-            OUR <br />
-            <span className="text-red-600">PARTNERS</span>!
-          </h2>
+          <motion.h2
+            initial={{ y: 60, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            className="text-5xl font-sans tracking-tighter md:text-[9rem] font-black uppercase italic leading-[0.75]  mb-12"
+          >
+            Our <br />
+            <span className="text-red-600">Partners</span>!
+          </motion.h2>
         </div>
 
         {/* 4. THE MASSIVE LOGO SCANNER */}
         <div className="relative">
-          <div className="relative py-12 bg-white/0.1 backdrop-blur-3xl group">
-            {/* Edge Glows */}
+          <div className="relative py-4 bg-white/0.1 backdrop-blur-3xl group">
             <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-[#050505] to-transparent z-20 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-[#050505] to-transparent z-20 pointer-events-none" />
 
-            <div className="relative items-center flex justify-center overflow-hidden opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 ease-in-out">
+            <motion.div
+              initial={{ y: 60, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
+              className="relative items-center flex justify-center overflow-hidden opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 ease-in-out"
+            >
               <LogoLoop
                 logos={sponsorLogos}
                 speed={60}
@@ -82,7 +81,7 @@ export default function PartnersScroll() {
                 fadeOut={false} // Custom fades used above for better control
                 ariaLabel="Our partners"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
 

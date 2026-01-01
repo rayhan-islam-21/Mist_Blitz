@@ -90,9 +90,15 @@ export default function GalleryPreviewCarousel() {
                 Archive
               </span>
             </div>
-            <h2 className="text-7xl font-sans md:text-[11rem] font-black text-white italic leading-[0.75] tracking-tighter uppercase">
-              THE<br /><span className="text-red-600">JOURNEY</span>
-            </h2>
+            <motion.h2
+          initial={{ y: 60, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
+          className="text-5xl font-sans tracking-tighter md:text-[9rem] font-black uppercase italic leading-[0.75]  mb-12"
+        >
+          Our <br />
+          <span className="text-red-600">JOurney</span>!
+        </motion.h2>
           </div>
 
           <div className="flex gap-4">

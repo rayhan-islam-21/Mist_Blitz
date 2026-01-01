@@ -51,10 +51,15 @@ const AboutPreview = () => {
               </span>
             </motion.div>
 
-            <h1 className="text-5xl md:text-[9rem] font-black uppercase italic leading-[0.8] tracking-tighter mb-10">
+            <motion.h1
+              initial={{ y: 60, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
+              className="text-5xl md:text-[9rem] font-black uppercase italic leading-[0.8] tracking-tighter mb-10"
+            >
               MIST <br />
               <span className=" text-red-600">BLITZ</span>!
-            </h1>
+            </motion.h1>
 
             <div className="space-y-8">
               <p className="text-xl md:text-3xl text-balance font-bold leading-tight tracking-tight text-gray-100 uppercase italic">
@@ -87,7 +92,7 @@ const AboutPreview = () => {
                 src="/china4.jpg"
                 alt="Formula Student China Entry"
                 fill
-                className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[1s]"
+                className="object-cover md:grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[1s]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
               <div className="absolute bottom-6 left-6">
@@ -155,9 +160,14 @@ const AboutPreview = () => {
                   The Blueprint
                 </span>
               </div>
-              <h2 className="text-5xl md:text-9xl font-black uppercase italic leading-none tracking-tighter mb-8">
+              <motion.h2
+                initial={{ x: -60, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                className="text-5xl md:text-9xl font-black uppercase italic leading-none tracking-tighter mb-8"
+              >
                 OUR <span className="text-red-600">ORIGIN</span>
-              </h2>
+              </motion.h2>
               <div className="grid md:grid-cols-2 text-balance font-sans gap-10 text-gray-300 text-sm md:text-lg leading-relaxed font-normal">
                 <p>
                   Founded in 2024, MIST BLITZ was established to bridge the gap
@@ -246,7 +256,7 @@ const AboutPreview = () => {
                     </p>
                   </div>
                 </div>
-{/* 
+                {/* 
                 <button className="flex items-center gap-6 group/btn bg-white px-4 py-5 transition-all hover:bg-red-600 shadow-[10px_10px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none">
                   <span className="text-black font-black uppercase tracking-widest text-sm group-hover/btn:text-white transition-colors">
                     Full Specifications
@@ -296,7 +306,7 @@ const AboutPreview = () => {
 
       {/* MARQUEE TEXT DECORATION - Refined speed and weight */}
       <div className="py-8 bg-red-600  z-50 -rotate-[0.95] w-[115%] -ml-[7.5%] border-y-4 border-black group cursor-default">
-        <div className="flex whitespace-nowrap z-50 gap-12 animate-marquee font-black italic uppercase text-5xl text-white select-none">
+        <div className="flex whitespace-nowrap z-50 gap-12 animate-marquee font-black italic uppercase text-2xl md:-5xl text-white select-none">
           <span>FSC CHINA 2024 ENTRY</span>
           <span>•</span>
           <span>MIST BLITZ // DHAKA</span>
@@ -334,7 +344,7 @@ const AboutPreview = () => {
         }
         .animate-marquee {
           display: inline-flex;
-          animation: marquee 25s linear infinite;
+          animation: marquee 20s linear infinite;
         }
       `}</style>
     </div>

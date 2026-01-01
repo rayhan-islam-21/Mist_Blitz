@@ -45,7 +45,7 @@ export default function JoinCTA() {
           transition={{ delay: 0.2 }}
           className="max-w-3xl mx-auto mb-16"
         >
-          <p className="text-xl md:text-3xl font-bold italic text-gray-100 uppercase leading-tight mb-6">
+          <p className="text-xl  md:text-3xl font-bold tracking-wider italic text-gray-100 uppercase leading-tight mb-6">
             Join MIST BLITZ in engineering the next era of{" "}
             <span className="text-red-600">Global Motorsports.</span>
           </p>
@@ -62,13 +62,10 @@ export default function JoinCTA() {
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="relative inline-block group"
+          className="relative md:inline-block flex justify-center items-center group"
         >
-          {/* HUD CORNER DECORATION */}
-          <div className="absolute -top-4 -left-4 w-8 h-8 border-t-2 border-l-2 border-red-600 transition-all group-hover:-top-6 group-hover:-left-6" />
-          <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b-2 border-r-2 border-red-600 transition-all group-hover:-bottom-6 group-hover:-right-6" />
 
-          <button onClick={handleClick} className="relative bg-white text-black px-12 md:px-20 py-8 font-black uppercase tracking-[0.3em] italic text-xl md:text-2xl transition-all hover:bg-red-600 hover:text-white flex items-center gap-8 shadow-[20px_20px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-2">
+          <button onClick={handleClick} className="relative bg-white text-black px-12 md:px-20 py-6 mx-center md:py-8 font-black tracking-widest uppercase  md:tracking-[0.3em] italic text-lg md:text-2xl transition-all hover:bg-red-600 hover:text-white flex items-center gap-8 shadow-[20px_20px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-2">
             SECURE PARTNERSHIP
             <MoveRight
               size={32}
@@ -76,7 +73,7 @@ export default function JoinCTA() {
             />
           </button>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-8 opacity-30">
+          <div className="mt-10  hidden md:flex flex-wrap justify-center gap-8 opacity-30">
             <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest">
               <Target size={12} /> GLOBAL_EXPOSURE
             </div>
