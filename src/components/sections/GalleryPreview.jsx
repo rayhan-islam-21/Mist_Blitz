@@ -222,14 +222,7 @@ function GalleryCard({ item, index, activeIndex, total }) {
         {/* Content Box */}
         <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 z-20">
           <motion.div animate={{ y: isHovered && isActive ? -10 : 0 }}>
-            <div className="flex items-center gap-3 mb-4">
-               <Target size={14} className="text-red-600" />
-               <span className="inline-block px-3 py-1 text-[10px] font-mono font-bold uppercase text-white bg-red-600">
-                 {item.tag}
-               </span>
-            </div>
-
-            <h3 className="text-3xl font-sans md:text-7xl font-black text-white uppercase italic tracking-tighter mb-4 leading-none">
+            <h3 className="text-3xl font-sans md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4 leading-none">
               {item.title}
             </h3>
 
