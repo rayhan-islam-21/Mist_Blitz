@@ -22,6 +22,7 @@ import PremiumDropdown from "@/components/ui/premium-dropdown";
 import api from "@/lib/axios";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
+import Button from "@/components/ui/retro-btn";
 
 const MyProfile = () => {
   const { user, setUser, loading } = useContext(AuthContext);
@@ -118,7 +119,7 @@ const MyProfile = () => {
             </h1>
           </motion.div>
 
-          <div className={`p-4 md:p-6 rounded-sm w-full md:min-w-[240px] md:w-auto shadow-2xl transition-all duration-500 ${isEditing ? "bg-red-600" : "bg-slate-900"} text-white`}>
+          <div className={`p-4 md:p-6 hidden rounded-sm w-full md:min-w-[240px] md:w-auto shadow-2xl transition-all duration-500 ${isEditing ? "bg-red-600" : "bg-slate-900"} text-white`}>
             <div className="flex justify-between items-center mb-2 md:mb-4">
               <span className="text-[9px] font-mono tracking-widest opacity-50 uppercase">{isEditing ? "Mode_Rewrite" : "Auth_Status"}</span>
               <div className={`h-2 w-2 rounded-full ${isEditing ? "bg-white animate-ping" : "bg-green-500"} shadow-[0_0_10px_currentcolor]`} />
