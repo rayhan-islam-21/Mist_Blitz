@@ -15,10 +15,9 @@ import {
   FaUserPlus,
   FaUser,
   FaSignOutAlt,
-  FaPowerOff // Replacing Trash icon with Power icon for logout
+  FaPowerOff 
 } from "react-icons/fa";
 
-// Import Dialog components
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 // ----- ROLE CONSTANTS -----
@@ -30,8 +29,10 @@ const ROLE = {
 const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const pathname = usePathname();
   const [openSubmenus, setOpenSubmenus] = useState({});
-  const [logoutModalOpen, setLogoutModalOpen] = useState(false); // Modal state
-  const { user, logOut,loading } = useContext(AuthContext);
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
+  
+  // Destructure 'loading' from AuthContext to prevent premature role assignment
+  const { user, logOut, loading } = useContext(AuthContext);
 
   const isAdmin = user?.admindata?.role?.toLowerCase().includes("admin");
   const userRole = isAdmin ? ROLE.ADMIN : ROLE.MEMBER;
@@ -56,7 +57,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         { name: "All Equipment", path: "/admin/equipment/all-equipment", roles: [ROLE.ADMIN] },
         { name: "Add Equipment", path: "/admin/equipment/add", roles: [ROLE.ADMIN] },
         { name: "Equipment Shop", path: "/member/equipment-shop", roles: [ROLE.MEMBER, ROLE.ADMIN] },
-        { name: "My Equipment", path: "/member/my-equipment", roles: [ROLE.MEMBER,ROLE.ADMIN] },
+        { name: "My Equipment", path: "/member/my-equipment", roles: [ROLE.MEMBER, ROLE.ADMIN] },
       ],
     },
     {
@@ -87,14 +88,6 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
     setLogoutModalOpen(false);
   };
 
-
-  if (loading) {
-  return (
-    <aside className="fixed top-0 left-0 h-full w-70 md:w-64 bg-white border-r border-gray-200 z-50 flex items-center justify-center">
-    </aside>
-  );
-}
-
   return (
     <>
       <aside
@@ -103,15 +96,11 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           ${sidebarOpen ? "w-70 translate-x-0" : "w-70 -translate-x-full md:translate-x-0 md:w-64"}
         `}
       >
+        {/* LOGO SECTION */}
         <div className="flex items-center justify-between p-6 h-20 border-b border-gray-50 shrink-0">
           <div className="flex items-center gap-3">
             <span className="text-xl font-bold tracking-wider text-slate-900">
-              <Image
-                src="/logo_black.png"
-                width={100}
-                height={100}
-                alt="logo"
-              />
+              <Image src="/logo_black.png" width={100} height={100} alt="logo" priority />
             </span>
           </div>
           <button onClick={toggleSidebar} className="md:hidden p-2 -mr-2 text-slate-400 hover:text-slate-600">
@@ -119,87 +108,105 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           </button>
         </div>
 
+        {/* NAVIGATION SECTION */}
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-hide">
-          {menuItems
-            .filter((item) => item.roles.includes(userRole))
-            .map((item, index) => {
-              const isActive = pathname === item.path;
-              const isSubMenuOpen = openSubmenus[item.name];
-              const hasActiveChild = item.subMenu?.some((sub) => sub.path === pathname);
+          {loading ? (
+            /* --- LOADING SKELETON --- */
+            <div className="space-y-3 px-2">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="h-10 w-full bg-slate-100 animate-pulse rounded-lg" />
+              ))}
+            </div>
+          ) : (
+            /* --- ACTUAL MENU --- */
+            menuItems
+              .filter((item) => item.roles.includes(userRole))
+              .map((item, index) => {
+                const isActive = pathname === item.path;
+                const isSubMenuOpen = openSubmenus[item.name];
+                const hasActiveChild = item.subMenu?.some((sub) => sub.path === pathname);
 
-              return (
-                <div key={index} className="relative">
-                  {!item.subMenu ? (
-                    <Link
-                      href={item.path}
-                      className={`flex items-center px-4 py-3 rounded-xl transition-all group ${
-                        isActive ? "bg-red-50 text-red-500 font-semibold" : "hover:bg-gray-50 text-slate-500"
-                      }`}
-                    >
-                      {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-red-600 rounded-r-full" />}
-                      <span className={`text-lg ${isActive ? "text-red-600" : "text-slate-400 group-hover:text-slate-600"}`}>{item.icon}</span>
-                      <span className="ml-3 text-sm">{item.name}</span>
-                    </Link>
-                  ) : (
-                    <div>
-                      <button
-                        onClick={() => toggleSubmenu(item.name)}
-                        className={`flex items-center w-full px-4 py-3 rounded-xl transition-all group ${
-                          hasActiveChild ? "text-red-500 font-semibold bg-red-50/30" : "hover:bg-gray-50"
+                return (
+                  <div key={index} className="relative">
+                    {!item.subMenu ? (
+                      <Link
+                        href={item.path}
+                        className={`flex items-center px-4 py-3 rounded-xl transition-all group ${
+                          isActive ? "bg-red-50 text-red-500 font-semibold" : "hover:bg-gray-50 text-slate-500"
                         }`}
                       >
-                        <span className={`text-lg ${hasActiveChild ? "text-red-600" : "text-slate-400 group-hover:text-slate-600"}`}>{item.icon}</span>
+                        {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-red-600 rounded-r-full" />}
+                        <span className={`text-lg ${isActive ? "text-red-600" : "text-slate-400 group-hover:text-slate-600"}`}>{item.icon}</span>
                         <span className="ml-3 text-sm">{item.name}</span>
-                        <FaChevronDown size={10} className={`ml-auto transition-transform ${isSubMenuOpen ? "rotate-180" : ""}`} />
-                      </button>
-                      <AnimatePresence>
-                        {isSubMenuOpen && (
-                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                            <div className="ml-9 mt-1 space-y-1 border-l-2 border-gray-100">
-                              {item.subMenu
-                                .filter((sub) => sub.roles.includes(userRole))
-                                .map((sub, i) => (
-                                  <Link key={i} href={sub.path} className={`block px-5 py-2.5 text-sm rounded-r-lg ${pathname === sub.path ? "text-red-600 font-medium bg-red-50" : "text-slate-500 hover:text-red-600"}`}>
-                                    {sub.name}
-                                  </Link>
-                                ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                      </Link>
+                    ) : (
+                      <div>
+                        <button
+                          onClick={() => toggleSubmenu(item.name)}
+                          className={`flex items-center w-full px-4 py-3 rounded-xl transition-all group ${
+                            hasActiveChild ? "text-red-500 font-semibold bg-red-50/30" : "hover:bg-gray-50"
+                          }`}
+                        >
+                          <span className={`text-lg ${hasActiveChild ? "text-red-600" : "text-slate-400 group-hover:text-slate-600"}`}>{item.icon}</span>
+                          <span className="ml-3 text-sm">{item.name}</span>
+                          <FaChevronDown size={10} className={`ml-auto transition-transform ${isSubMenuOpen ? "rotate-180" : ""}`} />
+                        </button>
+                        <AnimatePresence>
+                          {isSubMenuOpen && (
+                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                              <div className="ml-9 mt-1 space-y-1 border-l-2 border-gray-100">
+                                {item.subMenu
+                                  .filter((sub) => sub.roles.includes(userRole))
+                                  .map((sub, i) => (
+                                    <Link key={i} href={sub.path} className={`block px-5 py-2.5 text-sm rounded-r-lg ${pathname === sub.path ? "text-red-600 font-medium bg-red-50" : "text-slate-500 hover:text-red-600"}`}>
+                                      {sub.name}
+                                    </Link>
+                                  ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )}
+                  </div>
+                );
+              })
+          )}
         </nav>
 
+        {/* FOOTER PROFILE SECTION */}
         <div className="p-4 border-t border-gray-100 bg-gray-50/20 space-y-2">
-          <div className="flex items-center p-3 rounded-xl bg-white border border-gray-200 shadow-sm">
-            <div className="relative w-10 h-10 rounded-full  text-white flex items-center justify-center text-xs font-bold mr-3 overflow-hidden shadow-inner">
-              {user?.info?.image ? (
-                <Image src={user.info.image} alt="profile" fill className="object-cover" />
-              ) : (
-                user?.displayName?.charAt(0) || "U"
-              )}
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <p className="text-sm font-semibold font-mono uppercase text-slate-900 truncate">
-                {user?.info?.name || user?.displayName || "User"}
-              </p>
-              <p className="text-[10px] text-slate-500 truncate uppercase tracking-widest font-medium">
-                {user?.admindata?.role || "Member"}
-              </p>
-            </div>
-          </div>
+          {loading ? (
+            <div className="h-14 w-full bg-slate-100 animate-pulse rounded-xl" />
+          ) : (
+            <>
+              <div className="flex items-center p-3 rounded-xl bg-white border border-gray-200 shadow-sm">
+                <div className="relative w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-bold mr-3 overflow-hidden shadow-inner">
+                  {user?.info?.image ? (
+                    <Image src={user.info.image} alt="profile" fill className="object-cover" />
+                  ) : (
+                    user?.displayName?.charAt(0) || "U"
+                  )}
+                </div>
+                <div className="flex-1 overflow-hidden">
+                  <p className="text-sm font-semibold font-mono uppercase text-slate-900 truncate">
+                    {user?.info?.name || user?.displayName || "User"}
+                  </p>
+                  <p className="text-[10px] text-slate-500 truncate uppercase tracking-widest font-medium">
+                    {user?.admindata?.role || "Member"}
+                  </p>
+                </div>
+              </div>
 
-          <button
-            onClick={() => setLogoutModalOpen(true)} // Open Modal instead of window.confirm
-            className="flex items-center font-mono justify-center w-full gap-2 px-4 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-transparent hover:border-red-100"
-          >
-            <FaSignOutAlt />
-            <span>Logout Session</span>
-          </button>
+              <button
+                onClick={() => setLogoutModalOpen(true)}
+                className="flex items-center font-mono justify-center w-full gap-2 px-4 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-transparent hover:border-red-100"
+              >
+                <FaSignOutAlt />
+                <span>Logout Session</span>
+              </button>
+            </>
+          )}
         </div>
       </aside>
 

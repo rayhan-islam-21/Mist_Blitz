@@ -6,7 +6,7 @@ const adminSchema = new mongoose.Schema({
   uid: { type: String, required: true, unique: true },
   role: {
     type: String,
-    default: "user",
+    default: "member",
   }
 });
 

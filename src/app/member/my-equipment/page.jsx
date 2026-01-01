@@ -221,7 +221,7 @@ const MyEquipmentTable = () => {
               {dataLoading ? (
                 <tr>
                   <td colSpan="5" className="p-20 text-center font-black text-slate-200 uppercase tracking-[0.4em] italic text-xl animate-pulse">
-                    Scanning Neural Link...
+                    Scanning Data...
                   </td>
                 </tr>
               ) : (activeTab === "active" ? userAssets : userHistory).length > 0 ? (
@@ -249,8 +249,6 @@ const MyEquipmentTable = () => {
       <footer className="max-w-7xl mx-auto mt-6 flex justify-between items-center px-2">
         <div className="flex items-center gap-4 text-[9px] font-black uppercase tracking-widest text-slate-400">
           <span>Blitz ID: {user?.info?.blitzId}</span>
-          <span className="h-1 w-1 rounded-full bg-slate-300" />
-          <span>Status: Synchronized</span>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-[10px] font-bold text-slate-900 uppercase">Mist Blitz Logistics</span>

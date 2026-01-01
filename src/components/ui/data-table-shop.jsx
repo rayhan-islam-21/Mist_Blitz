@@ -194,7 +194,7 @@ const CheckoutEquipmentTable = () => {
             </thead>
             <tbody className="divide-y divide-slate-100">
               {dataLoading ? (
-                <tr><td colSpan="5" className="p-20 text-center font-black text-slate-200 uppercase tracking-[0.4em] italic text-xl animate-pulse">Scanning Registry...</td></tr>
+                <tr><td colSpan="5" className="p-20 text-center font-black text-slate-200 uppercase tracking-[0.4em] italic text-xl animate-pulse">Scanning Data...</td></tr>
               ) : table.getRowModel().rows.map(row => (
                 <tr key={row.id} className="hover:bg-slate-50 transition-colors group">
                   {row.getVisibleCells().map(cell => (
