@@ -1,128 +1,215 @@
 "use client";
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
-import { FaLock, FaEnvelope, FaChevronRight } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FaLock, FaUserShield, FaArrowRight, FaExchangeAlt, FaFingerprint, FaShieldAlt, FaEnvelope, FaCheckCircle } from "react-icons/fa";
+import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import AuthContext from "@/context/Authcontext";
-import { useRouter, useSearchParams } from "next/navigation"; // Added useSearchParams
+import api from "@/lib/axios";
+import Image from "next/image";
 
 const schema = yup.object().shape({
-  email: yup.string().email("Invalid signature").required("Identifier required"),
-  password: yup.string().required("Password required"),
+  email: yup.string().email("Invalid format").required("Email is required"),
+  password: yup.string().required("Access Key Required"),
 });
 
 const AdminLogin = () => {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const { signInWithEmail, signInWithGoogle, user, loading } = useContext(AuthContext);
-
-  // 1. Get email from URL (sent by Footer logic)
+  const searchParams = useSearchParams();
   const emailFromUrl = searchParams.get("email");
+  
+  const { signInWithEmail, user, loading: authLoading } = useContext(AuthContext);
+  const [memberInfo, setMemberInfo] = useState(null);
+  const [isFetching, setIsFetching] = useState(!!emailFromUrl);
+  // Manual loading state to ensure button resets correctly
+  const [isSubmittingManual, setIsSubmittingManual] = useState(false);
 
-  const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm({
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      email: emailFromUrl || "", // Pre-fill if exists
-    }
+    defaultValues: { email: emailFromUrl || "" }
   });
 
-  // 2. Redirect if already logged in
-  useEffect(() => {
-    if (!loading && user) {
-      router.replace(user.role === "admin" ? "/admin/dashboard" : "/profile");
-    }
-  }, [user, loading, router]);
-
-  // 3. Update field if URL param changes
   useEffect(() => {
     if (emailFromUrl) {
-      setValue("email", emailFromUrl);
+      const fetchIdentity = async () => {
+        try {
+          setValue("email", emailFromUrl);
+          const res = await api.get(`/members/${emailFromUrl}`);
+          setMemberInfo(res.data);
+        } catch (err) {
+          toast.error("IDENTITY BREACH: PROFILE NOT FOUND");
+        } finally {
+          setIsFetching(false);
+        }
+      };
+      fetchIdentity();
     }
   }, [emailFromUrl, setValue]);
 
-  const handleGoogleLogin = async () => {
-    try {
-      await signInWithGoogle();
-      toast.success("Identity Verified. Access Granted.");
-    } catch (error) { 
-      toast.error(error.message);
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.replace(user.role === "admin" ? "/admin/dashboard" : "/member/profile");
     }
+  }, [user, authLoading, router]);
+
+const onSubmit = async (data) => {
+  if (isSubmittingManual) return;
+  
+  setIsSubmittingManual(true);
+  const loginToast = toast.loading("Verifying Credentials...");
+
+  try {
+    await signInWithEmail(data.email, data.password);
+    // Success - using { id } replaces the loading toast
+    toast.success("ACCESS GRANTED", { id: loginToast });
+  } catch (error) {
+    console.error("Auth Error:", error);
+
+    // FIX: Extract only the message string or code. 
+    // Do NOT pass the whole 'error' object.
+    const errorMessage =  "INVALID PASSWORD";
+    
+    // Using { id } here also stops the spinner by replacing it with the error toast
+    toast.error(errorMessage, { id: loginToast });
+  } finally {
+    setIsSubmittingManual(false);
   }
+};
 
-  const onSubmit = async (data) => {
-    try {
-      await signInWithEmail(data.email, data.password);
-      toast.success("Identity Verified. Access Granted.");
-      // The useEffect above will handle the redirect automatically
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
 
-  if (loading) return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-red-500 font-mono italic tracking-widest">VERIFYING SESSION...</div>;
+  //   <div className="min-h-screen bg-[#02040a] flex flex-col items-center justify-center font-mono text-red-500">
+  //     <FaFingerprint className="text-4xl mb-4 animate-pulse" />
+  //     <div className="text-[10px] tracking-[1em] font-black uppercase text-center px-4">
+  //       Syncing Dossier...
+  //     </div>
+  //   </div>
+  // );
 
-  // ... (Your existing JSX remains the same)
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-950 relative overflow-hidden font-sans selection:bg-red-500/30">
-      <Toaster position="top-center" />
+    <div className="min-h-screen bg-[#02040a] selection:bg-red-600 selection:text-white flex items-center justify-center p-0 md:p-10 font-mono overflow-hidden">
+      <Toaster position="top-right" />
       
-      {/* (Rest of your UI code) */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-[460px] z-10 p-4"
+      {/* Background Ambience */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#450a0a_0%,transparent_70%)] opacity-30 pointer-events-none" />
+      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.98 }} 
+        animate={{ opacity: 1, scale: 1 }} 
+        className="relative z-10 w-full max-w-5xl h-full md:h-[650px] flex flex-col md:flex-row bg-[#0a0f18]/90 backdrop-blur-2xl border border-white/10 shadow-[0_0_100px_rgba(0,0,0,0.8)] overflow-hidden rounded-none md:rounded-3xl"
       >
-        <div className="relative bg-slate-900/40 backdrop-blur-3xl border border-slate-800 rounded-[2rem] overflow-hidden shadow-2xl">
-          <div className="p-10 md:p-12">
-            <div className="mb-10 text-center">
-              <h1 className="text-3xl font-black italic text-white tracking-[0.1em] uppercase">
-                Mist <span className="font-black text-red-600">Blitz</span>
-              </h1>
+        
+        {/* LEFT PANEL: IDENTITY */}
+        <div className="w-full md:w-1/2 relative flex flex-col items-center justify-center p-12 bg-gradient-to-br from-red-900/20 via-transparent to-transparent">
+          <div className="absolute top-10 left-10 w-10 h-10 border-t-2 border-l-2 border-red-500/30" />
+          <div className="absolute bottom-10 left-10 w-10 h-10 border-b-2 border-l-2 border-red-500/30" />
+          
+          <div className="relative mb-8">
+            <div className="w-40 h-40 rounded-2xl border-2 border-red-600 p-2 relative z-10 shadow-[0_0_20px_rgba(220,38,38,0.2)]">
+              <div className="relative w-full h-full rounded-lg overflow-hidden grayscale contrast-125">
+                <Image 
+                  src={memberInfo?.image || "/fallback-avatar.png"} 
+                  fill 
+                  className="object-cover" 
+                  alt="Agent" 
+                  priority
+                />
+                <motion.div 
+                  animate={{ top: ['0%', '100%', '0%'] }}
+                  transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                  className="absolute left-0 w-full h-1 bg-red-500/50 blur-sm z-20"
+                />
+              </div>
             </div>
+            <div className="absolute inset-0 bg-red-600/20 blur-3xl rounded-full scale-75 animate-pulse" />
+          </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div>
-                <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-2 ml-1 block">Email Identifier</label>
-                <div className="relative group">
-                  <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-red-500 transition-colors text-xs" />
-                  <input 
-                    {...register("email")} 
-                    type="email" 
-                    placeholder="admin@mistblitz.com" 
-                    className="w-full bg-slate-900/50 border border-slate-800 pl-12 pr-4 py-3.5 rounded-xl text-slate-200 placeholder:text-slate-600 text-sm focus:border-red-500/50 outline-none" 
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-2 ml-1 block">Password</label>
-                <div className="relative group">
-                  <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-red-500 transition-colors text-xs" />
-                  <input 
-                    {...register("password")} 
-                    type="password" 
-                    placeholder="••••••••" 
-                    className="w-full bg-slate-900/50 border border-slate-800 pl-12 pr-4 py-3.5 rounded-xl text-slate-200 placeholder:text-slate-600 text-sm focus:border-red-500/50 outline-none" 
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-red-600 text-white py-3.5 rounded-xl font-bold uppercase text-xs hover:bg-red-500 transition-all active:scale-[0.98]"
-              >
-                {isSubmitting ? "Connecting..." : "Establish Connection"}
-              </button>
-            </form>
+          <div className="text-center space-y-2 relative z-10">
+            <h2 className="text-white text-3xl font-black uppercase tracking-tighter italic">
+              {memberInfo?.name || "Access Denied"}
+            </h2>
+            <div className="inline-flex items-center gap-2 bg-red-600/20 border border-red-500/30 px-4 py-1.5 rounded-full">
+              <span className="text-[11px] text-red-500 font-black uppercase tracking-widest">
+                ROLL: {memberInfo?.roll || "0000"}
+              </span>
+            </div>
           </div>
         </div>
+
+        {/* RIGHT PANEL: AUTHENTICATION */}
+        <div className="w-full md:w-1/2 bg-black/40 flex flex-col p-12 border-t md:border-t-0 md:border-l border-white/5">
+          <div className="flex items-center justify-between mb-8">
+             <div className="flex items-center gap-3">
+               <FaShieldAlt className="text-red-600 text-xl" />
+               <div className="leading-none">
+                 <p className="text-white text-xs font-black uppercase tracking-[0.2em]">Auth Module</p>
+                 <p className="text-[9px] text-red-500/60 font-bold uppercase tracking-widest mt-1">SECURE_DASHBOARD</p>
+               </div>
+             </div>
+             <button 
+                type="button"
+                onClick={() => router.push('/auth/login')}
+                className="p-3 bg-white/5 border border-white/10 rounded-xl text-slate-500 hover:text-red-500 transition-all group"
+             >
+                <FaExchangeAlt size={14} className="group-hover:rotate-180 transition-transform duration-500" />
+             </button>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 flex-1 flex flex-col justify-center">
+            
+            {/* EMAIL */}
+            <div className="space-y-3">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Email</label>
+              <div className="relative group">
+                <FaEnvelope className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-700 group-focus-within:text-red-500 transition-colors" />
+                <input 
+                  {...register("email")} 
+                  type="email"
+                  readOnly={!!emailFromUrl}
+                  className="w-full bg-[#0d1117] border border-white/5 pl-14 pr-12 py-5 rounded-2xl text-slate-400 text-sm focus:ring-1 focus:ring-red-500/50 outline-none transition-all"
+                />
+                {emailFromUrl && <FaCheckCircle className="absolute right-5 top-1/2 -translate-y-1/2 text-green-500/40" />}
+              </div>
+            </div>
+
+            {/* PASSWORD */}
+            <div className="space-y-3">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Password</label>
+              <div className="relative group">
+                <FaLock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-700 group-focus-within:text-red-500 transition-colors" />
+                <input 
+                  {...register("password")} 
+                  type="password" 
+                  autoFocus
+                  placeholder="••••••••"
+                  className="w-full bg-[#0d1117] border border-white/5 pl-14 pr-6 py-5 rounded-2xl text-white text-lg focus:ring-1 focus:ring-red-500/50 outline-none transition-all tracking-[0.5em] placeholder:text-slate-900"
+                />
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isSubmittingManual}
+              className="w-full group relative flex items-center justify-between bg-red-700 hover:bg-red-600 disabled:bg-red-900/50 disabled:cursor-not-allowed text-white px-8 py-6 rounded-2xl font-black uppercase text-xs tracking-[0.4em] transition-all active:scale-[0.98] mt-4 shadow-lg shadow-red-900/20"
+            >
+              <span>{isSubmittingManual ? "AUTHORIZING..." : "GRANT ACCESS"}</span>
+              {!isSubmittingManual && <FaArrowRight className="group-hover:translate-x-2 transition-transform" />}
+            </button>
+          </form>
+
+          <div className="mt-8 flex justify-between items-center opacity-30">
+             <div className="space-y-1 text-[8px] font-bold uppercase tracking-widest text-slate-500">
+               <p>Security: Level 4</p>
+               <p>Terminal: Mist_RED_v1</p>
+             </div>
+             <FaUserShield className="text-white text-2xl" />
+          </div>
+        </div>
+        
       </motion.div>
     </div>
   );

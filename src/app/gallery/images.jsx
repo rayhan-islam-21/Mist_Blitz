@@ -35,9 +35,9 @@ const Gallery = () => {
     <section className="bg-black py-20 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* 1. TRANSPARENT TEXT WITH IMAGE BACKGROUND */}
-        <div className="relative mb-24 flex flex-col items-center justify-center overflow-hidden py-10">
+        <div className="relative md:mb-24 flex flex-col items-center justify-center overflow-hidden py-10">
           <h1
-            className="text-[15vw] font-sans md:text-[20vw] font-black uppercase leading-none tracking-tighter"
+            className="text-[18vw] font-sans md:text-[20vw] font-black uppercase leading-none tracking-tighter"
             style={{
               backgroundImage: `url('https://res.cloudinary.com/dnrubj8x4/image/upload/v1767172248/20251012_180008_vczdap.jpg')`,
               backgroundSize: "cover",
@@ -49,7 +49,7 @@ const Gallery = () => {
             Gallery
           </h1>
           <div className="h-1 w-32 bg-red-600 mt-[-2vw]"></div>
-          <p className="text-gray-500 font-mono text-[10px] uppercase tracking-[0.5em] mt-4 text-center">
+          <p className="text-gray-500 md:font-mono text-[10px] uppercase tracking-[0.5em] mt-4 text-center">
             China_Expedition_Archive_2025
           </p>
         </div>
@@ -65,7 +65,7 @@ const Gallery = () => {
               {/* MAIN IMAGE */}
               <Image
                 src={photo.imageUrl}
-                alt={photo.title}
+                alt="gallery images"
                 width={500}
                 height={700}
                 className="w-full h-auto object-cover group-hover:scale-105 transition-all duration-1000 ease-in-out"
