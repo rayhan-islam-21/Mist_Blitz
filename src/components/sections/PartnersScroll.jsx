@@ -60,14 +60,11 @@ export default function PartnersScroll() {
 
         {/* 4. THE MASSIVE LOGO SCANNER */}
         <div className="relative">
-          <div className="relative py-4 bg-white/0.1 backdrop-blur-3xl group">
+          <div className="relative py-0 bg-white/0.1 backdrop-blur-3xl group">
             <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-[#050505] to-transparent z-20 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-[#050505] to-transparent z-20 pointer-events-none" />
 
-            <motion.div
-              initial={{ y: 60, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            <div
               className="relative items-center flex justify-center overflow-hidden opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 ease-in-out"
             >
               <LogoLoop
@@ -81,7 +78,7 @@ export default function PartnersScroll() {
                 fadeOut={false} // Custom fades used above for better control
                 ariaLabel="Our partners"
               />
-            </motion.div>
+            </div>
           </div>
         </div>
 

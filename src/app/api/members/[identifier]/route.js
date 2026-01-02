@@ -7,17 +7,23 @@ export async function GET(request, { params }) {
     try {
         await connectDB();
         const { identifier } = await params;
+        const decodedId = decodeURIComponent(identifier).trim();
 
-        // Logic: If identifier contains '@', it's an email. Otherwise, it's an ID.
-        const query = identifier.includes("@") 
-            ? { email: identifier.toLowerCase().trim() } 
-            : { _id: identifier };
+        let query;
+        if (decodedId.includes("@")) {
+            query = { email: decodedId.toLowerCase() };
+        } else if (decodedId.length === 24 && /^[0-9a-fA-F]+$/.test(decodedId)) {
+            query = { _id: decodedId };
+        } else {
+            query = {blitzId: decodedId };
+        }
 
         const member = await Member.findOne(query);
 
         if (!member) {
             return NextResponse.json({ error: "Member not found" }, { status: 404 });
         }
+        
         return NextResponse.json(member, { status: 200 });
     } catch (error) {
         return NextResponse.json({ error: "Sync Error" }, { status: 500 });

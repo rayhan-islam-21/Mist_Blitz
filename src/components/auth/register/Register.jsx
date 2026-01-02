@@ -1,232 +1,164 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
-import {
-  FaUserPlus,
-  FaChevronRight,
-  FaEnvelope,
-  FaLock,
-  FaUserShield,
-} from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams, useRouter } from "next/navigation";
+import { FaUserCheck, FaChevronRight, FaLock, FaIdCard } from "react-icons/fa";
+import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
+import api from "@/lib/axios";
+import Image from "next/image";
 import AuthContext from "@/context/Authcontext";
-import { useRouter } from "next/navigation";
-import saveAdminToDB from "@/lib/saveadminToDb";
+import saveAdminToDB from "@/lib/saveadminToDb"; // Ensure path is correct
 
 const schema = yup.object().shape({
-  name: yup.string().required("Full name is required"),
-  email: yup
-    .string()
-    .email("Invalid signature")
-    .required("Identifier required"),
-  password: yup
-    .string()
-    .min(6, "Security key must be 6+ chars")
-    .required("Access key required"),
+  password: yup.string().min(6, "Password must be 6+ chars").required("Required"),
+  confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
 });
 
-const AdminRegister = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
+const MemberRegister = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const roll = searchParams.get("roll");
+
+  // Properly destructure from Context at the top level
+  const { signUpwithEmail } = useContext(AuthContext);
+
+  const [memberData, setMemberData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const { signUpwithEmail, signInWithGoogle, user } = useContext(AuthContext);
-  const router = useRouter();
-  console.log("Current User in Register:", user);
-
-  const handleGoogleRegistration = async () => {
-    try {
-      const result = await signInWithGoogle();
-      await handlePostRegistration(result.user);
-      toast.success("Identity Created via Google. System Access Granted.");
-    } catch (error) {
-      toast.error(error.message);
+  useEffect(() => {
+    if (!roll) {
+      router.replace("/");
+      return;
     }
-  };
 
-  const handlePostRegistration = async (users) => {
-    const adminData = {
-      uid: users.uid,
-      email: users.email,
-      name: users.displayName,
-      role: "admin",
-      createdAt: new Date().toISOString(),
+    const fetchIdentity = async () => {
+      try {
+        const res = await api.get(`/members/${roll}`);
+        setMemberData(res.data);
+      } catch (err) {
+        toast.error("Invalid Identity Token");
+        router.replace("/");
+      } finally {
+        setLoading(false);
+      }
     };
-    console.log("Admin Data to Save:", adminData);
-    await saveAdminToDB(adminData);
-    router.push("/admin/dashboard");
-  };
+    fetchIdentity();
+  }, [roll, router]);
 
   const onSubmit = async (data) => {
     try {
-      const result = await signUpwithEmail(
-        data.name,
-        data.email,
+      // 1. Create Firebase Auth account using fetched member data
+      const firebaseUser = await signUpwithEmail(
+        memberData.name,
+        memberData.email,
         data.password
       );
-      console.log("Registration Result:", result);
-      await handlePostRegistration(result);
-      toast.success("Identity Created. System Access Granted.");
+
+      // 2. Sync data to your database
+      const newUserRecord = {
+        uid: firebaseUser.uid,
+        email: memberData.email,
+        name: memberData.name,
+        roll: memberData.roll,
+        role: "member",
+        blitzId: memberData.blitzId,
+        image: memberData.image,
+        createdAt: new Date().toISOString(),
+      };
+
+      await saveAdminToDB(newUserRecord);
+
+      toast.success("Identity Synced Successfully!");
+      router.push("/profile");
+      
     } catch (error) {
-      toast.error(error.message);
+      console.error("Registration Error:", error);
+      toast.error(error.message || "Failed to initialize account");
     }
   };
 
-  const inputClasses =
-    "w-full bg-slate-900/50 border border-slate-800 pl-12 pr-4 py-3.5 rounded-xl text-slate-200 placeholder:text-slate-600 text-sm transition-all duration-300 outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50";
-  const labelClasses =
-    "text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-2 ml-1 block";
+  if (loading) return (
+    <div className="min-h-screen bg-[#02040a] flex items-center justify-center text-red-600 font-mono italic">
+      SYNCING BIO-DATA...
+    </div>
+  );
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-950 relative overflow-hidden font-sans selection:bg-red-500/30">
-      <Toaster position="top-center" />
+    <div className="min-h-screen w-full flex items-center justify-center bg-[#02040a] relative overflow-hidden p-6">
+      <Toaster position="top-right" />
 
-      {/* --- BACKGROUND LAYER --- */}
-      <div
-        className="absolute inset-0 z-0 opacity-20"
-        style={{
-          backgroundImage: `radial-gradient(#334155 1px, transparent 1px)`,
-          backgroundSize: "30px 30px",
-        }}
-      />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] z-0" />
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-120 z-10 p-4"
-      >
-        <div className="relative bg-slate-900/40 backdrop-blur-3xl border border-slate-800 rounded-[2rem] overflow-hidden shadow-2xl">
-          {/* Top Status Bar Decoration */}
-          <div className="h-1 w-full bg-gradient-to-r from-transparent via-red-600/50 to-transparent" />
-
-          <div className="p-10 md:p-12">
-            {/* --- HEADER --- */}
-            <div className="mb-10 text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 mb-6">
-                <FaUserShield className="text-red-500 text-[10px]" />
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                  Acount access request
-                </span>
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative z-10 w-full max-w-4xl">
+        <div className="grid lg:grid-cols-2 bg-slate-900/40 backdrop-blur-3xl border border-white/5 rounded-[2.5rem] overflow-hidden">
+          
+          <div className="p-12 bg-gradient-to-br from-blue-600/10 to-transparent border-r border-white/5">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-blue-600 rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.5)]">
+                <FaUserCheck className="text-white text-xl" />
               </div>
-
-              <h1 className="text-3xl font-black italic text-white tracking-[0.1em] uppercase">
-                User <span className="font-black text-red-600">Register</span>
-              </h1>
+              <h2 className="text-xl font-black text-white uppercase italic">Identity <span className="text-blue-500">Verified</span></h2>
             </div>
 
-            {/* --- GOOGLE AUTH --- */}
-            <button
-              onClick={() => handleGoogleRegistration()}
-              className="w-full flex items-center justify-center gap-3 bg-slate-800/40 border border-slate-700 py-3 rounded-xl hover:bg-slate-800 hover:border-slate-600 transition-all duration-200 group mb-8"
-            >
-              <FcGoogle size={18} />
-              <span className="text-xs font-bold text-slate-300 uppercase tracking-widest">
-                Connect with Google
-              </span>
-            </button>
-
-            <div className="relative mb-8 flex items-center">
-              <div className="flex-grow border-t border-slate-800"></div>
-              <span className="px-4 text-[9px] font-bold text-slate-600 uppercase tracking-[0.3em]">
-                Credentials
-              </span>
-              <div className="flex-grow border-t border-slate-800"></div>
+            <div className="mt-10">
+              <div className="relative w-32 h-32 mb-6 shadow-2xl">
+                <Image 
+                   src={memberData.image} 
+                   alt="Profile" 
+                   fill 
+                   className="rounded-2xl border-4 border-blue-500/50 object-cover" 
+                />
+              </div>
+              <h3 className="text-3xl font-black text-white uppercase italic leading-none">{memberData.name}</h3>
+              <p className="text-blue-400 font-mono text-sm mt-2">{memberData.position}</p>
+              
+              <div className="mt-8 space-y-2">
+                <p className="text-slate-500 text-[10px] uppercase font-bold tracking-widest">Department</p>
+                <div className="flex gap-2">
+                  <span className="bg-slate-800 text-slate-300 text-[10px] px-3 py-1 rounded-full uppercase font-bold">
+                    {memberData.techDept?.[0] || memberData.nonTechDept?.[0]}
+                  </span>
+                </div>
+              </div>
             </div>
+          </div>
 
-            {/* --- FORM --- */}
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <div>
-                <label className={labelClasses}>Full Name</label>
-                <div className="relative group">
-                  <FaUserPlus className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-red-500 transition-colors text-xs" />
-                  <input
-                    {...register("name")}
-                    type="text"
-                    placeholder="e.g. Rayhan Islam"
-                    className={inputClasses}
-                  />
+          <div className="p-12">
+            <h4 className="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em] mb-8">Finalize Authentication</h4>
+            
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <div className="group">
+                <label className="text-[10px] font-black uppercase text-slate-500 mb-2 block">Assigned Email</label>
+                <div className="relative">
+                  <FaIdCard className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-700" />
+                  <input value={memberData.email} disabled className="w-full bg-white/5 border border-white/10 pl-12 pr-4 py-4 rounded-xl text-slate-400 font-mono text-sm cursor-not-allowed" />
                 </div>
-                {errors.name && (
-                  <p className="text-red-500 text-[10px] mt-1.5 font-medium ml-1">
-                    {errors.name.message}
-                  </p>
-                )}
               </div>
 
-              <div>
-                <label className={labelClasses}>Email</label>
-                <div className="relative group">
-                  <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-red-500 transition-colors text-xs" />
-                  <input
-                    {...register("email")}
-                    type="email"
-                    placeholder="admin@mistblitz.com"
-                    className={inputClasses}
-                  />
+              <div className="group">
+                <label className="text-[10px] font-black uppercase text-slate-500 mb-2 block">Create Access Key</label>
+                <div className="relative">
+                  <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-700 group-focus-within:text-blue-500 transition-colors" />
+                  <input {...register("password")} type="password" placeholder="••••••••" className="w-full bg-black/40 border border-slate-800/60 pl-12 pr-4 py-4 rounded-xl text-slate-200 outline-none focus:border-blue-500/50 font-mono text-sm" />
                 </div>
-                {errors.email && (
-                  <p className="text-red-500 text-[10px] mt-1.5 font-medium ml-1">
-                    {errors.email.message}
-                  </p>
-                )}
+                {errors.password && <span className="text-[10px] text-red-500 mt-2 block font-mono">{errors.password.message}</span>}
               </div>
 
-              <div>
-                <label className={labelClasses}>Password</label>
-                <div className="relative group">
-                  <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-red-500 transition-colors text-xs" />
-                  <input
-                    {...register("password")}
-                    type="password"
-                    placeholder="••••••••"
-                    className={inputClasses}
-                  />
-                </div>
-                {errors.password && (
-                  <p className="text-red-500 text-[10px] mt-1.5 font-medium ml-1">
-                    {errors.password.message}
-                  </p>
-                )}
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-red-600 text-white py-4 rounded-xl font-bold uppercase tracking-[0.15em] text-xs flex items-center justify-center gap-2 hover:bg-red-500 transition-all active:scale-[0.98] disabled:bg-slate-800 disabled:text-slate-600 group mt-4"
-              >
-                {isSubmitting ? (
-                  "Syncing Node..."
-                ) : (
-                  <>
-                    Register Account{" "}
-                    <FaChevronRight className="text-[10px] group-hover:translate-x-0.5 transition-transform" />
-                  </>
-                )}
+              <button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-blue-500 transition-all shadow-lg active:scale-95 disabled:opacity-50">
+                {isSubmitting ? "PROCESSING..." : "COMPLETE REGISTRATION"}
               </button>
             </form>
-
-            <div className="mt-10 text-center">
-              <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">
-                Existing User?
-                <Link
-                  href="/auth/login"
-                  className="ml-2 text-slate-300 hover:text-red-500 transition-colors underline underline-offset-4 decoration-slate-700 hover:decoration-red-500"
-                >
-                  Authenticate Here
-                </Link>
-              </p>
-            </div>
           </div>
         </div>
       </motion.div>
@@ -234,4 +166,4 @@ const AdminRegister = () => {
   );
 };
 
-export default AdminRegister;
+export default MemberRegister;

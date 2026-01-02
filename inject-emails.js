@@ -1,8 +1,7 @@
 const csv = require('csvtojson');
 const mongoose = require('mongoose');
 
-const MONGO_URI = ""; 
-
+const MONGO_URI = "mongodb+srv://merayhanislam21_db_user:2f3ftqWBFOePQbeq@cluster0.bjbvxu2.mongodb.net/jerseyzbd?appName=Cluster0";
 // Updated to target 'memberv3' specifically
 const MemberV3 = mongoose.models.MemberV3 || mongoose.model('MemberV3', new mongoose.Schema({
   roll: String,
