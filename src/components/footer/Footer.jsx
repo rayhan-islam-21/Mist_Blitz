@@ -211,7 +211,7 @@ export default function Footer() {
                 className="inline-block bg-white text-black border-3 border-yellow-400 px-4 py-2 transform rotate-4 shadow-[4px_4px_0px_yellow] hover:rotate-0 transition-transform active:translate-y-1 active:shadow-none"
               >
                 <span className="uppercase text-sm tracking-wider">
-                  Blitz Member?
+                  Member of Blitz?
                 </span>
               </button>
             </div>

@@ -1,11 +1,18 @@
-
 import AdminRegister from "@/components/auth/register/Register";
-import React from "react";
+import React, { Suspense } from "react";
 
 const Register = () => {
   return (
     <div className="md:min-h-screen">
-     <AdminRegister/>
+      <Suspense
+        fallback={
+          <div className="h-screen flex justify-center items-center">
+            Loading...
+          </div>
+        }
+      >
+        <AdminRegister />
+      </Suspense>
     </div>
   );
 };
