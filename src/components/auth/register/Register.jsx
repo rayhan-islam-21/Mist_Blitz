@@ -55,7 +55,6 @@ const MemberRegister = () => {
 
   const onSubmit = async (data) => {
     try {
-      // 1. Create Firebase Auth account using fetched member data
       const firebaseUser = await signUpwithEmail(
         memberData.name,
         memberData.email,
@@ -67,17 +66,13 @@ const MemberRegister = () => {
         uid: firebaseUser.uid,
         email: memberData.email,
         name: memberData.name,
-        roll: memberData.roll,
         role: "member",
-        blitzId: memberData.blitzId,
-        image: memberData.image,
-        createdAt: new Date().toISOString(),
       };
 
       await saveAdminToDB(newUserRecord);
 
       toast.success("Identity Synced Successfully!");
-      router.push("/profile");
+      router.push("/member/profile");
       
     } catch (error) {
       console.error("Registration Error:", error);
