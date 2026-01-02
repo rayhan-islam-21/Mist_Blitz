@@ -48,21 +48,26 @@ export default function Footer() {
     const input = memberCode.trim();
     if (!input) return;
 
+    setStatus("loading");
+
     try {
       const res = await api.get(`/members/${input}`);
       const member = res.data;
-            try {
+      try {
         const userCheck = await api.get(`/admin/${member.email}`);
-
         if (userCheck.data) {
-          toast.success("Access Granted! Please login.");
+          toast.success("Identity recognized! Redirecting to Login...");
           router.push(`/auth/login?email=${member.email}`);
         }
       } catch (err) {
-        router.push(`/auth/register?roll=${member.roll}`);
+        toast.success("Identity Verified. Initialize your account.");
+        // Change 'id' to 'blitzId' to match MemberRegister.js
+        router.push(`/auth/register?blitzId=${member.blitzId}`);
       }
     } catch (err) {
-      toast.error("Identity not found in the Blitz records.");
+      setStatus("error");
+      toast.error("IDENTITY BREACH: Record not found in Blitz Database.");
+      setTimeout(() => setStatus("idle"), 2000);
     }
   };
 

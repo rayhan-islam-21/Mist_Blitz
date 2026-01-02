@@ -5,157 +5,240 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useSearchParams, useRouter } from "next/navigation";
-import { FaUserCheck, FaChevronRight, FaLock, FaIdCard } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { FaUserShield, FaArrowRight, FaLock, FaFingerprint, FaShieldAlt, FaEnvelope, FaCheckCircle, FaUserCheck } from "react-icons/fa";
+import { motion, useAnimation } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import api from "@/lib/axios";
 import Image from "next/image";
 import AuthContext from "@/context/Authcontext";
-import saveAdminToDB from "@/lib/saveadminToDb"; // Ensure path is correct
+import saveAdminToDB from "@/lib/saveadminToDb";
 
 const schema = yup.object().shape({
-  password: yup.string().min(6, "Password must be 6+ chars").required("Required"),
+  password: yup.string().min(6, "Security Key must be 6+ chars").required("Required"),
   confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
 });
 
 const MemberRegister = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const roll = searchParams.get("roll");
+  const controls = useAnimation();
+  
+  // 1. Get blitzId from URL (Matches Footer: ?blitzId=...)
+  const blitzId = searchParams.get("blitzId");
 
-  // Properly destructure from Context at the top level
   const { signUpwithEmail } = useContext(AuthContext);
 
   const [memberData, setMemberData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isSubmittingManual, setIsSubmittingManual] = useState(false);
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-    if (!roll) {
-      router.replace("/");
-      return;
-    }
+// Inside MemberRegister.js
+useEffect(() => {
+  // Use 'blitzId' because that's what we defined above
+  if (!blitzId) {
+    console.log("No blitzId found, redirecting...");
+    // router.replace("/"); // Temporary comment this out to debug if needed
+    return;
+  }
 
-    const fetchIdentity = async () => {
-      try {
-        const res = await api.get(`/members/${roll}`);
-        setMemberData(res.data);
-      } catch (err) {
-        toast.error("Invalid Identity Token");
-        router.replace("/");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchIdentity();
-  }, [roll, router]);
+  const fetchIdentity = async () => {
+    try {
+      setLoading(true);
+      const res = await api.get(`/members/${blitzId}`);
+      setMemberData(res.data);
+    } catch (err) {
+      console.error("Fetch Error:", err);
+      toast.error("IDENTITY BREACH: INVALID TOKEN");
+      router.replace("/");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchIdentity();
+}, [blitzId, router]);
 
   const onSubmit = async (data) => {
+    if (isSubmittingManual) return;
+    setIsSubmittingManual(true);
+    const syncToast = toast.loading("Initializing Bio-Metric Sync...");
+
     try {
+      // 2. Firebase Auth Sign Up
       const firebaseUser = await signUpwithEmail(
         memberData.name,
         memberData.email,
         data.password
       );
 
-      // 2. Sync data to your database
+      // 3. Database Sync
       const newUserRecord = {
         uid: firebaseUser.uid,
         email: memberData.email,
         name: memberData.name,
         role: "member",
+        blitzId: blitzId // Storing the reference
       };
 
       await saveAdminToDB(newUserRecord);
 
-      toast.success("Identity Synced Successfully!");
+      toast.success("IDENTITY SYNCHRONIZED", { id: syncToast });
       router.push("/member/profile");
       
     } catch (error) {
-      console.error("Registration Error:", error);
-      toast.error(error.message || "Failed to initialize account");
+      const errMsg ="SYNC_FAILED: INTERNAL ERROR";
+      toast.error(errMsg);
+    } finally {
+      setIsSubmittingManual(false);
     }
   };
 
   if (loading) return (
-    <div className="min-h-screen bg-[#02040a] flex items-center justify-center text-red-600 font-mono italic">
-      SYNCING BIO-DATA...
+    <div className="min-h-screen bg-[#02040a] flex flex-col items-center justify-center font-mono text-red-500">
+      <FaFingerprint className="text-4xl mb-4 animate-pulse" />
+      <div className="text-[10px] tracking-[1em] font-black uppercase">Syncing Bio-Data...</div>
     </div>
   );
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-[#02040a] relative overflow-hidden p-6">
+    <div className="min-h-screen bg-[#02040a] selection:bg-red-600 selection:text-white flex items-center justify-center p-0 md:p-10 font-mono overflow-hidden">
       <Toaster position="top-right" />
+      
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#450a0a_0%,transparent_70%)] opacity-30 pointer-events-none" />
+      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      </div>
-
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative z-10 w-full max-w-4xl">
-        <div className="grid lg:grid-cols-2 bg-slate-900/40 backdrop-blur-3xl border border-white/5 rounded-[2.5rem] overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.98 }} 
+        animate={{ opacity: 1, scale: 1 }} 
+        className="relative z-10 w-full max-w-5xl h-full md:min-h-[650px] flex flex-col md:flex-row bg-[#0a0f18]/90 backdrop-blur-2xl border border-white/10 shadow-[0_0_100px_rgba(0,0,0,0.8)] overflow-hidden rounded-none md:rounded-3xl"
+      >
+        
+        {/* LEFT PANEL: PROFILE DATA */}
+        <div className="w-full md:w-1/2 relative flex flex-col items-center justify-center p-12 bg-gradient-to-br from-red-900/20 via-transparent to-transparent">
+          <div className="absolute top-10 left-10 w-10 h-10 border-t-2 border-l-2 border-red-500/30" />
+          <div className="absolute bottom-10 left-10 w-10 h-10 border-b-2 border-l-2 border-red-500/30" />
           
-          <div className="p-12 bg-gradient-to-br from-blue-600/10 to-transparent border-r border-white/5">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-3 bg-blue-600 rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.5)]">
-                <FaUserCheck className="text-white text-xl" />
-              </div>
-              <h2 className="text-xl font-black text-white uppercase italic">Identity <span className="text-blue-500">Verified</span></h2>
-            </div>
-
-            <div className="mt-10">
-              <div className="relative w-32 h-32 mb-6 shadow-2xl">
+          <div className="relative mb-8">
+            <div className="w-40 h-40 rounded-2xl border-2 border-red-600 p-2 relative z-10 shadow-[0_0_20px_rgba(220,38,38,0.2)]">
+              <div className="relative w-full h-full rounded-lg overflow-hidden grayscale contrast-125">
                 <Image 
-                   src={memberData.image} 
-                   alt="Profile" 
-                   fill 
-                   className="rounded-2xl border-4 border-blue-500/50 object-cover" 
+                  src={memberData?.image || "/fallback-avatar.png"} 
+                  fill 
+                  className="object-cover" 
+                  alt="Agent" 
+                  priority
+                />
+                <motion.div 
+                  animate={{ top: ['0%', '100%', '0%'] }}
+                  transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                  className="absolute left-0 w-full h-1 bg-red-500/50 blur-sm z-20"
                 />
               </div>
-              <h3 className="text-3xl font-black text-white uppercase italic leading-none">{memberData.name}</h3>
-              <p className="text-blue-400 font-mono text-sm mt-2">{memberData.position}</p>
-              
-              <div className="mt-8 space-y-2">
-                <p className="text-slate-500 text-[10px] uppercase font-bold tracking-widest">Department</p>
-                <div className="flex gap-2">
-                  <span className="bg-slate-800 text-slate-300 text-[10px] px-3 py-1 rounded-full uppercase font-bold">
-                    {memberData.techDept?.[0] || memberData.nonTechDept?.[0]}
-                  </span>
-                </div>
-              </div>
             </div>
+            <div className="absolute inset-0 bg-red-600/20 blur-3xl rounded-full scale-75 animate-pulse" />
           </div>
 
-          <div className="p-12">
-            <h4 className="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em] mb-8">Finalize Authentication</h4>
-            
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="group">
-                <label className="text-[10px] font-black uppercase text-slate-500 mb-2 block">Assigned Email</label>
-                <div className="relative">
-                  <FaIdCard className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-700" />
-                  <input value={memberData.email} disabled className="w-full bg-white/5 border border-white/10 pl-12 pr-4 py-4 rounded-xl text-slate-400 font-mono text-sm cursor-not-allowed" />
-                </div>
-              </div>
-
-              <div className="group">
-                <label className="text-[10px] font-black uppercase text-slate-500 mb-2 block">Create Access Key</label>
-                <div className="relative">
-                  <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-700 group-focus-within:text-blue-500 transition-colors" />
-                  <input {...register("password")} type="password" placeholder="••••••••" className="w-full bg-black/40 border border-slate-800/60 pl-12 pr-4 py-4 rounded-xl text-slate-200 outline-none focus:border-blue-500/50 font-mono text-sm" />
-                </div>
-                {errors.password && <span className="text-[10px] text-red-500 mt-2 block font-mono">{errors.password.message}</span>}
-              </div>
-
-              <button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-blue-500 transition-all shadow-lg active:scale-95 disabled:opacity-50">
-                {isSubmitting ? "PROCESSING..." : "COMPLETE REGISTRATION"}
-              </button>
-            </form>
+          <div className="text-center space-y-2 relative z-10">
+            <h2 className="text-white text-3xl font-black uppercase tracking-tighter italic">
+              {memberData?.name || "Access Denied"}
+            </h2>
+            <div className="inline-flex items-center gap-2 bg-red-600/20 border border-red-500/30 px-4 py-1.5 rounded-full">
+              <span className="text-[11px] text-red-500 font-black uppercase tracking-widest">
+                BLITZ_ID: {blitzId}
+              </span>
+            </div>
+            <p className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] mt-4">
+              {memberData?.position || "Member"}
+            </p>
           </div>
         </div>
+
+        {/* RIGHT PANEL: REGISTRATION FORM */}
+        <motion.div 
+          animate={controls}
+          className="w-full md:w-1/2 bg-black/40 flex flex-col p-12 border-t md:border-t-0 md:border-l border-white/5"
+        >
+          <div className="flex items-center justify-between mb-8">
+             <div className="flex items-center gap-3">
+               <FaShieldAlt className="text-red-600 text-xl" />
+               <div className="leading-none">
+                 <p className="text-white text-xs font-black uppercase tracking-[0.2em]">Auth Module</p>
+                 <p className="text-[9px] text-red-500/60 font-bold uppercase tracking-widest mt-1">INITIALIZE_ACCOUNT</p>
+               </div>
+             </div>
+             <div className="p-3 bg-red-600/10 border border-red-500/20 rounded-xl text-red-500">
+                <FaUserCheck size={14} />
+             </div>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 flex-1 flex flex-col justify-center">
+            
+            {/* EMAIL (LOCKED) */}
+            <div className="space-y-3">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Assigned Email</label>
+              <div className="relative group">
+                <FaEnvelope className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-700" />
+                <input 
+                  value={memberData?.email || ""} 
+                  disabled 
+                  className="w-full bg-[#0d1117] border border-white/5 pl-14 pr-12 py-5 rounded-2xl text-slate-500 text-sm outline-none cursor-not-allowed" 
+                />
+                <FaCheckCircle className="absolute right-5 top-1/2 -translate-y-1/2 text-green-500/40" />
+              </div>
+            </div>
+
+            {/* PASSWORD */}
+            <div className="space-y-3">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Create Access Key</label>
+              <div className="relative group">
+                <FaLock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-700 group-focus-within:text-red-500 transition-colors" />
+                <input 
+                  {...register("password")} 
+                  type="password" 
+                  placeholder="••••••••" 
+                  className="w-full bg-[#0d1117] border border-white/5 pl-14 pr-6 py-5 rounded-2xl text-white text-lg focus:ring-1 focus:ring-red-500/50 outline-none transition-all tracking-[0.5em] placeholder:text-slate-900" 
+                />
+              </div>
+              {errors.password && <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-1 ml-1">{errors.password.message}</p>}
+            </div>
+
+            {/* CONFIRM PASSWORD */}
+            <div className="space-y-3">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Confirm Key</label>
+              <div className="relative group">
+                <FaLock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-700 group-focus-within:text-red-500 transition-colors" />
+                <input 
+                  {...register("confirmPassword")} 
+                  type="password" 
+                  placeholder="••••••••" 
+                  className="w-full bg-[#0d1117] border border-white/5 pl-14 pr-6 py-5 rounded-2xl text-white text-lg focus:ring-1 focus:ring-red-500/50 outline-none transition-all tracking-[0.5em] placeholder:text-slate-900" 
+                />
+              </div>
+              {errors.confirmPassword && <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-1 ml-1">{errors.confirmPassword.message}</p>}
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isSubmittingManual} 
+              className="w-full group relative flex items-center justify-between bg-red-700 hover:bg-red-600 disabled:bg-red-900/50 disabled:cursor-not-allowed text-white px-8 py-6 rounded-2xl font-black uppercase text-xs tracking-[0.4em] transition-all active:scale-[0.98] mt-4 shadow-lg shadow-red-900/20"
+            >
+              <span>{isSubmittingManual ? "PROCESSING..." : "COMPLETE REGISTRATION"}</span>
+              {!isSubmittingManual && <FaArrowRight className="group-hover:translate-x-2 transition-transform" />}
+            </button>
+          </form>
+
+          <div className="mt-8 flex justify-between items-center opacity-30">
+             <div className="space-y-1 text-[8px] font-bold uppercase tracking-widest text-slate-500">
+               <p>Status: Pending Initialization</p>
+               <p>Network: Mist_Red_v1</p>
+             </div>
+             <FaUserShield className="text-white text-2xl" />
+          </div>
+        </motion.div>
       </motion.div>
     </div>
   );
