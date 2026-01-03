@@ -68,12 +68,7 @@ const onSubmit = async (data) => {
     toast.success("ACCESS GRANTED", { id: loginToast });
   } catch (error) {
     console.error("Auth Error:", error);
-
-    // FIX: Extract only the message string or code. 
-    // Do NOT pass the whole 'error' object.
     const errorMessage =  "INVALID PASSWORD";
-    
-    // Using { id } here also stops the spinner by replacing it with the error toast
     toast.error(errorMessage, { id: loginToast });
   } finally {
     setIsSubmittingManual(false);
@@ -92,8 +87,7 @@ const onSubmit = async (data) => {
   return (
     <div className="min-h-screen bg-[#02040a] selection:bg-red-600 selection:text-white flex items-center justify-center p-0 md:p-10 font-mono overflow-hidden">
       <Toaster position="top-right" />
-      
-      {/* Background Ambience */}
+    
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#450a0a_0%,transparent_70%)] opacity-30 pointer-events-none" />
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
@@ -103,7 +97,7 @@ const onSubmit = async (data) => {
         className="relative z-10 w-full max-w-5xl h-full md:h-[650px] flex flex-col md:flex-row bg-[#0a0f18]/90 backdrop-blur-2xl border border-white/10 shadow-[0_0_100px_rgba(0,0,0,0.8)] overflow-hidden rounded-none md:rounded-3xl"
       >
         
-        {/* LEFT PANEL: IDENTITY */}
+
         <div className="w-full md:w-1/2 relative flex flex-col items-center justify-center p-12 bg-gradient-to-br from-red-900/20 via-transparent to-transparent">
           <div className="absolute top-10 left-10 w-10 h-10 border-t-2 border-l-2 border-red-500/30" />
           <div className="absolute bottom-10 left-10 w-10 h-10 border-b-2 border-l-2 border-red-500/30" />
@@ -139,8 +133,6 @@ const onSubmit = async (data) => {
             </div>
           </div>
         </div>
-
-        {/* RIGHT PANEL: AUTHENTICATION */}
         <div className="w-full md:w-1/2 bg-black/40 flex flex-col p-12 border-t md:border-t-0 md:border-l border-white/5">
           <div className="flex items-center justify-between mb-8">
              <div className="flex items-center gap-3">
@@ -160,8 +152,6 @@ const onSubmit = async (data) => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 flex-1 flex flex-col justify-center">
-            
-            {/* EMAIL */}
             <div className="space-y-3">
               <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Email</label>
               <div className="relative group">
