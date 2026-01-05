@@ -25,8 +25,6 @@ useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (loggedUser) => {
       if (loggedUser) {
         try {
-          // STEP 1: Exchange Firebase login for your custom Backend JWT
-          // This route will sign a token if the email belongs to an admin
           const tokenResponse = await api.post("/auth/token", { 
             email: loggedUser.email 
           });

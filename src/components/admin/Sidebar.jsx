@@ -308,7 +308,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                     {user?.info?.name || user?.displayName || "User"}
                   </p>
                   <p className="text-[10px] text-slate-500 truncate uppercase tracking-widest font-medium">
-                    {user?.admindata?.role || "Member"}
+                    {user?.admindata?.role}
                   </p>
                 </div>
               </div>
