@@ -23,7 +23,6 @@ const MemberRegister = () => {
   const router = useRouter();
   const controls = useAnimation();
   
-  // 1. Get blitzId from URL (Matches Footer: ?blitzId=...)
   const blitzId = searchParams.get("blitzId");
 
   const { signUpwithEmail } = useContext(AuthContext);
@@ -62,36 +61,40 @@ useEffect(() => {
   fetchIdentity();
 }, [blitzId, router]);
 
-  const onSubmit = async (data) => {
+const onSubmit = async (data) => {
     if (isSubmittingManual) return;
     setIsSubmittingManual(true);
     const syncToast = toast.loading("Initializing Bio-Metric Sync...");
 
     try {
-      // 2. Firebase Auth Sign Up
+      // 1. Firebase Auth Sign Up
       const firebaseUser = await signUpwithEmail(
         memberData.name,
         memberData.email,
         data.password
       );
 
-      // 3. Database Sync
+      // 2. Database Sync
       const newUserRecord = {
         uid: firebaseUser.uid,
         email: memberData.email,
         name: memberData.name,
         role: "member",
-        blitzId: blitzId // Storing the reference
+        blitzId: blitzId 
       };
 
       await saveAdminToDB(newUserRecord);
 
       toast.success("IDENTITY SYNCHRONIZED", { id: syncToast });
-      router.push("/member/profile");
+
+      // 3. Small delay to allow AuthContext/Firebase to propagate state
+      setTimeout(() => {
+        router.replace("/member/profile");
+      }, 500);
       
     } catch (error) {
-      const errMsg ="SYNC_FAILED: INTERNAL ERROR";
-      toast.error(errMsg);
+      console.error("Sync Error:", error);
+      toast.error("SYNC_FAILED: INTERNAL ERROR", { id: syncToast });
     } finally {
       setIsSubmittingManual(false);
     }

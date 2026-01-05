@@ -20,7 +20,7 @@ import toast, { Toaster } from "react-hot-toast";
 export default function Footer() {
   const router = useRouter();
 
-  // Logic States
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [memberCode, setMemberCode] = useState("");
   const [status, setStatus] = useState("idle");
@@ -61,7 +61,7 @@ export default function Footer() {
         }
       } catch (err) {
         toast.success("Identity Verified. Initialize your account.");
-        // Change 'id' to 'blitzId' to match MemberRegister.js
+        
         router.push(`/auth/register?blitzId=${member.blitzId}`);
       }
     } catch (err) {

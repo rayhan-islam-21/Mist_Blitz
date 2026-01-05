@@ -16,14 +16,6 @@ const GuestRoute = ({ children }) => {
 
   useEffect(() => {
     if (loading) return;
-
-    
-    if (user) {
-      router.replace(user.role === "admin" ? "/admin/dashboard" : "/member/profile");
-      return;
-    }
-
-    
     
     if (!emailParam && !blitzIdParam) {
       router.replace("/"); 
