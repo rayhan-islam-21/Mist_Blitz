@@ -3,11 +3,12 @@
 import React, { useState, useEffect } from "react";
 import api from "@/lib/axios";
 import {
-  Linkedin, Shield, Zap, ChevronRight, Wind, Settings, Layers
+  Linkedin, ChevronRight, Wind, Settings, Layers, Zap
 } from "lucide-react";
 import Image from "next/image";
 
 /* ================= MEMBER CARD COMPONENT ================= */
+// Maintains your exact UI styles for "admin" (black) and "default" (white)
 const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
   const handleClick = () => {
     if (subsystemId) {
@@ -22,11 +23,12 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
     ? member.linkedin 
     : `https://linkedin.com/search/results/all/?keywords=${encodeURIComponent(member.linkedin || member.name)}`;
 
+  // THE BLACK ADMIN CARD UI
   if (variant === "admin") {
     return (
       <div 
         onClick={handleClick}
-        className="group relative w-full h-[450px] bg-black overflow-hidden transition-all duration-500 hover:shadow-[15px_15px_0px_rgba(220,38,38,1)] border border-white/5 cursor-pointer"
+        className="group relative w-full h-[500px] bg-black overflow-hidden transition-all duration-500 hover:shadow-[15px_15px_0px_rgba(220,38,38,1)] border border-white/5 cursor-pointer"
       >
         <Image src={member.image || "/placeholder.jpg"} fill className="object-cover opacity-80 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000" alt={member.name} />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -48,8 +50,9 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
     );
   }
 
+  // THE WHITE SUBSYSTEM CARD UI
   return (
-    <div className="group relative w-full h-[400px] bg-white overflow-hidden border border-black/10 transition-all duration-500 hover:shadow-[10px_10px_0px_rgba(220,38,38,1)]">
+    <div className="group relative w-full h-[500px] bg-white overflow-hidden border border-black/10 transition-all duration-500 hover:shadow-[10px_10px_0px_rgba(220,38,38,1)]">
       <div className="relative w-full h-[70%] overflow-hidden bg-gray-100">
         <Image src={member.image || "/placeholder.jpg"} fill className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt={member.name} />
         {isLead && (
@@ -91,13 +94,13 @@ const TeamMembers = () => {
           "Electronics": { id: "electronics", name: "Electronics", icon: <Zap size={20} /> },
         };
 
-        // 1. Filter for leaders (using String conversion for safety)
+        // 1. Process Core Leads (Command Center)
         const coreLeads = data
-          .filter(m => String(m.isLead).toLowerCase() === "true")
+          .filter(m => String(m.isLead).toLowerCase() === "true" && (!m.techDept || m.techDept.length === 0))
           .map(m => ({
             ...m,
             role: m.position,
-            subId: (m.techDept && m.techDept[0]) ? subsystemsMap[m.techDept[0]]?.id : null
+            subId: null // Leads that aren't in a specific tech dept
           }));
 
         // 2. Process Subsystems
@@ -111,7 +114,6 @@ const TeamMembers = () => {
                 }
                 
                 const memberObj = { ...m, role: m.position };
-
                 if (String(m.isLead).toLowerCase() === "true") {
                   processedSubsystems[deptName].lead = memberObj;
                 } else {
@@ -141,6 +143,7 @@ const TeamMembers = () => {
     <section className="bg-black py-20 px-6 font-sans min-h-screen">
       <div className="max-w-7xl mx-auto">
         
+        {/* HEADER SECTION */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-24 border-b-4 border-white pb-10">
           <h1 className="text-5xl text-white md:text-8xl font-black uppercase italic leading-[0.8] tracking-tighter">
             THE <span className="text-red-600">CREW</span>
@@ -150,29 +153,25 @@ const TeamMembers = () => {
           </div>
         </div>
 
-        {/* COMMAND CENTER */}
+        {/* COMMAND CENTER (Uses Admin Variant) */}
         <div className="mb-48">
           <div className="flex items-center gap-4 mb-12">
             <h2 className="text-3xl font-black text-white uppercase italic tracking-tight underline decoration-red-600 decoration-4 underline-offset-8">Command Center</h2>
             <div className="h-[1px] flex-grow bg-white/20" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {currentYearData.core.length > 0 ? (
-              currentYearData.core.map((admin) => (
-                <MemberCard 
-                  key={`leader-${admin._id}`} 
-                  member={admin} 
-                  variant="admin" 
-                  subsystemId={admin.subId} 
-                />
-              ))
-            ) : (
-              <div className="col-span-full text-zinc-600 font-mono italic">NO_COMMAND_DATA_FOUND</div>
-            )}
+            {currentYearData.core.map((admin) => (
+              <MemberCard 
+                key={`leader-${admin._id}`} 
+                member={admin} 
+                variant="admin" 
+                subsystemId={admin.subId} 
+              />
+            ))}
           </div>
         </div>
 
-        {/* TECHNICAL UNITS */}
+        {/* TECHNICAL UNITS (Uses Default Variant) */}
         <div className="space-y-48">
           {currentYearData.subsystems.map((sub) => (
             <div key={sub.id} id={sub.id} className="scroll-mt-32">
