@@ -25,7 +25,7 @@ const AllMembersTable = () => {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const res = await api.get("/members"); 
+        const res = await api.get("/admin/members"); 
         const data = res.data;
         setMembers(data);
       } catch (error) {

@@ -34,7 +34,7 @@ export async function GET() {
   try {
     await connectDB();
 
-    const users = await Member.find().select('name position image techDept linkedin isLead');
+    const users = await Member.find();
     return NextResponse.json(users, { status: 200 });
   } catch (error) {
     console.error("Error fetching users:", error);
