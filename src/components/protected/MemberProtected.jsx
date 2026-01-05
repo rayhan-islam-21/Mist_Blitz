@@ -16,7 +16,7 @@ const MemberProtectedRoute = ({ children }) => {
     if (loading) return;
 
     if (!user) {
-      router.replace("/auth/login");
+      router.replace("/");
       return;
     }
 
@@ -25,7 +25,7 @@ const MemberProtectedRoute = ({ children }) => {
         const res = await api.get("/admin");
 
         const isMember = res.data.find(
-          (u) => u.email === user.email && u.role === "user"
+          (u) => u.email === user.email && u.role === "member"
         );
 
         if (!isMember) {
