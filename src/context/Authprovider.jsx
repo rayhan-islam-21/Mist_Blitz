@@ -21,26 +21,44 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // AUTH STATE OBSERVER
-  useEffect(() => {
+useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (loggedUser) => {
       if (loggedUser) {
         try {
-         const response = await api.get(`/members/${encodeURIComponent(loggedUser.email)}`);
-         const info = response.data
-         const userresponse = await api.get(`/admin/${(loggedUser.email)}`)
-         const admindata = userresponse.data
+          // STEP 1: Exchange Firebase login for your custom Backend JWT
+          // This route will sign a token if the email belongs to an admin
+          const tokenResponse = await api.post("/auth/token", { 
+            email: loggedUser.email 
+          });
+          
+          const { token } = tokenResponse.data;
+
+          // STEP 2: Save the "Key" in localStorage for Axios
+          localStorage.setItem("admin_jwt", token);
+
+          // STEP 3: Fetch Member info (Public-ish data)
+          const response = await api.get(`/members/${encodeURIComponent(loggedUser.email)}`);
+          const info = response.data;
+
+          // STEP 4: Fetch Admin data (Now works because token is in localStorage)
+          const userresponse = await api.get(`/admin/${encodeURIComponent(loggedUser.email)}`);
+          const admindata = userresponse.data;
+
           setUser({
             ...loggedUser,
             admindata,
             info,
-            isMember: true 
+            isMember: true,
+            token // Optional: keep it in state too
           });
         } catch (error) {
-          console.error("Member matching failed:", error);
-          // Fallback if email doesn't exist in MongoDB yet
+          console.error("Auth sync failed:", error);
+          // If JWT fails, they might be a regular member but not an admin
           setUser({ ...loggedUser, isMember: false });
         }
       } else {
+        // Cleanup on Logout
+        localStorage.removeItem("admin_jwt");
         setUser(null);
       }
       setLoading(false);
