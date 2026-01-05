@@ -11,15 +11,9 @@ const AdminLayout = ({ children }) => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    // Added overflow-x-hidden to prevent the "outside" white space
-    //  <MemberProtectedRoute>
-        <div className="min-h-screen bg-slate-50 flex overflow-x-hidden">
-      
-      {/* 1. Sidebar Component */}
+   <MemberProtectedRoute>
+         <div className="min-h-screen bg-slate-50 flex overflow-x-hidden">
       <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-
-      {/* 2. Main Content Area */}
-      {/* Added max-w-full and min-w-0 to handle flexbox overflow */}
       <div className="flex-1 flex flex-col min-w-0 max-w-full transition-all duration-300 md:ml-64">
         
         {/* Mobile Header */}
@@ -40,7 +34,6 @@ const AdminLayout = ({ children }) => {
         </header>
 
         {/* 3. Page Content */}
-        {/* Ensure the main container doesn't exceed screen width */}
         <main className="p-1 md:p-8 lg:p-4 w-full bg-white max-w-full">
           <div className="max-w-full overflow-hidden">
             {children}
@@ -48,6 +41,7 @@ const AdminLayout = ({ children }) => {
         </main>
       </div>
     </div>
+   </MemberProtectedRoute>
   );
 };
 
