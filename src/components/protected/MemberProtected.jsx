@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthContext from "@/context/Authcontext";
 import api from "@/lib/axios";
+import { FaFingerprint } from "react-icons/fa";
 
 const MemberProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
@@ -28,14 +29,9 @@ const MemberProtectedRoute = ({ children }) => {
           (u) => u.email === user.email && u.role === "member"
         );
 
-        if (!isMember) {
-          router.replace("/403");
-          return;
-        }
-
         setAuthorized(true);
       } catch (error) {
-        router.replace("/auth/login");
+        router.replace("/");
       } finally {
         setChecking(false);
       }
@@ -46,11 +42,13 @@ const MemberProtectedRoute = ({ children }) => {
 
   if (loading || checking) {
     return (
-      <div className="h-screen flex items-center justify-center">
-        Checking access…
-      </div>
+     <div className="min-h-screen bg-[#02040a] flex flex-col items-center justify-center font-mono text-red-500">
+      <FaFingerprint className="text-4xl mb-4 animate-pulse" />
+      <div className="text-[10px] tracking-[1em] font-black uppercase">Syncing Bio-Data...</div>
+    </div>
     );
   }
+  
 
   if (!authorized) return null;
 

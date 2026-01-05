@@ -23,7 +23,7 @@ export default function Footer() {
   // Logic States
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [memberCode, setMemberCode] = useState("");
-  const [status, setStatus] = useState("idle"); // idle, loading, error
+  const [status, setStatus] = useState("idle");
 
   const quickLinks = [
     "About",

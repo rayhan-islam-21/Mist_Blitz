@@ -5,7 +5,7 @@ import Sidebar from "@/components/admin/Sidebar";
 import { FaBars } from "react-icons/fa";
 import MemberProtectedRoute from "@/components/protected/MemberProtected";
 
-const AdminLayout = ({ children }) => {
+const MemberLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
@@ -45,4 +45,4 @@ const AdminLayout = ({ children }) => {
   );
 };
 
-export default AdminLayout;
+export default MemberLayout;
