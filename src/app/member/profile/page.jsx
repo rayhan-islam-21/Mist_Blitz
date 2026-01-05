@@ -22,7 +22,6 @@ import PremiumDropdown from "@/components/ui/premium-dropdown";
 import api from "@/lib/axios";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
-import Button from "@/components/ui/retro-btn";
 
 const MyProfile = () => {
   const { user, setUser, loading } = useContext(AuthContext);
@@ -42,6 +41,20 @@ const MyProfile = () => {
       });
     }
   }, [user]);
+
+  useEffect(() => {
+    const refreshData = async () => {
+      if (user?.email && !user?.info) {
+        try {
+          const res = await api.get(`/members/${user.email}`);
+          setUser((prev) => ({ ...prev, info: res.data }));
+        } catch (err) {
+          console.error("Profile sync error:", err);
+        }
+      }
+    };
+    refreshData();
+  }, [user, setUser]);
 
   const positionOptions = [
     "Senior Engineer",
@@ -308,93 +321,113 @@ const MyProfile = () => {
           </div>
 
           {/* --- RIGHT: Dossier Card --- */}
-      <div className="order-1 lg:order-2 lg:col-span-4">
-  <div className="lg:sticky lg:top-12">
-    {/* --- MAIN CARD CONTAINER --- */}
-    <div className="relative group">
-      {/* Brutalist "Offset" Background Decor */}
-      <div className="absolute inset-0 bg-slate-900 translate-x-2 translate-y-2 rounded-sm" />
-      
-      <div className="relative bg-white border-2 border-slate-900 rounded-sm overflow-hidden flex flex-col">
-        
-        {/* --- HEADER: TECHNICAL BAR --- */}
-        <div className="bg-slate-900 text-white px-4 py-3 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
-            </div>
-            <span className="text-[9px] font-mono tracking-[0.3em] font-bold uppercase">Signal_Active</span>
-          </div>
-          <FaFingerprint className="text-white/40 group-hover:text-red-600 transition-colors duration-500" />
-        </div>
+          <div className="order-1 lg:order-2 lg:col-span-4">
+            <div className="lg:sticky lg:top-12">
+              {/* --- MAIN CARD CONTAINER --- */}
+              <div className="relative group">
+                {/* Brutalist "Offset" Background Decor */}
+                <div className="absolute inset-0 bg-slate-900 translate-x-2 translate-y-2 rounded-sm" />
 
-        {/* --- IMAGE SECTION: THE "RECON" VIEW --- */}
-        <div className="p-6">
-          <div className="relative aspect-square w-full max-w-70 mx-auto bg-slate-50 border border-slate-200 group-hover:border-slate-900 transition-colors p-1">
-            {/* Corner Markers */}
-            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-slate-900 -m-[2px]" />
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-slate-900 -m-[2px]" />
-            
-            <div className="relative w-full h-full overflow-hidden hover:scale-102 transition-all duration-700 bg-slate-200">
-              <Image 
-                src={userData.image || "/placeholder-user.jpg"} 
-                alt="Operator" 
-                fill 
-                className="object-cover object-center" 
-              />
-            </div>
-          </div>
-        </div>
+                <div className="relative bg-white border-2 border-slate-900 rounded-sm overflow-hidden flex flex-col">
+                  {/* --- HEADER: TECHNICAL BAR --- */}
+                  <div className="bg-slate-900 text-white px-4 py-3 flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                      <div className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+                      </div>
+                      <span className="text-[9px] font-mono tracking-[0.3em] font-bold uppercase">
+                        Signal_Active
+                      </span>
+                    </div>
+                    <FaFingerprint className="text-white/40 group-hover:text-red-600 transition-colors duration-500" />
+                  </div>
 
-        {/* --- DATA SECTION --- */}
-        <div className="px-6 pb-6 space-y-6">
-          <div className="flex justify-between items-start pt-4 border-t border-slate-100">
-            <div>
-              <h3 className="text-2xl font-black italic uppercase tracking-tighter text-slate-900 leading-none">
-                Mist <span className="text-red-600">Blitz</span>
-              </h3>
-            </div>
-            <div className="text-right">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-2">Roll</p>
-              <p className="font-mono text-sm font-bold bg-slate-100 px-2 py-0.5 rounded italic">#{userData.roll}</p>
-            </div>
-          </div>
+                  {/* --- IMAGE SECTION: THE "RECON" VIEW --- */}
+                  <div className="p-6">
+                    <div className="relative aspect-square w-full max-w-70 mx-auto bg-slate-50 border border-slate-200 group-hover:border-slate-900 transition-colors p-1">
+                      {/* Corner Markers */}
+                      <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-slate-900 -m-[2px]" />
+                      <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-slate-900 -m-[2px]" />
 
-          {/* Micro-Metadata Grid */}
-          <div className="grid grid-cols-2 gap-4 py-4 border-y border-slate-100 bg-slate-50/50 -mx-6 px-6">
-            <div>
-              <p className="text-[8px] font-bold text-slate-400 uppercase tracking-tighter">Auth_Status</p>
-              <p className="text-[10px] font-black text-slate-800 uppercase italic tracking-tighter">Verified_Operator</p>
-            </div>
-            <div className="text-right">
-              <p className="text-[8px] font-bold text-slate-400 uppercase tracking-tighter">Registry_V</p>
-              <p className="text-[10px] font-black text-slate-800 uppercase italic tracking-tighter italic">2026.01.2</p>
-            </div>
-          </div>
+                      <div className="relative w-full h-full overflow-hidden hover:scale-102 transition-all duration-700 bg-slate-200">
+                        <Image
+                          src={userData.image || "/placeholder-user.jpg"}
+                          alt="Operator"
+                          fill
+                          className="object-cover object-center"
+                        />
+                      </div>
+                    </div>
+                  </div>
 
-          {/* Barcode / Serial Footer */}
-          <div className="flex justify-between items-center opacity-40 group-hover:opacity-100 transition-opacity duration-500">
-            <div className="flex flex-col gap-0.5">
-              <div className="flex gap-1">
-                {[...Array(12)].map((_, i) => (
-                  <div key={i} className={`h-4 w-[1px] bg-slate-900 ${i % 3 === 0 ? 'h-6' : ''}`} />
-                ))}
+                  {/* --- DATA SECTION --- */}
+                  <div className="px-6 pb-6 space-y-6">
+                    <div className="flex justify-between items-start pt-4 border-t border-slate-100">
+                      <div>
+                        <h3 className="text-2xl font-black italic uppercase tracking-tighter text-slate-900 leading-none">
+                          Mist <span className="text-red-600">Blitz</span>
+                        </h3>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-2">
+                          Roll
+                        </p>
+                        <p className="font-mono text-sm font-bold bg-slate-100 px-2 py-0.5 rounded italic">
+                          #{userData.roll}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Micro-Metadata Grid */}
+                    <div className="grid grid-cols-2 gap-4 py-4 border-y border-slate-100 bg-slate-50/50 -mx-6 px-6">
+                      <div>
+                        <p className="text-[8px] font-bold text-slate-400 uppercase tracking-tighter">
+                          Auth_Status
+                        </p>
+                        <p className="text-[10px] font-black text-slate-800 uppercase italic tracking-tighter">
+                          Verified_Operator
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[8px] font-bold text-slate-400 uppercase tracking-tighter">
+                          Registry_V
+                        </p>
+                        <p className="text-[10px] font-black text-slate-800 uppercase italic tracking-tighter italic">
+                          2026.01.2
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Barcode / Serial Footer */}
+                    <div className="flex justify-between items-center opacity-40 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="flex flex-col gap-0.5">
+                        <div className="flex gap-1">
+                          {[...Array(12)].map((_, i) => (
+                            <div
+                              key={i}
+                              className={`h-4 w-[1px] bg-slate-900 ${
+                                i % 3 === 0 ? "h-6" : ""
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-[8px] font-mono font-bold tracking-[0.2em]">
+                          {userData.blitzId?.substring(0, 12)}
+                        </span>
+                      </div>
+                      <FaBarcode className="text-4xl" />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <span className="text-[8px] font-mono font-bold tracking-[0.2em]">{userData.blitzId?.substring(0, 12)}</span>
-            </div>
-            <FaBarcode className="text-4xl" />
-          </div>
-        </div>
-      </div>
-    </div>
 
-    {/* Subtle Hint Text */}
-    <p className="mt-4 text-[9px] font-mono text-slate-400 uppercase text-center tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity">
-      Restricted_Data_Access
-    </p>
-  </div>
-</div>
+              {/* Subtle Hint Text */}
+              <p className="mt-4 text-[9px] font-mono text-slate-400 uppercase text-center tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity">
+                Restricted_Data_Access
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

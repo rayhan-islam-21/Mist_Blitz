@@ -37,10 +37,8 @@ const MemberRegister = () => {
 
 // Inside MemberRegister.js
 useEffect(() => {
-  // Use 'blitzId' because that's what we defined above
   if (!blitzId) {
     console.log("No blitzId found, redirecting...");
-    // router.replace("/"); // Temporary comment this out to debug if needed
     return;
   }
 
@@ -186,7 +184,7 @@ const onSubmit = async (data) => {
               <div className="relative group">
                 <FaEnvelope className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-700" />
                 <input 
-                  value={memberData?.email || ""} 
+                  value={memberData?.email} 
                   disabled 
                   className="w-full bg-[#0d1117] border border-white/5 pl-14 pr-12 py-5 rounded-2xl text-slate-500 text-sm outline-none cursor-not-allowed" 
                 />
