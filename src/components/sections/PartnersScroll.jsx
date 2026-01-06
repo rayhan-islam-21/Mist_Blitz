@@ -2,7 +2,6 @@
 
 import LogoLoop from "../LogoLoop";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Activity, Cpu, Box } from "lucide-react";
 import { useRef } from "react";
 
 const spon = [
@@ -40,7 +39,7 @@ export default function PartnersScroll() {
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`,
+          backgroundImage: `radial-linear(#fff 1px, transparent 1px)`,
           backgroundSize: "30px 30px",
         }}
       />
@@ -57,25 +56,21 @@ export default function PartnersScroll() {
             <span className="text-red-600">Partners</span>!
           </motion.h2>
         </div>
-
-        {/* 4. THE MASSIVE LOGO SCANNER */}
         <div className="relative">
           <div className="relative py-0 bg-white/0.1 backdrop-blur-3xl group">
-            <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-[#050505] to-transparent z-20 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-[#050505] to-transparent z-20 pointer-events-none" />
+            <div className="absolute inset-y-0 left-0 w-40 bg-linear-to-r from-[#050505] to-transparent z-20 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-40 bg-linear-to-l from-[#050505] to-transparent z-20 pointer-events-none" />
 
-            <div
-              className="relative items-center flex justify-center overflow-hidden opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 ease-in-out"
-            >
+            <div className="relative items-center flex justify-center overflow-hidden opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 ease-in-out">
               <LogoLoop
                 logos={sponsorLogos}
                 speed={60}
                 direction="left"
-                logoHeight={280} // DRAMATICALLY INCREASED SIZE
+                logoHeight={280}
                 gap={40}
                 hoverSpeed={0}
                 scaleOnHover
-                fadeOut={false} // Custom fades used above for better control
+                fadeOut={false}
                 ariaLabel="Our partners"
               />
             </div>
@@ -87,7 +82,7 @@ export default function PartnersScroll() {
           <p className="text-2xl md:text-4xl font-sans font-black italic uppercase leading-none text-white mb-6">
             The fuel behind <span className="text-red-600">Furiosa 1.0</span>
           </p>
-          <p className="text-gray-500 font-medium text-lg leading-relaxed">
+          <p className=" text-balance font-sans gap-10 text-gray-300 text-sm font-mono md:text-sm  font-normal  leading-relaxed">
             Our partners provide the high-precision hardware and strategic
             resources required to compete at the edge of physics. They don't
             just sponsor; they engineer the future with us.

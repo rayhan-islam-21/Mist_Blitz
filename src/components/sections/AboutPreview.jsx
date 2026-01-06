@@ -68,12 +68,12 @@ const AboutPreview = () => {
                   Formula Student engineering.
                 </span>{" "}
               </p>
-              <p className="text-sm  text-gray-400 text-balance font-semibold italic leading-relaxed max-w-lg">
+              <p className="text-sm   text-balance  font-sans gap-10 text-gray-300 md:text-lg  font-normal leading-relaxed max-w-lg">
                 MIST BLITZ is the official Formula Student team of the{" "}
                 <span className="text-white font-semibold italic">
                   Military Institute of Science and Technology (MIST).
                 </span>
-                . The team designs, manufactures, and validates a single-seat,
+                The team designs, manufactures, and validates a single-seat,
                 open-wheel race car in compliance with international Formula
                 Student regulations, representing Bangladesh on a global
                 motorsport platform.
@@ -155,7 +155,7 @@ const AboutPreview = () => {
           <div className="flex flex-col lg:flex-row justify-between items-start mb-24 gap-12">
             <div className="lg:w-2/3">
               <div className="flex items-center gap-4 mb-6">
-                <div className="h-[2px] w-12 bg-red-600" />
+                <div className="h-0.5 w-12 bg-red-600" />
                 <span className="font-mono text-xs uppercase tracking-[0.5em] text-red-600">
                   The Blueprint
                 </span>
