@@ -1,16 +1,22 @@
-
+import { Suspense } from "react";
+import GuestRoute from "@/components/protected/Guestroute";
 import AdminLogin from "@/components/auth/login/Login";
-import AdminRegister from "@/components/auth/register/Register";
-import React, { Suspense } from "react";
 
-const Login = () => {
+export default function LoginPage() {
   return (
-    <div className="md:min-h-screen  bg-white">
-    <Suspense fallback={<div className="h-screen flex justify-center items-center">Loading...</div>}>
-       <AdminLogin/>
+    <Suspense fallback={<LoginFallback />}>
+      <GuestRoute>
+        <AdminLogin/>
+      </GuestRoute>
     </Suspense>
+  );
+}
+
+function LoginFallback() {
+  return (
+    <div className="min-h-screen bg-[#02040a] flex items-center justify-center text-red-500 font-mono">
+      Initializing Secure Session...
     </div>
   );
-};
+}
 
-export default Login;
