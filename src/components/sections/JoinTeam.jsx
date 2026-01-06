@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 import Button from "../ui/retro-btn";
 import { Activity, Cpu, LayoutPanelLeft, ShieldCheck, Zap } from "lucide-react";
 
-/* ---------------- DATA ---------------- */
 
 const technicalTeams = [
   {
@@ -125,15 +124,13 @@ export default function JoinBlitzTeam() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Spatial Constants for the "Satellite" Orbit
-  const RADIUS_X = 630; // Horizontal stretch of the orbit
-  const RADIUS_Y = 630; // Vertical stretch of the orbit
+  const RADIUS_X = 630;
+  const RADIUS_Y = 630;
   const CARD_W = 280;
   const CARD_H = 320;
 
   return (
-    <section className="relative min-h-screen py-24 md:py-40 bg-[#050505] overflow-hidden flex flex-col items-center border-t border-white/5">
-      {/* 1. INDUSTRIAL BACKGROUND */}
+    <section className="relative selection:bg-red-600 selection:text-white min-h-screen py-24 md:py-20 bg-[#050505] overflow-hidden flex flex-col items-center border-t border-white/5">
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
@@ -142,7 +139,7 @@ export default function JoinBlitzTeam() {
         }}
       />
 
-      <div className="relative z-20 mb-32 text-center px-4">
+      <div className="relative z-20 mb-20 text-center px-4">
         <div className="flex items-center justify-center gap-3 mb-6">
           <Activity size={16} className="text-red-600 animate-pulse" />
           <span className="text-[10px] font-mono tracking-[0.5em] text-red-600 uppercase bg-red-600/10 px-3 py-1">
@@ -157,8 +154,6 @@ export default function JoinBlitzTeam() {
           TEAM <span className="text-red-600">BLITZ</span>
         </motion.h2>
       </div>
-
-      {/* ---------- MOBILE LAYOUT ---------- */}
       {isMobile && (
         <div className="relative z-20 w-full max-w-md px-4 space-y-8">
           {allDepts.map((dept, i) => (
@@ -177,18 +172,17 @@ export default function JoinBlitzTeam() {
         </div>
       )}
 
-      {/* ---------- DESKTOP CIRCULAR LAYOUT ---------- */}
+
       {!isMobile && (
         <div
           ref={containerRef}
           className="relative w-full max-w-450 h-450 flex items-center justify-center"
         >
-          {/* HUD Status Elements */}
+  
           <div className="absolute top-0 left-10 p-6  font-mono text-[9px] text-gray-500 uppercase"></div>
 
-          {/* Center Hub: The Reactor Core */}
           <div ref={centerRef} className="relative z-50">
-            <div className="relative h-32 w-32 rounded-full bg-black border-[4px] border-red-600 overflow-hidden shadow-[0_0_60px_rgba(220,38,38,0.3)] group cursor-crosshair">
+            <div className="relative h-32 w-32 rounded-full bg-black border-4 border-red-600 overflow-hidden shadow-[0_0_60px_rgba(220,38,38,0.3)] group cursor-crosshair">
               <Image
                 src="/furiosalogo.jpg"
                 alt="Logo"
@@ -197,11 +191,11 @@ export default function JoinBlitzTeam() {
               />
               <div className="absolute inset-0 bg-red-600/10 group-hover:bg-transparent transition-colors" />
             </div>
-            {/* Pulsing Ring */}
+
             <div className="absolute inset-[-20px] rounded-full border border-red-600/20 animate-ping" />
           </div>
 
-          {/* Cards arranged in an ellipse */}
+
           {allDepts.map((dept, i) => {
             const angle = (i / allDepts.length) * 2 * Math.PI;
             const x = Math.cos(angle) * RADIUS_X;
@@ -219,7 +213,7 @@ export default function JoinBlitzTeam() {
                 }}
               >
                 <div className="relative h-full w-full">
-                  {/* Visual Connection Pin */}
+ 
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-red-600 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
 
                   <DeptCard
@@ -233,7 +227,7 @@ export default function JoinBlitzTeam() {
             );
           })}
 
-          {/* Beams Connecting All Nodes */}
+     
           {allDepts.map((_, i) => (
             <AnimatedBeam
               key={i}
@@ -251,8 +245,8 @@ export default function JoinBlitzTeam() {
         </div>
       )}
 
-      {/* FINAL CTA */}
-      <div className="relative z-30 mt-30 md:mt-10 mb-32">
+
+      <div className="relative z-30 mt-30 md:mt-10 mb-14">
         <Button onClick={handleJoinClick} className="md:px-16 py-5 bg-red-600 text-white hover:bg-white hover:text-red-600 border-none transition-all group overflow-hidden -skew-x-6">
           <span className="relative font-black uppercase text-2xl tracking-[0.3em] italic skew-x-[12deg] flex items-center gap-4">
             <Zap className="fill-current" /> Join the Blitz

@@ -34,7 +34,7 @@ export default function PartnersScroll() {
   return (
     <section
       ref={containerRef}
-      className="relative selection:text-white selection:bg-red-600 bg-[#050505] max-w-7xl mx-auto overflow-hidden py-32 border-t border-white/5"
+      className="relative selection:text-white selection:bg-red-600 bg-[#050505] max-w-7xl mx-auto overflow-hidden py-28 border-t border-white/5"
     >
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"

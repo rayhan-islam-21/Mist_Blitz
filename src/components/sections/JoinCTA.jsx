@@ -21,7 +21,7 @@ export default function JoinCTA() {
       "Email%3A";
   };
   return (
-    <section className="relative py-40 selection:bg-red-600 selection:text-white bg-[#050505] border-t border-white/5 flex flex-col items-center justify-center text-center overflow-hidden">
+    <section className="relative py-28 selection:bg-red-600 selection:text-white bg-[#050505] border-t border-white/5 flex flex-col items-center justify-center text-center overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vw] font-black text-white/[0.01] italic select-none pointer-events-none uppercase tracking-tighter">
         FSC_2024
       </div>
