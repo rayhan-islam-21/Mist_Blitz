@@ -21,8 +21,7 @@ export default function JoinCTA() {
       "Email%3A";
   };
   return (
-    <section className="relative py-40 bg-[#050505] border-t border-white/5 flex flex-col items-center justify-center text-center overflow-hidden">
-      {/* BACKGROUND DECORATIVE ELEMENT */}
+    <section className="relative py-40 selection:bg-red-600 selection:text-white bg-[#050505] border-t border-white/5 flex flex-col items-center justify-center text-center overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vw] font-black text-white/[0.01] italic select-none pointer-events-none uppercase tracking-tighter">
         FSC_2024
       </div>
@@ -37,8 +36,6 @@ export default function JoinCTA() {
           FUEL THE <br />
           <span className="text-red-600">FUTURE</span>!
         </motion.h2>
-
-        {/* SUBHEADING: TECHNICAL COPY */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -56,8 +53,6 @@ export default function JoinCTA() {
             <span className="text-white"> Formula Student China circuits.</span>
           </p>
         </motion.div>
-
-        {/* THE CTA BUTTON: INDUSTRIAL BLOCK */}
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
