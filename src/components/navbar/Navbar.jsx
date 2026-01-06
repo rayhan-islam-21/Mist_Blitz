@@ -29,14 +29,11 @@ const Navbar = () => {
 
   return (
     <>
-      {/* 1. TOP BAR - Scaled for Mobile */}
-      <div className="absolute top-0 left-0 w-full h-24 flex justify-between items-start px-6 md:px-12 pt-6 md:pt-10 z-[140] pointer-events-none">
-        
-        {/* LEFT: Logo Section */}
+      <div className="absolute top-0 left-0 w-full h-24 flex justify-between items-start px-6 md:px-12 pt-6 md:pt-10 z-140 pointer-events-none">
         <div className="flex gap-3 md:gap-6 items-center pointer-events-auto">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2 md:gap-4 group">
-              <div className="w-[2px] h-4 md:h-6 bg-red-600 shadow-[0_0_8px_#ef4444]" />
+              <div className="w-0.5 h-4 md:h-6 bg-red-600 shadow-[0_0_8px_#ef4444]" />
               <Link href="/">
                 <Image src="/hero.png" alt="BLITZ" width={90} height={22} className="brightness-200 contrast-125 md:w-[115px] md:h-[28px]" priority />
               </Link>
@@ -45,7 +42,7 @@ const Navbar = () => {
         </div>
 
         {/* RIGHT: Time & Initialize */}
-        <div className="flex gap-4 md:gap-10 pointer-events-auto items-start">
+        <div className="md:flex hidden gap-4 md:gap-10 pointer-events-auto items-start">
           <div className="flex flex-col items-end font-mono">
             <div className="flex items-center gap-2">
               <span className="text-[8px] md:text-[10px] text-white font-bold tracking-widest">{systemTime}</span>
