@@ -20,11 +20,11 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { id: "SYS_01", name: "Home", href: "/" },
-    { id: "SYS_02", name: "About", href: "/about" },
-    { id: "SYS_03", name: "Partners", href: "/partners" },
-    { id: "SYS_04", name: "Gallery", href: "/gallery" },
-    { id: "SYS_05", name: "Shop", href: "/shop" },
+    { id: "01", name: "Home", href: "/" },
+    { id: "02", name: "About", href: "/about" },
+    { id: "03", name: "Partners", href: "/partners" },
+    { id: "04", name: "Gallery", href: "/gallery" },
+    { id: "05", name: "Shop", href: "/shop" },
   ];
 
   return (
@@ -71,9 +71,6 @@ const Navbar = () => {
             return (
               <Link key={item.id} href={item.href} className="group relative flex items-center gap-3 md:gap-6 py-2 md:py-3">
                 <div className="flex flex-col items-end">
-                  <span className={`font-mono text-[6px] md:text-[7px] mb-0.5 transition-colors ${active ? "text-red-600" : "text-white/20"}`}>
-                    {item.id}
-                  </span>
                   <span className={`text-base md:text-2xl font-sans italic font-black tracking-tighter transition-all duration-500 uppercase ${
                     active ? "text-white scale-110 pr-0" : "text-white/10 group-hover:text-red-600 group-hover:pr-1"
                   }`}>
@@ -81,7 +78,7 @@ const Navbar = () => {
                   </span>
                 </div>
                 
-                <div className={`w-[2px] md:w-1 h-10 md:h-14 transition-all duration-700 ${
+                <div className={`w-0.5 md:w-1 h-10 md:h-14 transition-all duration-700 ${
                   active ? "bg-red-600 shadow-[0_0_15px_#ff0000]" : "bg-white/5 group-hover:bg-red-600/40"
                 }`} />
               </Link>
@@ -97,7 +94,7 @@ const Navbar = () => {
         </div>
 
 
-        <div className="absolute top-0 left-0 w-full h-full border-[1px] border-white/5 m-2 md:m-4 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-full border border-white/5 m-2 md:m-4 pointer-events-none" />
       </nav>
     </>
   );
