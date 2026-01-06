@@ -42,8 +42,8 @@ const Navbar = () => {
         </div>
 
         {/* RIGHT: Time & Initialize */}
-        <div className="md:flex hidden gap-4 md:gap-10 pointer-events-auto items-start">
-          <div className="flex flex-col items-end font-mono">
+        <div className="flex gap-4 md:gap-10 pointer-events-auto items-start">
+          <div className="md:flex hidden flex-col items-end font-mono">
             <div className="flex items-center gap-2">
               <span className="text-[8px] md:text-[10px] text-white font-bold tracking-widest">{systemTime}</span>
               <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
@@ -55,16 +55,16 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Button href="/join" className="group relative h-8 md:h-11 px-4 md:px-10 bg-red-600 text-white font-mono text-[9px] md:text-[11px] font-black flex items-center justify-center skew-x-[-10deg] hover:bg-white hover:text-red-600 transition-all duration-300">
+          <Button href="/join" className="group relative h-8 md:h-11 px-4 md:px-10 bg-red-600 text-white font-mono text-[9px] md:text-[11px] font-black flex items-center justify-center -skew-x-5 md:skew-x-[-10deg] hover:bg-white hover:text-red-600 transition-all duration-300">
             <Link href="/contact"> <span className="skew-x-[20deg] tracking-widest">Contact Us</span></Link>
           </Button>
         </div>
       </div>
 
-      {/* 2. STICKY NAV - Repositioned for Mobile Screens */}
-      <nav className="fixed inset-0 pointer-events-none z-[150]">
+
+      <nav className="fixed inset-0 pointer-events-none z-150">
         
-        {/* RIGHT SIDE NAV - Responsive widths & font sizes */}
+      
         <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-end gap-1 md:gap-1 pointer-events-auto pr-4 md:pr-8">
           {navItems.map((item) => {
             const active = pathname === item.href;
@@ -89,14 +89,14 @@ const Navbar = () => {
           })}
         </div>
 
-        {/* CENTER CROSSHAIR - Hidden on very small screens to clear the view */}
+       
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05] hidden sm:block">
           <div className="relative w-32 h-32 md:w-48 md:h-48 border border-white/20 rounded-full flex items-center justify-center">
              <div className="w-1.5 h-1.5 bg-red-600 rotate-45" />
           </div>
         </div>
 
-        {/* PERIPHERAL BORDER - Mobile Adjusted Padding */}
+
         <div className="absolute top-0 left-0 w-full h-full border-[1px] border-white/5 m-2 md:m-4 pointer-events-none" />
       </nav>
     </>
