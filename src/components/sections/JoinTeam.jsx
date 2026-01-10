@@ -6,8 +6,7 @@ import { AnimatedBeam } from "@/components/ui/animated-beam";
 import DeptCard from "../Deptcard";
 import { motion } from "framer-motion";
 import Button from "../ui/retro-btn";
-import { Activity, Cpu, LayoutPanelLeft, ShieldCheck, Zap } from "lucide-react";
-
+import { Activity, Zap } from "lucide-react";
 
 const technicalTeams = [
   {
@@ -79,32 +78,29 @@ const allDepts = [...technicalTeams, ...nonTechnicalTeams];
 
 const handleJoinClick = () => {
   const email = "recruitment@mistblitz.com";
-  const subject = encodeURIComponent("RECRUITMENT_PHASE_2025 // [NAME] // [DEPT]");
-  
+  const subject = encodeURIComponent(
+    "RECRUITMENT_PHASE_2025 // [NAME] // [DEPT]"
+  );
+
   const body = encodeURIComponent(
     "FULL_NAME: \n" +
-    "STUDENT_ID: \n" +
-    "DEPARTMENT/MAJOR: \n" +
-    "LEVEL/TERM: \n\n" +
-    
-    "TARGET_UNIT: [Select: SSB | Chassis | Aero | Powertrain | Electronics | Mgmt | Media]\n" +
-    "EXPERIENCE_LOG: [Years of experience or previous project involvements]\n\n" +
-    
-    "CORE_COMPETENCIES:\n" +
-    "1. \n" +
-    "2. \n" +
-    "3. \n\n" +
-    
-    "LINK_PORTFOLIO: [Link to GitHub / Behance / Drive]\n\n" +
-    
-    "[Why do you want to join MIST BLITZ? Max 2 sentences]\n\n" +
-    
-    "--------------------------------------------------\n" +
-    "REQUIRED_ATTACHMENTS:\n" +
-    "[X] CV_FORMAT_PDF\n" +
-    "[ ] PROJECT_PORTFOLIO\n" +
-    "--------------------------------------------------\n" +
-    "EOF_TRANSMISSION // END_OF_LOG"
+      "STUDENT_ID: \n" +
+      "DEPARTMENT/MAJOR: \n" +
+      "LEVEL/TERM: \n\n" +
+      "TARGET_UNIT: [Select: SSB | Chassis | Aero | Powertrain | Electronics | Mgmt | Media]\n" +
+      "EXPERIENCE_LOG: [Years of experience or previous project involvements]\n\n" +
+      "CORE_COMPETENCIES:\n" +
+      "1. \n" +
+      "2. \n" +
+      "3. \n\n" +
+      "LINK_PORTFOLIO: [Link to GitHub / Behance / Drive]\n\n" +
+      "[Why do you want to join MIST BLITZ? Max 2 sentences]\n\n" +
+      "--------------------------------------------------\n" +
+      "REQUIRED_ATTACHMENTS:\n" +
+      "[X] CV_FORMAT_PDF\n" +
+      "[ ] PROJECT_PORTFOLIO\n" +
+      "--------------------------------------------------\n" +
+      "EOF_TRANSMISSION // END_OF_LOG"
   );
 
   window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
@@ -148,37 +144,40 @@ export default function JoinBlitzTeam() {
         </div>
         <motion.h2
           initial={{ y: 60, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className="text-5xl md:text-[9rem] font-black text-white font-sans italic leading-[0.8] tracking-tighter uppercase">
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
+          className="text-5xl md:text-[9rem] font-black text-white font-sans italic leading-[0.8] tracking-tighter uppercase"
+        >
           TEAM <span className="text-red-600">BLITZ</span>
         </motion.h2>
       </div>
       {isMobile && (
         <div className="relative z-20 w-full max-w-md px-4 space-y-8">
-          {allDepts.map((dept, i) => (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              key={dept.title}
-            >
-              <DeptCard
-                {...dept}
-                className="w-full h-96 border border-white/10"
-              />
-            </motion.div>
+          {allDepts.map((_, i) => (
+            <AnimatedBeam
+              key={`beam-${i}`}
+              containerRef={containerRef}
+              fromRef={{
+                get current() {
+                  return cardRefs.current[i];
+                },
+              }}
+              toRef={centerRef}
+              curvature={i % 2 === 0 ? 60 : -60}
+              duration={2}
+              pathColor="rgba(255, 255, 255, 0.08)"
+              gradientStartColor="#dc2626"
+              gradientStopColor="#000000"
+            />
           ))}
         </div>
       )}
-
 
       {!isMobile && (
         <div
           ref={containerRef}
           className="relative w-full max-w-450 h-450 flex items-center justify-center"
         >
-  
           <div className="absolute top-0 left-10 p-6  font-mono text-[9px] text-gray-500 uppercase"></div>
 
           <div ref={centerRef} className="relative z-50">
@@ -194,7 +193,6 @@ export default function JoinBlitzTeam() {
 
             <div className="absolute inset-[-20px] rounded-full border border-red-600/20 animate-ping" />
           </div>
-
 
           {allDepts.map((dept, i) => {
             const angle = (i / allDepts.length) * 2 * Math.PI;
@@ -213,7 +211,6 @@ export default function JoinBlitzTeam() {
                 }}
               >
                 <div className="relative h-full w-full">
- 
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-red-600 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
 
                   <DeptCard
@@ -227,7 +224,6 @@ export default function JoinBlitzTeam() {
             );
           })}
 
-     
           {allDepts.map((_, i) => (
             <AnimatedBeam
               key={i}
@@ -245,9 +241,11 @@ export default function JoinBlitzTeam() {
         </div>
       )}
 
-
       <div className="relative z-30 mt-30 md:mt-10 mb-14">
-        <Button onClick={handleJoinClick} className="md:px-16 py-5 bg-red-600 text-white hover:bg-white hover:text-red-600 border-none transition-all group overflow-hidden -skew-x-6">
+        <Button
+          onClick={handleJoinClick}
+          className="md:px-16 py-5 bg-red-600 text-white hover:bg-white hover:text-red-600 border-none transition-all group overflow-hidden -skew-x-6"
+        >
           <span className="relative font-black uppercase text-2xl tracking-[0.3em] italic skew-x-[12deg] flex items-center gap-4">
             <Zap className="fill-current" /> Join the Blitz
           </span>

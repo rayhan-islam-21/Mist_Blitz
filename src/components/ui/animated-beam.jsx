@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useId, useState, useCallback } from "react";
-import { motion } from "framer-motion"; // Changed from "motion/react" to "framer-motion" for standard installs
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const AnimatedBeam = ({
@@ -10,9 +10,9 @@ export const AnimatedBeam = ({
   toRef,
   curvature = -100,
   reverse = false,
-  duration = 1, // Faster duration for better visibility during testing
+  duration = 2,
   delay = 0,
-  pathColor = "green",
+  pathColor = "rgba(255,255,255,0.1)",
   pathWidth = 2,
   pathOpacity = 1,
   gradientStartColor = "#ffaa40",
@@ -30,16 +30,23 @@ export const AnimatedBeam = ({
     ? { x1: ["90%", "-10%"], x2: ["100%", "0%"] }
     : { x1: ["10%", "110%"], x2: ["0%", "100%"] };
 
-  // Use useCallback so it's a stable dependency for ResizeObserver and effect
   const updatePath = useCallback(() => {
-    if (containerRef.current && fromRef.current && toRef.current) {
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const rectA = fromRef.current.getBoundingClientRect();
-      const rectB = toRef.current.getBoundingClientRect();
+    // Safely access current elements
+    const container = containerRef?.current;
+    const from = fromRef?.current;
+    const to = toRef?.current;
 
-      // Only update if we have actual dimensions (prevents 0 height SVGs)
+    if (container && from && to) {
+      const containerRect = container.getBoundingClientRect();
+      const rectA = from.getBoundingClientRect();
+      const rectB = to.getBoundingClientRect();
+
+      // Ensure the container actually has a size
       if (containerRect.width > 0 && containerRect.height > 0) {
-        setSvgDimensions({ width: containerRect.width, height: containerRect.height });
+        setSvgDimensions({ 
+          width: containerRect.width, 
+          height: containerRect.height 
+        });
 
         const startX = rectA.left - containerRect.left + rectA.width / 2 + startXOffset;
         const startY = rectA.top - containerRect.top + rectA.height / 2 + startYOffset;
@@ -54,22 +61,25 @@ export const AnimatedBeam = ({
   }, [containerRef, fromRef, toRef, curvature, startXOffset, startYOffset, endXOffset, endYOffset]);
 
   useEffect(() => {
-    // 1. Monitor layout changes
+    // 1. Observe all three elements for layout shifts
     const resizeObserver = new ResizeObserver(() => updatePath());
     
     if (containerRef.current) resizeObserver.observe(containerRef.current);
     if (fromRef.current) resizeObserver.observe(fromRef.current);
     if (toRef.current) resizeObserver.observe(toRef.current);
 
-    // 2. Initial trigger after a tiny delay to ensure layout has settled
-    const timeoutId = setTimeout(updatePath, 100);
+    // 2. Initial trigger with a slightly longer delay (200ms)
+    // This allows the Circular layout's 'transform' and 'opacity' animations to settle
+    const timeoutId = setTimeout(updatePath, 200);
 
-    // 3. Trigger on window resize (extra safety)
+    // 3. Fallback for window changes
     window.addEventListener("resize", updatePath);
+    window.addEventListener("scroll", updatePath, true); // True catches shifts in parents
 
     return () => {
       resizeObserver.disconnect();
       window.removeEventListener("resize", updatePath);
+      window.removeEventListener("scroll", updatePath, true);
       clearTimeout(timeoutId);
     };
   }, [updatePath, containerRef, fromRef, toRef]);
@@ -80,9 +90,10 @@ export const AnimatedBeam = ({
       width={svgDimensions.width}
       height={svgDimensions.height}
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("pointer-events-none absolute top-0 left-0 stroke-2", className)}
+      className={cn("pointer-events-none absolute top-0 left-0", className)}
       viewBox={`0 0 ${svgDimensions.width} ${svgDimensions.height}`}
     >
+      {/* Background Path (Static) */}
       <path
         d={pathD}
         stroke={pathColor}
@@ -90,6 +101,7 @@ export const AnimatedBeam = ({
         strokeOpacity={pathOpacity}
         strokeLinecap="round"
       />
+      {/* Animated Gradient Path */}
       <path
         d={pathD}
         strokeWidth={pathWidth}
@@ -108,7 +120,7 @@ export const AnimatedBeam = ({
           transition={{
             delay,
             duration,
-            ease: "linear", // Changed to linear for a smoother "flowing" effect
+            ease: "linear",
             repeat: Infinity,
           }}
         >
