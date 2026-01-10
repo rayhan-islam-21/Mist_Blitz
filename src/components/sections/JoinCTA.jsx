@@ -46,7 +46,7 @@ export default function JoinCTA() {
             Join MIST BLITZ in engineering the next era of{" "}
             <span className="text-red-600">Global Motorsports.</span>
           </p>
-          <p className="text-lg font-sans text-gray-500 font-medium leading-relaxed">
+          <p className="text-lg font-sans text-gray-500 text-center text-balance font-medium leading-relaxed">
             Partner with the vanguard of the Military Institute of Science and
             Technology. Invest in high-tier technical innovation and gain
             international visibility at the

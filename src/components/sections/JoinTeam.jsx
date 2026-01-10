@@ -147,7 +147,7 @@ export default function JoinBlitzTeam() {
           </span>
         </div>
         <motion.h2
-          initial={{ y: 160, opacity: 0 }}
+          initial={{ y: 60, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ type: "spring", stiffness: 100, damping: 20 }}
         className="text-5xl md:text-[9rem] font-black text-white font-sans italic leading-[0.8] tracking-tighter uppercase">

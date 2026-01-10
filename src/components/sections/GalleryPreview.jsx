@@ -3,242 +3,139 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Target, Maximize2, Activity } from "lucide-react";
-
-/* ---------------- DATA ---------------- */
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const galleryData = [
-  {
-    id: 1,
-    image: "/car2.jpg",
-    title: "Furiosa 1.0",
-    tag: "Chassis_Phase // 01",
-    hoverText: "Track testing and validation of Furiosa 1.0, focusing on vehicle dynamics and performance benchmarking.",
-  },
-  {
-    id: 2,
-    image: "/improve.jpg",
-    title: "Manufacturing",
-    tag: "Fabrication // 02",
-    hoverText: "In-house chassis manufacturing involving precision fabrication and final structural assembly.",
-  },
-  {
-    id: 3,
-    image: "/china4.jpg",
-    title: "Team MIST BLITZ",
-    tag: "Deployment // 03",
-    hoverText: "MIST BLITZ representing Bangladesh at international Formula Student competitions.",
-  },
-  {
-    id: 4,
-    image: "/car2.jpg",
-    title: "Engineering",
-    tag: "System_Design // 04",
-    hoverText: "System-level vehicle design driven by CAD modeling and CFD analysis.",
-  },
-  {
-    id: 5,
-    image: "/china3.jpg",
-    title: "Competition",
-    tag: "Static_Events // 05",
-    hoverText: "Participation in global Formula Student static and dynamic events under rigorous regulations.",
-  },
+  { id: 1, image: "/car2.jpg", title: "Furiosa 1.0", description: "Performance validation and track testing." },
+  { id: 2, image: "/improve.jpg", title: "Fabrication", description: "Precision chassis manufacturing." },
+  { id: 3, image: "/china4.jpg", title: "MIST BLITZ", description: "Global Formula Student deployment." },
+  { id: 4, image: "/car2.jpg", title: "Engineering", description: "Advanced system design and CAD." },
+  { id: 5, image: "/china3.jpg", title: "Competition", description: "International static and dynamic events." },
 ];
 
-/* ---------------- MAIN COMPONENT ---------------- */
-
-export default function GalleryPreviewCarousel() {
+export default function FormulaGallery() {
   const [activeIndex, setActiveIndex] = useState(2);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const intervalRef = useRef(null);
-  const delay = 6000;
+  const containerRef = useRef(null);
 
   const next = () => setActiveIndex((prev) => (prev + 1) % galleryData.length);
   const prev = () => setActiveIndex((prev) => (prev - 1 + galleryData.length) % galleryData.length);
 
-  useEffect(() => {
-    if (isAutoPlaying) {
-      intervalRef.current = setInterval(next, delay);
-    }
-    return () => clearInterval(intervalRef.current);
-  }, [activeIndex, isAutoPlaying]);
-
-  const handleDragEnd = (_, info) => {
-    if (info.offset.x < -50) next();
-    if (info.offset.x > 50) prev();
+  // Drag Handler
+  const handleDragEnd = (event, info) => {
+    const threshold = 50; // pixels to trigger slide
+    if (info.offset.x < -threshold) next();
+    else if (info.offset.x > threshold) prev();
   };
 
+  useEffect(() => {
+    let interval;
+    if (isAutoPlaying) {
+      interval = setInterval(next, 5000);
+    }
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
+
   return (
-    <section className="relative selection:bg-red-600 selection:text-white bg-[#050505] overflow-hidden py-24 md:py-32 border-t border-white/5">
-      
-      {/* 1. TECHNICAL BACKGROUND */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`, backgroundSize: '60px 60px' }} />
-      
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[20vw] font-black text-white/[0.01] italic select-none pointer-events-none uppercase tracking-tighter">
-        ARCHIVE_RECORD
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section className="relative bg-[#050505] text-white py-12 md:py-24 overflow-hidden select-none">
+      <div className="max-w-350 mx-auto px-4 md:px-8">
         
-        {/* 2. HEADER: BRUTALIST STYLE */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-          <div className="relative">
-            <div className="flex items-center gap-3 mb-4">
-              <Activity size={16} className="text-red-600 animate-pulse" />
-              <span className="text-[10px] font-bold tracking-[0.5em] text-red-600 uppercase font-mono">
-                Archive
-              </span>
-            </div>
-            <motion.h2
-          initial={{ y: 60, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 100, damping: 20 }}
-          className="text-5xl font-sans tracking-tighter md:text-[9rem] font-black uppercase italic leading-[0.75]  mb-12"
-        >
-          Our <br />
-          <span className="text-red-600">JOurney</span>!
-        </motion.h2>
-          </div>
+        {/* HEADER */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-6">
+          <motion.h2 className="text-5xl md:mb-20 font-sans sm:text-7xl md:text-9xl font-black uppercase italic tracking-tighter leading-[0.8]">
+            OUR <br /> <span className="text-red-600">JOURNEY</span>
+          </motion.h2>
 
-          <div className="flex gap-4">
-            <button onClick={prev} className="group relative p-6 bg-white hover:bg-red-600 transition-colors">
-              <ChevronLeft size={24} className="text-black group-hover:text-white transition-colors" />
+          <div className="flex gap-2">
+            <button onClick={prev} className="p-4 md:p-6 border border-white/10 hover:bg-red-600 transition-colors active:scale-95">
+              <ChevronLeft size={24} />
             </button>
-            <button onClick={next} className="group relative p-6 bg-white hover:bg-red-600 transition-colors">
-              <ChevronRight size={24} className="text-black group-hover:text-white transition-colors" />
+            <button onClick={next} className="p-4 md:p-6 border border-white/10 hover:bg-red-600 transition-colors active:scale-95">
+              <ChevronRight size={24} />
             </button>
           </div>
         </div>
 
-        {/* 3. CAROUSEL */}
-        <div
-          className="relative h-110 md:h-162 flex items-center justify-center touch-pan-y"
+        {/* DRAGGABLE CAROUSEL CONTAINER */}
+        <motion.div 
+          ref={containerRef}
+          className="relative h-100 sm:h-125 md:h-162.5 flex items-center justify-center cursor-grab active:cursor-grabbing"
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }} 
+          onDragEnd={handleDragEnd}
         >
-          <motion.div
-            className="relative w-full h-full cursor-grab active:cursor-grabbing"
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            onDragEnd={handleDragEnd}
-          >
-            {galleryData.map((item, index) => (
-              <GalleryCard
-                key={item.id}
-                item={item}
-                index={index}
-                activeIndex={activeIndex}
-                total={galleryData.length}
-              />
-            ))}
-          </motion.div>
-        </div>
+          {galleryData.map((item, index) => (
+            <GalleryCard 
+              key={item.id} 
+              item={item} 
+              index={index} 
+              activeIndex={activeIndex} 
+              total={galleryData.length} 
+            />
+          ))}
+        </motion.div>
 
-        {/* 4. FOOTER STATUS BAR */}
-        <div className="flex flex-col md:flex-row items-center justify-between mt-16 gap-6 pt-10 border-t border-white/10 font-mono text-[9px] text-gray-600 uppercase tracking-widest italic">
-          <div className="flex gap-10">
-          </div>
-          <div className="flex gap-2">
-            {galleryData.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                className={`h-0.5 transition-all duration-500 ${
-                  activeIndex === i ? "w-12 bg-red-600" : "w-4 bg-gray-800"
-                }`}
-              />
-            ))}
-          </div>
-          <span>Ref: BLITZ_ARCHIVE_2025</span>
+        <div className="mt-8 md:mt-12 flex justify-center gap-2">
+          {galleryData.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIndex(i)}
+              className={`h-1.5 transition-all duration-500 ${activeIndex === i ? "w-12 md:w-24 bg-red-600" : "w-4 bg-white/10"}`}
+            />
+          ))}
         </div>
       </div>
-
-      <style jsx>{`
-        .stroke-text {
-          -webkit-text-stroke: 2px white;
-          color: transparent;
-        }
-      `}</style>
     </section>
   );
 }
 
-/* ---------------- CARD COMPONENT ---------------- */
-
 function GalleryCard({ item, index, activeIndex, total }) {
-  const [isHovered, setIsHovered] = useState(false);
-
   let offset = index - activeIndex;
   if (offset > total / 2) offset -= total;
   if (offset < -total / 2) offset += total;
-
   const isActive = offset === 0;
 
   return (
     <motion.div
-      className="absolute left-1/2 top-1/2 w-[90%] md:w-[65%] h-full"
+      className="absolute w-full md:w-[80%] h-full pointer-events-none"
       initial={false}
       animate={{
-        x: `calc(-50% + ${offset * (typeof window !== "undefined" && window.innerWidth < 768 ? 85 : 55)}%)`,
-        y: "-50%",
+        x: `${offset * 100}%`, 
         scale: isActive ? 1 : 0.8,
-        opacity: Math.abs(offset) <= 1 ? 1 : 0,
+        opacity: Math.abs(offset) > 1 ? 0 : 1 - Math.abs(offset) * 0.6,
         zIndex: total - Math.abs(offset),
-        filter: isActive ? "grayscale(0%)" : "grayscale(100%) blur(4px)",
       }}
-      transition={{ type: "spring", stiffness: 150, damping: 20 }}
+      transition={{ type: "spring", stiffness: 200, damping: 30 }}
     >
-      <div
-        className={`relative w-full h-full border ${isActive ? 'border-red-600' : 'border-white/10'} overflow-hidden group`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <Image
-          src={item.image}
-          alt={item.title}
-          fill
-          className={`object-cover transition-transform duration-1000 ${
-            isActive ? "scale-100" : "scale-125"
-          }`}
-          sizes="(max-width: 768px) 100vw, 70vw"
+      <div className={`relative w-full h-full overflow-hidden transition-all duration-700 ${isActive ? ' rounded-xl shadow-2xl' : 'opacity-30 blur-[2px]'}`}>
+        <Image 
+          src={item.image} 
+          alt={item.title} 
+          fill 
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 80vw"
+          draggable={false} // Prevents default browser image ghosting
         />
-
-        {/* 5. HUD VIEWFINDER OVERLAY (Only on active) */}
-        {isActive && (
-          <div className="absolute inset-0 z-10 pointer-events-none border-[20px] border-black/20">
-             <div className="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-red-600" />
-             <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-red-600" />
-             <div className="absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 border-red-600" />
-             <div className="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-red-600" />
-             <div className="absolute top-1/2 left-0 w-full h-px bg-red-600/10" />
-             <div className="absolute left-1/2 top-0 w-px h-full bg-red-600/10" />
-          </div>
-        )}
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-
-        {/* Content Box */}
+        
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+        
         <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 z-20">
-          <motion.div animate={{ y: isHovered && isActive ? -10 : 0 }}>
-            <h3 className="text-3xl font-sans md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4 leading-none">
-              {item.title}
-            </h3>
-
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{
-                height: isHovered && isActive ? "auto" : 0,
-                opacity: isHovered && isActive ? 1 : 0,
-              }}
-              className="overflow-hidden"
-            >
-              <p className="text-gray-400 font-mono text-xs md:text-sm max-w-xl leading-relaxed mt-4  border-red-600 pl-6 uppercase">
-                {item.hoverText}
-              </p>
-            </motion.div>
-          </motion.div>
+          <h3 className="text-4xl font-sans md:text-7xl font-black uppercase italic tracking-tighter leading-none pointer-events-auto">
+            {item.title}
+          </h3>
+          <AnimatePresence>
+            {isActive && (
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-[10px] md:text-xs text-gray-400 uppercase tracking-[0.3em] mt-2 md:mt-4 pointer-events-auto"
+              >
+                {item.description}
+              </motion.p>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </motion.div>
