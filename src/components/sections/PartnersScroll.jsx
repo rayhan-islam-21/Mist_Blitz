@@ -5,14 +5,14 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const spon = [
-  { logo: "/sponsers/sp9.png", website: "https://sponsor1.com" },
-  { logo: "/sponsers/sp2.png", website: "https://sponsor2.com" },
-  { logo: "/sponsers/sp3.png", website: "https://sponsor3.com" },
-  { logo: "/sponsers/sp4.png", website: "https://sponsor4.com" },
-  { logo: "/sponsers/sp5.png", website: "https://sponsor5.com" },
-  { logo: "/sponsers/sp6.png", website: "https://sponsor6.com" },
-  { logo: "/sponsers/sp7.png", website: "https://sponsor7.com" },
-  { logo: "/sponsers/sp8.png", website: "https://sponsor8.com" },
+  { logo: "/sponsers/sp9.png" },
+  { logo: "/sponsers/sp2.png" },
+  { logo: "/sponsers/sp3.png" },
+  { logo: "/sponsers/sp4.png" },
+  { logo: "/sponsers/sp5.png" },
+  { logo: "/sponsers/sp8.png" },
+  { logo: "/sponsers/sp6.png" },
+  { logo: "/sponsers/sp7.png" },
 ];
 
 const sponsors = [...spon, ...spon];
