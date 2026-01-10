@@ -19,7 +19,6 @@ const sponsors = [...spon, ...spon];
 const sponsorLogos = sponsors.map((s) => ({
   src: s.logo,
   alt: "Strategic Partner",
-  href: s.website,
 }));
 
 export default function PartnersScroll() {
@@ -34,7 +33,7 @@ export default function PartnersScroll() {
   return (
     <section
       ref={containerRef}
-      className="relative selection:text-white selection:bg-red-600 bg-[#050505] max-w-7xl mx-auto overflow-hidden py-28 border-t border-white/5"
+      className="relative selection:text-white selection:bg-red-600 bg-[#050505] max-w-7xl mx-auto overflow-hidden py-24 border-t border-white/5"
     >
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -50,7 +49,7 @@ export default function PartnersScroll() {
             initial={{ y: 60, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            className="text-5xl font-sans tracking-tighter md:text-[9rem] font-black uppercase italic leading-[0.75]  mb-12"
+            className="text-5xl font-sans tracking-tighter md:text-[9rem] font-black uppercase italic leading-[0.75] "
           >
             Our <br />
             <span className="text-red-600">Partners</span>!
