@@ -36,7 +36,7 @@ const Navbar = () => {
             <div className="flex items-center gap-2 md:gap-4 group">
               <div className="w-0.5 h-4 md:h-6 bg-red-600 shadow-[0_0_8px_#ef4444]" />
               <Link href="/">
-                <Image src="/hero.png" alt="BLITZ" width={90} height={22} className="brightness-200 contrast-125 md:w-[115px] md:h-[28px]" priority />
+                <Image src="/hero.png" alt="BLITZ" width={100} height={30} className="brightness-200 contrast-125 md:w-[120px] md:h-[52px]" priority />
               </Link>
             </div>
           </div>
@@ -56,8 +56,8 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Button href="/join" className="group relative h-8 md:h-11 px-4 md:px-10 bg-red-600 text-white font-mono text-[9px] md:text-[11px] font-black flex items-center justify-center -skew-x-5 md:skew-x-[-10deg] hover:bg-white hover:text-red-600 transition-all duration-300">
-            <Link href="/contact"> <span className="skew-x-[20deg] tracking-widest">Contact Us</span></Link>
+          <Button href="/join" className="group relative h-9 md:h-12 lg:h-12 px-4 md:px-10 bg-red-600 text-white font-mono text-[9px] md:text-[11px] font-black flex items-center justify-center -skew-x-5 md:skew-x-[-10deg] hover:bg-white hover:text-red-600 transition-all duration-300">
+            <Link href="/contact"> <span className="skew-x-[10deg] tracking-widest">Contact Us</span></Link>
           </Button>
         </div>
       </div>
