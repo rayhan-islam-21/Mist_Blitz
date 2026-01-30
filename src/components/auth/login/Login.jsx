@@ -41,7 +41,6 @@ const AdminLogin = () => {
     defaultValues: { email: "" }
   });
 
-  // Handle data fetching when email is extracted from URL
   useEffect(() => {
     if (emailFromUrl) {
       const fetchIdentity = async () => {

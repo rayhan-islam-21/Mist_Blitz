@@ -96,7 +96,7 @@ export default function PremiumPartners() {
         <div className="flex flex-col md:flex-row justify-between items-end gap-8">
           <div className="space-y-4">
             <h1 className="text-6xl font-sans italic md:text-8xl font-black tracking-tighter leading-[0.8]">
-              OUR <span className="text-red-600">PARTNER'S</span>
+              OUR <span className="text-red-600">SPONSORS</span>
               <br />
             </h1>
             <p className="text-white/40 text-sm font-sans md:text-base max-w-xl italic">
