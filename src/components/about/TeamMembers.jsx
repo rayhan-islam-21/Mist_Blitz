@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import api from "@/lib/axios";
-import { Linkedin, ChevronRight, Wind, Settings, Layers, Zap } from "lucide-react";
+import { Linkedin, ChevronRight, Wind, Settings, Layers, Zap, Star } from "lucide-react";
 import Image from "next/image";
 
 // ===================== STATIC TOP MANAGEMENT =====================
@@ -25,9 +25,8 @@ const TOP_MANAGEMENT = {
 };
 
 // ===================== MEMBER CARD COMPONENT =====================
-const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
+const MemberCard = ({ member, isLead, isCaptain, subsystemId, variant = "default" }) => {
   const isAdmin = variant === "admin";
-
   const linkedinUrl = member.linkedin
     ? member.linkedin.startsWith("http")
       ? member.linkedin
@@ -36,13 +35,11 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
 
   return (
     <div
-      onClick={() =>
-        subsystemId &&
-        document.getElementById(subsystemId)?.scrollIntoView({ behavior: "smooth" })
-      }
+      onClick={() => subsystemId && document.getElementById(subsystemId)?.scrollIntoView({ behavior: "smooth" })}
       className={`group relative w-full overflow-hidden transition-all duration-700 cursor-pointer border border-white/5
       ${isAdmin ? "h-[550px] bg-zinc-950 shadow-2xl" : "h-[480px] bg-zinc-900 shadow-xl"}
-      ${isAdmin ? "hover:border-red-100/50" : "hover:shadow-[8px_8px_0px_rgba(220,38,38,1)]"}`}
+      ${isCaptain ? "ring-1 ring-red-600/50 shadow-[0_0_40px_rgba(220,38,38,0.15)]" : ""}
+      ${isAdmin ? "hover:border-red-600/50" : "hover:shadow-[8px_8px_0px_rgba(220,38,38,1)]"}`}
     >
       <Image
         src={member.image || "/placeholder.jpg"}
@@ -58,23 +55,13 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
         <p className="text-red-600 font-mono text-[10px] uppercase tracking-[0.4em] mb-2 font-bold">
           {member.position || member.role}
         </p>
-        <h3
-          className={`${
-            isAdmin ? "text-3xl" : "text-xl"
-          } font-black uppercase italic text-white leading-[0.9] tracking-tighter mb-4`}
-        >
+        <h3 className={`${isAdmin ? "text-3xl" : "text-xl"} font-black uppercase italic text-white leading-[0.9] tracking-tighter mb-4`}>
           {member.name}
         </h3>
 
         <div className="flex items-center justify-between pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-500">
           {linkedinUrl && (
-            <a
-              href={linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="p-2 border border-white/20 text-white hover:bg-white hover:text-black transition-colors"
-            >
+            <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="p-2 border border-white/20 text-white hover:bg-white hover:text-black transition-colors">
               <Linkedin size={14} />
             </a>
           )}
@@ -86,9 +73,9 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
         </div>
       </div>
 
-      {isLead && (
-        <div className="absolute top-4 left-4 z-20 bg-red-600 text-white px-3 py-1 text-[10px] font-black uppercase tracking-widest italic">
-          UNIT_LEAD
+      {(isLead || isCaptain) && (
+        <div className={`absolute top-4 left-4 z-20 text-white px-3 py-1 text-[10px] font-black uppercase tracking-widest italic flex items-center gap-2 ${isCaptain ? "bg-white text-black" : "bg-red-600"}`}>
+          {isCaptain ? <><Star size={10} fill="currentColor" /> Team Captain</> : "Unit Lead"}
         </div>
       )}
     </div>
@@ -98,7 +85,7 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
 // ===================== MAIN COMPONENT =====================
 const TeamMembers = () => {
   const [loading, setLoading] = useState(true);
-  const [currentYearData, setCurrentYearData] = useState({ core: [], subsystems: [] });
+  const [currentYearData, setCurrentYearData] = useState({ captain: , core: [], subsystems: [] });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -113,37 +100,39 @@ const TeamMembers = () => {
           Electronics: { id: "electronics", name: "Electronics", icon: <Zap size={20} /> },
         };
 
-        // Process core leads
-        const coreLeads = data
-          .filter((m) => m.isLead === true || String(m.isLead).toLowerCase() === "true")
-          .map((m) => ({ ...m, role: m.position, subId: subsystemsMap[m.techDept?.[0]]?.id || null }));
-
-        // Process subsystems
+        let captain = null;
+        const coreLeads = [];
         const processed = {};
+
         data.forEach((m) => {
+          const isLeadVal = m.isLead === true || String(m.isLead).toLowerCase() === "true";
+          const position = (m.position || "").toLowerCase();
+
+          // Logic: Captain is someone marked as Lead whose position includes "Captain"
+          if (isLeadVal && position.includes("captain")) {
+            captain = { ...m, role: m.position };
+          } 
+          // Core leads are leads that are NOT the captain
+          else if (isLeadVal) {
+            coreLeads.push({ ...m, role: m.position, subId: subsystemsMap[m.techDept?.[0]]?.id || null });
+          }
+
           m.techDept?.forEach((dept) => {
             if (subsystemsMap[dept]) {
               if (!processed[dept]) processed[dept] = { ...subsystemsMap[dept], lead: null, members: [] };
-              if (m.isLead === true || String(m.isLead).toLowerCase() === "true") processed[dept].lead = { ...m, role: m.position };
+              if (isLeadVal) processed[dept].lead = { ...m, role: m.position };
               else processed[dept].members.push({ ...m, role: m.position });
             }
           });
         });
 
-        // Deterministic order
-        const orderedSubsystems = [
-          "Powertrain",
-          "Chassis and Aerodynamics",
-          "Suspension, Steering and Braking",
-          "Electronics",
-        ]
+        const orderedSubsystems = ["Powertrain", "Chassis and Aerodynamics", "Suspension, Steering and Braking", "Electronics"]
           .filter((k) => processed[k])
           .map((k) => processed[k]);
 
-        setCurrentYearData({ core: coreLeads, subsystems: orderedSubsystems });
+        setCurrentYearData({ captain, core: coreLeads, subsystems: orderedSubsystems });
         setLoading(false);
       } catch (e) {
-        console.error(e);
         setLoading(false);
       }
     };
@@ -166,21 +155,23 @@ const TeamMembers = () => {
             Directorate
           </div>
           <div className="flex flex-col md:flex-row items-end justify-center gap-6 relative z-10">
-            {/* Advisor */}
             <div className="w-full md:w-1/3 group">
               <div className="mb-4 pl-4 border-l-2 border-zinc-800 group-hover:border-red-600 transition-colors">
+                <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-[0.3em]">REF: STRAT_OPS</p>
               </div>
               <MemberCard member={TOP_MANAGEMENT.advisor} variant="admin" />
             </div>
 
-            {/* CMDT (Middle) */}
             <div className="w-full md:w-[38%] z-20 transform md:-translate-y-16 scale-105">
+              <div className="bg-red-600 text-center py-1 mb-1 shadow-lg">
+                <p className="text-[9px] font-black text-white uppercase tracking-[0.4em] italic">Supreme Command</p>
+              </div>
               <MemberCard member={TOP_MANAGEMENT.cmdt} variant="admin" />
             </div>
 
-            {/* HOD */}
             <div className="w-full md:w-1/3 group">
               <div className="mb-4 text-right pr-4 border-r-2 border-zinc-800 group-hover:border-red-600 transition-colors">
+                <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-[0.3em]">REF: DEPT_EXEC</p>
               </div>
               <MemberCard member={TOP_MANAGEMENT.hod} variant="admin" />
             </div>
@@ -188,13 +179,28 @@ const TeamMembers = () => {
         </div>
 
         {/* ========== CREW HEADER ========== */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-32 border-b border-white/5 pb-12">
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-24 border-b border-white/5 pb-12">
           <h1 className="text-7xl md:text-9xl font-black uppercase italic leading-[0.8] tracking-tighter text-white">
             THE <span className="text-red-600">CREW</span>
           </h1>
         </div>
 
-        {/* ========== COMMAND CENTER GRID ========== */}
+        {/* ========== CAPTAIN DEDICATED SECTION ========== */}
+        {currentYearData.captain && (
+          <div className="mb-48 flex justify-center">
+            <div className="w-full max-w-md text-center">
+              <div className="inline-block mb-6 px-6 py-2 border border-red-600/30 bg-red-600/5">
+                <h2 className="text-xl font-black text-white uppercase italic tracking-widest">
+                  Operations Lead
+                </h2>
+              </div>
+              <MemberCard member={currentYearData.captain} variant="admin" isCaptain={true} />
+              <div className="mt-4 h-12 w-px bg-gradient-to-b from-red-600 to-transparent mx-auto" />
+            </div>
+          </div>
+        )}
+
+        {/* ========== COMMAND CENTER GRID (4 LEADS) ========== */}
         <div className="mb-48">
           <div className="flex items-center gap-4 mb-16">
             <h2 className="text-4xl font-black text-white uppercase italic tracking-tighter">Command Center</h2>
@@ -202,7 +208,7 @@ const TeamMembers = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {currentYearData.core.map((admin) => (
-              <MemberCard key={admin._id} member={admin} variant="admin" subsystemId={admin.subId} />
+              <MemberCard key={admin._id} member={admin} variant="admin" subsystemId={admin.subId} isLead={true} />
             ))}
           </div>
         </div>
