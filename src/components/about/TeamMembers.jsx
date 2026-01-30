@@ -42,7 +42,7 @@ const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
       }
       className={`group relative w-full overflow-hidden transition-all duration-700 cursor-pointer border border-white/5
       ${isAdmin ? "h-[550px] bg-zinc-950 shadow-2xl" : "h-[480px] bg-zinc-900 shadow-xl"}
-      ${isAdmin ? "hover:border-red-600/50" : "hover:shadow-[8px_8px_0px_rgba(220,38,38,1)]"}`}
+      ${isAdmin ? "hover:border-red-100/50" : "hover:shadow-[8px_8px_0px_rgba(220,38,38,1)]"}`}
     >
       <Image
         src={member.image || "/placeholder.jpg"}
@@ -169,23 +169,18 @@ const TeamMembers = () => {
             {/* Advisor */}
             <div className="w-full md:w-1/3 group">
               <div className="mb-4 pl-4 border-l-2 border-zinc-800 group-hover:border-red-600 transition-colors">
-                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Mentorship</p>
               </div>
               <MemberCard member={TOP_MANAGEMENT.advisor} variant="admin" />
             </div>
 
             {/* CMDT (Middle) */}
             <div className="w-full md:w-[38%] z-20 transform md:-translate-y-16 scale-105">
-              <div className="bg-red-600 text-center py-2 shadow-lg mb-1">
-                <p className="text-[10px] font-black text-white uppercase tracking-[0.5em] italic">Command Center</p>
-              </div>
               <MemberCard member={TOP_MANAGEMENT.cmdt} variant="admin" />
             </div>
 
             {/* HOD */}
             <div className="w-full md:w-1/3 group">
               <div className="mb-4 text-right pr-4 border-r-2 border-zinc-800 group-hover:border-red-600 transition-colors">
-                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Leadership</p>
               </div>
               <MemberCard member={TOP_MANAGEMENT.hod} variant="admin" />
             </div>
