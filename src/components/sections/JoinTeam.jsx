@@ -6,7 +6,7 @@ import { AnimatedBeam } from "@/components/ui/animated-beam";
 import DeptCard from "../Deptcard";
 import { motion } from "framer-motion";
 import Button from "../ui/retro-btn";
-import { Activity, Zap } from "lucide-react";
+import { Activity, Cpu, LayoutPanelLeft, ShieldCheck, Zap } from "lucide-react";
 
 const technicalTeams = [
   {
@@ -107,13 +107,9 @@ const handleJoinClick = () => {
 };
 
 export default function JoinBlitzTeam() {
-  const [mounted, setMounted] = useState(false);
   const containerRef = useRef(null);
   const centerRef = useRef(null);
   const cardRefs = useRef([]);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -128,12 +124,6 @@ export default function JoinBlitzTeam() {
   const RADIUS_Y = 630;
   const CARD_W = 280;
   const CARD_H = 320;
-
-
-  // 3. Return a placeholder or null during SSR to prevent mismatch
-  if (!mounted) {
-    return <section className="min-h-screen bg-[#050505]" />; 
-  }
 
   return (
     <section className="relative selection:bg-red-600 selection:text-white min-h-screen py-24 md:py-20 bg-[#050505] overflow-hidden flex flex-col items-center border-t border-white/5">
@@ -174,7 +164,7 @@ export default function JoinBlitzTeam() {
               }}
               toRef={centerRef}
               curvature={i % 2 === 0 ? 60 : -60}
-              duration={2}
+              duration={3}
               pathColor="rgba(255, 255, 255, 0.08)"
               gradientStartColor="#dc2626"
               gradientStopColor="#000000"
@@ -206,8 +196,8 @@ export default function JoinBlitzTeam() {
 
           {allDepts.map((dept, i) => {
             const angle = (i / allDepts.length) * 2 * Math.PI;
-           const x = Math.round(Math.cos(angle) * RADIUS_X);
-            const y = Math.round(Math.sin(angle) * RADIUS_Y);
+            const x = Math.cos(angle) * RADIUS_X;
+            const y = Math.sin(angle) * RADIUS_Y;
 
             return (
               <div
@@ -216,8 +206,8 @@ export default function JoinBlitzTeam() {
                 className="absolute z-40 group"
                 style={{
                   transform: `translate(${x}px, ${y}px)`,
-                  width: `${CARD_W}px`,
-                  height: `${CARD_H}px`,
+                  width: CARD_W,
+                  height: CARD_H,
                 }}
               >
                 <div className="relative h-full w-full">

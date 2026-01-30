@@ -95,10 +95,6 @@ const About = () => {
             </div>
 
             <Achievements />
-
-            <div className="py-8">
-              <TeamMembers />
-            </div>
           </div>
         </div>
       </main>

@@ -24,7 +24,8 @@ const Navbar = () => {
     { id: "02", name: "About", href: "/about" },
     { id: "03", name: "Partners", href: "/partners" },
     { id: "04", name: "Gallery", href: "/gallery" },
-    { id: "05", name: "Shop", href: "/shop" },
+    { id: "05", name: "Team", href: "/team" },
+    { id: "06", name: "Shop", href: "/shop" },
   ];
 
   return (
@@ -71,7 +72,7 @@ const Navbar = () => {
             return (
               <Link key={item.id} href={item.href} className="group relative flex items-center gap-3 md:gap-6 py-2 md:py-3">
                 <div className="flex flex-col items-end">
-                  <span className={`text-base md:text-2xl font-sans italic font-black tracking-tighter transition-all duration-500 uppercase ${
+                  <span className={`text-base md:text-xl font-sans italic font-black tracking-tighter transition-all duration-500 uppercase ${
                     active ? "text-white scale-110 pr-0" : "text-white/10 group-hover:text-red-600 group-hover:pr-1"
                   }`}>
                     {item.name}

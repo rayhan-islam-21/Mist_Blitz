@@ -7,6 +7,28 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
+
+const TOP_MANAGEMENT = {
+  hod: {
+    name: "HOD Name",
+    position: "Head of Department",
+    image: "/hod.jpg",
+    linkedin: "",
+  },
+  cmdt: {
+    name: "CMDT Name",
+    position: "Commandant",
+    image: "/cmdt.jpg",
+    linkedin: "",
+  },
+  advisor: {
+    name: "Ahasan Sir",
+    position: "Advisor",
+    image: "/ahasan.jpg",
+    linkedin: "",
+  },
+};
+
 const MemberCard = ({ member, isLead, subsystemId, variant = "default" }) => {
   const handleClick = () => {
     if (subsystemId) {
@@ -166,14 +188,62 @@ if (loading) {
   return (
     <section className="bg-black py-20 px-6 font-sans min-h-screen">
       <div className="max-w-7xl mx-auto">
+
+        {/* ========== TOP MANAGEMENT (ELITE HIERARCHY) ========== */}
+<div className="relative mb-64 mt-20">
+  {/* Background Decorative Accent - Large faint number or text to break the void */}
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15rem] font-black text-white/[0.03] italic pointer-events-none select-none">
+    01
+  </div>
+
+  <div className="flex flex-col md:flex-row justify-center items-end gap-6 md:gap-2 max-w-6xl mx-auto relative z-10">
+    
+    {/* HOD - Left Wing */}
+    <div className="w-full md:w-1/3 group">
+      <div className="mb-4 pl-4 border-l-2 border-zinc-700 group-hover:border-red-600 transition-colors">
+        <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.4em]">Strategic</p>
+        <p className="text-sm font-black text-white uppercase italic">Head of Department</p>
+      </div>
+      <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
+        <MemberCard member={TOP_MANAGEMENT.hod} variant="admin" />
+      </div>
+    </div>
+
+    {/* COMMANDANT - The Apex Focal Point */}
+    <div className="w-full md:w-5/12 z-20 transform md:-translate-y-20 scale-105 group">
+      <div className="relative transition-all duration-700 group-hover:shadow-[0_0_50px_rgba(220,38,38,0.2)]">
+        {/* Glow Header */}
+        <div className="bg-gradient-to-r from-red-700 via-red-600 to-red-700 text-center py-3 shadow-lg">
+          <p className="text-[11px] font-black uppercase tracking-[0.5em] italic text-white animate-pulse">
+            Command Center
+          </p>
+        </div>
+        <MemberCard member={TOP_MANAGEMENT.cmdt} variant="admin" />
         
-        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-24 border-b-4 border-white pb-10">
+        {/* Aesthetic Corner Brackets */}
+        <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-red-600" />
+        <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-red-600" />
+      </div>
+    </div>
+
+    {/* ADVISOR - Right Wing */}
+    <div className="w-full md:w-1/3 group">
+      <div className="mb-4 pr-4 text-right border-r-2 border-zinc-700 group-hover:border-red-600 transition-colors">
+        <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.4em]">Mentorship</p>
+        <p className="text-sm font-black text-white uppercase italic">Faculty Advisor</p>
+      </div>
+      <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
+        <MemberCard member={TOP_MANAGEMENT.advisor} variant="admin" />
+      </div>
+    </div>
+
+  </div>
+</div>
+        
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-24  border-white ">
           <h1 className="text-5xl text-white md:text-8xl font-black uppercase italic leading-[0.8] tracking-tighter">
             THE <span className="text-red-600">CREW</span>
           </h1>
-          <div className="flex bg-zinc-800 p-1">
-             <button className="px-8 py-3 text-xs font-black uppercase bg-red-600 text-white">SEASON_2026</button>
-          </div>
         </div>
 
         <div className="mb-48">
