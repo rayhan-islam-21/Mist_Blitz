@@ -1,4 +1,5 @@
 // pages/about.js
+"use client";
 import WhatWeDo from "@/components/about/WhatWeDo";
 import MISTBlitzIntro from "@/components/about/MISTBlitzIntro";
 import TeamMembers from "@/components/about/TeamMembers";
@@ -13,7 +14,7 @@ const About = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center    justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center animate-slow-zoom   justify-center overflow-hidden">
         <Image
           src="/team.jpg"
           fill
@@ -26,10 +27,7 @@ const About = () => {
         {/* <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/20 to-black/80 z-10"></div> */}
 
         <div className="relative z-20 text-center  px-6">
-          <h2 className="text-red-500 font-mono tracking-[0.3em] uppercase text-sm mb-4 animate-fade-in">
-            Engineering the Future
-          </h2>
-          <h1 className="text-6xl md:text-9xl  font-black text-white tracking-normal uppercase">
+          <h1 className="text-6xl md:text-8xl font-sans italic  font-black text-white tracking-normal uppercase">
             About <span className="text-red-600">blitz</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mt-6 font-light">
@@ -37,6 +35,7 @@ const About = () => {
             pushing the boundaries of automotive excellence through the Formula
             Student challenge.
           </p>
+          
         </div>
       </section>
 
@@ -100,6 +99,19 @@ const About = () => {
       </main>
 
       <Footer />
+               <style jsx global>{`
+                html, body {
+                    max-width: 100%;
+                    overflow-x: hidden;
+                }
+                @keyframes slow-zoom {
+                    0% { transform: scale(1); }
+                    100% { transform: scale(1.1); }
+                }
+                .animate-slow-zoom {
+                    animation: slow-zoom 20s infinite alternate linear;
+                }
+            `}</style>
     </div>
   );
 };

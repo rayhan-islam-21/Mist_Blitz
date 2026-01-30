@@ -93,9 +93,6 @@ const Navbar = () => {
              <div className="w-1.5 h-1.5 bg-red-600 rotate-45" />
           </div>
         </div>
-
-
-        <div className="absolute top-0 left-0 w-full h-full border border-white/5 m-2 md:m-4 pointer-events-none" />
       </nav>
     </>
   );

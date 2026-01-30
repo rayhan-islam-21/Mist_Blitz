@@ -34,7 +34,6 @@ const Gallery = () => {
   return (
     <section className="bg-black py-20 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
-        {/* 1. TRANSPARENT TEXT WITH IMAGE BACKGROUND */}
         <div className="relative md:mb-24 flex flex-col items-center justify-center overflow-hidden py-10">
           <h1
             className="text-[18vw] font-sans md:text-[20vw] font-black uppercase leading-none tracking-tighter"
@@ -49,9 +48,6 @@ const Gallery = () => {
             Gallery
           </h1>
           <div className="h-1 w-32 bg-red-600 mt-[-2vw]"></div>
-          <p className="text-gray-500 md:font-mono text-[10px] uppercase tracking-[0.5em] mt-4 text-center">
-            China_Expedition_Archive_2025
-          </p>
         </div>
 
         {/* 2. MASONRY GRID */}

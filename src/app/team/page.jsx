@@ -50,12 +50,6 @@ const Page = () => {
                         </div>
                     </div>
 
-                    {/* Decorative Corner Accents */}
-                    <div className="absolute bottom-10 left-10 hidden md:block z-10">
-                        <p className="text-[10px] font-mono text-zinc-600 uppercase [writing-mode:vertical-lr] tracking-[0.5em]">
-                            MIST_AUTO_RACING
-                        </p>
-                    </div>
                 </section>
 
                 {/* ====== Team Members Section ====== */}
@@ -67,7 +61,6 @@ const Page = () => {
             <Footer />
 
             <style jsx global>{`
-                /* Ensure the root html and body don't allow horizontal shift */
                 html, body {
                     max-width: 100%;
                     overflow-x: hidden;
