@@ -151,27 +151,20 @@ export default function JoinBlitzTeam() {
           TEAM <span className="text-red-600">BLITZ</span>
         </motion.h2>
       </div>
-      {isMobile && (
-        <div className="relative z-20 w-full max-w-md px-4 space-y-8">
-          {allDepts.map((_, i) => (
-            <AnimatedBeam
-              key={`beam-${i}`}
-              containerRef={containerRef}
-              fromRef={{
-                get current() {
-                  return cardRefs.current[i];
-                },
-              }}
-              toRef={centerRef}
-              curvature={i % 2 === 0 ? 60 : -60}
-              duration={3}
-              pathColor="rgba(255, 255, 255, 0.08)"
-              gradientStartColor="#dc2626"
-              gradientStopColor="#000000"
-            />
-          ))}
-        </div>
-      )}
+    {isMobile && (
+  <div className="relative z-20 w-full max-w-md px-4 space-y-8 flex flex-col items-center">
+    {allDepts.map((dept, i) => (
+      <DeptCard
+        key={dept.title}
+        title={dept.title}
+        description={dept.description}
+        image={dept.image}
+        className="w-full border border-white/5 bg-black/40 backdrop-blur-sm"
+      />
+    ))}
+  </div>
+)}
+
 
       {!isMobile && (
         <div

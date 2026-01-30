@@ -238,7 +238,7 @@ const AboutPreview = () => {
                       Max Output
                     </p>
                     <p className="text-xl font-bold text-white">
-                      33.8tkW @8.5k
+                      33.8kW @8.5k
                     </p>
                   </div>
                   <div>
