@@ -7,28 +7,31 @@ import Image from 'next/image';
 
 const Page = () => {
     return (
-        <div className="min-h-screen bg-black text-white ">
+        /* Added overflow-x-hidden to prevent horizontal scroll from animations */
+        <div className="min-h-screen bg-black text-white overflow-x-hidden">
             <Navbar />
 
             <main>
                 {/* ====== Improved Hero Section ====== */}
                 <section className="relative w-full h-screen overflow-hidden">
-                    {/* Background with subtle Zoom effect */}
-                    <div className="absolute inset-0 scale-105 animate-slow-zoom">
-                        <Image
-                            src="/china4.jpg" 
-                            alt="Team Hero Banner"
-                            fill
-                            className="object-cover"
-                            priority
-                        />
+                    {/* Background wrapper with overflow-hidden to clip the zoom effect */}
+                    <div className="absolute inset-0 overflow-hidden">
+                        <div className="absolute inset-0 scale-105 animate-slow-zoom">
+                            <Image
+                                src="/china4.jpg" 
+                                alt="Team Hero Banner"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                        </div>
                     </div>
 
-                    {/* Multi-layered Overlay for better text legibility */}
+                    {/* Multi-layered Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black"></div>
                     
                     {/* Hero Content */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
                         <div className="space-y-2">
                             <h1 className="text-6xl md:text-[8rem] font-sans font-black uppercase italic tracking-tighter leading-none">
                                 OUR <span className="text-red-600">Team</span>
@@ -48,7 +51,7 @@ const Page = () => {
                     </div>
 
                     {/* Decorative Corner Accents */}
-                    <div className="absolute bottom-10 left-10 hidden md:block">
+                    <div className="absolute bottom-10 left-10 hidden md:block z-10">
                         <p className="text-[10px] font-mono text-zinc-600 uppercase [writing-mode:vertical-lr] tracking-[0.5em]">
                             MIST_AUTO_RACING
                         </p>
@@ -56,29 +59,25 @@ const Page = () => {
                 </section>
 
                 {/* ====== Team Members Section ====== */}
-                {/* Removed extra padding/container here because TeamMembers handles its own max-width */}
-                <section className="relative z-10 bg-black">
+                <section className="relative z-10 bg-black w-full overflow-hidden">
                     <TeamMembers />
                 </section>
             </main>
 
             <Footer />
 
-            {/* Global Animation Styles */}
             <style jsx global>{`
+                /* Ensure the root html and body don't allow horizontal shift */
+                html, body {
+                    max-width: 100%;
+                    overflow-x: hidden;
+                }
                 @keyframes slow-zoom {
                     0% { transform: scale(1); }
                     100% { transform: scale(1.1); }
                 }
                 .animate-slow-zoom {
                     animation: slow-zoom 20s infinite alternate linear;
-                }
-                @keyframes fade-in {
-                    from { opacity: 0; transform: translateY(10px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fade-in {
-                    animation: fade-in 1s ease-out forwards;
                 }
             `}</style>
         </div>
