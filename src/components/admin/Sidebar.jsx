@@ -39,8 +39,20 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
 
   // This checks both the top level 'role' and 'admindata.role'
   const isAdmin =
-    user?.admindata?.role?.toLowerCase().includes("admin");
+    user?.role?.toLowerCase() === "admin" ||
+    user?.admindata?.role?.toLowerCase() === "admin";
   const userRole = isAdmin ? ROLE.ADMIN : ROLE.MEMBER;
+
+  useEffect(() => {
+    if (user) {
+      console.log("PRODUCTION_DEBUG - User Object:", user);
+      console.log(
+        "PRODUCTION_DEBUG - Role Found:",
+        user?.role || user?.admindata?.role,
+      );
+      console.log("PRODUCTION_DEBUG - IsAdmin Value:", isAdmin);
+    }
+  }, [user, isAdmin]);
 
   const menuItems = [
     {
