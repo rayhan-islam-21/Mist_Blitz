@@ -165,8 +165,8 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           bg-white text-slate-600 shadow-xl md:shadow-sm flex flex-col
           ${
             sidebarOpen
-              ? "w-70 translate-x-0"
-              : "w-70 -translate-x-full md:translate-x-0 md:w-64"
+              ? "w-72 translate-x-0"
+              : "w-72 -translate-x-full md:translate-x-0 md:w-64"
           }
         `}
       >
