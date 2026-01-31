@@ -39,7 +39,6 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
 
   // This checks both the top level 'role' and 'admindata.role'
   const isAdmin =
-    user?.role?.toLowerCase().includes("admin") ||
     user?.admindata?.role?.toLowerCase().includes("admin");
   const userRole = isAdmin ? ROLE.ADMIN : ROLE.MEMBER;
 
