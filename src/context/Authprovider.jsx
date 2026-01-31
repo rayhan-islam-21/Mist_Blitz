@@ -12,7 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
-import api from "@/lib/axios"; // Your axios instance
+import api from "@/lib/axios";
 
 const AuthProvider = ({ children }) => {
   const provider = new GoogleAuthProvider();
@@ -20,60 +20,76 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // AUTH STATE OBSERVER
-useEffect(() => {
+  // 🔐 AUTH STATE OBSERVER
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (loggedUser) => {
-      if (loggedUser) {
-        try {
-          const tokenResponse = await api.post("/auth/token", { 
-            email: loggedUser.email 
-          });
-          
-          const { token } = tokenResponse.data;
+      setLoading(true);
 
-          // STEP 2: Save the "Key" in localStorage for Axios
-          localStorage.setItem("admin_jwt", token);
-
-          // STEP 3: Fetch Member info (Public-ish data)
-          const response = await api.get(`/members/${encodeURIComponent(loggedUser.email)}`);
-          const info = response.data;
-
-          // STEP 4: Fetch Admin data (Now works because token is in localStorage)
-          const userresponse = await api.get(`/admin/${encodeURIComponent(loggedUser.email)}`);
-          const admindata = userresponse.data;
-
-          setUser({
-            ...loggedUser,
-            admindata,
-            info,
-            isMember: true,
-            token // Optional: keep it in state too
-          });
-        } catch (error) {
-          console.error("Auth sync failed:", error);
-          // If JWT fails, they might be a regular member but not an admin
-          setUser({ ...loggedUser, isMember: false });
-        }
-      } else {
-        // Cleanup on Logout
+      if (!loggedUser) {
         localStorage.removeItem("admin_jwt");
         setUser(null);
+        setLoading(false);
+        return;
       }
-      setLoading(false);
+
+      try {
+        // 1️⃣ Get backend JWT (ADMIN / MEMBER aware)
+        const tokenRes = await api.post("/auth/token", {
+          email: loggedUser.email,
+        });
+
+        const { token } = tokenRes.data;
+        localStorage.setItem("admin_jwt", token);
+
+        // 2️⃣ Fetch public member info
+        const memberRes = await api.get(
+          `/members/${encodeURIComponent(loggedUser.email)}`
+        );
+
+        // 3️⃣ Try admin fetch (may fail for members)
+        let adminData = null;
+        try {
+          const adminRes = await api.get(
+            `/admin/${encodeURIComponent(loggedUser.email)}`
+          );
+          adminData = adminRes.data;
+        } catch {
+          adminData = null;
+        }
+
+        setUser({
+          ...loggedUser,
+          info: memberRes.data,
+          admindata: adminData,
+          role: adminData?.role || "member",
+          isMember: true,
+          token,
+        });
+      } catch (error) {
+        // ❌ BACKEND FAILURE = UNKNOWN STATE (NOT MEMBER)
+        console.error("Auth sync failed:", error);
+
+        setUser({
+          ...loggedUser,
+          role: "unknown",
+          admindata: null,
+          info: null,
+        });
+      } finally {
+        setLoading(false);
+      }
     });
 
     return () => unsubscribe();
   }, []);
 
-  // SIGN UP
+  // ---------- AUTH ACTIONS ----------
   const signUpwithEmail = async (name, email, password) => {
     setLoading(true);
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(result.user, { displayName: name });
-      return result.user; 
-    } catch (error) {
-      throw error;
+      return result.user;
     } finally {
       setLoading(false);
     }
@@ -89,24 +105,29 @@ useEffect(() => {
     return signInWithPopup(auth, provider);
   };
 
-  const logOut = () => {
+  const logOut = async () => {
     setLoading(true);
-    return signOut(auth);
-  };
-
-  const userInfo = {
-    user,
-    loading,
-    setUser,
-    setLoading,
-    signUpwithEmail,
-    signInWithEmail,
-    signInWithGoogle,
-    logOut,
+    await signOut(auth);
+    localStorage.removeItem("admin_jwt");
+    setUser(null);
+    setLoading(false);
   };
 
   return (
-    <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        setUser,
+        setLoading,
+        signUpwithEmail,
+        signInWithEmail,
+        signInWithGoogle,
+        logOut,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 

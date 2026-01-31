@@ -37,8 +37,10 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   // Destructure 'loading' from AuthContext to prevent premature role assignment
   const { user, logOut, loading } = useContext(AuthContext);
 
-  // This checks both the top level 'role' and 'admindata.role'
-  // This is more robust against missing objects in production
+  if (loading || !user || user.role === "unknown") {
+    return null; // or skeleton
+  }
+
   const isAdmin =
     user?.admindata?.role?.toLowerCase() === "admin" ||
     user?.role?.toLowerCase() === "admin";
