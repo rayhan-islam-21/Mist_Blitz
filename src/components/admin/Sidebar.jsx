@@ -37,7 +37,10 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   // Destructure 'loading' from AuthContext to prevent premature role assignment
   const { user, logOut, loading } = useContext(AuthContext);
 
-  const isAdmin = user?.admindata?.role?.toLowerCase().includes("admin");
+  // This checks both the top level 'role' and 'admindata.role'
+  const isAdmin =
+    user?.role?.toLowerCase().includes("admin") ||
+    user?.admindata?.role?.toLowerCase().includes("admin");
   const userRole = isAdmin ? ROLE.ADMIN : ROLE.MEMBER;
 
   const menuItems = [
@@ -193,7 +196,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                 const isActive = pathname === item.path;
                 const isSubMenuOpen = openSubmenus[item.name];
                 const hasActiveChild = item.subMenu?.some(
-                  (sub) => sub.path === pathname
+                  (sub) => sub.path === pathname,
                 );
 
                 return (
