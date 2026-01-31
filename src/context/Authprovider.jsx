@@ -22,48 +22,40 @@ const AuthProvider = ({ children }) => {
 
   // AUTH STATE OBSERVER
 useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (loggedUser) => {
-      if (loggedUser) {
-        try {
-          const tokenResponse = await api.post("/auth/token", { 
-            email: loggedUser.email 
-          });
-          
-          const { token } = tokenResponse.data;
+  const unsubscribe = onAuthStateChanged(auth, async (loggedUser) => {
+    if (loggedUser) {
+      try {
+        // Step 1: Get the backend JWT
+        const { data } = await api.post("/auth/token", { email: loggedUser.email });
+        
+        // Step 2: Save to localStorage IMMEDIATELY
+        localStorage.setItem("admin_jwt", data.token);
 
-          // STEP 2: Save the "Key" in localStorage for Axios
-          localStorage.setItem("admin_jwt", token);
+        // Step 3: Fetch both Member and Admin data
+        // We use separate try/catches or Promise.all to ensure one failure doesn't wipe all data
+        const [infoRes, adminRes] = await Promise.allSettled([
+          api.get(`/members/${encodeURIComponent(loggedUser.email)}`),
+          api.get(`/admin/${encodeURIComponent(loggedUser.email)}`)
+        ]);
 
-          // STEP 3: Fetch Member info (Public-ish data)
-          const response = await api.get(`/members/${encodeURIComponent(loggedUser.email)}`);
-          const info = response.data;
-
-          // STEP 4: Fetch Admin data (Now works because token is in localStorage)
-          const userresponse = await api.get(`/admin/${encodeURIComponent(loggedUser.email)}`);
-          const admindata = userresponse.data;
-
-          setUser({
-            ...loggedUser,
-            admindata,
-            info,
-            isMember: true,
-            token // Optional: keep it in state too
-          });
-        } catch (error) {
-          console.error("Auth sync failed:", error);
-          // If JWT fails, they might be a regular member but not an admin
-          setUser({ ...loggedUser, isMember: false });
-        }
-      } else {
-        // Cleanup on Logout
-        localStorage.removeItem("admin_jwt");
-        setUser(null);
+        setUser({
+          ...loggedUser,
+          info: infoRes.status === 'fulfilled' ? infoRes.value.data : null,
+          admindata: adminRes.status === 'fulfilled' ? adminRes.value.data : null,
+          isMember: infoRes.status === 'fulfilled',
+        });
+      } catch (error) {
+        console.error("Auth sync failed:", error);
+        setUser({ ...loggedUser, isMember: false });
       }
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+    } else {
+      localStorage.removeItem("admin_jwt");
+      setUser(null);
+    }
+    setLoading(false);
+  });
+  return () => unsubscribe();
+}, []);
 
   // SIGN UP
   const signUpwithEmail = async (name, email, password) => {

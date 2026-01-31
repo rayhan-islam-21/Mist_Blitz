@@ -38,9 +38,11 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const { user, logOut, loading } = useContext(AuthContext);
 
   // This checks both the top level 'role' and 'admindata.role'
+  // This is more robust against missing objects in production
   const isAdmin =
-    user?.role?.toLowerCase() === "admin" ||
-    user?.admindata?.role?.toLowerCase() === "admin";
+    user?.admindata?.role?.toLowerCase() === "admin" ||
+    user?.role?.toLowerCase() === "admin";
+
   const userRole = isAdmin ? ROLE.ADMIN : ROLE.MEMBER;
 
   useEffect(() => {
