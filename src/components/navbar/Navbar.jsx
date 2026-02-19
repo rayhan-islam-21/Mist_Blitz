@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 import Button from "../ui/retro-btn";
 
 const Navbar = () => {
@@ -34,9 +33,8 @@ const Navbar = () => {
         <div className="flex gap-3 md:gap-6 items-center pointer-events-auto">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2 md:gap-4 group">
-              <div className="w-0.5 h-4 md:h-6 bg-red-600 shadow-[0_0_8px_#ef4444]" />
               <Link href="/">
-                <Image src="/hero.png" alt="BLITZ" width={100} height={30} className="brightness-200 contrast-125 md:w-[120px] md:h-[52px]" priority />
+                <Image src={'https://res.cloudinary.com/dnrubj8x4/image/upload/v1771498710/hero_q5f7az.png'} alt="BLITZ" width={100} height={40} className="brightness-200 contrast-125 md:w-30 md:h-14" priority />
               </Link>
             </div>
           </div>
@@ -44,18 +42,6 @@ const Navbar = () => {
 
         {/* RIGHT: Time & Initialize */}
         <div className="flex gap-4 md:gap-10 pointer-events-auto items-start">
-          <div className="md:flex hidden flex-col items-end font-mono">
-            <div className="flex items-center gap-2">
-              <span className="text-[8px] md:text-[10px] text-white font-bold tracking-widest">{systemTime}</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
-            </div>
-            <div className="hidden sm:flex mt-2 gap-1">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className={`h-[2px] w-3 md:w-4 ${i < 4 ? "bg-red-600" : "bg-white/10"}`} />
-              ))}
-            </div>
-          </div>
-
           <Button href="/join" className="group relative h-9 md:h-12 lg:h-12 px-4 md:px-10 bg-red-600 text-white font-mono text-[9px] md:text-[11px] font-black flex items-center justify-center -skew-x-5 md:skew-x-[-10deg] hover:bg-white hover:text-red-600 transition-all duration-300">
             <Link href="/contact"> <span className="skew-x-[10deg] tracking-widest">Contact Us</span></Link>
           </Button>
