@@ -42,8 +42,8 @@ const Navbar = () => {
 
         {/* RIGHT: Time & Initialize */}
         <div className="flex gap-4 md:gap-10 pointer-events-auto items-start">
-          <Button href="/join" className="group relative h-9 md:h-12 lg:h-12 px-4 md:px-10 bg-red-600 text-white font-mono text-[9px] md:text-[11px] font-black flex items-center justify-center -skew-x-5 md:skew-x-[-10deg] hover:bg-white hover:text-red-600 transition-all duration-300">
-            <Link href="/contact"> <span className="skew-x-[10deg] tracking-widest">Contact Us</span></Link>
+          <Button  href="/join" className="relative py-3.5 px-4 md:px-6 bg-red-600 text-white font-sans text-[10px] md:text-[14px] font-black flex items-center justify-center rounded-sm -skew-x-8  hover:bg-red-700 hover:text-white transition-all duration-300">
+            <Link href="/contact">Contact Us</Link>
           </Button>
         </div>
       </div>

@@ -12,7 +12,6 @@ import {
   Cpu,
   Gauge,
 } from "lucide-react";
-import { Highlighter } from "../ui/highlighter";
 
 const AboutPreview = () => {
   const { scrollYProgress } = useScroll();
@@ -20,7 +19,6 @@ const AboutPreview = () => {
 
   return (
     <div className="bg-[#050505] text-white min-h-screen font-sans selection:bg-red-600 selection:text-white overflow-hidden relative">
-      {/* GLOBAL BACKGROUND GRID - Mimics blueprint paper */}
       <div
         className="absolute inset-0 opacity-[0.1] pointer-events-none"
         style={{
@@ -28,8 +26,6 @@ const AboutPreview = () => {
           backgroundSize: "30px 30px",
         }}
       />
-
-      {/* SECTION 1: THE MANIFESTO */}
       <section className="relative pt-40 pb-20 px-6 border-b border-white/5">
         <motion.div
           style={{ y: y1 }}
@@ -54,7 +50,7 @@ const AboutPreview = () => {
             <motion.h1
               initial={{ y: 60, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 100, damping: 20 }}
+              transition={{ type: "spring", stiffness: 100, damping: 30 }}
               className="text-5xl md:text-[9rem] font-black uppercase italic leading-[0.8] tracking-tighter mb-10"
             >
               MIST <br />
@@ -92,7 +88,7 @@ const AboutPreview = () => {
                 src="/china4.jpg"
                 alt="Formula Student China Entry"
                 fill
-                className="object-cover md:grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[1s]"
+                className="object-cover  group-hover:scale-105 transition-all duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
               <div className="absolute bottom-6 left-6">
@@ -129,16 +125,17 @@ const AboutPreview = () => {
         ].map((stat, i) => (
           <div
             key={i}
-            className="p-12 border-r border-white/10 hover:bg-red-600 transition-all group overflow-hidden relative"
+            className="px-12 py-10 border-r border-white/10 hover:bg-red-600 transition-all group overflow-hidden relative"
           >
             <div className="relative z-10 transition-colors group-hover:text-white">
-              <div className="mb-4 text-red-600 group-hover:text-white transition-colors">
+              <div className="mb-4 flex gap-2 text-red-600 group-hover:text-white transition-colors">
                 {stat.icon}
+                <p className="font-mono text-[10px] md:text-sm text-gray-500 mb-2 tracking-widest group-hover:text-white/70 uppercase">
+                  {stat.label}
+                </p>
               </div>
-              <p className="font-mono text-[10px] text-gray-500 mb-2 tracking-widest group-hover:text-white/70 uppercase">
-                {stat.label}
-              </p>
-              <p className="text-2xl md:text-4xl font-black italic uppercase tracking-tighter">
+
+              <p className="text-lg md:text-4xl font-black italic uppercase tracking-tighter">
                 {stat.value}
               </p>
             </div>
@@ -154,12 +151,6 @@ const AboutPreview = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row justify-between items-start mb-24 gap-12">
             <div className="lg:w-2/3">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="h-0.5 w-12 bg-red-600" />
-                <span className="font-mono text-xs uppercase tracking-[0.5em] text-red-600">
-                  The Blueprint
-                </span>
-              </div>
               <motion.h2
                 initial={{ x: -60, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
@@ -206,25 +197,18 @@ const AboutPreview = () => {
                 className="object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-[2s]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
-              <div className="absolute top-10 right-10 flex gap-2">
-                <div className="h-2 w-2 rounded-full bg-red-600 animate-pulse" />
-                <span className="font-mono text-[10px] uppercase tracking-widest text-white">
-                  FSC_China_2024_Entry
-                </span>
-              </div>
               <div className="absolute bottom-12 left-12">
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="w-16 h-[2px] bg-red-600" />
                   <span className="font-mono text-xs uppercase tracking-widest text-gray-300">
-                    Power Unit: KTM 390 DUKE // 373.3cc
+                    Power Unit: KTM 390 DUKE || 373.3cc
                   </span>
                 </div>
-                <h3 className="md:text-7xl text-5xl font-black italic uppercase mb-8 tracking-tighter text-white">
+                <h3 className="md:text-7xl text-4xl font-black italic uppercase mb-8 tracking-tighter text-white">
                   FURIOSA 1.0
                 </h3>
 
                 {/* New Data Overlay for Technical Highlights */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 border-l border-red-600 pl-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
                   <div>
                     <p className="text-[10px] text-gray-500 uppercase font-mono">
                       Weight
@@ -237,9 +221,7 @@ const AboutPreview = () => {
                     <p className="text-[10px] text-gray-500 uppercase font-mono">
                       Max Output
                     </p>
-                    <p className="text-xl font-bold text-white">
-                      33.8kW @8.5k
-                    </p>
+                    <p className="text-xl font-bold text-white">33.8kW @8.5k</p>
                   </div>
                   <div>
                     <p className="text-[10px] text-gray-500 uppercase font-mono">
@@ -256,13 +238,6 @@ const AboutPreview = () => {
                     </p>
                   </div>
                 </div>
-                {/* 
-                <button className="flex items-center gap-6 group/btn bg-white px-4 py-5 transition-all hover:bg-red-600 shadow-[10px_10px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none">
-                  <span className="text-black font-black uppercase tracking-widest text-sm group-hover/btn:text-white transition-colors">
-                    Full Specifications
-                  </span>
-                  <MoveRight className="text-black group-hover/btn:text-white group-hover/btn:translate-x-2 transition-all" />
-                </button> */}
               </div>
             </div>
 
@@ -294,7 +269,7 @@ const AboutPreview = () => {
                 </div>
                 <div className="flex justify-between items-center border-t border-white/10 pt-6">
                   <span className="font-mono text-[10px] text-gray-500 uppercase tracking-widest tracking-tighter">
-                    Tires: Apollo Amazer 4G Life // R13
+                    Tires: Apollo Amazer 4G Life || R13
                   </span>
                   <Activity size={16} className="text-red-600" />
                 </div>
