@@ -22,7 +22,7 @@ const DeptCard = forwardRef(function DeptCard(
           src={image}
           alt={title}
           fill
-          className="object-cover opacity-100 group-hover:opacity-30 group-hover:scale-105 transition-all duration-1000 ease-out brightness-105 group-hover:brightness-90"
+          className="object-cover opacity-100 group-hover:opacity-15 group-hover:scale-105 transition-all duration-1000 ease-out brightness-105 group-hover:brightness-75"
         />
         {/* Dynamic Gradient Mask */}
         <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
@@ -32,14 +32,14 @@ const DeptCard = forwardRef(function DeptCard(
       <div className="absolute top-6 left-6 z-20 flex flex-col gap-1">
       </div>
 
-      {/* 3. CENTER CONTENT CONTAINER */}
-      <div className="absolute inset-0 z-30 flex flex-col justify-end p-8">
+      {/* 3. CONTENT LAYER */}
+      <div className="absolute inset-0 z-30 p-5">
 
-        {/* Hover title: small and centered */}
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <h4 className="text-[11px] md:text-xs font-black italic uppercase tracking-[0.18em] text-white text-center px-4">
+        {/* Heading: small + centered by default, moves to top on hover */}
+        <div className="absolute z-40 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:left-4 group-hover:top-4 group-hover:translate-x-0 group-hover:translate-y-0 right-auto group-hover:right-4 transition-all duration-500">
+          <h3 className="text-[11px] md:text-xs group-hover:text-lg font-black italic font-sans uppercase text-white leading-tight text-center group-hover:text-left tracking-[0.16em] group-hover:tracking-normal">
             {title}
-          </h4>
+          </h3>
         </div>
         
         {/* Floating Watermark Role (Visible on hover) */}
@@ -47,17 +47,9 @@ const DeptCard = forwardRef(function DeptCard(
           <h4 className="text-9xl font-black italic uppercase text-white leading-none -ml-12">{title.split(' ')[0]}</h4>
         </div>
 
-        {/* Title & Static Info */}
-        <div className="relative space-y-2 transition-opacity duration-500 group-hover:opacity-0">
-          
-          <h3 className="text-2xl p-2 font-black italic font-sans uppercase text-white transition-all duration-500 ">
-            {title}
-          </h3>
-        </div>
-
-        {/* 4. EXPANDABLE SECTION (Description & Button) */}
-        <div className="max-h-0 opacity-0 overflow-hidden group-hover:max-h-60 group-hover:opacity-100 transition-all duration-700 ease-in-out">
-          <p className="mt-4 text-neutral-300 text-sm leading-relaxed font-medium line-clamp-3">
+        {/* Centered description on hover */}
+        <div className="absolute inset-0 flex items-center justify-center px-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <p className="text-neutral-200 text-sm leading-relaxed font-semibold text-center line-clamp-4 max-w-[85%]">
             {description}
           </p>
         </div>
