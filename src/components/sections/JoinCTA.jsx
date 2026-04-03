@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { MoveRight, Zap, Target, Activity, ShieldAlert } from "lucide-react";
+import { MoveRight } from "lucide-react";
 
 export default function JoinCTA() {
 
@@ -22,7 +22,7 @@ export default function JoinCTA() {
   };
   return (
     <section className="relative py-28 selection:bg-red-600 selection:text-white bg-[#050505] border-t border-white/5 flex flex-col items-center justify-center text-center overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vw] font-black text-white/[0.01] italic select-none pointer-events-none uppercase tracking-tighter">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vw] font-black text-white/1 italic select-none pointer-events-none uppercase tracking-tighter">
         FSC_2024
       </div>
 
@@ -60,25 +60,13 @@ export default function JoinCTA() {
           className="relative md:inline-block flex justify-center items-center group"
         >
 
-          <button onClick={handleClick} className="relative bg-white text-black px-12 md:px-20 py-6 mx-center md:py-8 font-black tracking-widest uppercase  md:tracking-[0.3em] italic text-lg md:text-2xl transition-all hover:bg-red-600 hover:text-white flex items-center gap-8 shadow-[20px_20px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-2">
+          <button onClick={handleClick} className="relative bg-white text-black px-8 md:px-14 py-4 mx-center md:py-5 font-black tracking-widest uppercase md:tracking-[0.22em] italic text-sm md:text-xl transition-all hover:bg-red-600 hover:text-white flex items-center gap-5 shadow-[16px_16px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-1">
             SECURE PARTNERSHIP
             <MoveRight
-              size={32}
+              size={24}
               className="transition-transform group-hover:translate-x-4"
             />
           </button>
-
-          <div className="mt-10  hidden md:flex flex-wrap justify-center gap-8 opacity-30">
-            <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest">
-              <Target size={12} /> GLOBAL_EXPOSURE
-            </div>
-            <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest">
-              <Zap size={12} /> TECH_INNOVATION
-            </div>
-            <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest">
-              <ShieldAlert size={12} /> EXCLUSIVE_ACCESS
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>

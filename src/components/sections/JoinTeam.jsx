@@ -247,9 +247,9 @@ export default function JoinBlitzTeam() {
       <div className="relative z-30 mt-30 md:mt-10 mb-14">
         <Button
           onClick={handleJoinClick}
-          className="md:px-16 py-5 bg-red-600 text-white hover:bg-white hover:text-red-600 border-none transition-all group overflow-hidden -skew-x-6"
+          className="md:px-12 py-3 bg-red-600 text-white hover:bg-white hover:text-red-600 border-none transition-all group overflow-hidden -skew-x-6"
         >
-          <span className="relative font-black uppercase text-2xl tracking-[0.3em] italic skew-x-12 flex items-center gap-4">
+          <span className="relative font-black uppercase text-lg md:text-xl tracking-[0.24em] italic skew-x-12 flex items-center gap-3">
             <Zap className="fill-current" /> Join the Blitz
           </span>
         </Button>
