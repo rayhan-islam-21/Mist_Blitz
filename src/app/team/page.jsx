@@ -1,13 +1,166 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/navbar/Navbar';
-import TeamMembers from '@/components/about/TeamMembers';
 import Footer from '@/components/footer/Footer';
 import Image from 'next/image';
 
+const leadership = ["Commandant", "HoD", "Faculty Advisor", "Team Lead / Captain"];
+
+const technicalTeams = [
+    {
+        name: "Chassis",
+        members: ["Structural Design Lead", "Frame Fabrication Engineer", "Material Analyst"],
+        responsibilities: [
+            "Spaceframe design and packaging",
+            "Torsional rigidity and safety compliance",
+            "Fabrication planning and quality checks",
+        ],
+    },
+    {
+        name: "Suspension",
+        members: ["Dynamics Lead", "Kinematics Engineer", "Test and Validation Engineer"],
+        responsibilities: [
+            "Suspension geometry and kinematics",
+            "Steering integration and braking balance",
+            "Track tuning and setup validation",
+        ],
+    },
+    {
+        name: "Powertrain",
+        members: ["Engine Lead", "Cooling Systems Engineer", "Drivetrain Specialist"],
+        responsibilities: [
+            "Engine mapping and performance optimization",
+            "Cooling and thermal management",
+            "Transmission and torque delivery setup",
+        ],
+    },
+    {
+        name: "Electronics",
+        members: ["DAQ Lead", "Wiring Harness Engineer", "Embedded Systems Engineer"],
+        responsibilities: [
+            "Sensor integration and live telemetry",
+            "Power distribution and harness design",
+            "Data logging and diagnostics systems",
+        ],
+    },
+];
+
+const managerialTeams = [
+    {
+        name: "Documentation",
+        members: ["Report Lead", "Design Report Writer", "Compliance Reviewer"],
+        responsibilities: [
+            "Technical documentation and submission planning",
+            "Design and cost report compilation",
+            "Version tracking and final proofreading",
+        ],
+    },
+    {
+        name: "Finance",
+        members: ["Budget Lead", "Procurement Coordinator", "Sponsor Accounts Officer"],
+        responsibilities: [
+            "Budget forecasting and expense control",
+            "Purchase and vendor coordination",
+            "Financial records and transparency tracking",
+        ],
+    },
+    {
+        name: "Media",
+        members: ["Creative Lead", "Content Creator", "Visual Editor"],
+        responsibilities: [
+            "Brand communication and storytelling",
+            "Photo and video coverage",
+            "Campaigns and social outreach",
+        ],
+    },
+    {
+        name: "Logistics",
+        members: ["Operations Lead", "Transport Coordinator", "Inventory Officer"],
+        responsibilities: [
+            "Event travel and shipment planning",
+            "Inventory flow and resource movement",
+            "On-ground operations support",
+        ],
+    },
+    {
+        name: "Management",
+        members: ["Program Manager", "Timeline Coordinator", "Inter-Team Liaison"],
+        responsibilities: [
+            "Milestone planning and execution tracking",
+            "Cross-team communication and risk management",
+            "Resource allocation and team coordination",
+        ],
+    },
+    {
+        name: "Business Plan Presentation",
+        members: ["Pitch Lead", "Market Research Analyst", "Presentation Strategist"],
+        responsibilities: [
+            "Business model development",
+            "Market validation and value proposition",
+            "Pitch deck and Q&A preparation",
+        ],
+    },
+];
+
+const TeamAccordion = ({ title, teams, activeTeam, setActiveTeam }) => (
+    <section className="mb-14">
+        <h3 className="text-3xl md:text-4xl font-black italic uppercase tracking-tight mb-3">
+            {title}
+        </h3>
+        <p className="text-sm md:text-base text-zinc-400 mb-6 uppercase tracking-wider">
+            Click each tab to expand with members and responsibilities
+        </p>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {teams.map((team) => {
+                const isOpen = activeTeam === team.name;
+
+                return (
+                    <div
+                        key={team.name}
+                        className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
+                            isOpen ? "border-red-600 bg-red-600/10" : "border-white/10 bg-white/2"
+                        }`}
+                    >
+                        <button
+                            onClick={() => setActiveTeam(isOpen ? null : team.name)}
+                            className="w-full text-left p-4 md:p-5 flex items-center justify-between"
+                        >
+                            <span className="font-black uppercase italic text-base md:text-lg">{team.name}</span>
+                            <span className="text-xl leading-none">{isOpen ? "-" : "+"}</span>
+                        </button>
+
+                        {isOpen && (
+                            <div className="px-4 md:px-5 pb-5 border-t border-white/10">
+                                <div className="pt-4">
+                                    <p className="text-[11px] tracking-widest uppercase text-zinc-400 mb-2">Members</p>
+                                    <ul className="list-disc pl-5 text-sm text-zinc-200 space-y-1 mb-5">
+                                        {team.members.map((member) => (
+                                            <li key={member}>{member}</li>
+                                        ))}
+                                    </ul>
+
+                                    <p className="text-[11px] tracking-widest uppercase text-zinc-400 mb-2">Roles and Responsibilities</p>
+                                    <ul className="list-disc pl-5 text-sm text-zinc-200 space-y-1">
+                                        {team.responsibilities.map((item) => (
+                                            <li key={item}>{item}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                );
+            })}
+        </div>
+    </section>
+);
+
 const Page = () => {
+    const [activeTechnical, setActiveTechnical] = useState(technicalTeams[0].name);
+    const [activeManagerial, setActiveManagerial] = useState(managerialTeams[0].name);
+
     return (
-        /* Added overflow-x-hidden to prevent horizontal scroll from animations */
         <div className="min-h-screen bg-black text-white overflow-x-hidden">
             <Navbar />
 
@@ -28,7 +181,7 @@ const Page = () => {
                     </div>
 
                     {/* Multi-layered Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black"></div>
+                    <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black"></div>
                     
                     {/* Hero Content */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
@@ -46,15 +199,44 @@ const Page = () => {
                         {/* Animated Scroll Indicator */}
                         <div className="absolute bottom-12 flex flex-col items-center gap-4">
                             <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Scroll to Explore</span>
-                            <div className="w-[1px] h-12 bg-gradient-to-b from-red-600 to-transparent"></div>
+                            <div className="w-px h-12 bg-linear-to-b from-red-600 to-transparent"></div>
                         </div>
                     </div>
 
                 </section>
 
-                {/* ====== Team Members Section ====== */}
-                <section className="relative z-10 bg-black w-full overflow-hidden">
-                    <TeamMembers />
+                {/* ====== Team Structure Section ====== */}
+                <section className="relative z-10 bg-black w-full overflow-hidden py-16 md:py-24 border-t border-white/10">
+                    <div className="max-w-6xl mx-auto px-4 md:px-6">
+                        <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tight mb-10">
+                            4. <span className="text-red-600">Teams</span>
+                        </h2>
+
+                        <div className="mb-14 rounded-2xl border border-white/10 bg-white/2 p-6 md:p-8">
+                            <h3 className="text-3xl md:text-4xl font-black italic uppercase tracking-tight mb-5">
+                                A. Team Structure
+                            </h3>
+                            <ul className="list-disc pl-6 text-lg text-zinc-200 space-y-2">
+                                {leadership.map((role) => (
+                                    <li key={role}>{role}</li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <TeamAccordion
+                            title="B. Technical Team"
+                            teams={technicalTeams}
+                            activeTeam={activeTechnical}
+                            setActiveTeam={setActiveTechnical}
+                        />
+
+                        <TeamAccordion
+                            title="C. Managerial Team"
+                            teams={managerialTeams}
+                            activeTeam={activeManagerial}
+                            setActiveTeam={setActiveManagerial}
+                        />
+                    </div>
                 </section>
             </main>
 
