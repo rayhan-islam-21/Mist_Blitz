@@ -32,7 +32,7 @@ const CAPTAIN_DATA = {
 };
 
 // ===================== MEMBER CARD COMPONENT =====================
-const MemberCard = ({ member, isLead, isCaptain, subsystemId, variant = "default" }) => {
+const MemberCard = ({ member, isLead, isCaptain, subsystemId, onCardClick, variant = "default" }) => {
   const isAdmin = variant === "admin";
   const linkedinUrl = member.linkedin
     ? member.linkedin.startsWith("http")
@@ -42,7 +42,13 @@ const MemberCard = ({ member, isLead, isCaptain, subsystemId, variant = "default
 
   return (
     <div
-      onClick={() => subsystemId && document.getElementById(subsystemId)?.scrollIntoView({ behavior: "smooth" })}
+      onClick={() => {
+        if (onCardClick) {
+          onCardClick();
+          return;
+        }
+        if (subsystemId) document.getElementById(subsystemId)?.scrollIntoView({ behavior: "smooth" });
+      }}
       className={`group relative w-full overflow-hidden transition-all duration-700 cursor-pointer border border-white/5
       ${isAdmin ? "h-[500px] md:h-[550px] bg-zinc-950 shadow-2xl" : "h-[420px] md:h-[480px] bg-zinc-900 shadow-xl"}
       ${isCaptain ? "ring-1 ring-red-600/50 shadow-[0_0_40px_rgba(220,38,38,0.15)]" : ""}
@@ -92,6 +98,7 @@ const MemberCard = ({ member, isLead, isCaptain, subsystemId, variant = "default
 // ===================== MAIN COMPONENT =====================
 const TeamMembers = () => {
   const [loading, setLoading] = useState(true);
+  const [activeSubsystemId, setActiveSubsystemId] = useState(null);
   const [currentYearData, setCurrentYearData] = useState({ 
     captain: CAPTAIN_DATA, 
     core: [], 
@@ -132,6 +139,7 @@ const TeamMembers = () => {
           .map((k) => processed[k]);
 
         setCurrentYearData(prev => ({ ...prev, core: coreLeads, subsystems: orderedSubsystems }));
+        if (coreLeads[0]?.subId) setActiveSubsystemId(coreLeads[0].subId);
         setLoading(false);
       } catch (e) {
         setLoading(false);
@@ -139,6 +147,8 @@ const TeamMembers = () => {
     };
     fetchData();
   }, []);
+
+  const activeSubsystem = currentYearData.subsystems.find((sub) => sub.id === activeSubsystemId);
 
   if (loading) return (
     <div className="min-h-screen bg-black flex items-center justify-center">
@@ -257,29 +267,66 @@ const TeamMembers = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {currentYearData.core.map((admin) => (
-              <MemberCard key={admin._id} member={admin} variant="admin" subsystemId={admin.subId} isLead={true} />
+              <MemberCard
+                key={admin._id}
+                member={admin}
+                variant="admin"
+                subsystemId={admin.subId}
+                isLead={true}
+                onCardClick={() => admin.subId && setActiveSubsystemId(admin.subId)}
+              />
             ))}
           </div>
         </div>
 
-        {/* SUBSYSTEMS */}
-        <div className="space-y-32 md:space-y-48">
-          {currentYearData.subsystems.map((sub) => (
-            <div key={sub.id} id={sub.id} className="scroll-mt-32">
-              <div className="flex items-center gap-4 md:gap-6 mb-10 md:mb-16 group">
-                <div className="bg-red-600 text-white p-3 md:p-4 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all">
-                  {sub.icon}
-                </div>
-                <h3 className="text-3xl md:text-7xl text-white font-black uppercase italic tracking-tighter">{sub.name}</h3>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                {sub.lead && <MemberCard member={sub.lead} isLead={true} />}
-                {sub.members.map((member) => (
-                  <MemberCard key={member._id} member={member} isLead={false} />
-                ))}
-              </div>
+        {/* TEAMMATES TAB PANEL (shown after clicking a leader) */}
+        <div className="mb-20 md:mb-28">
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            {currentYearData.core.map((leader) => (
+              <button
+                key={`${leader._id}-tab`}
+                onClick={() => leader.subId && setActiveSubsystemId(leader.subId)}
+                className={`px-4 py-2 text-xs md:text-sm font-black uppercase tracking-wider border transition-all ${
+                  activeSubsystemId === leader.subId
+                    ? "bg-red-600 text-white border-red-600"
+                    : "bg-transparent text-zinc-300 border-white/20 hover:border-red-600 hover:text-white"
+                }`}
+              >
+                {leader.techDept?.[0] || leader.role || "Team"}
+              </button>
+            ))}
+          </div>
+
+          {!activeSubsystem && (
+            <div className="border border-white/10 bg-zinc-900/40 p-8 text-zinc-400 uppercase text-xs tracking-[0.2em]">
+              Select a team leader to view teammates.
             </div>
-          ))}
+          )}
+
+          {activeSubsystem && (
+            <div className="space-y-8">
+              <div className="flex items-center gap-4 md:gap-6 group">
+                <div className="bg-red-600 text-white p-3 md:p-4 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all">
+                  {activeSubsystem.icon}
+                </div>
+                <h3 className="text-2xl md:text-5xl text-white font-black uppercase italic tracking-tighter">
+                  {activeSubsystem.name}
+                </h3>
+              </div>
+
+              {activeSubsystem.members.length === 0 ? (
+                <div className="border border-white/10 bg-zinc-900/40 p-8 text-zinc-400 uppercase text-xs tracking-[0.2em]">
+                  No teammates found for this unit yet.
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                  {activeSubsystem.members.map((member) => (
+                    <MemberCard key={member._id} member={member} isLead={false} />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>
