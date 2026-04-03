@@ -21,10 +21,13 @@ const Navbar = () => {
   const navItems = [
     { id: "01", name: "Home", href: "/" },
     { id: "02", name: "About", href: "/about" },
-    { id: "05", name: "Team", href: "/team" },
-    { id: "03", name: "Sponsors", href: "/sponsors" },
-    { id: "04", name: "Gallery", href: "/gallery" },
-    { id: "06", name: "Shop", href: "/shop" },
+    { id: "03", name: "Our Journey", href: "/our-journey" },
+    { id: "04", name: "Teams", href: "/team" },
+    { id: "05", name: "Our Cars", href: "/our-cars" },
+    { id: "06", name: "Sponsors", href: "/sponsors" },
+    { id: "07", name: "Gallery", href: "/gallery" },
+    { id: "08", name: "Support Us", href: "/support-us" },
+    { id: "09", name: "Join Us", href: "/join-us" },
   ];
 
   return (

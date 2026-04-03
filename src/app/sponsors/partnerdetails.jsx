@@ -241,7 +241,16 @@ export default function PremiumPartners() {
                 Next Intake • 2026
               </span>
 
-              <SponsorButton/>
+              <div className="flex gap-3 items-center">
+                <a
+                  href="/sponsorship-proposal.pdf"
+                  download
+                  className="text-[9px] font-black uppercase tracking-widest border border-white/20 px-4 py-2 hover:border-red-500 hover:text-red-500 transition-all"
+                >
+                  Download Proposal (PDF)
+                </a>
+                <SponsorButton/>
+              </div>
             </div>
           </div>
         </section>

@@ -5,10 +5,13 @@ import api from "@/lib/axios";
 import Image from "next/image";
 import { Maximize2, X } from "lucide-react";
 
+const CATEGORIES = ["All", "Cars", "Fabrication", "Competitions", "Team Moments"];
+
 const Gallery = () => {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedImg, setSelectedImg] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -24,6 +27,11 @@ const Gallery = () => {
     fetchGallery();
   }, []);
 
+  const filtered =
+    activeCategory === "All"
+      ? photos
+      : photos.filter((p) => p.category === activeCategory);
+
   if (loading)
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center font-mono uppercase tracking-[0.3em]">
@@ -34,7 +42,8 @@ const Gallery = () => {
   return (
     <section className="bg-black py-20 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <div className="relative md:mb-24 flex flex-col items-center justify-center overflow-hidden py-10">
+        {/* Title */}
+        <div className="relative md:mb-16 flex flex-col items-center justify-center overflow-hidden py-10">
           <h1
             className="text-[18vw] font-sans md:text-[20vw] font-black uppercase leading-none tracking-tighter"
             style={{
@@ -50,15 +59,38 @@ const Gallery = () => {
           <div className="h-1 w-32 bg-red-600 mt-[-2vw]"></div>
         </div>
 
-        {/* 2. MASONRY GRID */}
+        {/* Category Tabs */}
+        <div className="flex gap-2 mb-12 overflow-x-auto border-b border-white/10 pb-0">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`pb-4 px-3 text-xs font-black uppercase tracking-widest transition-all duration-300 border-b-2 whitespace-nowrap ${
+                activeCategory === cat
+                  ? "border-red-600 text-white"
+                  : "border-transparent text-white/30 hover:text-white/60"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Empty state */}
+        {filtered.length === 0 && (
+          <div className="text-center py-24 text-white/20 uppercase tracking-widest text-sm font-mono">
+            No images in this category yet.
+          </div>
+        )}
+
+        {/* Masonry Grid */}
         <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
-          {photos.map((photo, index) => (
+          {filtered.map((photo, index) => (
             <div
               key={photo._id || index}
               onClick={() => setSelectedImg(photo.imageUrl)}
               className="relative group cursor-zoom-in overflow-hidden border border-white/5 bg-zinc-900"
             >
-              {/* MAIN IMAGE */}
               <Image
                 src={photo.imageUrl}
                 alt="gallery images"
@@ -67,11 +99,10 @@ const Gallery = () => {
                 className="w-full h-auto object-cover group-hover:scale-105 transition-all duration-1000 ease-in-out"
               />
 
-              {/* HOVER OVERLAY: SHOWS YEAR */}
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center">
                 <div className="translate-y-4 font-sans group-hover:translate-y-0 transition-transform duration-500 text-center">
                   <span className="text-red-600 font-mono text-xs uppercase tracking-widest block mb-2">
-                    Season
+                    {photo.category || "Season"}
                   </span>
                   <h3 className="text-white text-4xl font-black italic uppercase tracking-tighter leading-none">
                     {photo.year}
@@ -90,7 +121,7 @@ const Gallery = () => {
           ))}
         </div>
 
-        {/* 3. LIGHTBOX MODAL */}
+        {/* Lightbox Modal */}
         {selectedImg && (
           <div
             className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
