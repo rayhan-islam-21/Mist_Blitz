@@ -1,8 +1,17 @@
 import AuthProvider from "@/context/Authprovider";
 import "./globals.css";
-import { Barlow_Condensed, Space_Mono } from "next/font/google";
+import { Oswald, Barlow, Space_Mono } from "next/font/google";
 
-const barlow = Barlow_Condensed({
+// Display / headings — bold condensed, very motorsport
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-oswald",
+  display: "swap",
+});
+
+// Body text — clean, readable
+const barlow = Barlow({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
@@ -10,6 +19,7 @@ const barlow = Barlow_Condensed({
   display: "swap",
 });
 
+// Technical labels / mono data
 const spaceMono = Space_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -25,7 +35,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${barlow.variable} ${spaceMono.variable} bg-black text-white`}>
+      <body
+        className={`${oswald.variable} ${barlow.variable} ${spaceMono.variable} bg-black text-white`}
+      >
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
