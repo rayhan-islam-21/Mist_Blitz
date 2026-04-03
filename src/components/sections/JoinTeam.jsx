@@ -120,10 +120,10 @@ export default function JoinBlitzTeam() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const RADIUS_X = 420;
-  const RADIUS_Y = 420;
-  const CARD_W = 200;
-  const CARD_H = 220;
+  const RADIUS_X = 520;
+  const RADIUS_Y = 520;
+  const CARD_W = 220;
+  const CARD_H = 240;
 
   return (
     <section className="relative selection:bg-red-600 selection:text-white py-16 md:py-20 bg-[#050505] overflow-hidden flex flex-col items-center border-t border-white/5">
@@ -169,12 +169,12 @@ export default function JoinBlitzTeam() {
       {!isMobile && (
         <div
           ref={containerRef}
-          className="relative w-full max-w-4xl h-[900px] flex items-center justify-center"
+          className="relative w-full h-[1200px] flex items-center justify-center"
         >
           <div className="absolute top-0 left-10 p-6  font-mono text-[9px] text-gray-500 uppercase"></div>
 
           <div ref={centerRef} className="relative z-50">
-            <div className="relative h-32 w-32 rounded-full bg-black border-4 border-red-600 overflow-hidden shadow-[0_0_60px_rgba(220,38,38,0.3)] group cursor-crosshair">
+            <div className="relative h-44 w-44 rounded-full bg-black border-4 border-red-600 overflow-hidden shadow-[0_0_80px_rgba(220,38,38,0.5)] group cursor-crosshair">
               <Image
                 src="/furiosalogo.jpg"
                 alt="Logo"
