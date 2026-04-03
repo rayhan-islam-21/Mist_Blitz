@@ -280,7 +280,14 @@ const TeamMembers = () => {
         </div>
 
         {/* TEAMMATES TAB PANEL (shown after clicking a leader) */}
-        <div className="mb-20 md:mb-28">
+        <div className="mb-20 md:mb-28 border border-white/10 bg-zinc-950/50 p-5 md:p-8">
+          <div className="flex items-center gap-4 mb-6">
+            <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter text-white">
+              Team Unit View
+            </h2>
+            <div className="h-px grow bg-gradient-to-r from-red-600 to-transparent" />
+          </div>
+
           <div className="flex flex-wrap items-center gap-3 mb-6">
             {currentYearData.core.map((leader) => (
               <button
@@ -314,12 +321,19 @@ const TeamMembers = () => {
                 </h3>
               </div>
 
-              {activeSubsystem.members.length === 0 ? (
+              {activeSubsystem.members.length === 0 && !activeSubsystem.lead ? (
                 <div className="border border-white/10 bg-zinc-900/40 p-8 text-zinc-400 uppercase text-xs tracking-[0.2em]">
                   No teammates found for this unit yet.
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                  {activeSubsystem.lead && (
+                    <MemberCard
+                      key={`${activeSubsystem.id}-lead-card`}
+                      member={activeSubsystem.lead}
+                      isLead={true}
+                    />
+                  )}
                   {activeSubsystem.members.map((member) => (
                     <MemberCard key={member._id} member={member} isLead={false} />
                   ))}
