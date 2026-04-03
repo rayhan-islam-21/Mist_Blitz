@@ -110,6 +110,8 @@ export default function JoinBlitzTeam() {
   const containerRef = useRef(null);
   const centerRef = useRef(null);
   const cardRefs = useRef([]);
+  // Stable ref objects for AnimatedBeam (new object each render breaks beam tracking)
+  const beamRefs = useRef(allDepts.map(() => ({ current: null })));
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -120,8 +122,7 @@ export default function JoinBlitzTeam() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const RADIUS_X = 520;
-  const RADIUS_Y = 520;
+  const ORBIT_RADIUS = 470;
   const CARD_W = 220;
   const CARD_H = 240;
 
@@ -169,9 +170,17 @@ export default function JoinBlitzTeam() {
       {!isMobile && (
         <div
           ref={containerRef}
-          className="relative w-full h-[1200px] flex items-center justify-center"
+          className="relative w-full max-w-7xl h-295 flex items-center justify-center"
         >
           <div className="absolute top-0 left-10 p-6  font-mono text-[9px] text-gray-500 uppercase"></div>
+
+          <div
+            className="pointer-events-none absolute rounded-full border border-white/10"
+            style={{
+              width: ORBIT_RADIUS * 2 + CARD_W,
+              height: ORBIT_RADIUS * 2 + CARD_W,
+            }}
+          />
 
           <div ref={centerRef} className="relative z-50">
             <div className="relative h-44 w-44 rounded-full bg-black border-4 border-red-600 overflow-hidden shadow-[0_0_80px_rgba(220,38,38,0.5)] group cursor-crosshair">
@@ -184,23 +193,30 @@ export default function JoinBlitzTeam() {
               <div className="absolute inset-0 bg-red-600/10 group-hover:bg-transparent transition-colors" />
             </div>
 
-            <div className="absolute inset-[-20px] rounded-full border border-red-600/20 animate-ping" />
+            <div className="absolute -inset-5 rounded-full border border-red-600/20 animate-ping" />
           </div>
 
           {allDepts.map((dept, i) => {
             const angle = (i / allDepts.length) * 2 * Math.PI;
-            const x = Math.cos(angle) * RADIUS_X;
-            const y = Math.sin(angle) * RADIUS_Y;
+            const x = Math.cos(angle) * ORBIT_RADIUS;
+            const y = Math.sin(angle) * ORBIT_RADIUS;
 
             return (
               <div
                 key={dept.title}
-                ref={(el) => (cardRefs.current[i] = el)}
+                ref={(el) => {
+                  cardRefs.current[i] = el;
+                  beamRefs.current[i].current = el;
+                }}
                 className="absolute z-40 group"
                 style={{
-                  transform: `translate(${x}px, ${y}px)`,
+                  left: "50%",
+                  top: "50%",
+                  transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
                   width: CARD_W,
                   height: CARD_H,
+                  borderRadius: "1.5rem",
+                  overflow: "hidden",
                 }}
               >
                 <div className="relative h-full w-full">
@@ -210,7 +226,7 @@ export default function JoinBlitzTeam() {
                     title={dept.title}
                     description={dept.description}
                     image={dept.image}
-                    className="w-full h-full border border-white/5 group-hover:border-red-600/50 transition-all duration-500 bg-black/40 backdrop-blur-sm"
+                    className="w-full h-full rounded-3xl border border-white/10 group-hover:border-red-600/60 transition-all duration-500 bg-black/50 backdrop-blur-sm"
                   />
                 </div>
               </div>
@@ -221,14 +237,14 @@ export default function JoinBlitzTeam() {
             <AnimatedBeam
               key={i}
               containerRef={containerRef}
-              fromRef={{ current: cardRefs.current[i] }}
+              fromRef={beamRefs.current[i]}
               toRef={centerRef}
               curvature={i % 2 === 0 ? 40 : -40}
-              duration={4 + Math.random() * 2}
+              duration={4.8}
               delay={i * 0.2}
-              pathColor="rgba(255, 255, 255, 0.03)"
+              pathColor="rgba(255, 255, 255, 0.16)"
               gradientStartColor="#dc2626"
-              gradientEndColor="#000000"
+              gradientStopColor="#7f1d1d"
             />
           ))}
         </div>
@@ -239,7 +255,7 @@ export default function JoinBlitzTeam() {
           onClick={handleJoinClick}
           className="md:px-16 py-5 bg-red-600 text-white hover:bg-white hover:text-red-600 border-none transition-all group overflow-hidden -skew-x-6"
         >
-          <span className="relative font-black uppercase text-2xl tracking-[0.3em] italic skew-x-[12deg] flex items-center gap-4">
+          <span className="relative font-black uppercase text-2xl tracking-[0.3em] italic skew-x-12 flex items-center gap-4">
             <Zap className="fill-current" /> Join the Blitz
           </span>
         </Button>

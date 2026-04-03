@@ -11,7 +11,7 @@ const DeptCard = forwardRef(function DeptCard(
       ref={ref}
       style={style}
       className={cn(
-        "group relative w-full h-120 bg-[#0A0A0A] overflow-hidden rounded-2xl cursor-pointer transition-all duration-700 ease-in-out",
+        "group relative w-full h-120 bg-[#0A0A0A] overflow-hidden rounded-3xl cursor-pointer transition-all duration-700 ease-in-out",
         "border border-white/10 hover:border-red-500/40",
         className
       )}
