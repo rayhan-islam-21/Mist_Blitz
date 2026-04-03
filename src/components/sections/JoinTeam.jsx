@@ -124,7 +124,7 @@ export default function JoinBlitzTeam() {
 
   const ORBIT_RADIUS = 470;
   const CARD_W = 220;
-  const CARD_H = 240;
+  const CARD_H = 220;
 
   return (
     <section className="relative selection:bg-red-600 selection:text-white py-16 md:py-20 bg-[#050505] overflow-hidden flex flex-col items-center border-t border-white/5">
@@ -209,7 +209,7 @@ export default function JoinBlitzTeam() {
                   transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
                   width: CARD_W,
                   height: CARD_H,
-                  borderRadius: "1.5rem",
+                  borderRadius: "9999px",
                   overflow: "hidden",
                 }}
               >
@@ -220,7 +220,7 @@ export default function JoinBlitzTeam() {
                     title={dept.title}
                     description={dept.description}
                     image={dept.image}
-                    className="w-full h-full rounded-3xl border border-white/10 group-hover:border-red-600/60 transition-all duration-500 bg-black/50 backdrop-blur-sm"
+                    className="w-full h-full rounded-full border border-white/10 group-hover:border-red-600/60 transition-all duration-500 bg-black/50 backdrop-blur-sm"
                   />
                 </div>
               </div>
