@@ -35,17 +35,10 @@ const AboutPreview = () => {
               initial={{ y: 60, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ type: "spring", stiffness: 100, damping: 30 }}
-              className="text-5xl md:text-[9rem] font-black uppercase italic leading-[0.8] tracking-tighter mb-10"
+              className="text-5xl md:text-[9rem] font-black uppercase italic leading-none tracking-tighter mb-10"
             >
               MIST <br />
-              <span className="text-red-600">
-                BLI
-                <span className="text-white italic underline decoration-red-600 decoration-[6px] underline-offset-4">
-                  T
-                </span>
-                <span className="bg-red-600 px-1 italic">Z</span>
-              </span>
-              !
+              <span className="text-red-600">BLITZ</span>!
             </motion.h1>
 
             <div className="space-y-8">
@@ -90,7 +83,7 @@ const AboutPreview = () => {
                 initial={{ x: -60, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                className="text-5xl md:text-9xl font-black uppercase italic leading-none tracking-tighter mb-8"
+                className="text-5xl md:text-9xl font-black uppercase italic leading-tight tracking-tighter mb-8"
               >
                 OUR <span className="text-red-600">ORIGIN</span>
               </motion.h2>

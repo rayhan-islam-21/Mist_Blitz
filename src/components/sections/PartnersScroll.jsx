@@ -49,7 +49,7 @@ export default function PartnersScroll() {
             initial={{ y: 60, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            className="text-5xl font-sans tracking-tighter md:text-[9rem] font-black uppercase italic leading-[0.75] "
+            className="text-5xl font-sans tracking-tighter md:text-[9rem] font-black uppercase italic leading-none"
           >
             Our <br />
             <span className="text-red-600">Partners</span>!
