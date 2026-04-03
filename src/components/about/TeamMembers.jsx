@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import api from "@/lib/axios";
 import { Linkedin, ChevronRight, Wind, Settings, Layers, Zap, Star } from "lucide-react";
 import Image from "next/image";
@@ -99,6 +99,7 @@ const MemberCard = ({ member, isLead, isCaptain, subsystemId, onCardClick, varia
 const TeamMembers = () => {
   const [loading, setLoading] = useState(true);
   const [activeSubsystemId, setActiveSubsystemId] = useState(null);
+  const teamPanelRef = useRef(null);
   const [currentYearData, setCurrentYearData] = useState({ 
     captain: CAPTAIN_DATA, 
     core: [], 
@@ -149,6 +150,14 @@ const TeamMembers = () => {
   }, []);
 
   const activeSubsystem = currentYearData.subsystems.find((sub) => sub.id === activeSubsystemId);
+
+  const openTeamPanel = (subId) => {
+    if (!subId) return;
+    setActiveSubsystemId(subId);
+    requestAnimationFrame(() => {
+      teamPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
 
   if (loading) return (
     <div className="min-h-screen bg-black flex items-center justify-center">
@@ -204,10 +213,9 @@ const TeamMembers = () => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-[600px] h-[300px] md:h-[600px] bg-red-600/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
 
           <div className="relative z-10 text-center mb-10">
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <div className="h-[1px] w-8 md:w-12 bg-gradient-to-r from-transparent to-red-600" />
-              <h2 className="text-[10px] md:text-xs font-mono text-red-600 uppercase tracking-[0.6em] font-black">Team Captain</h2>
-              <div className="h-[1px] w-8 md:w-12 bg-gradient-to-l from-transparent to-red-600" />
+            <div className="inline-flex items-center gap-3 border border-red-600/40 bg-red-600/10 px-5 py-2">
+              <div className="h-2 w-2 bg-red-600 rounded-full" />
+              <h2 className="text-xs md:text-sm font-black text-white uppercase tracking-[0.22em] italic">Team Captain</h2>
             </div>
           </div>
 
@@ -262,7 +270,7 @@ const TeamMembers = () => {
         {/* COMMAND CENTER GRID */}
         <div className="mb-32 md:mb-48">
           <div className="flex items-center gap-4 mb-10 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-black text-white uppercase italic tracking-tighter">Command Center</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-white uppercase italic tracking-tighter">Team Lead</h2>
             <div className="h-px flex-grow bg-gradient-to-r from-red-600 to-transparent" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -273,14 +281,14 @@ const TeamMembers = () => {
                 variant="admin"
                 subsystemId={admin.subId}
                 isLead={true}
-                onCardClick={() => admin.subId && setActiveSubsystemId(admin.subId)}
+                onCardClick={() => openTeamPanel(admin.subId)}
               />
             ))}
           </div>
         </div>
 
         {/* TEAMMATES TAB PANEL (shown after clicking a leader) */}
-        <div className="mb-20 md:mb-28 border border-white/10 bg-zinc-950/50 p-5 md:p-8">
+        <div ref={teamPanelRef} className="mb-20 md:mb-28 border border-white/10 bg-zinc-950/50 p-5 md:p-8 scroll-mt-28">
           <div className="flex items-center gap-4 mb-6">
             <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter text-white">
               Team Unit View
@@ -292,7 +300,7 @@ const TeamMembers = () => {
             {currentYearData.core.map((leader) => (
               <button
                 key={`${leader._id}-tab`}
-                onClick={() => leader.subId && setActiveSubsystemId(leader.subId)}
+                onClick={() => openTeamPanel(leader.subId)}
                 className={`px-4 py-2 text-xs md:text-sm font-black uppercase tracking-wider border transition-all ${
                   activeSubsystemId === leader.subId
                     ? "bg-red-600 text-white border-red-600"
