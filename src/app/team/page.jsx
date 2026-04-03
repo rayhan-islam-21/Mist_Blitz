@@ -21,6 +21,12 @@ const managerialTeams = {
     BPP: ["Member 1", "Member 2"],
 };
 
+const rolesAndResponsibilities = [
+    "Leadership and strategic decision making",
+    "Technical development and testing execution",
+    "Operations, finance, media, and documentation support",
+];
+
 const Page = () => {
     const [openTechnical, setOpenTechnical] = useState(null);
     const [openManagerial, setOpenManagerial] = useState(null);
@@ -76,85 +82,122 @@ const Page = () => {
                 </section>
 
                 {/* ====== Team Structure Doc Section ====== */}
-                <section className="bg-[#efefef] text-black py-14 md:py-20">
-                    <div className="max-w-4xl mx-auto px-6 md:px-8">
-                        <h2 className="text-4xl md:text-5xl font-bold mb-10">4. Teams</h2>
+                <section className="relative py-16 md:py-24 bg-linear-to-b from-[#f8f8f8] via-[#ececec] to-[#e6e6e6] text-black overflow-hidden">
+                    <div
+                        className="absolute inset-0 opacity-40 pointer-events-none"
+                        style={{
+                            backgroundImage: "linear-gradient(#11111110 1px, transparent 1px), linear-gradient(90deg, #11111110 1px, transparent 1px)",
+                            backgroundSize: "36px 36px",
+                        }}
+                    />
 
-                        <div className="mb-12">
-                            <h3 className="text-3xl md:text-4xl font-bold mb-4">a. Team Structure</h3>
-                            <ul className="list-disc pl-8 text-2xl leading-relaxed">
-                                <li>Commandant</li>
-                                <li>HoD</li>
-                                <li>Faculty advisor</li>
-                                <li>Team lead / captain</li>
-                            </ul>
-                        </div>
+                    <div className="relative max-w-6xl mx-auto px-6 md:px-8">
+                        <div className="rounded-3xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_24px_60px_rgba(0,0,0,0.12)] p-6 md:p-10">
+                            <div className="mb-10 md:mb-12">
+                                <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-red-600 font-bold mb-3">Organization Blueprint</p>
+                                <h2 className="text-4xl md:text-6xl font-black tracking-tight">4. Teams</h2>
+                            </div>
 
-                        <div className="mb-12">
-                            <h3 className="text-3xl md:text-4xl font-bold mb-4">B. Technical Team (Each team tab will be expanded with members on click)</h3>
-                            <ul className="list-disc pl-8 text-2xl leading-relaxed mb-3">
-                                <li>Sub-teams:</li>
-                            </ul>
+                            <div className="grid lg:grid-cols-2 gap-6 md:gap-8 mb-8">
+                                <div className="rounded-2xl border border-black/10 bg-white p-5 md:p-7">
+                                    <h3 className="text-2xl md:text-3xl font-black mb-4">a. Team Structure</h3>
+                                    <ul className="space-y-2 text-lg md:text-xl text-zinc-800">
+                                        <li>• Commandant</li>
+                                        <li>• HoD</li>
+                                        <li>• Faculty advisor</li>
+                                        <li>• Team lead / captain</li>
+                                    </ul>
+                                </div>
 
-                            <div className="pl-10 mb-4 space-y-3">
-                                {Object.keys(technicalTeams).map((team) => {
-                                    const isOpen = openTechnical === team;
+                                <div className="rounded-2xl border border-black/10 bg-[#111] text-white p-5 md:p-7">
+                                    <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 mb-3">Core Note</p>
+                                    <p className="text-lg md:text-xl leading-relaxed text-zinc-200">
+                                        Each team tab expands on click to show members and responsibilities. This keeps the page clean while still showing full structure when needed.
+                                    </p>
+                                </div>
+                            </div>
 
-                                    return (
-                                        <div key={team}>
+                            <div className="mb-8 md:mb-10 rounded-2xl border border-black/10 bg-white p-5 md:p-7">
+                                <h3 className="text-2xl md:text-3xl font-black mb-4">B. Technical Team</h3>
+                                <p className="text-zinc-600 mb-5">Sub-teams</p>
+
+                                <div className="flex flex-wrap gap-3 mb-5">
+                                    {Object.keys(technicalTeams).map((team) => {
+                                        const isOpen = openTechnical === team;
+
+                                        return (
                                             <button
+                                                key={team}
                                                 onClick={() => setOpenTechnical(isOpen ? null : team)}
-                                                className="text-2xl underline-offset-4 hover:underline"
+                                                className={`px-4 py-2 rounded-full border text-sm md:text-base font-semibold transition-all ${
+                                                    isOpen
+                                                        ? "bg-red-600 text-white border-red-600"
+                                                        : "bg-white text-zinc-800 border-zinc-300 hover:border-red-600 hover:text-red-600"
+                                                }`}
                                             >
                                                 {team}
                                             </button>
+                                        );
+                                    })}
+                                </div>
 
-                                            {isOpen && (
-                                                <ul className="list-disc pl-8 text-xl mt-2">
-                                                    {technicalTeams[team].map((member) => (
-                                                        <li key={member}>{member}</li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </div>
-                                    );
-                                })}
+                                <div className="rounded-xl border border-zinc-200 bg-zinc-50 min-h-28 p-4 md:p-5">
+                                    {openTechnical ? (
+                                        <ul className="space-y-2 text-zinc-800">
+                                            {technicalTeams[openTechnical].map((member) => (
+                                                <li key={member}>• {member}</li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <p className="text-zinc-500">Select a sub-team to view members.</p>
+                                    )}
+                                </div>
                             </div>
 
-                            <ul className="list-disc pl-8 text-2xl leading-relaxed">
-                                <li>Roles and responsibilities</li>
-                            </ul>
-                        </div>
+                            <div className="mb-8 md:mb-10 rounded-2xl border border-black/10 bg-white p-5 md:p-7">
+                                <h3 className="text-2xl md:text-3xl font-black mb-4">c. Managerial Team</h3>
 
-                        <div>
-                            <h3 className="text-3xl md:text-4xl font-bold mb-4">c. Managerial Team (Same)</h3>
+                                <div className="flex flex-wrap gap-3 mb-5">
+                                    {Object.keys(managerialTeams).map((team) => {
+                                        const isOpen = openManagerial === team;
 
-                            <div className="pl-6 mb-4 space-y-3">
-                                {Object.keys(managerialTeams).map((team) => {
-                                    const isOpen = openManagerial === team;
-
-                                    return (
-                                        <div key={team}>
+                                        return (
                                             <button
+                                                key={team}
                                                 onClick={() => setOpenManagerial(isOpen ? null : team)}
-                                                className="text-2xl underline-offset-4 hover:underline"
+                                                className={`px-4 py-2 rounded-full border text-sm md:text-base font-semibold transition-all ${
+                                                    isOpen
+                                                        ? "bg-black text-white border-black"
+                                                        : "bg-white text-zinc-800 border-zinc-300 hover:border-black"
+                                                }`}
                                             >
                                                 {team}
                                             </button>
+                                        );
+                                    })}
+                                </div>
 
-                                            {isOpen && (
-                                                <ul className="list-disc pl-8 text-xl mt-2">
-                                                    {managerialTeams[team].map((member) => (
-                                                        <li key={member}>{member}</li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </div>
-                                    );
-                                })}
+                                <div className="rounded-xl border border-zinc-200 bg-zinc-50 min-h-28 p-4 md:p-5">
+                                    {openManagerial ? (
+                                        <ul className="space-y-2 text-zinc-800">
+                                            {managerialTeams[openManagerial].map((member) => (
+                                                <li key={member}>• {member}</li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <p className="text-zinc-500">Select a managerial unit to view members.</p>
+                                    )}
+                                </div>
                             </div>
 
-                            <p className="text-2xl leading-relaxed">Roles & responsibilities</p>
+                            <div className="rounded-2xl border border-black/10 bg-white p-5 md:p-7">
+                                <h4 className="text-xl md:text-2xl font-black mb-4">Roles & responsibilities</h4>
+                                <ul className="space-y-2 text-zinc-800">
+                                    {rolesAndResponsibilities.map((item) => (
+                                        <li key={item}>• {item}</li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </section>
