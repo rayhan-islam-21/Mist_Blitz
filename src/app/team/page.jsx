@@ -9,6 +9,7 @@ const leadership = ["Commandant", "HoD", "Faculty Advisor", "Team Lead / Captain
 const technicalTeams = [
     {
         name: "Chassis",
+        image: "/dept/dept2.jpg",
         members: ["Structural Design Lead", "Frame Fabrication Engineer", "Material Analyst"],
         responsibilities: [
             "Spaceframe design and packaging",
@@ -18,6 +19,7 @@ const technicalTeams = [
     },
     {
         name: "Suspension",
+        image: "/dept/dept1.jpg",
         members: ["Dynamics Lead", "Kinematics Engineer", "Test and Validation Engineer"],
         responsibilities: [
             "Suspension geometry and kinematics",
@@ -27,6 +29,7 @@ const technicalTeams = [
     },
     {
         name: "Powertrain",
+        image: "/dept/dept5.jpg",
         members: ["Engine Lead", "Cooling Systems Engineer", "Drivetrain Specialist"],
         responsibilities: [
             "Engine mapping and performance optimization",
@@ -36,6 +39,7 @@ const technicalTeams = [
     },
     {
         name: "Electronics",
+        image: "/dept/dept6.jpg",
         members: ["DAQ Lead", "Wiring Harness Engineer", "Embedded Systems Engineer"],
         responsibilities: [
             "Sensor integration and live telemetry",
@@ -48,6 +52,7 @@ const technicalTeams = [
 const managerialTeams = [
     {
         name: "Documentation",
+        image: "/dept/dept2.jpg",
         members: ["Report Lead", "Design Report Writer", "Compliance Reviewer"],
         responsibilities: [
             "Technical documentation and submission planning",
@@ -57,6 +62,7 @@ const managerialTeams = [
     },
     {
         name: "Finance",
+        image: "/dept/dept7.jpg",
         members: ["Budget Lead", "Procurement Coordinator", "Sponsor Accounts Officer"],
         responsibilities: [
             "Budget forecasting and expense control",
@@ -66,6 +72,7 @@ const managerialTeams = [
     },
     {
         name: "Media",
+        image: "/dept/dept6.jpg",
         members: ["Creative Lead", "Content Creator", "Visual Editor"],
         responsibilities: [
             "Brand communication and storytelling",
@@ -75,6 +82,7 @@ const managerialTeams = [
     },
     {
         name: "Logistics",
+        image: "/dept/dept5.jpg",
         members: ["Operations Lead", "Transport Coordinator", "Inventory Officer"],
         responsibilities: [
             "Event travel and shipment planning",
@@ -84,6 +92,7 @@ const managerialTeams = [
     },
     {
         name: "Management",
+        image: "/dept/dept1.jpg",
         members: ["Program Manager", "Timeline Coordinator", "Inter-Team Liaison"],
         responsibilities: [
             "Milestone planning and execution tracking",
@@ -93,6 +102,7 @@ const managerialTeams = [
     },
     {
         name: "Business Plan Presentation",
+        image: "/dept/dept7.jpg",
         members: ["Pitch Lead", "Market Research Analyst", "Presentation Strategist"],
         responsibilities: [
             "Business model development",
@@ -124,15 +134,35 @@ const TeamAccordion = ({ title, teams, activeTeam, setActiveTeam }) => (
                     >
                         <button
                             onClick={() => setActiveTeam(isOpen ? null : team.name)}
-                            className="w-full text-left p-4 md:p-5 flex items-center justify-between"
+                            className="w-full text-left p-4 md:p-5 flex items-center justify-between gap-4"
                         >
-                            <span className="font-black uppercase italic text-base md:text-lg">{team.name}</span>
+                            <div className="flex items-center gap-3 min-w-0">
+                                <div className="relative h-12 w-12 rounded-xl overflow-hidden border border-white/20 shrink-0">
+                                    <Image
+                                        src={team.image}
+                                        alt={`${team.name} team`}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
+                                <span className="font-black uppercase italic text-base md:text-lg truncate">{team.name}</span>
+                            </div>
                             <span className="text-xl leading-none">{isOpen ? "-" : "+"}</span>
                         </button>
 
                         {isOpen && (
                             <div className="px-4 md:px-5 pb-5 border-t border-white/10">
                                 <div className="pt-4">
+                                    <div className="relative h-36 w-full rounded-xl overflow-hidden border border-white/10 mb-4">
+                                        <Image
+                                            src={team.image}
+                                            alt={`${team.name} department`}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+                                    </div>
+
                                     <p className="text-[11px] tracking-widest uppercase text-zinc-400 mb-2">Members</p>
                                     <ul className="list-disc pl-5 text-sm text-zinc-200 space-y-1 mb-5">
                                         {team.members.map((member) => (
