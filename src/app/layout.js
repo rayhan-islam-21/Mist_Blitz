@@ -1,11 +1,20 @@
 import AuthProvider from "@/context/Authprovider";
 import "./globals.css";
-import { Mouse_Memoirs, Cousine } from "next/font/google";
+import { Barlow_Condensed, Space_Mono } from "next/font/google";
 
-const comicFont = Mouse_Memoirs({
+const barlow = Barlow_Condensed({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-comic",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-barlow",
+  display: "swap",
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-space-mono",
+  display: "swap",
 });
 
 export const metadata = {
@@ -16,12 +25,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${comicFont.className} bg-black text-white`}>
+      <body className={`${barlow.variable} ${spaceMono.variable} bg-black text-white`}>
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
 }
-
-
-
