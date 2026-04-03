@@ -1,143 +1,251 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
-const galleryData = [
-  { id: 1, image: "/car2.jpg", title: "Furiosa 1.0", description: "Performance validation and track testing." },
-  { id: 2, image: "/improve.jpg", title: "Fabrication", description: "Precision chassis manufacturing." },
-  { id: 3, image: "/china4.jpg", title: "MIST BLITZ", description: "Global Formula Student deployment." },
-  { id: 4, image: "/car2.jpg", title: "Engineering", description: "Advanced system design and CAD." },
-  { id: 5, image: "/china3.jpg", title: "Competition", description: "International static and dynamic events." },
+const slides = [
+  {
+    id: 1,
+    image: "/car2.jpg",
+    tag: "Engineering",
+    code: "ENG-01",
+    title: "Furiosa 1.0",
+    sub: "Performance validation & track testing",
+    stat: { n: "290kg", l: "Car Weight" },
+  },
+  {
+    id: 2,
+    image: "/improve.jpg",
+    tag: "Fabrication",
+    code: "FAB-02",
+    title: "Built By Hand",
+    sub: "Precision chassis manufacturing in-house",
+    stat: { n: "100%", l: "In-House" },
+  },
+  {
+    id: 3,
+    image: "/china4.jpg",
+    tag: "Competition",
+    code: "FSC-03",
+    title: "China 2024",
+    sub: "Formula Student China — global stage",
+    stat: { n: "FSC", l: "Competed" },
+  },
+  {
+    id: 4,
+    image: "/team.jpg",
+    tag: "Team",
+    code: "TMB-04",
+    title: "50+ Engineers",
+    sub: "One team. One mission. One car.",
+    stat: { n: "50+", l: "Members" },
+  },
+  {
+    id: 5,
+    image: "/china3.jpg",
+    tag: "Racing",
+    code: "DYN-05",
+    title: "On The Track",
+    sub: "Dynamic events — acceleration & endurance",
+    stat: { n: "39Nm", l: "Peak Torque" },
+  },
 ];
 
 export default function FormulaGallery() {
-  const [activeIndex, setActiveIndex] = useState(2);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const containerRef = useRef(null);
-
-  const next = () => setActiveIndex((prev) => (prev + 1) % galleryData.length);
-  const prev = () => setActiveIndex((prev) => (prev - 1 + galleryData.length) % galleryData.length);
-
-  // Drag Handler
-  const handleDragEnd = (event, info) => {
-    const threshold = 50; // pixels to trigger slide
-    if (info.offset.x < -threshold) next();
-    else if (info.offset.x > threshold) prev();
-  };
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    let interval;
-    if (isAutoPlaying) {
-      interval = setInterval(next, 5000);
-    }
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+    if (paused) return;
+    const t = setInterval(() => setActive((p) => (p + 1) % slides.length), 5000);
+    return () => clearInterval(t);
+  }, [paused]);
+
+  const cur = slides[active];
+  const prev = () => setActive((p) => (p - 1 + slides.length) % slides.length);
+  const next = () => setActive((p) => (p + 1) % slides.length);
 
   return (
-    <section className="relative bg-[#050505] text-white py-12 md:py-24 overflow-hidden select-none">
-      <div className="max-w-350 mx-auto px-4 md:px-8">
-        
-        {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-6">
-          <motion.h2 className="text-5xl md:mb-20 font-sans sm:text-7xl md:text-9xl font-black uppercase italic tracking-tighter leading-[0.8]">
-            OUR <br /> <span className="text-red-600">JOURNEY</span>
-          </motion.h2>
+    <section
+      className="relative bg-[#050505] text-white overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* ── FULL BLEED IMAGE ── */}
+      <div className="relative h-[85vh] w-full overflow-hidden">
+        <AnimatePresence mode="sync">
+          <motion.div
+            key={cur.id}
+            className="absolute inset-0"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
+            <Image
+              src={cur.image}
+              fill
+              alt={cur.title}
+              className="object-cover object-center"
+              priority
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-transparent to-transparent z-10" />
+
+        {/* Speed lines top-right */}
+        <div className="absolute top-0 right-0 w-1/2 h-full overflow-hidden z-10 pointer-events-none">
+          {[...Array(4)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute h-px bg-gradient-to-l from-transparent via-red-600/20 to-transparent"
+              style={{ top: `${25 + i * 18}%`, width: "80%", right: 0 }}
+            />
+          ))}
+        </div>
+
+        {/* Slide code — top left */}
+        <div className="absolute top-8 left-8 z-20 flex items-center gap-3">
+          <div className="w-2 h-2 bg-red-600 rotate-45" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/40">
+            {cur.code}
+          </span>
+        </div>
+
+        {/* Progress bar — top */}
+        <div className="absolute top-0 left-0 w-full h-[2px] z-20">
+          <motion.div
+            className="h-full bg-red-600"
+            key={active}
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: paused ? 0 : 5, ease: "linear" }}
+          />
+        </div>
+
+        {/* Slide counter */}
+        <div className="absolute top-8 right-8 z-20 font-mono text-xs text-white/30 tracking-widest">
+          {String(active + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
+        </div>
+
+        {/* Bottom left: main content */}
+        <div className="absolute bottom-0 left-0 z-20 px-8 md:px-16 pb-12 max-w-2xl">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={cur.id}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="inline-flex items-center gap-2 mb-4">
+                <span className="w-4 h-[2px] bg-red-600" />
+                <span className="font-mono text-red-500 text-[10px] uppercase tracking-[0.4em]">
+                  {cur.tag}
+                </span>
+              </span>
+              <h3 className="text-5xl md:text-7xl font-sans font-black italic uppercase leading-none tracking-tighter text-white mb-3">
+                {cur.title}
+              </h3>
+              <p className="text-white/50 text-sm uppercase tracking-[0.2em] font-mono">
+                {cur.sub}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Bottom right: stat + arrows */}
+        <div className="absolute bottom-0 right-0 z-20 px-8 md:px-16 pb-12 flex items-end gap-8">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={cur.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-right mr-6"
+            >
+              <p className="font-sans font-black italic text-4xl text-white leading-none">
+                {cur.stat.n}
+              </p>
+              <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 mt-1">
+                {cur.stat.l}
+              </p>
+            </motion.div>
+          </AnimatePresence>
 
           <div className="flex gap-2">
-            <button onClick={prev} className="p-4 md:p-6 border border-white/10 hover:bg-red-600 transition-colors active:scale-95">
-              <ChevronLeft size={24} />
+            <button
+              onClick={prev}
+              className="w-12 h-12 border border-white/20 hover:border-red-600 hover:bg-red-600/10 flex items-center justify-center transition-all duration-200 text-white/60 hover:text-white"
+            >
+              ←
             </button>
-            <button onClick={next} className="p-4 md:p-6 border border-white/10 hover:bg-red-600 transition-colors active:scale-95">
-              <ChevronRight size={24} />
+            <button
+              onClick={next}
+              className="w-12 h-12 border border-white/20 hover:border-red-600 hover:bg-red-600/10 flex items-center justify-center transition-all duration-200 text-white/60 hover:text-white"
+            >
+              →
             </button>
           </div>
         </div>
+      </div>
 
-        {/* DRAGGABLE CAROUSEL CONTAINER */}
-        <motion.div 
-          ref={containerRef}
-          className="relative h-100 sm:h-125 md:h-162.5 flex items-center justify-center cursor-grab active:cursor-grabbing"
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }} 
-          onDragEnd={handleDragEnd}
-        >
-          {galleryData.map((item, index) => (
-            <GalleryCard 
-              key={item.id} 
-              item={item} 
-              index={index} 
-              activeIndex={activeIndex} 
-              total={galleryData.length} 
-            />
-          ))}
-        </motion.div>
+      {/* ── BOTTOM BAR ── */}
+      <div className="border-t border-white/5 bg-[#050505]">
+        <div className="max-w-7xl mx-auto flex items-stretch">
 
-        <div className="mt-8 md:mt-12 flex justify-center gap-2">
-          {galleryData.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              className={`h-1.5 transition-all duration-500 ${activeIndex === i ? "w-12 md:w-24 bg-red-600" : "w-4 bg-white/10"}`}
-            />
-          ))}
+          {/* Title block */}
+          <div className="px-10 py-8 border-r border-white/5 shrink-0">
+            <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/25 mb-1">Section</p>
+            <h2 className="font-sans font-black italic uppercase text-3xl leading-none text-white">
+              Our <span className="text-red-600">Journey</span>
+            </h2>
+          </div>
+
+          {/* Slide thumbnails */}
+          <div className="flex flex-1 overflow-x-auto no-scrollbar">
+            {slides.map((s, i) => (
+              <button
+                key={s.id}
+                onClick={() => setActive(i)}
+                className={`relative shrink-0 h-full min-w-[100px] md:min-w-[140px] overflow-hidden transition-all duration-300 ${
+                  active === i ? "opacity-100" : "opacity-30 hover:opacity-60"
+                }`}
+              >
+                <Image src={s.image} fill alt={s.title} className="object-cover" />
+                <div className="absolute inset-0 bg-black/40" />
+                {active === i && (
+                  <div className="absolute bottom-0 left-0 w-full h-[2px] bg-red-600" />
+                )}
+                <span className="absolute bottom-2 left-2 font-mono text-[8px] uppercase tracking-wider text-white/70">
+                  {s.tag}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="px-8 py-8 border-l border-white/5 shrink-0 flex items-center">
+            <Link
+              href="/our-journey"
+              className="flex items-center gap-3 group"
+            >
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30 group-hover:text-red-500 transition-colors">
+                Full Story
+              </span>
+              <span className="w-8 h-8 border border-white/20 group-hover:border-red-600 group-hover:bg-red-600/10 flex items-center justify-center transition-all text-white/40 group-hover:text-white">
+                →
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function GalleryCard({ item, index, activeIndex, total }) {
-  let offset = index - activeIndex;
-  if (offset > total / 2) offset -= total;
-  if (offset < -total / 2) offset += total;
-  const isActive = offset === 0;
-
-  return (
-    <motion.div
-      className="absolute w-full md:w-[80%] h-full pointer-events-none"
-      initial={false}
-      animate={{
-        x: `${offset * 100}%`, 
-        scale: isActive ? 1 : 0.8,
-        opacity: Math.abs(offset) > 1 ? 0 : 1 - Math.abs(offset) * 0.6,
-        zIndex: total - Math.abs(offset),
-      }}
-      transition={{ type: "spring", stiffness: 200, damping: 30 }}
-    >
-      <div className={`relative w-full h-full overflow-hidden transition-all duration-700 ${isActive ? ' rounded-xl shadow-2xl' : 'opacity-30 blur-[2px]'}`}>
-        <Image 
-          src={item.image} 
-          alt={item.title} 
-          fill 
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 80vw"
-          draggable={false} // Prevents default browser image ghosting
-        />
-        
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
-        
-        <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 z-20">
-          <h3 className="text-4xl font-sans md:text-7xl font-black uppercase italic tracking-tighter leading-none pointer-events-auto">
-            {item.title}
-          </h3>
-          <AnimatePresence>
-            {isActive && (
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-[10px] md:text-xs text-gray-400 uppercase tracking-[0.3em] mt-2 md:mt-4 pointer-events-auto"
-              >
-                {item.description}
-              </motion.p>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-    </motion.div>
   );
 }
