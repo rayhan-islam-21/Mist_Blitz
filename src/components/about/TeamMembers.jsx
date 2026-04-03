@@ -43,10 +43,10 @@ const MemberCard = ({ member, isLead, isCaptain, subsystemId, variant = "default
   return (
     <div
       onClick={() => subsystemId && document.getElementById(subsystemId)?.scrollIntoView({ behavior: "smooth" })}
-      className={`group relative w-full overflow-hidden transition-all duration-700 cursor-pointer border border-white/5
+      className={`group relative w-full overflow-hidden rounded-2xl transition-all duration-700 cursor-pointer border border-white/5
       ${isAdmin ? "h-[500px] md:h-[550px] bg-zinc-950 shadow-2xl" : "h-[420px] md:h-[480px] bg-zinc-900 shadow-xl"}
       ${isCaptain ? "ring-1 ring-red-600/50 shadow-[0_0_40px_rgba(220,38,38,0.15)]" : ""}
-      ${isAdmin ? "hover:border-red-600/50" : "hover:shadow-[8px_8px_0px_rgba(220,38,38,1)]"}`}
+      ${isAdmin ? "hover:border-red-600/50 hover:-translate-y-1" : "hover:-translate-y-1 hover:shadow-[8px_8px_0px_rgba(220,38,38,1)]"}`}
     >
       <Image
         src={member.image || "/placeholder.jpg"}
@@ -56,7 +56,7 @@ const MemberCard = ({ member, isLead, isCaptain, subsystemId, variant = "default
         alt={member.name}
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent group-hover:from-red-950/40 transition-colors duration-700" />
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent group-hover:from-red-950/40 transition-colors duration-700" />
 
       <div className="absolute bottom-0 left-0 p-6 w-full transform group-hover:-translate-y-2 transition-transform duration-500">
         <p className="text-red-600 font-mono text-[10px] uppercase tracking-[0.4em] mb-2 font-bold">
@@ -147,7 +147,15 @@ const TeamMembers = () => {
   );
 
   return (
-    <section className="bg-black py-10 md:py-20 px-4 md:px-6 font-sans min-h-screen">
+    <section className="relative bg-black py-10 md:py-20 px-4 md:px-6 font-sans min-h-screen overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-[0.08] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(#ffffff 0.5px, transparent 0.5px)",
+          backgroundSize: "30px 30px",
+        }}
+      />
+      <div className="absolute inset-x-0 top-0 h-48 bg-linear-to-b from-red-600/10 to-transparent pointer-events-none" />
       <div className="max-w-7xl mx-auto">
         
         {/* DIRECTORATE SECTION */}
@@ -183,10 +191,11 @@ const TeamMembers = () => {
         </div>
 
         {/* CREW HEADER */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-8 mb-16 md:mb-24 border-b border-white/5 pb-8 md:pb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-8 mb-16 md:mb-24 border-b border-white/10 pb-8 md:pb-12">
           <h1 className="text-5xl md:text-9xl font-black uppercase italic leading-[0.8] tracking-tighter text-white">
             THE <span className="text-red-600">CREW</span>
           </h1>
+          <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-zinc-400">Precision. Grit. Teamwork.</p>
         </div>
 
         {/* ========== BESPOKE CAPTAIN SECTION ========== */}
@@ -205,7 +214,7 @@ const TeamMembers = () => {
             <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-red-600 z-20 transition-all duration-500 group-hover:-top-2 group-hover:-left-2" />
             <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-red-600 z-20 transition-all duration-500 group-hover:-bottom-2 group-hover:-right-2" />
             
-            <div className="relative h-[480px] md:h-[650px] w-full bg-zinc-950 overflow-hidden border border-white/10 shadow-2xl">
+            <div className="relative h-[480px] md:h-[650px] w-full bg-zinc-950 overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
               <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 pointer-events-none bg-[length:100%_2px,3px_100%]" />
               
               <Image
