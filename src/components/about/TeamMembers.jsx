@@ -58,7 +58,7 @@ const MemberCard = ({ member, isLead, isCaptain, subsystemId, onCardClick, varia
         src={member.image || "/placeholder.jpg"}
         fill
         sizes="(max-width: 768px) 100vw, 33vw"
-        className="object-cover opacity-70 grayscale group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000 ease-in-out"
+        className="object-cover opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000 ease-in-out"
         alt={member.name}
       />
 
@@ -213,9 +213,9 @@ const TeamMembers = () => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-[600px] h-[300px] md:h-[600px] bg-red-600/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
 
           <div className="relative z-10 text-center mb-10">
-            <div className="inline-flex items-center gap-3 border border-red-600/40 bg-red-600/10 px-5 py-2">
-              <div className="h-2 w-2 bg-red-600 rounded-full" />
-              <h2 className="text-xs md:text-sm font-black text-white uppercase tracking-[0.22em] italic">Team Captain</h2>
+            <div className="inline-flex flex-col items-center">
+              <h2 className="text-lg md:text-2xl font-black text-white uppercase italic tracking-[0.22em]">Team Captain</h2>
+              <div className="mt-2 h-px w-40 md:w-56 bg-linear-to-r from-transparent via-red-600 to-transparent" />
             </div>
           </div>
 
@@ -229,7 +229,7 @@ const TeamMembers = () => {
               <Image
                 src={currentYearData.captain.image}
                 fill
-                className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-in-out opacity-60 group-hover:opacity-100"
+                className="object-cover group-hover:scale-105 transition-all duration-1000 ease-in-out opacity-90 group-hover:opacity-100"
                 alt="Captain"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
