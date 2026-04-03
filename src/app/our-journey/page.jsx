@@ -5,403 +5,334 @@ import Footer from "@/components/footer/Footer";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-const journeyData = [
+const seasons = [
   {
     year: "2021",
-    number: "01",
+    round: "S01",
     title: "The Beginning",
-    tagline: "Where it all started.",
-    color: "from-white/5",
+    tagline: "From blueprint to reality.",
+    description:
+      "MIST Blitz was founded with a single goal — to put Bangladesh on the global Formula Student map. A small group of driven engineers laid the groundwork, established the workshop, and started designing from scratch.",
     image: "/team.jpg",
-    milestones: [
-      "Team formally founded at MIST",
-      "Initial design concepts drafted",
-      "First workshop space secured",
-      "Core founding members recruited",
-    ],
-    phases: [
-      { label: "Design", detail: "Concept sketches & initial CAD models" },
-      { label: "Analysis", detail: "Structural simulation & load calculations" },
-      { label: "Manufacturing", detail: "First prototype frame fabrication" },
-      { label: "Testing", detail: "Static load testing & validation" },
-    ],
-    achievements: ["Team formally registered", "Workshop secured at MIST", "First CAD prototype complete"],
-    stat: { value: "12", label: "Founding Members" },
+    accent: "#ffffff",
+    milestones: ["Team formally founded", "Workshop established at MIST", "First CAD prototype complete", "Core crew of 12 engineers"],
+    phases: ["Design", "Analysis", "Manufacturing", "Testing"],
+    stat1: { n: "12", l: "Founders" },
+    stat2: { n: "0→1", l: "Prototype" },
   },
   {
     year: "2022",
-    number: "02",
-    title: "First Prototype",
-    tagline: "Steel meets ambition.",
-    color: "from-red-900/10",
+    round: "S02",
+    title: "First Machine",
+    tagline: "Steel welded. Engine fired.",
+    description:
+      "The team completed its first full race car — designed, manufactured, and tested entirely in-house. Every weld, every wire, every component built by students pushing past midnight to meet their own deadline.",
     image: "/car2.jpg",
-    milestones: [
-      "First car chassis fabricated",
-      "Electronics integration complete",
-      "Team expanded to 30+ members",
-      "First internal driver trials",
-    ],
-    phases: [
-      { label: "Design", detail: "Full vehicle CAD finalized in SolidWorks" },
-      { label: "Analysis", detail: "FEA on chassis & suspension geometry" },
-      { label: "Manufacturing", detail: "Chassis welded, suspension assembled" },
-      { label: "Testing", detail: "Dynamic testing on campus grounds" },
-    ],
-    achievements: ["Prototype 1.0 complete", "First driver trials", "30+ active members"],
-    stat: { value: "30+", label: "Team Members" },
+    accent: "#e53e3e",
+    milestones: ["Full chassis fabricated", "Electronics integrated", "30+ team members", "First driver trial runs"],
+    phases: ["Design", "Analysis", "Manufacturing", "Testing"],
+    stat1: { n: "30+", l: "Team Size" },
+    stat2: { n: "#1", l: "Prototype" },
   },
   {
     year: "2023",
-    number: "03",
+    round: "S03",
     title: "International Debut",
-    tagline: "Racing beyond borders.",
-    color: "from-red-600/10",
+    tagline: "Bangladesh on the world stage.",
+    description:
+      "MIST Blitz entered its first international Formula Student competition. Competing against teams from across the globe, the team earned recognition in design events and returned with invaluable experience.",
     image: "/china4.jpg",
-    milestones: [
-      "Formula Student competition entry",
-      "International ranking achieved",
-      "Sponsorship partnerships secured",
-      "Media coverage & recognition",
-    ],
-    phases: [
-      { label: "Design", detail: "Revised aero package & lighter chassis" },
-      { label: "Analysis", detail: "Full vehicle dynamics simulation" },
-      { label: "Manufacturing", detail: "Lightweight CNC-machined components" },
-      { label: "Testing", detail: "Endurance & acceleration tests" },
-    ],
-    achievements: ["Competed internationally", "Design event recognition", "50+ members strong"],
-    stat: { value: "50+", label: "Team Members" },
+    accent: "#e53e3e",
+    milestones: ["First international competition", "Design event recognition", "Strategic sponsors secured", "50+ member strong team"],
+    phases: ["Design", "Analysis", "Manufacturing", "Testing"],
+    stat1: { n: "50+", l: "Team Size" },
+    stat2: { n: "FSC", l: "Competed" },
   },
   {
     year: "2024",
-    number: "04",
-    title: "Evolution & Excellence",
-    tagline: "Faster. Smarter. Stronger.",
-    color: "from-red-600/20",
+    round: "S04",
+    title: "Furiosa 1.0",
+    tagline: "Our fastest machine yet.",
+    description:
+      "A ground-up redesign produced FURIOSA 1.0 — the most technically advanced car the team has ever built. KTM 390 Duke power, steel spaceframe chassis, double wishbone suspension, and a full data acquisition system.",
     image: "/car2.jpg",
-    milestones: [
-      "Ground-up powertrain redesign",
-      "Advanced electronics & DAQ suite",
-      "Best competition result in history",
-      "Formula Student China — FURIOSA 1.0",
-    ],
-    phases: [
-      { label: "Design", detail: "Ground-up redesign from competition feedback" },
-      { label: "Analysis", detail: "CFD analysis for improved aero & downforce" },
-      { label: "Manufacturing", detail: "Carbon fiber bodywork, upgraded drivetrain" },
-      { label: "Testing", detail: "Full competition simulation week" },
-    ],
-    achievements: ["Personal best lap times", "Top static event scores", "National recognition"],
-    stat: { value: "FSC", label: "China 2024" },
+    accent: "#e53e3e",
+    milestones: ["FURIOSA 1.0 launched", "Formula Student China entry", "Advanced DAQ system", "Best team result in history"],
+    phases: ["Design", "Analysis", "Manufacturing", "Testing"],
+    stat1: { n: "39Nm", l: "Peak Torque" },
+    stat2: { n: "290kg", l: "Car Weight" },
   },
 ];
 
-const OurJourneyPage = () => {
-  const [activeYear, setActiveYear] = useState("2024");
-  const activeIdx = journeyData.findIndex((d) => d.year === activeYear);
-  const active = journeyData[activeIdx];
+export default function OurJourneyPage() {
+  const [active, setActive] = useState(3); // default 2024
+
+  const cur = seasons[active];
 
   return (
-    <div className="bg-black min-h-screen text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
+    <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
       <Navbar />
 
-      {/* ── HERO ── */}
-      <section className="relative h-screen flex items-end justify-start overflow-hidden">
+      {/* ══ HERO ══ */}
+      <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+        {/* Background image */}
         <div className="absolute inset-0">
-          <Image src="/china4.jpg" fill alt="Journey" className="object-cover opacity-30" priority />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
+          <Image src="/china4.jpg" fill alt="hero" className="object-cover object-center" priority />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-[#0a0a0a]/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
         </div>
 
-        {/* Big ghost year */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 text-[30vw] font-sans font-black italic text-white/[0.03] leading-none select-none pointer-events-none pr-4">
-          2024
+        {/* Speed lines decoration */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[...Array(5)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute h-px bg-gradient-to-r from-transparent via-red-600/30 to-transparent"
+              style={{ top: `${20 + i * 15}%`, width: "60%", left: "40%" }}
+            />
+          ))}
         </div>
 
-        <div className="relative z-10 px-8 md:px-20 pb-24 max-w-4xl">
-          <motion.p
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-red-500 font-mono uppercase tracking-[0.4em] text-xs mb-6 flex items-center gap-3"
-          >
-            <span className="w-8 h-px bg-red-600" /> MIST Blitz Formula Student
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+        <div className="relative z-10 px-8 md:px-20 pb-20 pt-40">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-7xl md:text-[10rem] font-sans font-black italic uppercase leading-none tracking-tighter mb-6"
+            transition={{ duration: 0.8 }}
           >
-            Our<br /><span className="text-red-600">Journey</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="text-gray-400 text-lg max-w-lg"
-          >
-            Four years of engineering, sacrifice, and speed. Every lap a lesson. Every season a chapter.
-          </motion.p>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-[2px] bg-red-600" />
+              <span className="font-mono text-red-500 text-xs uppercase tracking-[0.4em]">
+                MIST Blitz Formula Student
+              </span>
+            </div>
+            <h1 className="text-[13vw] md:text-[11vw] font-sans font-black italic uppercase leading-none tracking-tighter text-white mb-2">
+              Our
+            </h1>
+            <h1 className="text-[13vw] md:text-[11vw] font-sans font-black italic uppercase leading-none tracking-tighter text-red-600 mb-10">
+              Journey
+            </h1>
+            <p className="text-gray-400 text-lg max-w-lg font-light">
+              Four seasons. One mission. Engineering Bangladesh&apos;s place on the global motorsport stage.
+            </p>
+          </motion.div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 right-12 flex flex-col items-center gap-3">
-          <div className="w-px h-16 bg-gradient-to-b from-red-600 to-transparent" />
-          <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-zinc-600 rotate-90 origin-center mt-4">scroll</span>
+        {/* Scroll cue */}
+        <div className="absolute bottom-8 right-16 flex flex-col items-center gap-2">
+          <div className="w-[1px] h-14 bg-gradient-to-b from-red-600 to-transparent" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30">scroll</span>
         </div>
       </section>
 
-      {/* ── TIMELINE TRACK ── */}
-      <section className="bg-black py-0 border-y border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-4">
-            {journeyData.map((item, i) => (
+      {/* ══ SEASON SELECTOR STRIP ══ */}
+      <div className="sticky top-16 z-40 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-white/5">
+        <div className="max-w-7xl mx-auto flex">
+          {seasons.map((s, i) => (
+            <button
+              key={s.year}
+              onClick={() => setActive(i)}
+              className={`relative flex-1 flex flex-col items-center py-5 px-4 transition-all duration-300 group overflow-hidden ${
+                active === i ? "bg-red-600/10" : "hover:bg-white/[0.02]"
+              }`}
+            >
+              {active === i && (
+                <motion.div
+                  layoutId="pill"
+                  className="absolute top-0 left-0 w-full h-[3px] bg-red-600"
+                />
+              )}
+              <span className={`font-mono text-[9px] uppercase tracking-[0.3em] mb-1 ${active === i ? "text-red-500" : "text-white/20"}`}>
+                {s.round}
+              </span>
+              <span className={`font-sans font-black italic text-2xl md:text-3xl leading-none ${active === i ? "text-white" : "text-white/20 group-hover:text-white/50"}`}>
+                {s.year}
+              </span>
+              <span className={`font-mono text-[9px] uppercase tracking-wider mt-1 hidden md:block ${active === i ? "text-white/60" : "text-white/10"}`}>
+                {s.title}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* ══ SEASON CONTENT ══ */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={cur.year}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4 }}
+        >
+          {/* SECTION A — Full bleed photo + title */}
+          <div className="relative h-[70vh] overflow-hidden">
+            <Image src={cur.image} fill alt={cur.title} className="object-cover object-center" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+
+            {/* Giant ghost year */}
+            <div className="absolute -right-8 top-1/2 -translate-y-1/2 font-sans font-black italic text-[22vw] leading-none text-white/[0.04] select-none pointer-events-none">
+              {cur.year}
+            </div>
+
+            {/* Content overlay */}
+            <div className="absolute bottom-0 left-0 px-8 md:px-20 pb-14">
+              <span className="block font-mono text-red-500 text-xs uppercase tracking-[0.5em] mb-4">
+                {cur.round} / {cur.year}
+              </span>
+              <h2 className="text-5xl md:text-8xl font-sans font-black italic uppercase leading-none tracking-tighter text-white mb-3">
+                {cur.title}
+              </h2>
+              <p className="text-red-400 italic text-xl md:text-2xl font-sans font-black uppercase">
+                {cur.tagline}
+              </p>
+            </div>
+
+            {/* Right side stats */}
+            <div className="absolute bottom-14 right-8 md:right-20 flex gap-12">
+              {[cur.stat1, cur.stat2].map((s, i) => (
+                <div key={i} className="text-right">
+                  <p className="text-4xl md:text-5xl font-sans font-black italic text-white leading-none">
+                    {s.n}
+                  </p>
+                  <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/40 mt-1">{s.l}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* SECTION B — Description + milestones */}
+          <div className="bg-[#0a0a0a]">
+            {/* Red accent bar */}
+            <div className="h-1 w-full bg-gradient-to-r from-red-600 via-red-600/50 to-transparent" />
+
+            <div className="max-w-7xl mx-auto px-8 md:px-20 py-20">
+              <div className="grid md:grid-cols-2 gap-16 mb-20">
+                {/* Description */}
+                <div>
+                  <p className="text-2xl md:text-3xl text-white/80 leading-relaxed font-light">
+                    {cur.description}
+                  </p>
+                </div>
+                {/* Milestones */}
+                <div className="space-y-0">
+                  {cur.milestones.map((m, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-5 py-5 border-b border-white/5 group"
+                    >
+                      <span className="font-mono text-red-600 text-xs font-bold shrink-0 w-6">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div className="w-0 group-hover:w-4 h-px bg-red-600 transition-all duration-300 shrink-0" />
+                      <span className="text-white/70 group-hover:text-white transition-colors text-sm uppercase tracking-wider font-sans font-bold">
+                        {m}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Phases — horizontal race track style */}
+              <div>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-6 h-[2px] bg-red-600" />
+                  <span className="font-mono text-xs uppercase tracking-[0.4em] text-white/30">
+                    Season Process
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
+                  {cur.phases.map((phase, i) => (
+                    <div
+                      key={i}
+                      className={`relative p-8 border border-white/5 group overflow-hidden ${
+                        i === 0 ? "bg-red-600" : "bg-white/[0.02] hover:bg-white/[0.04]"
+                      } transition-all duration-300`}
+                    >
+                      {/* Phase number watermark */}
+                      <span className="absolute top-4 right-5 font-mono text-[40px] font-black text-white/[0.06] leading-none select-none">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {i > 0 && (
+                        <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10">
+                          <div className="w-4 h-4 bg-[#0a0a0a] border border-red-600/30 rotate-45" />
+                        </div>
+                      )}
+                      <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/40 mb-3">
+                        Phase {String(i + 1).padStart(2, "0")}
+                      </p>
+                      <p className="font-sans font-black italic uppercase text-xl text-white leading-none">
+                        {phase}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Season nav */}
+            <div className="max-w-7xl mx-auto px-8 md:px-20 pb-16 flex items-center justify-between">
               <button
-                key={item.year}
-                onClick={() => setActiveYear(item.year)}
-                className={`relative group text-left px-8 py-8 border-r border-white/5 transition-all duration-500 overflow-hidden ${
-                  activeYear === item.year ? "bg-red-600/10" : "hover:bg-white/[0.02]"
-                }`}
+                onClick={() => setActive((p) => Math.max(0, p - 1))}
+                disabled={active === 0}
+                className="flex items-center gap-3 text-white/30 hover:text-white disabled:opacity-20 transition-colors group"
               >
-                {/* Active indicator line */}
-                {activeYear === item.year && (
-                  <motion.div layoutId="track" className="absolute top-0 left-0 w-full h-1 bg-red-600" />
-                )}
-                <span className="block text-[10px] font-mono uppercase tracking-[0.3em] text-white/30 mb-1">
-                  Season {item.number}
+                <span className="w-10 h-10 border border-white/20 group-hover:border-red-600 flex items-center justify-center transition-colors">
+                  ←
                 </span>
-                <span className={`block text-4xl md:text-5xl font-sans font-black italic leading-none mb-2 transition-colors ${
-                  activeYear === item.year ? "text-white" : "text-white/30 group-hover:text-white/60"
-                }`}>
-                  {item.year}
-                </span>
-                <span className={`block text-xs uppercase tracking-wider font-bold transition-colors ${
-                  activeYear === item.year ? "text-red-500" : "text-white/20 group-hover:text-white/40"
-                }`}>
-                  {item.title}
+                <span className="font-mono text-xs uppercase tracking-wider hidden md:block">
+                  {active > 0 ? seasons[active - 1].year : ""}
                 </span>
               </button>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ── ACTIVE YEAR CONTENT ── */}
-      <AnimatePresence mode="wait">
-        {active && (
-          <motion.section
-            key={active.year}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="relative bg-black"
-          >
-            {/* Giant ghost year background */}
-            <div className="absolute top-0 left-0 right-0 overflow-hidden pointer-events-none select-none">
-              <div className="text-[25vw] font-sans font-black italic leading-none text-white/[0.025] -mt-8 -ml-4">
-                {active.year}
-              </div>
-            </div>
-
-            {/* Main content grid */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-0">
-              {/* Top row: title + tagline + stat */}
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                <div>
-                  <p className="text-red-500 font-mono text-xs uppercase tracking-[0.4em] mb-3 flex items-center gap-3">
-                    <span className="w-6 h-px bg-red-600" />{active.year}
-                  </p>
-                  <h2 className="text-5xl md:text-8xl font-sans font-black italic uppercase leading-none tracking-tighter text-white">
-                    {active.title}
-                  </h2>
-                  <p className="text-gray-500 text-xl italic mt-3">{active.tagline}</p>
-                </div>
-                <div className="text-right shrink-0">
-                  <p className="text-7xl md:text-8xl font-sans font-black italic text-red-600 leading-none">
-                    {active.stat.value}
-                  </p>
-                  <p className="text-xs font-mono uppercase tracking-[0.3em] text-white/40 mt-1">
-                    {active.stat.label}
-                  </p>
-                </div>
-              </div>
-
-              {/* Full-width image */}
-              <div className="relative w-full h-[40vh] mb-16 overflow-hidden">
-                <Image
-                  src={active.image}
-                  fill
-                  alt={active.title}
-                  className="object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/70" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                {/* Diagonal accent */}
-                <div className="absolute top-0 left-0 w-2 h-full bg-red-600" />
-              </div>
-
-              {/* Three column content */}
-              <div className="grid md:grid-cols-3 gap-0 mb-0">
-
-                {/* Col 1: Milestones */}
-                <div className="border-r border-white/5 pr-8 pb-16">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="w-6 h-px bg-red-600" />
-                    <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-red-500">Milestones</span>
-                  </div>
-                  <ul className="space-y-5">
-                    {active.milestones.map((m, i) => (
-                      <li key={i} className="flex gap-4 items-start group">
-                        <span className="text-red-600 font-mono text-xs mt-1 shrink-0 font-bold">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span className="text-gray-300 text-sm leading-relaxed group-hover:text-white transition-colors">
-                          {m}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Col 2: Phases */}
-                <div className="border-r border-white/5 px-8 pb-16">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="w-6 h-px bg-red-600" />
-                    <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-red-500">Process</span>
-                  </div>
-                  <div className="space-y-0">
-                    {active.phases.map((phase, i) => (
-                      <div key={i} className="relative">
-                        <div className={`flex gap-4 items-stretch ${i < active.phases.length - 1 ? "mb-0" : ""}`}>
-                          {/* Step marker */}
-                          <div className="flex flex-col items-center shrink-0 w-6">
-                            <div className="w-3 h-3 rounded-full bg-red-600 shrink-0 mt-1 z-10" />
-                            {i < active.phases.length - 1 && (
-                              <div className="w-px flex-1 bg-red-600/20 mt-1" style={{ minHeight: "40px" }} />
-                            )}
-                          </div>
-                          <div className="pb-7">
-                            <p className="text-white font-sans font-black italic uppercase text-sm tracking-wide mb-1">
-                              {phase.label}
-                            </p>
-                            <p className="text-gray-500 text-xs leading-relaxed">{phase.detail}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Col 3: Achievements */}
-                <div className="pl-8 pb-16">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="w-6 h-px bg-red-600" />
-                    <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-red-500">Achievements</span>
-                  </div>
-                  <ul className="space-y-4">
-                    {active.achievements.map((a, i) => (
-                      <li key={i} className="flex gap-4 items-start">
-                        <span className="text-red-600 text-lg leading-none mt-0.5 shrink-0">◆</span>
-                        <span className="text-gray-300 text-sm leading-relaxed">{a}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Nav arrows */}
-                  <div className="flex gap-3 mt-12">
-                    <button
-                      onClick={() => {
-                        const prev = journeyData[activeIdx - 1];
-                        if (prev) setActiveYear(prev.year);
-                      }}
-                      disabled={activeIdx === 0}
-                      className="w-10 h-10 border border-white/20 flex items-center justify-center text-white/40 hover:border-red-600 hover:text-red-600 disabled:opacity-20 transition-all"
-                    >
-                      ←
-                    </button>
-                    <button
-                      onClick={() => {
-                        const next = journeyData[activeIdx + 1];
-                        if (next) setActiveYear(next.year);
-                      }}
-                      disabled={activeIdx === journeyData.length - 1}
-                      className="w-10 h-10 border border-white/20 flex items-center justify-center text-white/40 hover:border-red-600 hover:text-red-600 disabled:opacity-20 transition-all"
-                    >
-                      →
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Red marquee strip */}
-            <div className="bg-red-600 py-4 overflow-hidden -rotate-[0.5deg] w-[102%] -ml-[1%]">
-              <div className="flex gap-12 whitespace-nowrap animate-marquee font-sans font-black italic uppercase text-white text-sm tracking-widest">
-                {[...Array(6)].map((_, i) => (
-                  <React.Fragment key={i}>
-                    <span>{active.year}</span>
-                    <span>•</span>
-                    <span>{active.title}</span>
-                    <span>•</span>
-                    <span>MIST BLITZ</span>
-                    <span>•</span>
-                    <span>Formula Student</span>
-                    <span>•</span>
-                  </React.Fragment>
+              <div className="flex gap-2">
+                {seasons.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActive(i)}
+                    className={`transition-all duration-300 ${
+                      active === i ? "w-8 h-1 bg-red-600" : "w-2 h-1 bg-white/20 hover:bg-white/40"
+                    }`}
+                  />
                 ))}
               </div>
+
+              <button
+                onClick={() => setActive((p) => Math.min(seasons.length - 1, p + 1))}
+                disabled={active === seasons.length - 1}
+                className="flex items-center gap-3 text-white/30 hover:text-white disabled:opacity-20 transition-colors group"
+              >
+                <span className="font-mono text-xs uppercase tracking-wider hidden md:block">
+                  {active < seasons.length - 1 ? seasons[active + 1].year : ""}
+                </span>
+                <span className="w-10 h-10 border border-white/20 group-hover:border-red-600 flex items-center justify-center transition-colors">
+                  →
+                </span>
+              </button>
             </div>
-          </motion.section>
-        )}
+          </div>
+        </motion.div>
       </AnimatePresence>
 
-      {/* ── STATS STRIP ── */}
-      <section className="bg-zinc-950 border-t border-white/5 py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
-            {[
-              { value: "4", label: "Seasons", sub: "2021 – 2024" },
-              { value: "3+", label: "Prototypes", sub: "Fully in-house" },
-              { value: "50+", label: "Engineers", sub: "Peak team size" },
-              { value: "FSC", label: "Competition", sub: "Formula Student China" },
-            ].map((s, i) => (
-              <div key={i} className={`px-10 py-10 ${i < 3 ? "border-r border-white/5" : ""}`}>
-                <p className="text-5xl md:text-6xl font-sans font-black italic text-red-600 leading-none mb-2">
-                  {s.value}
-                </p>
-                <p className="text-white font-sans font-black italic uppercase text-lg tracking-tight mb-1">
-                  {s.label}
-                </p>
-                <p className="text-white/30 text-xs font-mono uppercase tracking-widest">{s.sub}</p>
-              </div>
-            ))}
-          </div>
+      {/* ══ STATS STRIP ══ */}
+      <div className="border-t border-white/5 bg-[#0f0f0f]">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5">
+          {[
+            { n: "4", l: "Seasons", s: "2021 – 2024" },
+            { n: "3+", l: "Prototypes", s: "100% in-house" },
+            { n: "50+", l: "Engineers", s: "Peak team size" },
+            { n: "FSC", l: "China", s: "International competition" },
+          ].map((s, i) => (
+            <div key={i} className="px-10 py-12">
+              <p className="font-sans font-black italic text-5xl text-red-600 leading-none mb-2">{s.n}</p>
+              <p className="font-sans font-black italic uppercase text-lg text-white mb-1">{s.l}</p>
+              <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/25">{s.s}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
 
       <Footer />
-
-      <style jsx global>{`
-        @keyframes slow-zoom {
-          0% { transform: scale(1); }
-          100% { transform: scale(1.1); }
-        }
-        .animate-slow-zoom {
-          animation: slow-zoom 20s infinite alternate linear;
-        }
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          display: inline-flex;
-          animation: marquee 18s linear infinite;
-        }
-      `}</style>
     </div>
   );
-};
-
-export default OurJourneyPage;
+}
