@@ -22,7 +22,7 @@ const DeptCard = forwardRef(function DeptCard(
           src={image}
           alt={title}
           fill
-          className="object-cover   group-hover:scale-105 transition-all duration-1000 ease-out brightness-105 group-hover:brightness-100"
+          className="object-cover opacity-100 group-hover:opacity-30 group-hover:scale-105 transition-all duration-1000 ease-out brightness-105 group-hover:brightness-90"
         />
         {/* Dynamic Gradient Mask */}
         <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
@@ -34,6 +34,13 @@ const DeptCard = forwardRef(function DeptCard(
 
       {/* 3. CENTER CONTENT CONTAINER */}
       <div className="absolute inset-0 z-30 flex flex-col justify-end p-8">
+
+        {/* Hover title: small and centered */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <h4 className="text-[11px] md:text-xs font-black italic uppercase tracking-[0.18em] text-white text-center px-4">
+            {title}
+          </h4>
+        </div>
         
         {/* Floating Watermark Role (Visible on hover) */}
         <div className="absolute top-1/2 left-8 -translate-y-1/2 opacity-0 group-hover:opacity-10 transition-all duration-700 pointer-events-none">
@@ -41,9 +48,9 @@ const DeptCard = forwardRef(function DeptCard(
         </div>
 
         {/* Title & Static Info */}
-        <div className="relative space-y-2">
+        <div className="relative space-y-2 transition-opacity duration-500 group-hover:opacity-0">
           
-          <h3 className="text-2xl border-l-4 border-l-red-500 p-2 font-black italic font-sans uppercase  text-white transition-all duration-500 ">
+          <h3 className="text-2xl p-2 font-black italic font-sans uppercase text-white transition-all duration-500 ">
             {title}
           </h3>
         </div>
