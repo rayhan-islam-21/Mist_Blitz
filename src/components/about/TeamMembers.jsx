@@ -209,7 +209,7 @@ const TeamMembers = () => {
         </div>
 
         {/* ========== BESPOKE CAPTAIN SECTION ========== */}
-        <div className="relative mb-32 md:mb-64 flex flex-col items-center">
+        <div className="relative mb-16 md:mb-24 flex flex-col items-center">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-[600px] h-[300px] md:h-[600px] bg-red-600/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
 
           <div className="relative z-10 text-center mb-10">
@@ -260,15 +260,10 @@ const TeamMembers = () => {
             </div>
           </div>
 
-          <div className="mt-12 md:mt-16 flex flex-col items-center">
-            <div className="w-px h-16 md:h-24 bg-gradient-to-b from-red-600 to-transparent relative">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-600 rounded-full animate-ping" />
-            </div>
-          </div>
         </div>
 
         {/* COMMAND CENTER GRID */}
-        <div className="mb-32 md:mb-48">
+        <div className="mb-24 md:mb-32">
           <div className="flex items-center gap-4 mb-10 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-black text-white uppercase italic tracking-tighter">Team Lead</h2>
             <div className="h-px flex-grow bg-gradient-to-r from-red-600 to-transparent" />
