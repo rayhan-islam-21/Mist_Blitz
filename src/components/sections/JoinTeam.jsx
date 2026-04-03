@@ -6,7 +6,7 @@ import { AnimatedBeam } from "@/components/ui/animated-beam";
 import DeptCard from "../Deptcard";
 import { motion } from "framer-motion";
 import Button from "../ui/retro-btn";
-import { Activity, Cpu, LayoutPanelLeft, ShieldCheck, Zap } from "lucide-react";
+import { Cpu, LayoutPanelLeft, ShieldCheck, Zap } from "lucide-react";
 
 const technicalTeams = [
   {
@@ -137,12 +137,6 @@ export default function JoinBlitzTeam() {
       />
 
       <div className="relative z-20 mb-20 text-center px-4">
-        <div className="flex items-center justify-center gap-3 mb-6">
-          <Activity size={16} className="text-red-600 animate-pulse" />
-          <span className="text-[10px] font-mono tracking-[0.5em] text-red-600 uppercase bg-red-600/10 px-3 py-1">
-            Blitz_Core_Team
-          </span>
-        </div>
         <motion.h2
           initial={{ y: 60, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
