@@ -36,8 +36,8 @@ const DeptCard = forwardRef(function DeptCard(
       <div className="absolute inset-0 z-30 p-5">
 
         {/* Heading: small + centered by default, moves to top on hover */}
-        <div className="absolute z-40 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:left-4 group-hover:top-4 group-hover:translate-x-0 group-hover:translate-y-0 right-auto group-hover:right-4 transition-all duration-500">
-          <h3 className="text-[11px] md:text-xs group-hover:text-lg font-black italic font-sans uppercase text-white leading-tight text-center group-hover:text-left tracking-[0.16em] group-hover:tracking-normal">
+        <div className="absolute z-40 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 group-hover:opacity-0">
+          <h3 className="text-[11px] md:text-xs font-black italic font-sans uppercase text-white leading-tight text-center tracking-[0.16em]">
             {title}
           </h3>
         </div>
