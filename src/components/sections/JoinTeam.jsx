@@ -120,13 +120,13 @@ export default function JoinBlitzTeam() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const RADIUS_X = 630;
-  const RADIUS_Y = 630;
-  const CARD_W = 280;
-  const CARD_H = 320;
+  const RADIUS_X = 420;
+  const RADIUS_Y = 420;
+  const CARD_W = 200;
+  const CARD_H = 220;
 
   return (
-    <section className="relative selection:bg-red-600 selection:text-white min-h-screen py-24 md:py-20 bg-[#050505] overflow-hidden flex flex-col items-center border-t border-white/5">
+    <section className="relative selection:bg-red-600 selection:text-white py-16 md:py-20 bg-[#050505] overflow-hidden flex flex-col items-center border-t border-white/5">
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
@@ -146,7 +146,7 @@ export default function JoinBlitzTeam() {
           initial={{ y: 60, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
-          className="text-5xl md:text-[9rem] font-black text-white font-sans italic leading-[0.8] tracking-tighter uppercase"
+          className="text-5xl md:text-[7rem] font-black text-white font-sans italic leading-[0.8] tracking-tighter uppercase"
         >
           TEAM <span className="text-red-600">BLITZ</span>
         </motion.h2>
@@ -169,7 +169,7 @@ export default function JoinBlitzTeam() {
       {!isMobile && (
         <div
           ref={containerRef}
-          className="relative w-full max-w-450 h-450 flex items-center justify-center"
+          className="relative w-full max-w-4xl h-[900px] flex items-center justify-center"
         >
           <div className="absolute top-0 left-10 p-6  font-mono text-[9px] text-gray-500 uppercase"></div>
 

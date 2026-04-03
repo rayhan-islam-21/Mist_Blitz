@@ -4,85 +4,127 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import Button from "../ui/retro-btn";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const [systemTime, setSystemTime] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date();
-      setSystemTime(now.toLocaleTimeString("en-US", { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-    }, 1000);
-    return () => clearInterval(timer);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const navItems = [
-    { id: "01", name: "Home", href: "/" },
-    { id: "02", name: "About", href: "/about" },
-    { id: "03", name: "Our Journey", href: "/our-journey" },
-    { id: "04", name: "Teams", href: "/team" },
-    { id: "05", name: "Our Cars", href: "/our-cars" },
-    { id: "06", name: "Sponsors", href: "/sponsors" },
-    { id: "07", name: "Gallery", href: "/gallery" },
-    { id: "08", name: "Support Us", href: "/support-us" },
-    { id: "09", name: "Join Us", href: "/join-us" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Our Journey", href: "/our-journey" },
+    { name: "Teams", href: "/team" },
+    { name: "Our Cars", href: "/our-cars" },
+    { name: "Sponsors", href: "/sponsors" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Support Us", href: "/support-us" },
+    { name: "Join Us", href: "/join-us" },
   ];
 
   return (
     <>
-      <div className="absolute top-0 left-0 w-full h-24 flex justify-between items-start px-6 md:px-12 pt-6 md:pt-10 z-140 pointer-events-none">
-        <div className="flex gap-3 md:gap-6 items-center pointer-events-auto">
-          <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-2 md:gap-4 group">
-              <Link href="/">
-                <Image src={'https://res.cloudinary.com/dnrubj8x4/image/upload/v1771498710/hero_q5f7az.png'} alt="BLITZ" width={100} height={40} className="brightness-200 contrast-125 md:w-30 md:h-14" priority />
-              </Link>
+      <nav
+        className={`fixed top-0 left-0 w-full z-[150] transition-all duration-300 ${
+          scrolled ? "bg-black/95 backdrop-blur-md border-b border-white/10" : "bg-black/60 backdrop-blur-sm"
+        }`}
+      >
+        <div className="max-w-screen-2xl mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-18">
+
+          {/* LEFT: Logo */}
+          <Link href="/" className="flex items-center gap-2 shrink-0">
+            <div className="relative bg-black/50 px-2 py-1">
+              <Image
+                src="https://res.cloudinary.com/dnrubj8x4/image/upload/v1771498710/hero_q5f7az.png"
+                alt="MIST BLITZ"
+                width={130}
+                height={52}
+                className="brightness-200 contrast-125 w-28 h-auto md:w-36"
+                priority
+              />
             </div>
+          </Link>
+
+          {/* CENTER: Nav links (desktop) */}
+          <div className="hidden lg:flex items-center gap-0">
+            {navItems.map((item) => {
+              const active = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`relative px-3 xl:px-4 py-5 text-[11px] xl:text-[12px] font-black uppercase tracking-wider transition-all duration-200 group ${
+                    active ? "text-white" : "text-white/50 hover:text-white"
+                  }`}
+                >
+                  {item.name}
+                  <span
+                    className={`absolute bottom-0 left-0 h-[2px] bg-red-600 transition-all duration-300 ${
+                      active ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
+                </Link>
+              );
+            })}
           </div>
-        </div>
 
-        {/* RIGHT: Time & Initialize */}
-        <div className="flex gap-4 md:gap-10 pointer-events-auto items-start">
-          <Button  href="/join" className="relative py-3.5 px-4 md:px-6 bg-red-600 text-white font-sans text-[10px] md:text-[14px] font-black flex items-center justify-center rounded-sm -skew-x-8  hover:bg-red-700 hover:text-white transition-all duration-300">
-            <Link href="/contact">Contact Us</Link>
-          </Button>
-        </div>
-      </div>
+          {/* RIGHT: Contact button + mobile toggle */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/contact"
+              className="hidden sm:inline-flex items-center bg-red-600 text-white font-black uppercase text-[11px] xl:text-[12px] tracking-wider px-4 xl:px-5 py-2.5 hover:bg-red-700 transition-colors duration-200 -skew-x-6"
+            >
+              <span className="skew-x-6">Contact Us</span>
+            </Link>
 
-
-      <nav className="fixed inset-0 pointer-events-none z-150">
-        
-      
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-end gap-1 md:gap-1 pointer-events-auto pr-4 md:pr-8">
-          {navItems.map((item) => {
-            const active = pathname === item.href;
-            return (
-              <Link key={item.id} href={item.href} className="group relative flex items-center gap-3 md:gap-6 py-2 md:py-3">
-                <div className="flex flex-col items-end">
-                  <span className={`text-base md:text-xl font-sans italic font-black tracking-tighter transition-all duration-500 uppercase ${
-                    active ? "text-white scale-110 pr-0" : "text-white/10 group-hover:text-red-600 group-hover:pr-1"
-                  }`}>
-                    {item.name}
-                  </span>
-                </div>
-                
-                <div className={`w-0.5 md:w-1 h-10 md:h-14 transition-all duration-700 ${
-                  active ? "bg-red-600 shadow-[0_0_15px_#ff0000]" : "bg-white/5 group-hover:bg-red-600/40"
-                }`} />
-              </Link>
-            );
-          })}
-        </div>
-
-       
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05] hidden sm:block">
-          <div className="relative w-32 h-32 md:w-48 md:h-48 border border-white/20 rounded-full flex items-center justify-center">
-             <div className="w-1.5 h-1.5 bg-red-600 rotate-45" />
+            {/* Mobile menu toggle */}
+            <button
+              className="lg:hidden text-white p-2"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile Dropdown Menu */}
+      {menuOpen && (
+        <div className="fixed top-16 left-0 w-full bg-black/98 backdrop-blur-md z-[149] border-b border-white/10 lg:hidden">
+          <div className="flex flex-col py-4 px-6">
+            {navItems.map((item) => {
+              const active = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`py-3 text-sm font-black uppercase tracking-wider border-b border-white/5 transition-colors ${
+                    active ? "text-red-500" : "text-white/60 hover:text-white"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
+            <Link
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+              className="mt-4 bg-red-600 text-white font-black uppercase text-sm tracking-wider px-5 py-3 text-center hover:bg-red-700 transition-colors"
+            >
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      )}
     </>
   );
 };
