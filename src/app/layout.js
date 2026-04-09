@@ -1,6 +1,6 @@
 import AuthProvider from "@/context/Authprovider";
 import "./globals.css";
-import { Viga, Manrope, Space_Mono } from "next/font/google";
+import { Viga } from "next/font/google";
 
 // Display / headings — bold condensed, very motorsport
 const oswald = Viga({
@@ -8,22 +8,6 @@ const oswald = Viga({
   weight: ["400"],
   style: ["normal"],
   variable: "--font-oswald",
-  display: "swap",
-});
-
-// Body text — clean, readable
-const barlow = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-barlow",
-  display: "swap",
-});
-
-// Technical labels / mono data
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-mono",
   display: "swap",
 });
 
@@ -36,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${oswald.variable} ${barlow.variable} ${spaceMono.variable} bg-black text-white`}
+        className={`${oswald.variable} bg-black text-white`}
       >
         <AuthProvider>{children}</AuthProvider>
       </body>
