@@ -1,12 +1,12 @@
 import AuthProvider from "@/context/Authprovider";
 import "./globals.css";
-import { Quantico, Manrope, Space_Mono } from "next/font/google";
+import { Viga, Manrope, Space_Mono } from "next/font/google";
 
 // Display / headings — bold condensed, very motorsport
-const oswald = Quantico({
+const oswald = Viga({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+  weight: ["400"],
+  style: ["normal"],
   variable: "--font-oswald",
   display: "swap",
 });
