@@ -6,7 +6,7 @@ import { Saira_Condensed, Manrope, Space_Mono } from "next/font/google";
 const oswald = Saira_Condensed({
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   variable: "--font-oswald",
   display: "swap",
 });
