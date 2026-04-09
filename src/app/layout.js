@@ -1,11 +1,10 @@
 import AuthProvider from "@/context/Authprovider";
 import "./globals.css";
-import { Rajdhani, Manrope, Space_Mono } from "next/font/google";
+import { Russo_One, Manrope, Space_Mono } from "next/font/google";
 
 // Display / headings — bold condensed, very motorsport
-const oswald = Rajdhani({
+const oswald = Russo_One({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   variable: "--font-oswald",
   display: "swap",
 });

@@ -68,7 +68,7 @@ select {
 }
 
 @theme inline {
-  --font-sans: var(--font-oswald), "Rajdhani", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-oswald), "Russo One", ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-barlow), "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-space-mono), "Space Mono", ui-monospace, monospace;
   --radius-sm: calc(var(--radius) - 4px);
