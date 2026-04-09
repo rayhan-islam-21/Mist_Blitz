@@ -33,7 +33,7 @@ export default function PartnersScroll() {
   return (
     <section
       ref={containerRef}
-      className="relative selection:text-white selection:bg-red-600 bg-[#050505] max-w-7xl mx-auto overflow-hidden py-24 border-t border-white/5"
+      className="relative selection:text-white selection:bg-red-600 bg-[#050505] max-w-7xl mx-auto overflow-hidden py-20 border-t border-white/5"
     >
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -44,7 +44,7 @@ export default function PartnersScroll() {
       />
 
       <div className="max-w-450 mx-auto px-6 relative z-10">
-        <div className="flex flex-col gap-2 mb-20">
+        <div className="flex flex-col gap-2 mb-10">
           <motion.h2
             initial={{ y: 60, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -52,7 +52,7 @@ export default function PartnersScroll() {
             className="text-5xl font-sans tracking-tighter md:text-[9rem] font-black uppercase italic leading-none"
           >
             Our <br />
-            <span className="text-red-600">Partners</span>!
+            <span className="text-red-600">Sponsers</span>!
           </motion.h2>
         </div>
         <div className="relative">
@@ -65,7 +65,7 @@ export default function PartnersScroll() {
                 logos={sponsorLogos}
                 speed={60}
                 direction="left"
-                logoHeight={280}
+                logoHeight={220}
                 gap={40}
                 hoverSpeed={0}
                 scaleOnHover
@@ -81,7 +81,7 @@ export default function PartnersScroll() {
           <p className="text-2xl md:text-4xl font-sans font-black italic uppercase leading-none text-white mb-6">
             The fuel behind <span className="text-red-600">Furiosa 1.0</span>
           </p>
-          <p className=" text-balance font-sans gap-10 text-gray-300 text-sm font-mono md:text-sm  font-normal  leading-relaxed">
+          <p className="text-balance font-sans gap-10 text-gray-300 text-sm md:text-sm font-normal leading-relaxed">
             Our partners provide the high-precision hardware and strategic
             resources required to compete at the edge of physics. They don't
             just sponsor; they engineer the future with us.
