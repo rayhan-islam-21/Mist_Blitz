@@ -5,6 +5,7 @@ import { Russo_One, Manrope, Space_Mono } from "next/font/google";
 // Display / headings — bold condensed, very motorsport
 const oswald = Russo_One({
   subsets: ["latin"],
+  weight: ["400"],
   variable: "--font-oswald",
   display: "swap",
 });
