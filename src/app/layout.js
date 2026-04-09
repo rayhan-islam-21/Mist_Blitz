@@ -1,11 +1,12 @@
 import AuthProvider from "@/context/Authprovider";
 import "./globals.css";
-import { Russo_One, Manrope, Space_Mono } from "next/font/google";
+import { Barlow_Condensed, Manrope, Space_Mono } from "next/font/google";
 
 // Display / headings — bold condensed, very motorsport
-const oswald = Russo_One({
+const oswald = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
   variable: "--font-oswald",
   display: "swap",
 });
