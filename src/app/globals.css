@@ -173,8 +173,9 @@ select {
   p {
     font-family: var(--font-body) !important;
     font-weight: 400 !important;
-    line-height: 1.7;
-    letter-spacing: 0.01em;
+    font-size: 1.05rem !important;
+    line-height: 1.7 !important;
+    letter-spacing: 0.01em !important;
   }
   li {
     font-family: var(--font-body);
