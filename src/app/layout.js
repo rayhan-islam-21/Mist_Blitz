@@ -1,12 +1,12 @@
 import AuthProvider from "@/context/Authprovider";
 import "./globals.css";
-import { Saira_Condensed, Manrope, Space_Mono } from "next/font/google";
+import { Quantico, Manrope, Space_Mono } from "next/font/google";
 
 // Display / headings — bold condensed, very motorsport
-const oswald = Saira_Condensed({
+const oswald = Quantico({
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  style: ["normal"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
   variable: "--font-oswald",
   display: "swap",
 });
