@@ -191,6 +191,11 @@ select {
 }
 
 @layer components {
+  .body-font {
+    font-family: var(--font-body) !important;
+    font-style: normal !important;
+  }
+
   .body-copy {
     font-family: var(--font-body) !important;
     font-weight: 400 !important;
