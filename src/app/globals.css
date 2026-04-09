@@ -191,6 +191,16 @@ select {
 }
 
 @layer components {
+  .body-copy {
+    font-family: var(--font-body) !important;
+    font-weight: 400 !important;
+    font-size: 1.05rem !important;
+    line-height: 1.7 !important;
+    letter-spacing: 0.01em !important;
+    font-style: normal !important;
+    text-transform: none !important;
+  }
+
   .cta-btn {
     @apply inline-flex items-center justify-center gap-2 min-h-12 px-8 py-3 text-sm md:text-base font-black uppercase tracking-[0.18em] transition-all duration-200;
     min-width: 12rem;

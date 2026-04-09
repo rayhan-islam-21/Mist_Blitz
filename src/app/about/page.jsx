@@ -28,7 +28,7 @@ const About = () => {
           <h1 className="text-6xl md:text-8xl font-sans italic font-black text-white tracking-normal uppercase">
             About <span className="text-red-600">blitz</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mt-6 font-light">
+          <p className="body-copy text-gray-400 max-w-2xl mx-auto mt-6">
             We are a group of passionate engineers from MIST, dedicated to
             pushing the boundaries of automotive excellence through the Formula
             Student challenge.
@@ -48,7 +48,7 @@ const About = () => {
               <h2 className="text-3xl md:text-5xl uppercase text-white font-sans font-black italic mb-6">
                 Building More Than <span className="text-red-600">Just Race Cars.</span>
               </h2>
-              <p className="text-gray-400 leading-relaxed mb-6">
+              <p className="body-copy text-gray-400 mb-6">
                 Founded at the Military Institute of Science and Technology,
                 MIST Blitz represents the pinnacle of student engineering.
                 Our journey isn&apos;t just about the finish line; it&apos;s about the
@@ -61,11 +61,11 @@ const About = () => {
               <div className="space-y-6 mb-8">
                 <div className="border-l-2 border-red-600 pl-4">
                   <h4 className="text-white font-black uppercase text-sm tracking-wider mb-1">Vision</h4>
-                  <p className="text-gray-400 text-sm">To become Bangladesh&apos;s leading Formula Student team, recognized globally for engineering excellence and innovation.</p>
+                  <p className="body-copy text-gray-400 text-sm">To become Bangladesh&apos;s leading Formula Student team, recognized globally for engineering excellence and innovation.</p>
                 </div>
                 <div className="border-l-2 border-white/20 pl-4">
                   <h4 className="text-white font-black uppercase text-sm tracking-wider mb-1">Mission</h4>
-                  <p className="text-gray-400 text-sm">To develop world-class engineers through hands-on, competitive, real-world experience in vehicle design and manufacturing.</p>
+                  <p className="body-copy text-gray-400 text-sm">To develop world-class engineers through hands-on, competitive, real-world experience in vehicle design and manufacturing.</p>
                 </div>
               </div>
 
@@ -110,11 +110,11 @@ const About = () => {
               </h2>
               <div className="grid md:grid-cols-2 gap-12">
                 <div>
-                  <p className="text-gray-400 leading-relaxed mb-6">
+                  <p className="body-copy text-gray-400 mb-6">
                     Formula Student (also known as Formula SAE) is the world&apos;s largest and most established engineering
                     design competition for university students. Teams design, build, and race a small formula-style race car.
                   </p>
-                  <p className="text-gray-400 leading-relaxed">
+                  <p className="body-copy text-gray-400">
                     The competition is not just about speed — judges evaluate engineering design, cost analysis, business
                     planning, and dynamic performance. It prepares students for real-world engineering careers.
                   </p>
@@ -155,12 +155,12 @@ const About = () => {
               </h2>
               <div className="grid md:grid-cols-2 gap-12">
                 <div>
-                  <p className="text-gray-400 leading-relaxed mb-6">
+                  <p className="body-copy text-gray-400 mb-6">
                     The Military Institute of Science and Technology (MIST) is one of Bangladesh&apos;s leading engineering
                     universities, offering world-class facilities and a rigorous academic environment. MIST provides
                     the foundation for our team&apos;s technical capabilities.
                   </p>
-                  <p className="text-gray-400 leading-relaxed mb-6">
+                  <p className="body-copy text-gray-400 mb-6">
                     Our team benefits from the support of the Mechanical and Electrical engineering departments,
                     access to workshops, CAD labs, and a community of driven engineering students.
                   </p>

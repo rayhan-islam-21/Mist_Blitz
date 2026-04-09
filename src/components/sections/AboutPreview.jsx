@@ -68,7 +68,7 @@ const AboutPreview = () => {
                 fill
                 className="object-cover group-hover:scale-105 transition-all duration-1000"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
             </div>
           </div>
         </div>
@@ -87,14 +87,14 @@ const AboutPreview = () => {
               >
                 OUR <span className="text-red-600">ORIGIN</span>
               </motion.h2>
-              <div className="grid md:grid-cols-2 text-balance font-sans gap-10 text-gray-300 text-sm md:text-lg leading-relaxed font-normal">
-                <p>
+              <div className="grid md:grid-cols-2 text-balance gap-10 text-gray-300">
+                <p className="body-copy text-gray-300">
                   Founded in 2024, MIST BLITZ was established to bridge the gap
                   between academic theory and real-world motorsport engineering.
                   The team provides MIST students with hands-on experience in
                   vehicle design, manufacturing, testing, and validation.
                 </p>
-                <p>
+                <p className="body-copy text-gray-300">
                   Our first mission,{" "}
                   <span className="text-white">Formula Student China</span>,
                   operating under Formula Student regulations, the team focuses
@@ -104,7 +104,7 @@ const AboutPreview = () => {
                 </p>
               </div>
             </div>
-            <div className="lg:w-1/3 w-full bg-gradient-to-br from-white/5 to-transparent p-10 border-l-4 border-red-600 backdrop-blur-md">
+            <div className="lg:w-1/3 w-full bg-linear-to-br from-white/5 to-transparent p-10 border-l-4 border-red-600 backdrop-blur-md">
               <h4 className="font-black uppercase tracking-widest text-white text-xs mb-6">
                 TEAM PHILOSOPHY
               </h4>
@@ -125,7 +125,7 @@ const AboutPreview = () => {
                 fill
                 className="object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-[2s]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-transparent to-transparent" />
               <div className="absolute bottom-12 left-12 right-12">
                 <h3 className="md:text-7xl text-4xl font-black italic uppercase mb-8 tracking-tighter text-white">
                   FURIOSA 1.0
