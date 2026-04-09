@@ -161,14 +161,29 @@ select {
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    font-weight: 400;
     font-feature-settings: "kern" 1, "liga" 1;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
-    letter-spacing: -0.01em;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
   }
-  /* Paragraphs, spans, labels — Barlow */
-  p, span, li, a, button, input, textarea, select, label {
+  p, li {
     font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+  span, a, button, input, textarea, select, label {
+    font-family: var(--font-body);
+  }
+}
+
+@layer components {
+  .cta-btn {
+    @apply inline-flex items-center justify-center gap-2 min-h-12 px-8 py-3 text-sm md:text-base font-black uppercase tracking-[0.18em] transition-all duration-200;
+    min-width: 12rem;
   }
 }

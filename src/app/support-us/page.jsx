@@ -68,7 +68,7 @@ const SupportUsPage = () => {
             <Image src="/bg2.jpg" fill alt="Support Us" className="object-cover opacity-30" priority />
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/30 to-black" />
         <div className="relative z-10 text-center px-6">
           <p className="text-red-500 uppercase tracking-[0.4em] text-xs font-bold mb-4">Partner With Us</p>
           <h1 className="text-6xl md:text-9xl font-sans italic font-black uppercase tracking-tighter leading-none">
@@ -79,7 +79,7 @@ const SupportUsPage = () => {
           </p>
           <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
             <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Scroll to Explore</span>
-            <div className="w-px h-12 bg-gradient-to-b from-red-600 to-transparent" />
+            <div className="w-px h-12 bg-linear-to-b from-red-600 to-transparent" />
           </div>
         </div>
       </section>
@@ -181,13 +181,13 @@ const SupportUsPage = () => {
             <a
               href="/sponsorship-proposal.pdf"
               download
-              className="bg-white text-red-600 font-black uppercase text-sm px-8 py-4 hover:bg-red-50 transition-colors duration-200"
+              className="cta-btn bg-white text-red-600 hover:bg-red-50"
             >
               Download Proposal (PDF)
             </a>
             <Link
               href="/contact"
-              className="border-2 border-white text-white font-black uppercase text-sm px-8 py-4 hover:bg-white hover:text-red-600 transition-colors duration-200"
+              className="cta-btn border-2 border-white text-white hover:bg-white hover:text-red-600"
             >
               Contact Us
             </Link>

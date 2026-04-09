@@ -191,7 +191,7 @@ const ContactPage = () => {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="w-full bg-red-600 text-white font-black uppercase text-sm py-4 hover:bg-red-700 transition-colors duration-200 disabled:opacity-50"
+                  className="cta-btn w-full bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
                 >
                   {status === "loading" ? "Sending..." : "Send Message"}
                 </button>

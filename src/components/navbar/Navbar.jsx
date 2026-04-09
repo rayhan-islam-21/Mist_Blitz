@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-[150] transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-150 transition-all duration-300 ${
           scrolled ? "bg-black/95 backdrop-blur-md border-b border-white/10" : "bg-black/60 backdrop-blur-sm"
         }`}
       >
@@ -66,7 +66,7 @@ const Navbar = () => {
                 >
                   {item.name}
                   <span
-                    className={`absolute bottom-0 left-0 h-[2px] bg-red-600 transition-all duration-300 ${
+                    className={`absolute bottom-0 left-0 h-0.5 bg-red-600 transition-all duration-300 ${
                       active ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   />
@@ -79,7 +79,7 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             <Link
               href="/contact"
-              className="hidden sm:inline-flex items-center bg-red-600 text-white font-black uppercase text-[11px] xl:text-[12px] tracking-wider px-4 xl:px-5 py-2.5 hover:bg-red-700 transition-colors duration-200 -skew-x-6"
+              className="cta-btn hidden sm:inline-flex bg-red-600 text-white text-[11px] xl:text-[12px] hover:bg-red-700 -skew-x-6"
             >
               <span className="skew-x-6">Contact Us</span>
             </Link>
@@ -98,7 +98,7 @@ const Navbar = () => {
 
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="fixed top-16 left-0 w-full bg-black/98 backdrop-blur-md z-[149] border-b border-white/10 lg:hidden">
+        <div className="fixed top-16 left-0 w-full bg-black/98 backdrop-blur-md z-149 border-b border-white/10 lg:hidden">
           <div className="flex flex-col py-4 px-6">
             {navItems.map((item) => {
               const active = pathname === item.href;
@@ -118,7 +118,7 @@ const Navbar = () => {
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
-              className="mt-4 bg-red-600 text-white font-black uppercase text-sm tracking-wider px-5 py-3 text-center hover:bg-red-700 transition-colors"
+              className="cta-btn mt-4 bg-red-600 text-white text-center hover:bg-red-700"
             >
               Contact Us
             </Link>

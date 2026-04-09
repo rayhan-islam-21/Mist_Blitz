@@ -19,7 +19,7 @@ export default function SponsorButton() {
   return (
     <button
       onClick={handleClick}
-      className="px-6 py-2 rounded bg-red-600 text-white font-semibold hover:bg-red-700 transition"
+      className="cta-btn rounded bg-red-600 text-white hover:bg-red-700"
     >
       Sponsor Us
     </button>
