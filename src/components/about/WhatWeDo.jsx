@@ -66,13 +66,13 @@ const WhatWeDo = () => {
                 {item.title}
               </h3>
               
-              <p className="body-copy text-gray-400 mb-8">
+              <p className="body-copy body-font text-gray-300 mb-8">
                 {item.description}
               </p>
 
               {/* LIST: BLUEPRINT STYLE */}
               <div className="space-y-4">
-                <div className="h-[1px] w-full bg-white/10" />
+                <div className="h-px w-full bg-white/10" />
                 <ul className="grid grid-cols-1 gap-3">
                   {item.list.map((li, i) => (
                     <li key={i} className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">
@@ -84,7 +84,7 @@ const WhatWeDo = () => {
               </div>
 
               {/* DECORATIVE BACKGROUND NUMBER */}
-              <span className="absolute bottom-4 right-6 text-7xl font-black text-white/[0.02] pointer-events-none group-hover:text-red-600/10 transition-colors">
+              <span className="absolute bottom-4 right-6 text-7xl font-black text-white/2 pointer-events-none group-hover:text-red-600/10 transition-colors">
                 0{index + 1}
               </span>
             </div>

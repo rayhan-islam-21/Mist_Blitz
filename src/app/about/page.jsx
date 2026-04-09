@@ -28,7 +28,7 @@ const About = () => {
           <h1 className="text-6xl md:text-8xl font-sans italic font-black text-white tracking-normal uppercase">
             About <span className="text-red-600">blitz</span>
           </h1>
-          <p className="body-copy text-gray-400 max-w-2xl mx-auto mt-6">
+          <p className="body-copy body-font text-gray-300 max-w-2xl mx-auto mt-6">
             We are a group of passionate engineers from MIST, dedicated to
             pushing the boundaries of automotive excellence through the Formula
             Student challenge.
