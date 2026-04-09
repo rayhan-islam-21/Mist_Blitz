@@ -66,7 +66,7 @@ const WhatWeDo = () => {
                 {item.title}
               </h3>
               
-              <p className="text-gray-400 text-sm leading-relaxed mb-8 font-medium">
+              <p className="body-copy text-gray-400 mb-8">
                 {item.description}
               </p>
 
