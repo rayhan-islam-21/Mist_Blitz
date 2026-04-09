@@ -176,6 +176,8 @@ select {
     font-size: 1.05rem !important;
     line-height: 1.7 !important;
     letter-spacing: 0.01em !important;
+    font-style: normal !important;
+    text-transform: none !important;
   }
   li {
     font-family: var(--font-body);
