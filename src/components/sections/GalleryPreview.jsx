@@ -95,15 +95,15 @@ export default function FormulaGallery() {
         </AnimatePresence>
 
         {/* Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-transparent to-transparent z-10" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#050505]/80 via-transparent to-transparent z-10" />
 
         {/* Speed lines top-right */}
         <div className="absolute top-0 right-0 w-1/2 h-full overflow-hidden z-10 pointer-events-none">
           {[...Array(4)].map((_, i) => (
             <div
               key={i}
-              className="absolute h-px bg-gradient-to-l from-transparent via-red-600/20 to-transparent"
+              className="absolute h-px bg-linear-to-l from-transparent via-red-600/20 to-transparent"
               style={{ top: `${25 + i * 18}%`, width: "80%", right: 0 }}
             />
           ))}
@@ -118,7 +118,7 @@ export default function FormulaGallery() {
         </div>
 
         {/* Progress bar — top */}
-        <div className="absolute top-0 left-0 w-full h-[2px] z-20">
+        <div className="absolute top-0 left-0 w-full h-0.5 z-20">
           <motion.div
             className="h-full bg-red-600"
             key={active}
@@ -144,7 +144,7 @@ export default function FormulaGallery() {
               transition={{ duration: 0.5 }}
             >
               <span className="inline-flex items-center gap-2 mb-4">
-                <span className="w-4 h-[2px] bg-red-600" />
+                <span className="w-4 h-0.5 bg-red-600" />
                 <span className="font-mono text-red-500 text-[10px] uppercase tracking-[0.4em]">
                   {cur.tag}
                 </span>
@@ -214,14 +214,14 @@ export default function FormulaGallery() {
               <button
                 key={s.id}
                 onClick={() => setActive(i)}
-                className={`relative shrink-0 h-full min-w-[100px] md:min-w-[140px] overflow-hidden transition-all duration-300 ${
+                className={`relative shrink-0 h-full min-w-25 md:min-w-35 overflow-hidden transition-all duration-300 ${
                   active === i ? "opacity-100" : "opacity-30 hover:opacity-60"
                 }`}
               >
                 <Image src={s.image} fill alt={s.title} className="object-cover" />
                 <div className="absolute inset-0 bg-black/40" />
                 {active === i && (
-                  <div className="absolute bottom-0 left-0 w-full h-[2px] bg-red-600" />
+                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-red-600" />
                 )}
                 <span className="absolute bottom-2 left-2 font-mono text-[8px] uppercase tracking-wider text-white/70">
                   {s.tag}
@@ -234,12 +234,12 @@ export default function FormulaGallery() {
           <div className="px-8 py-8 border-l border-white/5 shrink-0 flex items-center">
             <Link
               href="/our-journey"
-              className="flex items-center gap-3 group"
+              className="cta-btn border border-white/20 text-white/70 hover:text-white hover:border-red-600 group"
             >
-              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30 group-hover:text-red-500 transition-colors">
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/50 group-hover:text-white transition-colors">
                 Full Story
               </span>
-              <span className="w-8 h-8 border border-white/20 group-hover:border-red-600 group-hover:bg-red-600/10 flex items-center justify-center transition-all text-white/40 group-hover:text-white">
+              <span className="w-8 h-8 border border-white/20 group-hover:border-red-600 group-hover:bg-red-600/10 flex items-center justify-center transition-all text-white/50 group-hover:text-white">
                 →
               </span>
             </Link>

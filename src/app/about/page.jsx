@@ -169,9 +169,9 @@ const About = () => {
                       href="https://mist.ac.bd"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-red-500 font-black uppercase text-xs tracking-widest hover:text-red-400 transition-colors"
+                      className="cta-btn bg-transparent border border-red-500/60 text-red-500 hover:bg-red-600 hover:text-white"
                     >
-                      Visit MIST →
+                      Visit MIST
                     </Link>
                   </div>
                 </div>

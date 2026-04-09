@@ -68,8 +68,8 @@ select {
 }
 
 @theme inline {
-  --font-sans: var(--font-oswald), "Oswald", ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-barlow), "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-oswald), "Exo 2", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-barlow), "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-space-mono), "Space Mono", ui-monospace, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

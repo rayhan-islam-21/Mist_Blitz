@@ -1,19 +1,20 @@
 import AuthProvider from "@/context/Authprovider";
 import "./globals.css";
-import { Oswald, Barlow, Space_Mono } from "next/font/google";
+import { Exo_2, IBM_Plex_Sans, Space_Mono } from "next/font/google";
 
 // Display / headings — bold condensed, very motorsport
-const oswald = Oswald({
+const oswald = Exo_2({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
   variable: "--font-oswald",
   display: "swap",
 });
 
 // Body text — clean, readable
-const barlow = Barlow({
+const barlow = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-barlow",
   display: "swap",

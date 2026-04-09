@@ -43,7 +43,7 @@ export default function SimpleComingSoon() {
           />
           <button
             type="submit"
-            className="bg-white text-black font-bold py-3 rounded text-sm hover:bg-red-600 hover:text-white transition-colors uppercase tracking-widest"
+            className="cta-btn w-full rounded bg-white text-black hover:bg-red-600 hover:text-white"
           >
             Notify Me
           </button>

@@ -60,7 +60,7 @@ export default function JoinCTA() {
           className="relative md:inline-block flex justify-center items-center group"
         >
 
-          <button onClick={handleClick} className="cta-btn relative bg-white text-black mx-center italic hover:bg-red-600 hover:text-white gap-5 shadow-[16px_16px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-1">
+          <button onClick={handleClick} className="cta-btn relative min-h-14 py-4 md:py-5 bg-white text-black mx-center italic hover:bg-red-600 hover:text-white gap-5 shadow-[16px_16px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-1">
             SECURE PARTNERSHIP
             <MoveRight
               size={24}

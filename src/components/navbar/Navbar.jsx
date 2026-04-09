@@ -79,7 +79,7 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             <Link
               href="/contact"
-              className="cta-btn hidden sm:inline-flex bg-red-600 text-white text-[11px] xl:text-[12px] hover:bg-red-700 -skew-x-6"
+              className="cta-btn hidden sm:inline-flex min-h-10 min-w-0 px-6 py-2 bg-red-600 text-white text-[11px] xl:text-[12px] hover:bg-red-700 -skew-x-6"
             >
               <span className="skew-x-6">Contact Us</span>
             </Link>

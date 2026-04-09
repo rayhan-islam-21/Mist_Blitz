@@ -92,7 +92,7 @@ export default function PremiumPartners() {
     <div className="min-h-screen bg-[#050505] text-white selection:bg-red-500/30 font-mono overflow-x-hidden">
       {/* 1. HEADER */}
       <header className="pt-32 md:pt-40 pb-20 px-6 max-w-7xl mx-auto border-x border-white/5 relative">
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-red-600/50 to-transparent" />
+        <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-red-600/50 to-transparent" />
         <div className="flex flex-col md:flex-row justify-between items-end gap-8">
           <div className="space-y-4">
             <h1 className="text-6xl font-sans italic md:text-8xl font-black tracking-tighter leading-[0.8]">
@@ -114,10 +114,10 @@ export default function PremiumPartners() {
             <button
               key={tier.id}
               onClick={() => setActiveTier(tier)}
-              className={`flex-1 min-w-[150px] py-6 px-8 border-r border-white/5 transition-all relative group overflow-hidden ${
+              className={`flex-1 min-w-37.5 py-6 px-8 border-r border-white/5 transition-all relative group overflow-hidden ${
                 activeTier.id === tier.id
-                  ? "bg-white/[0.02]"
-                  : "hover:bg-white/[0.01]"
+                  ? "bg-white/2"
+                  : "hover:bg-white/1"
               }`}
             >
               <div className="relative z-10 flex items-center justify-between">
@@ -154,7 +154,7 @@ export default function PremiumPartners() {
             {activeTier.sponsors.map((sponsor) => (
               <div
                 key={sponsor.name}
-                className="group relative border border-white/5 bg-[#080808] p-8 md:p-12 hover:bg-white/[0.02] transition-colors"
+                className="group relative border border-white/5 bg-[#080808] p-8 md:p-12 hover:bg-white/2 transition-colors"
               >
                 <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-red-600/0 group-hover:border-red-600/50 transition-all" />
 
@@ -206,7 +206,7 @@ export default function PremiumPartners() {
         {/* 4. FOOTER STATUS */}
         <section className="mt-12 flex flex-col md:flex-row gap-1">
           {/* LEFT: WHY SPONSOR */}
-          <div className="flex-1 bg-white/[0.02] border border-white/5 p-8">
+          <div className="flex-1 bg-white/2 border border-white/5 p-8">
             <h4 className="text-[10px] font-black uppercase tracking-widest text-red-500">
               Partner With Us
             </h4>
@@ -245,7 +245,7 @@ export default function PremiumPartners() {
                 <a
                   href="/sponsorship-proposal.pdf"
                   download
-                  className="text-[9px] font-black uppercase tracking-widest border border-white/20 px-4 py-2 hover:border-red-500 hover:text-red-500 transition-all"
+                  className="cta-btn border border-white/20 text-white hover:border-red-500 hover:text-red-500"
                 >
                   Download Proposal (PDF)
                 </a>
@@ -257,7 +257,7 @@ export default function PremiumPartners() {
       </main>
 
       {/* 5. PERIPHERAL VIEWPORT BORDER */}
-      <div className="fixed inset-0 pointer-events-none border border-white/5 m-4 z-[100]" />
+      <div className="fixed inset-0 pointer-events-none border border-white/5 m-4 z-100" />
     </div>
   );
 }
