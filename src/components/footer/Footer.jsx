@@ -108,7 +108,7 @@ export default function Footer() {
                 </span>
               </div>
             </div>
-            <p className="text-gray-300 mb-6">
+            <p className="body-copy text-gray-300 mb-6">
               Engineering excellence on the racetrack. Join us in pushing the
               boundaries of innovation!
             </p>
@@ -166,15 +166,15 @@ export default function Footer() {
             <h4 className="text-2xl mb-6 text-yellow-400">Upcoming</h4>
             <div className="space-y-4 text-sm">
               <div className="border-l-4 border-blue-500 pl-4">
-                <p className="text-gray-400">Jan 15, 2025</p>
+                <p className="body-copy text-gray-400">Jan 15, 2025</p>
                 Team Recruitment
               </div>
               <div className="border-l-4 border-red-500 pl-4">
-                <p className="text-gray-400">Mar 20, 2025</p>
+                <p className="body-copy text-gray-400">Mar 20, 2025</p>
                 Car Launch Event
               </div>
               <div className="border-l-4 border-yellow-400 pl-4">
-                <p className="text-gray-400">Jun 10, 2025</p>
+                <p className="body-copy text-gray-400">Jun 10, 2025</p>
                 Formula Student UK
               </div>
             </div>
@@ -183,7 +183,7 @@ export default function Footer() {
           {/* Social Media */}
           <div>
             <h4 className="text-2xl mb-6 text-blue-500">Follow Us</h4>
-            <p className="text-gray-300 mb-6 text-sm">
+            <p className="body-copy text-gray-300 mb-6">
               Stay connected for the latest updates, photos, and race results!
             </p>
             <div className="flex flex-wrap gap-3">
@@ -223,7 +223,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-          <span>© 2024 MIST Blitz Formula Student Team</span>
+          <p className="body-copy">© 2024 MIST Blitz Formula Student Team</p>
           <div className="flex gap-3 mt-2 md:mt-0">
             <span className="px-3 py-1 bg-blue-500 border-2 border-white -rotate-2 text-xs uppercase tracking-wider text-white">
               Fast
@@ -241,7 +241,7 @@ export default function Footer() {
       {/* VERIFICATION MODAL - Styled to match your Comic/FDS UI */}
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-[500] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-500 flex items-center justify-center p-4">
             {/* Overlay with a heavier blur for focus */}
             <motion.div
               initial={{ opacity: 0 }}
