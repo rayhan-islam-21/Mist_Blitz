@@ -1,11 +1,11 @@
 import AuthProvider from "@/context/Authprovider";
 import "./globals.css";
-import { Barlow_Condensed, Manrope, Space_Mono } from "next/font/google";
+import { Saira_Condensed, Manrope, Space_Mono } from "next/font/google";
 
 // Display / headings — bold condensed, very motorsport
-const oswald = Barlow_Condensed({
+const oswald = Saira_Condensed({
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800", "900"],
+  weight: ["500", "600", "700", "800"],
   style: ["normal", "italic"],
   variable: "--font-oswald",
   display: "swap",
