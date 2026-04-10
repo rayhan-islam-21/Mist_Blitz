@@ -5,8 +5,8 @@ import Image from "next/image";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 import DeptCard from "../Deptcard";
 import { motion } from "framer-motion";
-import Button from "../ui/retro-btn";
-import { Cpu, LayoutPanelLeft, ShieldCheck, Zap } from "lucide-react";
+import Link from "next/link";
+import { Cpu, LayoutPanelLeft, ShieldCheck } from "lucide-react";
 
 const technicalTeams = [
   {
@@ -76,35 +76,6 @@ const nonTechnicalTeams = [
 
 const allDepts = [...technicalTeams, ...nonTechnicalTeams];
 
-const handleJoinClick = () => {
-  const email = "recruitment@mistblitz.com";
-  const subject = encodeURIComponent(
-    "RECRUITMENT_PHASE_2025 // [NAME] // [DEPT]"
-  );
-
-  const body = encodeURIComponent(
-    "FULL_NAME: \n" +
-      "STUDENT_ID: \n" +
-      "DEPARTMENT/MAJOR: \n" +
-      "LEVEL/TERM: \n\n" +
-      "TARGET_UNIT: [Select: SSB | Chassis | Aero | Powertrain | Electronics | Mgmt | Media]\n" +
-      "EXPERIENCE_LOG: [Years of experience or previous project involvements]\n\n" +
-      "CORE_COMPETENCIES:\n" +
-      "1. \n" +
-      "2. \n" +
-      "3. \n\n" +
-      "LINK_PORTFOLIO: [Link to GitHub / Behance / Drive]\n\n" +
-      "[Why do you want to join MIST BLITZ? Max 2 sentences]\n\n" +
-      "--------------------------------------------------\n" +
-      "REQUIRED_ATTACHMENTS:\n" +
-      "[X] CV_FORMAT_PDF\n" +
-      "[ ] PROJECT_PORTFOLIO\n" +
-      "--------------------------------------------------\n" +
-      "EOF_TRANSMISSION // END_OF_LOG"
-  );
-
-  window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-};
 
 export default function JoinBlitzTeam() {
   const containerRef = useRef(null);
@@ -244,15 +215,29 @@ export default function JoinBlitzTeam() {
         </div>
       )}
 
-      <div className="relative z-30 mt-30 md:mt-10 mb-14">
-        <Button
-          onClick={handleJoinClick}
-          className="cta-btn bg-red-600 text-white hover:bg-white hover:text-red-600 border-none transition-all group overflow-hidden -skew-x-6"
-        >
-          <span className="relative font-black uppercase text-lg md:text-xl tracking-[0.24em] italic skew-x-12 flex items-center gap-3">
-            <Zap className="fill-current" /> Join the Blitz
-          </span>
-        </Button>
+      <div className="relative z-30 w-full bg-red-600 py-16 px-6 mt-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-3xl md:text-5xl font-sans font-black italic uppercase text-white mb-4">
+            Ready to Join?
+          </h3>
+          <p className="text-red-100 mb-8 max-w-xl mx-auto">
+            Applications are open. Take the first step and become part of Bangladesh&apos;s premier Formula Student team.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/contact"
+              className="cta-btn bg-white text-red-600 hover:bg-red-50"
+            >
+              Apply via Contact Form
+            </Link>
+            <a
+              href="mailto:info@mistblitz.com"
+              className="cta-btn border-2 border-white text-white hover:bg-white hover:text-red-600"
+            >
+              Email Us Directly
+            </a>
+          </div>
+        </div>
       </div>
 
       <style jsx>{`
