@@ -24,6 +24,8 @@ select {
   letter-spacing: 0.01em;
 }
 :root {
+  --font-sans: var(--font-oswald), "Viga", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-oswald), "Viga", ui-sans-serif, system-ui, sans-serif;
   --blitz-yellow: #ffe600;
   --blitz-red: #e10600;
   --blitz-gray: #1e1e1e;
