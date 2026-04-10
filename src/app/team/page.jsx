@@ -18,12 +18,12 @@ const Page = () => {
                             src="/china4.jpg"
                             alt="Team Hero"
                             fill
-                            className="object-cover opacity-50"
+                            className="object-cover opacity-75"
                             priority
                         />
                     </div>
-                    <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent" />
-                    <div className="absolute inset-0 bg-linear-to-r from-black/70 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-r from-black/50 via-transparent to-transparent" />
 
                     <div className="relative z-10 px-6 md:px-16 pb-12">
                         <div className="flex items-center gap-3 mb-4">
