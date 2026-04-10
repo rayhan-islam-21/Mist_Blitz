@@ -1,5 +1,6 @@
-import { RoundedRedLoader } from "@/components/ui/center-loader";
 "use client";
+
+import { RoundedRedLoader } from "@/components/ui/center-loader";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
