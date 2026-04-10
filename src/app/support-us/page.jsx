@@ -5,27 +5,28 @@ import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import Image from "next/image";
 import Link from "next/link";
+import { Banknote, Wrench, Package, GraduationCap } from "lucide-react";
 
 const ways = [
   {
-    icon: "💰",
+    icon: Banknote,
     title: "Financial Support",
-    desc: "Direct funding helps us purchase materials, tools, machined components, and cover competition registration and travel costs.",
+    desc: "Building a Formula Student car from scratch demands significant investment. Your funding goes directly into raw materials, CNC machining, engine components, ECU systems, and international competition fees — from Formula Bharat to Formula Student China.",
   },
   {
-    icon: "⚙️",
+    icon: Wrench,
     title: "Technical Support",
-    desc: "Access to engineering expertise, simulation software, manufacturing facilities, or technical mentorship is invaluable to our development.",
+    desc: "Access to CAD/CAE software licenses (CATIA, ANSYS, SolidWorks), CNC machining facilities, welding equipment, and dyno testing infrastructure is critical to developing a competitive car. Technical partnerships directly elevate our engineering output.",
   },
   {
-    icon: "🔩",
+    icon: Package,
     title: "Materials & Parts",
-    desc: "Donations of raw materials — steel, aluminum, carbon fiber, electronics components — directly reduce our manufacturing costs.",
+    desc: "Donations of steel tubing, aluminum billets, carbon fiber prepreg, KTM powertrain components, brake calipers, and electronic hardware directly reduce our production costs and accelerate the build timeline for our next car.",
   },
   {
-    icon: "📚",
+    icon: GraduationCap,
     title: "Knowledge & Mentorship",
-    desc: "Industry professionals who can guide, review our designs, or share engineering knowledge help us grow as future engineers.",
+    desc: "Industry engineers who review our suspension geometry, aero packages, or business plan give us an unfair advantage. Your expertise helps our 50+ student engineers bridge the gap between university theory and real-world motorsport engineering.",
   },
 ];
 
@@ -34,26 +35,51 @@ const tiers = [
     name: "Bronze Partner",
     color: "border-amber-700",
     accent: "text-amber-600",
-    benefits: ["Logo on team website", "Social media mention", "Certificate of support"],
+    benefits: [
+      "Logo on team website",
+      "Social media mention",
+      "Certificate of partnership",
+      "Season update newsletter",
+    ],
   },
   {
     name: "Silver Partner",
     color: "border-gray-400",
     accent: "text-gray-300",
-    benefits: ["Logo on car bodywork", "All Bronze benefits", "Logo on team kit", "Feature post on social media"],
+    benefits: [
+      "All Bronze benefits",
+      "Logo on car bodywork",
+      "Logo on team race kit",
+      "Dedicated feature post",
+      "Competition day photos",
+    ],
   },
   {
     name: "Gold Partner",
     color: "border-yellow-400",
     accent: "text-yellow-400",
     featured: true,
-    benefits: ["Premium logo placement on car", "All Silver benefits", "Banner at competition", "Detailed impact report", "Dedicated press release"],
+    benefits: [
+      "All Silver benefits",
+      "Premium logo on car & trailer",
+      "Banner at competition paddock",
+      "Detailed season impact report",
+      "Press release on partnership",
+      "Team visit & factory showcase",
+    ],
   },
   {
     name: "Title Sponsor",
     color: "border-red-500",
     accent: "text-red-500",
-    benefits: ["Car named after sponsor", "All Gold benefits", "VIP event access", "Engineering presentation", "Co-branding rights"],
+    benefits: [
+      "All Gold benefits",
+      "Car named after your brand",
+      "Co-branding across all media",
+      "VIP access at competitions",
+      "Engineering design presentation",
+      "Recruitment pipeline access",
+    ],
   },
 ];
 
@@ -65,7 +91,7 @@ const SupportUsPage = () => {
       <main className="bg-[#0a0a0a]">
       {/* Hero */}
       <section className="relative w-full h-[70vh] overflow-hidden flex flex-col justify-end">
-        <Image src="/bg2.jpg" fill alt="Support Us" className="object-cover opacity-50 transition-all duration-700" priority />
+        <Image src="/china-tour.jpg" fill alt="Support Us" className="object-cover opacity-50 transition-all duration-700" priority />
         <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent" />
         <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a]/60 via-transparent to-transparent" />
         <div className="relative z-10 px-6 md:px-16 pb-12">
@@ -89,21 +115,23 @@ const SupportUsPage = () => {
               More Than a Sponsorship
             </h3>
             <p className="text-gray-400 leading-relaxed mb-6">
-              MIST Blitz is entirely student-run and student-funded. Every taka raised goes directly into building a
-              better race car and shaping better engineers. Your support doesn&apos;t just put a logo on a car — it sends
-              young engineers to the world stage.
+              MIST Blitz is Bangladesh&apos;s first internationally competing Formula Student team — entirely student-run,
+              student-funded, and built in-house at the Military Institute of Science and Technology. Founded in April 2024,
+              we competed at Formula Student China 2025 in Zhuhai against 76 international teams — becoming the first
+              Bangladeshi team to pass full scrutineering and complete endurance laps.
             </p>
             <p className="text-gray-400 leading-relaxed">
-              Formula Student is recognized globally as the premier engineering design competition for university students.
-              By backing us, you invest in Bangladesh&apos;s future engineering talent and gain visibility at an international level.
+              Your support doesn&apos;t just put a logo on a car — it backs 50+ engineers who are representing Bangladesh
+              on a global stage. We also took 1st place in Engineering Design CRM at Formula Bharat 2025. Every taka
+              raised goes directly into building a faster, smarter, more competitive machine.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
             {[
-              { value: "50+", label: "Engineers Trained" },
-              { value: "3", label: "Cars Built" },
-              { value: "4+", label: "Years of Innovation" },
-              { value: "Global", label: "Competition Stage" },
+              { value: "50+", label: "Active Engineers" },
+              { value: "2", label: "International Events" },
+              { value: "1st", label: "Formula Bharat Design" },
+              { value: "76", label: "Teams Competed Against" },
             ].map((s, i) => (
               <div key={i} className="border border-white/10 p-6 text-center">
                 <p className="text-3xl font-black text-red-600 font-sans italic">{s.value}</p>
@@ -124,7 +152,7 @@ const SupportUsPage = () => {
           <div className="grid md:grid-cols-2 gap-6">
             {ways.map((w, i) => (
               <div key={i} className="border border-white/10 p-8 hover:border-red-600/40 transition-colors duration-300">
-                <div className="text-3xl mb-4">{w.icon}</div>
+                <w.icon className="text-red-500 mb-4" size={28} strokeWidth={1.5} />
                 <h4 className="text-lg font-black uppercase italic text-white mb-3">{w.title}</h4>
                 <p className="text-gray-400 text-sm leading-relaxed">{w.desc}</p>
               </div>
