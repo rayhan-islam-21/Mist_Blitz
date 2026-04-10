@@ -83,7 +83,7 @@ const OurCarsPage = () => {
       </section>
 
       {/* Car Lineup Selector */}
-      <section className="bg-black py-20 px-6">
+      <section className="bg-[#0a0a0a] py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-xs uppercase tracking-widest text-red-500 mb-2 font-bold">Car Lineup</h2>
           <p className="text-3xl md:text-5xl font-sans font-black italic uppercase text-white mb-12">
@@ -154,7 +154,7 @@ const OurCarsPage = () => {
       </section>
 
       {/* Evolution Comparison */}
-      <section className="bg-zinc-950 border-y border-white/5 py-16 px-6">
+      <section className="bg-[#111111] border-y border-white/5 py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-xs uppercase tracking-widest text-red-500 mb-2 font-bold">Evolution</h2>
           <p className="text-3xl md:text-5xl font-sans font-black italic uppercase text-white mb-10">
