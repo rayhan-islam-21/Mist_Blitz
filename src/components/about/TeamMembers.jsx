@@ -62,108 +62,121 @@ function isLead(m) {
   return m.isLead === true || String(m.isLead).toLowerCase() === "true" || m.position === "Senior Engineer";
 }
 
-// ─── MEMBER CARD (regular — compact) ─────────────────────────────────────────
+// ─── MEMBER CARD — full-bleed photo, text overlay ────────────────────────────
 function MemberCard({ member }) {
   const linkedinUrl = member.linkedin
     ? member.linkedin.startsWith("http") ? member.linkedin : `https://www.linkedin.com/in/${member.linkedin}`
     : null;
 
   return (
-    <div className="group relative bg-zinc-900 border border-white/10 hover:border-red-600/40 transition-all duration-300 overflow-hidden">
-      <div className="relative h-52 overflow-hidden">
-        <Image
-          src={member.image || "/placeholder.jpg"}
-          fill
-          sizes="(max-width: 768px) 50vw, 20vw"
-          className="object-cover object-top group-hover:scale-105 transition-all duration-500"
-          alt={member.name}
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-zinc-900/90 via-transparent to-transparent" />
-      </div>
-      <div className="p-4 border-t border-white/8">
-        <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-red-500 mb-1 truncate">
+    <div className="group relative aspect-3/4 overflow-hidden cursor-pointer">
+      {/* Photo */}
+      <Image
+        src={member.image || "/placeholder.jpg"}
+        fill
+        sizes="(max-width: 768px) 50vw, 20vw"
+        className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
+        alt={member.name}
+      />
+      {/* Gradient — only bottom third */}
+      <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-transparent" />
+
+      {/* Always-visible text */}
+      <div className="absolute bottom-0 left-0 right-0 p-3">
+        <p className="font-mono text-[8px] uppercase tracking-[0.3em] text-red-400 mb-0.5 leading-none">
           {member.position}
         </p>
-        <h4 className="font-black italic uppercase text-sm text-white leading-tight tracking-tight mb-2 line-clamp-2">
+        <h4 className="font-black italic uppercase text-sm text-white leading-tight tracking-tight">
           {member.name}
         </h4>
-        {linkedinUrl && (
-          <a
-            href={linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-white/30 hover:text-red-500 transition-colors text-[10px] font-mono uppercase tracking-wider"
-          >
-            <Linkedin size={10} /> LinkedIn
-          </a>
-        )}
       </div>
+
+      {/* LinkedIn — appears on hover */}
+      {linkedinUrl && (
+        <a
+          href={linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={e => e.stopPropagation()}
+          className="absolute top-3 right-3 w-7 h-7 bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-600 hover:border-red-600 transition-all duration-200"
+        >
+          <Linkedin size={12} className="text-white" />
+        </a>
+      )}
     </div>
   );
 }
 
-// ─── LEAD CARD (bigger) ───────────────────────────────────────────────────────
+// ─── LEAD CARD — taller, red accent ──────────────────────────────────────────
 function LeadCard({ member }) {
   const linkedinUrl = member.linkedin
     ? member.linkedin.startsWith("http") ? member.linkedin : `https://www.linkedin.com/in/${member.linkedin}`
     : null;
 
   return (
-    <div className="group relative bg-zinc-900 border border-red-600/30 hover:border-red-600/60 transition-all duration-300 overflow-hidden shadow-[0_0_30px_rgba(220,38,38,0.08)]">
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-red-600 z-10" />
-      <div className="absolute top-3 right-3 z-10 bg-red-600 px-2 py-0.5 flex items-center gap-1">
-        <Star size={8} className="text-white fill-white" />
+    <div className="group relative aspect-3/4 overflow-hidden cursor-pointer">
+      {/* Red top bar */}
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-red-600 z-20" />
+
+      {/* Lead badge */}
+      <div className="absolute top-3 left-3 z-20 bg-red-600 px-2 py-0.5">
         <span className="text-[8px] font-black uppercase tracking-widest text-white">Lead</span>
       </div>
-      <div className="relative h-72 overflow-hidden">
-        <Image
-          src={member.image || "/placeholder.jpg"}
-          fill
-          sizes="(max-width: 768px) 100vw, 25vw"
-          className="object-cover object-top group-hover:scale-105 transition-all duration-500"
-          alt={member.name}
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-zinc-900 via-zinc-900/20 to-transparent" />
-      </div>
-      <div className="p-5 border-t border-red-600/20">
-        <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-red-500 mb-1">{member.position}</p>
-        <h4 className="font-black italic uppercase text-base text-white leading-tight tracking-tight mb-3">
+
+      {/* Photo */}
+      <Image
+        src={member.image || "/placeholder.jpg"}
+        fill
+        sizes="(max-width: 768px) 50vw, 25vw"
+        className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
+        alt={member.name}
+      />
+      <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/10 to-transparent" />
+
+      {/* Text overlay */}
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <p className="font-mono text-[8px] uppercase tracking-[0.3em] text-red-400 mb-1 leading-none">
+          {member.position}
+        </p>
+        <h4 className="font-black italic uppercase text-base text-white leading-tight tracking-tight">
           {member.name}
         </h4>
-        {linkedinUrl && (
-          <a
-            href={linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-white/30 hover:text-red-500 transition-colors text-[10px] font-mono uppercase tracking-wider"
-          >
-            <Linkedin size={11} /> LinkedIn
-          </a>
-        )}
       </div>
+
+      {linkedinUrl && (
+        <a
+          href={linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={e => e.stopPropagation()}
+          className="absolute top-3 right-3 w-7 h-7 bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-600 hover:border-red-600 transition-all duration-200"
+        >
+          <Linkedin size={12} className="text-white" />
+        </a>
+      )}
     </div>
   );
 }
 
-// ─── TOP HIERARCHY CARD ───────────────────────────────────────────────────────
+// ─── HIERARCHY CARD — same photo-dominant style ───────────────────────────────
 function HierarchyCard({ person }) {
   return (
-    <div className={`group relative overflow-hidden border transition-all duration-300 bg-zinc-900 ${person.highlight ? "border-red-600/40 shadow-[0_0_30px_rgba(220,38,38,0.1)]" : "border-white/10 hover:border-red-600/30"}`}>
-      {person.highlight && <div className="absolute top-0 left-0 right-0 h-0.5 bg-red-600 z-10" />}
-      <div className="relative h-72 overflow-hidden">
-        <Image
-          src={person.image}
-          fill
-          sizes="(max-width: 768px) 100vw, 25vw"
-          className="object-cover object-top group-hover:scale-105 transition-all duration-700"
-          alt={person.name}
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-zinc-900/90 via-transparent to-transparent" />
-      </div>
-      <div className="p-5 border-t border-white/8">
-        <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-red-500 mb-1">{person.label}</p>
-        <h4 className="font-black italic uppercase text-base text-white leading-tight tracking-tight">{person.name}</h4>
-        <p className="text-white/40 text-xs mt-1 font-mono">{person.position}</p>
+    <div className={`group relative aspect-3/4 overflow-hidden ${person.highlight ? "ring-1 ring-red-600" : ""}`}>
+      {person.highlight && <div className="absolute top-0 left-0 right-0 h-0.5 bg-red-600 z-20" />}
+
+      <Image
+        src={person.image}
+        fill
+        sizes="(max-width: 768px) 50vw, 25vw"
+        className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+        alt={person.name}
+      />
+      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-transparent" />
+
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <p className="font-mono text-[8px] uppercase tracking-[0.35em] text-red-400 mb-1 leading-none">{person.label}</p>
+        <h4 className="font-black italic uppercase text-sm text-white leading-tight tracking-tight mb-0.5">{person.name}</h4>
+        <p className="text-white/50 text-[10px] font-mono">{person.position}</p>
       </div>
     </div>
   );
@@ -173,33 +186,39 @@ function HierarchyCard({ person }) {
 function CaptainCard({ captain }) {
   const linkedinUrl = captain.linkedin
     ? `https://www.linkedin.com/in/${captain.linkedin}` : null;
+
   return (
-    <div className="group relative overflow-hidden border border-red-600/40 bg-zinc-900 shadow-[0_0_30px_rgba(220,38,38,0.1)] transition-all duration-300 hover:border-red-600/70">
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-red-600 z-10" />
-      <div className="absolute top-3 right-3 z-10 bg-white px-2 py-0.5 flex items-center gap-1">
-        <Star size={8} className="text-black fill-black" />
+    <div className="group relative aspect-3/4 overflow-hidden ring-1 ring-red-600">
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-red-600 z-20" />
+      <div className="absolute top-3 left-3 z-20 bg-white px-2 py-0.5 flex items-center gap-1">
+        <Star size={7} className="text-black fill-black" />
         <span className="text-[8px] font-black uppercase tracking-widest text-black">Captain</span>
       </div>
-      <div className="relative h-72 overflow-hidden">
-        <Image
-          src={captain.image}
-          fill
-          sizes="(max-width: 768px) 100vw, 25vw"
-          className="object-cover object-top group-hover:scale-105 transition-all duration-700"
-          alt={captain.name}
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-zinc-900/90 via-transparent to-transparent" />
+
+      <Image
+        src={captain.image}
+        fill
+        sizes="(max-width: 768px) 50vw, 25vw"
+        className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+        alt={captain.name}
+      />
+      <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/10 to-transparent" />
+
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <p className="font-mono text-[8px] uppercase tracking-[0.35em] text-red-400 mb-1 leading-none">Team Captain</p>
+        <h4 className="font-black italic uppercase text-sm text-white leading-tight tracking-tight">{captain.name}</h4>
       </div>
-      <div className="p-5 border-t border-red-600/20">
-        <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-red-500 mb-1">Team Captain</p>
-        <h4 className="font-black italic uppercase text-base text-white leading-tight tracking-tight">{captain.name}</h4>
-        {linkedinUrl && (
-          <a href={linkedinUrl} target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-white/30 hover:text-red-500 transition-colors text-[10px] font-mono uppercase tracking-wider mt-2">
-            <Linkedin size={11} /> LinkedIn
-          </a>
-        )}
-      </div>
+
+      {linkedinUrl && (
+        <a
+          href={linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute top-3 right-3 w-7 h-7 bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-600 hover:border-red-600 transition-all duration-200"
+        >
+          <Linkedin size={12} className="text-white" />
+        </a>
+      )}
     </div>
   );
 }
