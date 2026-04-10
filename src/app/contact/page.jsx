@@ -21,13 +21,21 @@ const ContactPage = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
       setStatus("success");
       setForm({ name: "", email: "", subject: "", message: "" });
-    }, 1500);
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -136,6 +144,17 @@ const ContactPage = () => {
                   className="mt-6 text-red-500 uppercase text-xs tracking-widest font-black hover:text-red-400 transition-colors"
                 >
                   Send Another →
+                </button>
+              </div>
+            ) : status === "error" ? (
+              <div className="border border-white/20 p-8 text-center">
+                <p className="text-xl font-black italic uppercase text-white mb-2">Failed to Send</p>
+                <p className="text-gray-400 text-sm">Something went wrong. Please try again or email us directly.</p>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="mt-6 text-red-500 uppercase text-xs tracking-widest font-black hover:text-red-400 transition-colors"
+                >
+                  Try Again →
                 </button>
               </div>
             ) : (
