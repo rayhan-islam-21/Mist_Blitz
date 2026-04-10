@@ -33,14 +33,16 @@ const Navbar = () => {
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-150 transition-all duration-300 ${
-          scrolled ? "bg-black/95 backdrop-blur-md border-b border-white/10" : "bg-black/60 backdrop-blur-sm"
+          scrolled
+            ? "bg-[#05070d]/35 backdrop-blur-xl border-b border-white/15 shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
+            : "bg-transparent backdrop-blur-[2px]"
         }`}
       >
         <div className="max-w-screen-2xl mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-18">
 
           {/* LEFT: Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="relative bg-black/50 px-2 py-1">
+            <div className="relative rounded-md border border-white/10 bg-white/5 px-2 py-1 backdrop-blur-md">
               <Image
                 src="https://res.cloudinary.com/dnrubj8x4/image/upload/v1771498710/hero_q5f7az.png"
                 alt="MIST BLITZ"
@@ -98,7 +100,7 @@ const Navbar = () => {
 
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="fixed top-16 left-0 w-full bg-black/98 backdrop-blur-md z-149 border-b border-white/10 lg:hidden">
+        <div className="fixed top-16 left-0 w-full bg-[#060913]/70 backdrop-blur-xl z-149 border-b border-white/15 lg:hidden">
           <div className="flex flex-col py-4 px-6">
             {navItems.map((item) => {
               const active = pathname === item.href;

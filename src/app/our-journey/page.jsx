@@ -65,89 +65,102 @@ const seasons = [
 ];
 
 export default function OurJourneyPage() {
-  const [active, setActive] = useState(3); // default 2024
+  const [active, setActive] = useState(3);
 
   const cur = seasons[active];
 
   return (
-    <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden bg-[#080b12] text-white selection:bg-red-600 selection:text-white">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-red-600/20 blur-3xl" />
+        <div className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)",
+            backgroundSize: "42px 42px",
+            maskImage:
+              "radial-gradient(circle at center, rgba(0,0,0,0.55), transparent 72%)",
+          }}
+        />
+      </div>
+
       <Navbar />
 
-      {/* ══ HERO ══ */}
-      <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <Image src="/china4.jpg" fill alt="hero" className="object-cover object-center" priority />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-[#0a0a0a]/30" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
+      <section className="relative mx-auto flex min-h-[92vh] w-full max-w-7xl items-end px-6 pb-16 pt-36 md:px-10">
+        <div className="absolute inset-x-6 top-28 h-[65vh] overflow-hidden rounded-[2.5rem] border border-white/10 md:inset-x-10">
+          <Image src={cur.image} fill alt={cur.title} className="object-cover object-center" priority />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#070910]/95 via-[#070910]/65 to-[#070910]/35" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#070910] via-transparent to-transparent" />
         </div>
 
-        {/* Speed lines decoration */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute h-px bg-gradient-to-r from-transparent via-red-600/30 to-transparent"
-              style={{ top: `${20 + i * 15}%`, width: "60%", left: "40%" }}
-            />
-          ))}
-        </div>
-
-        <div className="relative z-10 px-8 md:px-20 pb-20 pt-40">
+        <div className="relative z-10 grid w-full items-end gap-8 lg:grid-cols-[1fr_auto]">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-[2px] bg-red-600" />
-              <span className="font-mono text-red-500 text-xs uppercase tracking-[0.4em]">
-                MIST Blitz Formula Student
-              </span>
+            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/5 px-4 py-2 backdrop-blur">
+              <span className="h-2 w-2 rounded-full bg-red-600" />
+              <span className="text-[11px] uppercase tracking-[0.26em] text-white/70">MIST Blitz Timeline</span>
             </div>
-            <h1 className="text-[13vw] md:text-[11vw] font-sans font-black italic uppercase leading-none tracking-tighter text-white mb-2">
-              Our
-            </h1>
-            <h1 className="text-[13vw] md:text-[11vw] font-sans font-black italic uppercase leading-none tracking-tighter text-red-600 mb-10">
+            <h1 className="mb-3 text-[13vw] font-black uppercase leading-[0.9] tracking-[-0.04em] text-white md:text-[8vw]">
               Journey
             </h1>
-            <p className="text-gray-400 text-lg max-w-lg font-light">
-              Four seasons. One mission. Engineering Bangladesh&apos;s place on the global motorsport stage.
+            <p className="max-w-xl text-base text-white/75 md:text-lg">
+              Four seasons of relentless building, testing, and racing. Explore how the team evolved from a small workshop group into an international Formula Student competitor.
             </p>
           </motion.div>
-        </div>
 
-        {/* Scroll cue */}
-        <div className="absolute bottom-8 right-16 flex flex-col items-center gap-2">
-          <div className="w-[1px] h-14 bg-gradient-to-b from-red-600 to-transparent" />
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30">scroll</span>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.5 }}
+            className="grid grid-cols-2 gap-3 md:min-w-[320px]"
+          >
+            {[cur.stat1, cur.stat2].map((s, i) => (
+              <div key={i} className="rounded-2xl border border-white/15 bg-black/35 p-4 backdrop-blur-sm">
+                <p className="text-3xl font-black leading-none text-red-500">{s.n}</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.24em] text-white/55">{s.l}</p>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* ══ SEASON SELECTOR STRIP ══ */}
-      <div className="sticky top-16 z-40 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-7xl mx-auto flex">
+      <div className="sticky top-16 z-40 border-y border-white/10 bg-[#06080f]/85 backdrop-blur-xl">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-2 md:grid-cols-4">
           {seasons.map((s, i) => (
             <button
               key={s.year}
               onClick={() => setActive(i)}
-              className={`relative flex-1 flex flex-col items-center py-5 px-4 transition-all duration-300 group overflow-hidden ${
-                active === i ? "bg-red-600/10" : "hover:bg-white/[0.02]"
+              className={`group relative flex flex-col items-center overflow-hidden px-3 py-5 transition-all duration-300 ${
+                active === i ? "bg-red-600/15" : "hover:bg-white/[0.04]"
               }`}
             >
               {active === i && (
-                <motion.div
-                  layoutId="pill"
-                  className="absolute top-0 left-0 w-full h-[3px] bg-red-600"
-                />
+                <motion.div layoutId="seasonActive" className="absolute inset-0 border-b-2 border-red-500" />
               )}
-              <span className={`font-mono text-[9px] uppercase tracking-[0.3em] mb-1 ${active === i ? "text-red-500" : "text-white/20"}`}>
+              <span
+                className={`mb-1 text-[10px] uppercase tracking-[0.25em] ${
+                  active === i ? "text-red-400" : "text-white/35"
+                }`}
+              >
                 {s.round}
               </span>
-              <span className={`font-sans font-black italic text-2xl md:text-3xl leading-none ${active === i ? "text-white" : "text-white/20 group-hover:text-white/50"}`}>
+              <span
+                className={`text-2xl font-black leading-none ${
+                  active === i ? "text-white" : "text-white/45 group-hover:text-white"
+                }`}
+              >
                 {s.year}
               </span>
-              <span className={`font-mono text-[9px] uppercase tracking-wider mt-1 hidden md:block ${active === i ? "text-white/60" : "text-white/10"}`}>
+              <span
+                className={`mt-1 hidden text-[10px] uppercase tracking-[0.18em] md:block ${
+                  active === i ? "text-white/70" : "text-white/20"
+                }`}
+              >
                 {s.title}
               </span>
             </button>
@@ -155,178 +168,140 @@ export default function OurJourneyPage() {
         </div>
       </div>
 
-      {/* ══ SEASON CONTENT ══ */}
       <AnimatePresence mode="wait">
         <motion.div
           key={cur.year}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.35 }}
+          className="mx-auto w-full max-w-7xl px-6 py-14 md:px-10"
         >
-          {/* SECTION A — Full bleed photo + title */}
-          <div className="relative h-[70vh] overflow-hidden">
-            <Image src={cur.image} fill alt={cur.title} className="object-cover object-center" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+          <div className="mb-10 rounded-[2rem] border border-white/10 bg-white/[0.02] p-6 md:p-8">
+            <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr]">
+              <div>
+                <span className="mb-4 block text-[11px] uppercase tracking-[0.34em] text-red-400">
+                  Season Focus
+                </span>
+                <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.03em] text-white md:text-6xl">
+                  {cur.title}
+                </h2>
+                <p className="mt-3 text-lg uppercase tracking-[0.11em] text-red-300">{cur.tagline}</p>
+                <p className="mt-6 max-w-2xl text-white/75">{cur.description}</p>
+              </div>
 
-            {/* Giant ghost year */}
-            <div className="absolute -right-8 top-1/2 -translate-y-1/2 font-sans font-black italic text-[22vw] leading-none text-white/[0.04] select-none pointer-events-none">
-              {cur.year}
-            </div>
-
-            {/* Content overlay */}
-            <div className="absolute bottom-0 left-0 px-8 md:px-20 pb-14">
-              <span className="block font-mono text-red-500 text-xs uppercase tracking-[0.5em] mb-4">
-                {cur.round} / {cur.year}
-              </span>
-              <h2 className="text-5xl md:text-8xl font-sans font-black italic uppercase leading-none tracking-tighter text-white mb-3">
-                {cur.title}
-              </h2>
-              <p className="text-red-400 italic text-xl md:text-2xl font-sans font-black uppercase">
-                {cur.tagline}
-              </p>
-            </div>
-
-            {/* Right side stats */}
-            <div className="absolute bottom-14 right-8 md:right-20 flex gap-12">
-              {[cur.stat1, cur.stat2].map((s, i) => (
-                <div key={i} className="text-right">
-                  <p className="text-4xl md:text-5xl font-sans font-black italic text-white leading-none">
-                    {s.n}
-                  </p>
-                  <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/40 mt-1">{s.l}</p>
+              <div className="relative min-h-[280px] overflow-hidden rounded-2xl border border-white/10">
+                <Image src={cur.image} fill alt={cur.title} className="object-cover object-center" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/15 bg-black/35 px-4 py-3 backdrop-blur">
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/60">
+                    {cur.round} / {cur.year}
+                  </span>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
 
-          {/* SECTION B — Description + milestones */}
-          <div className="bg-[#0a0a0a]">
-            {/* Red accent bar */}
-            <div className="h-1 w-full bg-gradient-to-r from-red-600 via-red-600/50 to-transparent" />
-
-            <div className="max-w-7xl mx-auto px-8 md:px-20 py-20">
-              <div className="grid md:grid-cols-2 gap-16 mb-20">
-                {/* Description */}
-                <div>
-                  <p className="text-2xl md:text-3xl text-white/80 leading-relaxed font-light">
-                    {cur.description}
-                  </p>
-                </div>
-                {/* Milestones */}
-                <div className="space-y-0">
-                  {cur.milestones.map((m, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-5 py-5 border-b border-white/5 group"
-                    >
-                      <span className="font-mono text-red-600 text-xs font-bold shrink-0 w-6">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <div className="w-0 group-hover:w-4 h-px bg-red-600 transition-all duration-300 shrink-0" />
-                      <span className="text-white/70 group-hover:text-white transition-colors text-sm uppercase tracking-wider font-sans font-bold">
-                        {m}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="rounded-3xl border border-white/10 bg-[#0b0f1a]/80 p-6 md:p-8">
+              <div className="mb-8 flex items-center gap-3">
+                <span className="h-2 w-2 rounded-full bg-red-500" />
+                <span className="text-[11px] uppercase tracking-[0.28em] text-white/65">Milestones</span>
               </div>
 
-              {/* Phases — horizontal race track style */}
-              <div>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-6 h-[2px] bg-red-600" />
-                  <span className="font-mono text-xs uppercase tracking-[0.4em] text-white/30">
-                    Season Process
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
-                  {cur.phases.map((phase, i) => (
-                    <div
-                      key={i}
-                      className={`relative p-8 border border-white/5 group overflow-hidden ${
-                        i === 0 ? "bg-red-600" : "bg-white/[0.02] hover:bg-white/[0.04]"
-                      } transition-all duration-300`}
-                    >
-                      {/* Phase number watermark */}
-                      <span className="absolute top-4 right-5 font-mono text-[40px] font-black text-white/[0.06] leading-none select-none">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      {i > 0 && (
-                        <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10">
-                          <div className="w-4 h-4 bg-[#0a0a0a] border border-red-600/30 rotate-45" />
-                        </div>
-                      )}
-                      <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/40 mb-3">
-                        Phase {String(i + 1).padStart(2, "0")}
-                      </p>
-                      <p className="font-sans font-black italic uppercase text-xl text-white leading-none">
-                        {phase}
-                      </p>
+              <div className="space-y-5">
+                {cur.milestones.map((m, i) => (
+                  <div key={i} className="grid grid-cols-[22px_1fr] gap-4">
+                    <div className="relative">
+                      <span className="text-[10px] font-bold text-red-400">{String(i + 1).padStart(2, "0")}</span>
+                      {i < cur.milestones.length - 1 && <div className="absolute left-[6px] top-5 h-8 w-px bg-white/20" />}
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Season nav */}
-            <div className="max-w-7xl mx-auto px-8 md:px-20 pb-16 flex items-center justify-between">
-              <button
-                onClick={() => setActive((p) => Math.max(0, p - 1))}
-                disabled={active === 0}
-                className="flex items-center gap-3 text-white/30 hover:text-white disabled:opacity-20 transition-colors group"
-              >
-                <span className="w-10 h-10 border border-white/20 group-hover:border-red-600 flex items-center justify-center transition-colors">
-                  ←
-                </span>
-                <span className="font-mono text-xs uppercase tracking-wider hidden md:block">
-                  {active > 0 ? seasons[active - 1].year : ""}
-                </span>
-              </button>
-
-              <div className="flex gap-2">
-                {seasons.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActive(i)}
-                    className={`transition-all duration-300 ${
-                      active === i ? "w-8 h-1 bg-red-600" : "w-2 h-1 bg-white/20 hover:bg-white/40"
-                    }`}
-                  />
+                    <div className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm uppercase tracking-[0.08em] text-white/80">
+                      {m}
+                    </div>
+                  </div>
                 ))}
               </div>
-
-              <button
-                onClick={() => setActive((p) => Math.min(seasons.length - 1, p + 1))}
-                disabled={active === seasons.length - 1}
-                className="flex items-center gap-3 text-white/30 hover:text-white disabled:opacity-20 transition-colors group"
-              >
-                <span className="font-mono text-xs uppercase tracking-wider hidden md:block">
-                  {active < seasons.length - 1 ? seasons[active + 1].year : ""}
-                </span>
-                <span className="w-10 h-10 border border-white/20 group-hover:border-red-600 flex items-center justify-center transition-colors">
-                  →
-                </span>
-              </button>
             </div>
+
+            <div className="space-y-6">
+              <div className="rounded-3xl border border-white/10 bg-[#0b0f1a]/80 p-6 md:p-8">
+                <div className="mb-5 flex items-center justify-between">
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/65">Build Pipeline</span>
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-red-400">4 stages</span>
+                </div>
+                <div className="space-y-3">
+                  {cur.phases.map((phase, i) => (
+                    <div key={phase} className="relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                      <div
+                        className="absolute inset-y-0 left-0 bg-red-600/90"
+                        style={{ width: `${35 + i * 17}%` }}
+                      />
+                      <div className="relative flex items-center justify-between">
+                        <p className="text-sm uppercase tracking-[0.11em] text-white">{phase}</p>
+                        <span className="text-[10px] text-white/75">0{i + 1}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-red-600/25 to-[#171b29] p-6 md:p-8">
+                <span className="text-[11px] uppercase tracking-[0.24em] text-white/75">Season snapshot</span>
+                <p className="mt-3 text-sm text-white/85">
+                  {cur.year} was a key step in MIST Blitz growth, with stronger engineering workflow, broader team capability, and improved competitive confidence.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 flex items-center justify-between rounded-2xl border border-white/10 bg-black/30 px-4 py-3 md:px-6">
+            <button
+              onClick={() => setActive((p) => Math.max(0, p - 1))}
+              disabled={active === 0}
+              className="flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm uppercase tracking-[0.13em] text-white/70 transition hover:border-red-400 hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              Prev
+              <span className="text-red-400">{active > 0 ? seasons[active - 1].year : "-"}</span>
+            </button>
+
+            <div className="flex items-center gap-2">
+              {seasons.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  aria-label={`Go to season ${seasons[i].year}`}
+                  className={`h-2 rounded-full transition-all ${
+                    active === i ? "w-9 bg-red-500" : "w-2 bg-white/35 hover:bg-white/70"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={() => setActive((p) => Math.min(seasons.length - 1, p + 1))}
+              disabled={active === seasons.length - 1}
+              className="flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm uppercase tracking-[0.13em] text-white/70 transition hover:border-red-400 hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              <span className="text-red-400">{active < seasons.length - 1 ? seasons[active + 1].year : "-"}</span>
+              Next
+            </button>
           </div>
         </motion.div>
       </AnimatePresence>
 
-      {/* ══ STATS STRIP ══ */}
-      <div className="border-t border-white/5 bg-[#0f0f0f]">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5">
+      <div className="border-t border-white/10 bg-[#06080f]">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-2 divide-x divide-y divide-white/10 md:grid-cols-4 md:divide-y-0">
           {[
             { n: "4", l: "Seasons", s: "2021 – 2024" },
             { n: "3+", l: "Prototypes", s: "100% in-house" },
             { n: "50+", l: "Engineers", s: "Peak team size" },
             { n: "FSC", l: "China", s: "International competition" },
           ].map((s, i) => (
-            <div key={i} className="px-10 py-12">
-              <p className="font-sans font-black italic text-5xl text-red-600 leading-none mb-2">{s.n}</p>
-              <p className="font-sans font-black italic uppercase text-lg text-white mb-1">{s.l}</p>
-              <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/25">{s.s}</p>
+            <div key={i} className="px-6 py-10 md:px-10">
+              <p className="mb-2 text-5xl font-black leading-none text-red-500">{s.n}</p>
+              <p className="mb-1 text-lg font-black uppercase tracking-[0.06em] text-white">{s.l}</p>
+              <p className="text-[11px] uppercase tracking-[0.2em] text-white/35">{s.s}</p>
             </div>
           ))}
         </div>

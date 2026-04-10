@@ -69,7 +69,7 @@ select {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@theme inline {
+@theme {
   --font-sans: var(--font-oswald), "Viga", ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-oswald), "Viga", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-oswald), "Viga", ui-sans-serif, system-ui, sans-serif;
