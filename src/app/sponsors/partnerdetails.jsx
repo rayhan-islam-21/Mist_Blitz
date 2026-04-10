@@ -89,26 +89,9 @@ export default function PremiumPartners() {
   const [activeTier, setActiveTier] = useState(DATA[0]);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white selection:bg-red-500/30 font-mono overflow-x-hidden">
-      {/* 1. HEADER */}
-      <header className="pt-32 md:pt-40 pb-20 px-6 max-w-7xl mx-auto border-x border-white/5 relative">
-        <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-red-600/50 to-transparent" />
-        <div className="flex flex-col md:flex-row justify-between items-end gap-8">
-          <div className="space-y-4">
-            <h1 className="text-6xl font-sans italic md:text-8xl font-black tracking-tighter leading-[0.8]">
-              OUR <span className="text-red-600">SPONSORS</span>
-              <br />
-            </h1>
-            <p className="text-white/40 text-sm font-sans md:text-base max-w-xl italic">
-              Connected strategic partners driving innovation, security, and
-              high-precision infrastructure across the network.
-            </p>
-          </div>
-        </div>
-      </header>
-
-      {/* 2. STICKY TIER NAV */}
-      <div className="sticky top-0 z-50 bg-[#050505] border-y border-white/10 backdrop-blur-xl">
+    <div className="bg-[#0a0a0a] text-white selection:bg-red-500/30 font-mono overflow-x-hidden">
+      {/* 1. STICKY TIER NAV */}
+      <div className="sticky top-0 z-50 bg-[#0a0a0a] border-y border-white/10 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto flex overflow-x-auto no-scrollbar">
           {DATA.map((tier) => (
             <button
@@ -203,61 +186,40 @@ export default function PremiumPartners() {
           </motion.div>
         </AnimatePresence>
 
-        {/* 4. FOOTER STATUS */}
-        <section className="mt-12 flex flex-col md:flex-row gap-1">
-          {/* LEFT: WHY SPONSOR */}
-          <div className="flex-1 bg-white/2 border border-white/5 p-8">
-            <h4 className="text-[10px] font-black uppercase tracking-widest text-red-500">
-              Partner With Us
-            </h4>
-            <p className="mt-3 text-white/40 text-xs leading-relaxed max-w-md">
-              Join an elite network of industry leaders, innovators, and global
-              brands. Our partners gain strategic visibility, direct access to
-              top engineering talent, and long-term collaboration opportunities
-              across technology, manufacturing, and research domains.
-            </p>
-
-            <ul className="mt-4 space-y-2 text-[9px] uppercase tracking-widest text-white/40">
-              <li>• Brand Visibility & Recognition</li>
-              <li>• Direct Talent & Research Access</li>
-              <li>• Long-Term Strategic Collaboration</li>
-            </ul>
-          </div>
-
-          {/* RIGHT: CTA */}
-          <div className="flex-1 bg-red-600/5 border border-white/5 p-8 flex flex-col justify-between">
-            <div>
-              <h4 className="text-[10px] font-black uppercase tracking-widest">
-                Become a Sponsor
-              </h4>
-              <p className="mt-2 text-[9px] text-white/40 uppercase max-w-sm">
-                Sponsorship tiers are limited. Applications are reviewed based
-                on strategic alignment and impact potential.
-              </p>
-            </div>
-
-            <div className="mt-6 flex items-center justify-between">
-              <span className="text-[9px] uppercase tracking-widest text-white/30">
-                Next Intake • 2026
-              </span>
-
-              <div className="flex gap-3 items-center">
-                <a
-                  href="/sponsorship-proposal.pdf"
-                  download
-                  className="cta-btn border border-white/20 text-white hover:border-red-500 hover:text-red-500"
-                >
-                  Download Proposal (PDF)
-                </a>
-                <SponsorButton/>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
-      {/* 5. PERIPHERAL VIEWPORT BORDER */}
-      <div className="fixed inset-0 pointer-events-none border border-white/5 m-4 z-100" />
+      {/* 4. CTA BANNER */}
+      <section className="bg-red-600 py-16 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <p className="text-red-200 text-xs uppercase tracking-widest font-black mb-3">Partner With Us</p>
+            <h3 className="text-3xl md:text-5xl font-sans font-black italic uppercase text-white leading-tight mb-4">
+              Become a<br />Sponsor
+            </h3>
+            <ul className="space-y-2 text-red-100 text-sm">
+              <li className="flex items-center gap-2"><span className="text-white text-xs">▶</span> Brand visibility on car &amp; team kit</li>
+              <li className="flex items-center gap-2"><span className="text-white text-xs">▶</span> Direct access to top engineering talent</li>
+              <li className="flex items-center gap-2"><span className="text-white text-xs">▶</span> Long-term strategic collaboration</li>
+            </ul>
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-red-100 text-sm max-w-sm">
+              Sponsorship tiers are limited. Applications are reviewed based on strategic alignment and impact potential.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 mt-2">
+              <a
+                href="/sponsorship-proposal.pdf"
+                download
+                className="cta-btn bg-white text-red-600 hover:bg-red-50"
+              >
+                Download Proposal (PDF)
+              </a>
+              <SponsorButton />
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
