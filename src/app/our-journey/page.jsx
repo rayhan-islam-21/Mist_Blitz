@@ -8,308 +8,148 @@ import { Trophy, Users, Wrench, Flag, Medal, Star, ChevronRight } from "lucide-r
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const journeyData = {
-  2021: {
-    year: "2021",
+  2023: {
+    year: "2023",
     round: "Season 01",
     heroImage: "/team.jpg",
-    tagline: "Where it all began.",
+    contentImage: "/team.jpg",
+    tagline: "From a dream to a blueprint.",
 
     teamFormation: {
-      founded: "April 2021",
-      totalMembers: 12,
+      founded: "2023",
+      totalMembers: 20,
       summary:
-        "MIST Blitz was conceived by a group of 12 passionate engineering students at the Military Institute of Science and Technology (MIST). The founding team established the core structure, secured a dedicated workshop space, and laid down the operational framework for Bangladesh's first Formula Student team.",
+        "MIST Blitz was born from the ambition of a group of engineering students at the Military Institute of Science and Technology (MIST). In 2023, the founding team began recruiting members, establishing departments, and laying the groundwork for Bangladesh's first internationally competing Formula Student team.",
       departments: [
-        { name: "Chassis & Frame", count: 3 },
-        { name: "Powertrain", count: 2 },
-        { name: "Electronics", count: 2 },
-        { name: "Management", count: 3 },
-        { name: "Documentation", count: 2 },
+        { name: "Chassis & Frame", count: 4 },
+        { name: "Powertrain", count: 4 },
+        { name: "Electronics", count: 4 },
+        { name: "Management & Finance", count: 4 },
+        { name: "Media & Documentation", count: 4 },
       ],
       leadership: [
         { role: "Team Principal", name: "—" },
         { role: "Chief Engineer", name: "—" },
-        { role: "Technical Director", name: "—" },
       ],
     },
 
     milestones: [
-      "Official team registration at MIST",
-      "Secured dedicated workshop space on campus",
-      "Completed first full CAD model of race car",
-      "Established 5 core technical departments",
-      "First team presentation to faculty sponsors",
-      "Began procurement of raw materials",
+      "Team concept established at MIST Mechanical Engineering dept.",
+      "Initial recruitment — first 20 members onboarded",
+      "Workshop space secured on MIST campus",
+      "Departmental structure defined and assigned",
+      "First design review sessions conducted",
+      "Feasibility study and competition target set — FSC China",
     ],
 
     fabrication: {
-      car: "Concept Prototype (Unnamed)",
-      summary: "The first season focused entirely on design validation and concept development. No physical car was completed — the team spent the year establishing workflows, learning tools, and validating their design approach.",
+      car: "Concept Phase",
+      summary:
+        "2023 was entirely dedicated to research, concept design, and team building. No physical car was fabricated — the team spent the year studying Formula Student regulations, benchmarking other teams, and producing initial design concepts for Furiosa 1.0.",
       phases: [
         {
           name: "Design",
-          status: "completed",
-          details: "Full vehicle CAD model designed in SolidWorks. Chassis geometry and suspension pickup points defined.",
+          status: "partial",
+          details: "Early concept sketches and initial CAD layouts. Chassis geometry and packaging studies conducted in SolidWorks.",
         },
         {
           name: "Analysis",
-          status: "completed",
-          details: "Basic FEA on chassis tubes. Suspension kinematics simulated in OptimumKinematics.",
+          status: "not-started",
+          details: "No formal simulation conducted. Literature review of suspension kinematics and chassis FEA started.",
         },
         {
           name: "Manufacturing",
-          status: "partial",
-          details: "Chassis jig fabricated. Steel tube cutting and bending began. Full car not completed this season.",
+          status: "not-started",
+          details: "No manufacturing this season. Workshop setup and tooling acquisition began.",
         },
         {
           name: "Testing",
           status: "not-started",
-          details: "No vehicle testing conducted. Dynamic testing planned for next season.",
+          details: "No vehicle to test. Team visited and studied other FS teams' testing procedures.",
         },
       ],
     },
 
     competitions: {
       participated: [],
-      note: "No competition entries in the founding season. Team focused entirely on preparation and design.",
+      note: "No competition entries in the founding season. Team focused on planning, design, and preparation.",
     },
 
     achievements: [
-      { type: "recognition", title: "Official MIST Motorsport Club Recognition", desc: "Formally recognized by MIST authorities as an official engineering club." },
-      { type: "award", title: "Best New Initiative — MIST Engineering Fest 2021", desc: "Awarded best new technical initiative among student clubs." },
-    ],
-  },
-
-  2022: {
-    year: "2022",
-    round: "Season 02",
-    heroImage: "/car2.jpg",
-    tagline: "The first machine rolls.",
-
-    teamFormation: {
-      founded: "Ongoing (2021)",
-      totalMembers: 30,
-      summary:
-        "The team grew from 12 to 30+ members as MIST Blitz completed its first full race car. New recruits joined the chassis, powertrain, and electronics teams. The management and media departments were formally established this season.",
-      departments: [
-        { name: "Chassis & Aerodynamics", count: 6 },
-        { name: "Suspension, Steering & Braking", count: 5 },
-        { name: "Powertrain", count: 5 },
-        { name: "Electronics & DAQ", count: 4 },
-        { name: "Management & Finance", count: 5 },
-        { name: "Media & Documentation", count: 5 },
-      ],
-      leadership: [
-        { role: "Team Principal", name: "—" },
-        { role: "Chief Engineer", name: "—" },
-        { role: "Vehicle Dynamics Lead", name: "—" },
-      ],
-    },
-
-    milestones: [
-      "First complete race car fabricated in-house",
-      "Team size grew to 30+ members",
-      "Successful engine start — KTM 450 powerplant",
-      "First driver seat fitting and ergonomics validation",
-      "Full suspension geometry finalized and built",
-      "Completed first shakedown run on campus",
-    ],
-
-    fabrication: {
-      car: "Blitz Mk.I",
-      summary:
-        "Blitz Mk.I was the team's first complete race car, built entirely in-house using a steel spaceframe chassis. The car featured a KTM single-cylinder engine, double wishbone suspension, and basic electronics.",
-      phases: [
-        {
-          name: "Design",
-          status: "completed",
-          details: "Full vehicle redesigned with driver ergonomics. Suspension pickup points optimized. Chassis tubes sized through FEA.",
-        },
-        {
-          name: "Analysis",
-          status: "completed",
-          details: "Full chassis FEA completed. Suspension kinematics validated. Weight distribution calculated at 42:58 F:R.",
-        },
-        {
-          name: "Manufacturing",
-          status: "completed",
-          details: "Steel spaceframe TIG welded by student team. Custom suspension uprights machined in MIST workshop. Brake system assembled.",
-        },
-        {
-          name: "Testing",
-          status: "completed",
-          details: "Shakedown run completed on campus. Brake bias adjusted. Driver comfort validated through 4 test sessions.",
-        },
-      ],
-    },
-
-    competitions: {
-      participated: [],
-      note: "No international competition this season. Team focused on completing and testing the first car. Local demonstration run held at MIST campus.",
-    },
-
-    achievements: [
-      { type: "award", title: "1st Formula Student Car in Bangladesh", desc: "Blitz Mk.I became the first Formula Student specification car ever built in Bangladesh." },
-      { type: "recognition", title: "MIST Best Technical Project 2022", desc: "Recognized as the best technical student project at MIST annual presentation." },
-      { type: "recognition", title: "Featured in National Engineering News", desc: "Coverage by national engineering publications for pioneering motorsport in Bangladesh." },
-    ],
-  },
-
-  2023: {
-    year: "2023",
-    round: "Season 03",
-    heroImage: "/china4.jpg",
-    tagline: "Bangladesh meets the world.",
-
-    teamFormation: {
-      founded: "Ongoing (2021)",
-      totalMembers: 50,
-      summary:
-        "Season 03 saw the team scale to over 50 members with dedicated sub-teams for each competition discipline. International competition preparation drove major structural improvements. A dedicated Business Plan Presentation (BPP) team was formed to prepare for static events.",
-      departments: [
-        { name: "Chassis & Aerodynamics", count: 8 },
-        { name: "Suspension, Steering & Braking", count: 7 },
-        { name: "Powertrain", count: 8 },
-        { name: "Electronics & DAQ", count: 7 },
-        { name: "Management & Finance", count: 8 },
-        { name: "Media & Documentation", count: 6 },
-        { name: "Business Plan Presentation", count: 6 },
-      ],
-      leadership: [
-        { role: "Team Principal", name: "—" },
-        { role: "Chief Engineer", name: "—" },
-        { role: "Competition Manager", name: "—" },
-      ],
-    },
-
-    milestones: [
-      "First international competition entry confirmed — FSC China",
-      "Team expanded to 50+ members",
-      "Blitz Mk.II completed ahead of schedule",
-      "Design Event documentation submitted to Formula Student China",
-      "Secured major sponsorship from 3 corporate partners",
-      "International travel logistics managed for first time",
-    ],
-
-    fabrication: {
-      car: "Blitz Mk.II",
-      summary:
-        "Blitz Mk.II was a refined evolution of Mk.I with a lighter chassis, improved suspension geometry, and upgraded braking system. Weight was reduced by 15% through optimized tube layout and component selection.",
-      phases: [
-        {
-          name: "Design",
-          status: "completed",
-          details: "Chassis redesigned with optimized triangulation. Reduced tube count while improving structural rigidity. Aerodynamic bodywork added.",
-        },
-        {
-          name: "Analysis",
-          status: "completed",
-          details: "Full multibody dynamics simulation in ADAMS. CFD analysis on body panels. Brake thermal analysis completed.",
-        },
-        {
-          name: "Manufacturing",
-          status: "completed",
-          details: "15% weight reduction achieved. Suspension arms CNC machined. Brake calipers upgraded. Wiring harness redesigned from scratch.",
-        },
-        {
-          name: "Testing",
-          status: "completed",
-          details: "8 test sessions completed. Skidpad and acceleration tests benchmarked. 500km total test mileage logged.",
-        },
-      ],
-    },
-
-    competitions: {
-      participated: [
-        {
-          name: "Formula Student China (FSC) 2023",
-          location: "Xiangyang, China",
-          date: "July 2023",
-          events: ["Engineering Design Event", "Cost & Manufacturing Analysis", "Business Plan Presentation", "Acceleration", "Skidpad", "Autocross"],
-          result: "Competed — Design event recognized",
-          ranking: "Classified Finisher",
-        },
-      ],
-    },
-
-    achievements: [
-      { type: "award", title: "Design Event Recognition — FSC China 2023", desc: "MIST Blitz received recognition from international judges for engineering design quality." },
-      { type: "recognition", title: "First Bangladeshi Team at Formula Student China", desc: "Became the first team from Bangladesh to compete at an international Formula Student event." },
-      { type: "award", title: "Best Newcomer — FSC 2023", desc: "Acknowledged among best-performing first-year teams at Formula Student China." },
+      { type: "recognition", title: "Official Recognition by MIST Authorities", desc: "MIST Blitz was officially recognized as an engineering team under the Department of Mechanical Engineering, MIST." },
+      { type: "recognition", title: "First Formula Student Team from Bangladesh", desc: "Established as the first team in Bangladesh to pursue an international Formula Student campaign." },
     ],
   },
 
   2024: {
     year: "2024",
-    round: "Season 04",
-    heroImage: "/car2.jpg",
-    tagline: "Furiosa 1.0 — engineered to race.",
+    round: "Season 02",
+    heroImage: "/furiosa.png",
+    contentImage: "/furiosa.png",
+    tagline: "Furiosa 1.0 — built from scratch.",
 
     teamFormation: {
-      founded: "Ongoing (2021)",
-      totalMembers: 55,
+      founded: "April 2024",
+      totalMembers: 31,
       summary:
-        "Season 04 brought the most mature team structure yet. Each department operated with defined sub-leads, clear deliverables, and a competition-grade documentation system. The team trained in scrutineering procedures and ran mock static events internally before the competition.",
+        "Officially founded in April 2024, MIST Blitz formalized its 31-member team with defined sub-leads for each department. This season was defined by the complete design and fabrication of Furiosa 1.0 — the team's debut race car — and preparation for international competition.",
       departments: [
-        { name: "Chassis & Aerodynamics", count: 9 },
-        { name: "Suspension, Steering & Braking", count: 8 },
-        { name: "Powertrain", count: 9 },
-        { name: "Electronics, DAQ & Software", count: 8 },
-        { name: "Management & Finance", count: 9 },
-        { name: "Media & Documentation", count: 6 },
-        { name: "Business Plan Presentation", count: 6 },
+        { name: "Chassis & Aerodynamics", count: 6 },
+        { name: "Suspension, Steering & Braking", count: 6 },
+        { name: "Powertrain", count: 6 },
+        { name: "Electronics & DAQ", count: 5 },
+        { name: "Management & Finance", count: 5 },
+        { name: "Media & Documentation", count: 3 },
       ],
       leadership: [
         { role: "Team Principal", name: "—" },
         { role: "Chief Engineer", name: "—" },
         { role: "Technical Director", name: "—" },
-        { role: "Competition Manager", name: "—" },
       ],
     },
 
     milestones: [
-      "FURIOSA 1.0 — ground-up redesign completed",
-      "KTM 390 Duke engine selected and integrated",
-      "Full data acquisition system installed and tested",
-      "Best shakedown results in team history",
-      "Passed international scrutineering at FSC China 2024",
-      "Achieved peak power output of 33.8kW at 8,500rpm",
+      "Officially founded — April 2024",
+      "Full design of Furiosa 1.0 completed in SolidWorks",
+      "Steel spaceframe chassis TIG-welded in-house",
+      "KTM 390 Duke engine successfully integrated",
+      "Independent double wishbone suspension fabricated",
+      "Anti-Ackermann steering system designed and built",
+      "1st place — Engineering Design CRM at Formula Bharat 2025",
     ],
 
     fabrication: {
       car: "FURIOSA 1.0",
       summary:
-        "FURIOSA 1.0 is a ground-up redesign and the most technically advanced car the team has ever built. Powered by a KTM 390 Duke engine, the car features a steel spaceframe chassis, double wishbone pushrod suspension, and a full data acquisition system.",
+        "Furiosa 1.0 is MIST Blitz's debut Formula Student race car — designed and built entirely in-house. It features a triangulated steel spaceframe, independent double wishbone suspension front and rear, an anti-Ackermann steering system, and a KTM 390 Duke single-cylinder engine.",
       specs: [
         { label: "Engine", value: "KTM 390 Duke — 373.3cc Single" },
-        { label: "Peak Power", value: "33.8 kW @ 8,500 rpm" },
-        { label: "Peak Torque", value: "39 Nm @ 6,500 rpm" },
-        { label: "Chassis", value: "Steel Spaceframe" },
-        { label: "Suspension", value: "Double Wishbone Pushrod (F&R)" },
+        { label: "Chassis", value: "Steel Spaceframe (Triangulated)" },
+        { label: "Suspension", value: "Independent Double Wishbone (F&R)" },
+        { label: "Steering", value: "Anti-Ackermann System" },
         { label: "Brakes", value: "Hydraulic Disc — 4 Wheel" },
-        { label: "Tyres", value: "Apollo Amazer 4G Life R13" },
-        { label: "Weight", value: "290 kg (40:60 F:R Distribution)" },
+        { label: "Build", value: "100% In-house Fabrication" },
       ],
       phases: [
         {
           name: "Design",
           status: "completed",
-          details: "Complete vehicle redesign. Chassis optimized for KTM 390 Duke packaging. New suspension geometry with pushrod actuation. Ergonomics verified against 95th percentile driver.",
+          details: "Full vehicle CAD completed in SolidWorks. Chassis geometry, suspension kinematics, and packaging all validated against FSC regulations.",
         },
         {
           name: "Analysis",
           status: "completed",
-          details: "Full FEA on chassis and suspension. CFD on body panels. Brake thermal analysis. ADAMS simulation with 6-DOF dynamics model.",
+          details: "Chassis FEA and suspension kinematics simulation completed. Structural integrity and driver safety verified.",
         },
         {
           name: "Manufacturing",
           status: "completed",
-          details: "All chassis tubes TIG welded in-house. CNC machined uprights and hubs. Custom wiring harness. Full DAQ system integration.",
+          details: "Steel spaceframe TIG-welded by student team. All suspension components fabricated in MIST workshop. Engine integrated with custom mounts.",
         },
         {
           name: "Testing",
           status: "completed",
-          details: "12 test sessions. Full competition simulation runs. DAQ data analysis after each run. Final setup locked before shipping to China.",
+          details: "Multiple shakedown runs conducted on campus. Vehicle dynamics evaluated and setup refined before competition.",
         },
       ],
     },
@@ -317,9 +157,93 @@ const journeyData = {
     competitions: {
       participated: [
         {
-          name: "Formula Student China (FSC) 2024",
-          location: "Xiangyang, China",
-          date: "July 2024",
+          name: "Formula Bharat 2025",
+          location: "India",
+          date: "2025",
+          events: ["Engineering Design — CRM (Combustion)"],
+          result: "1st Place — Engineering Design Concept Resources Management (CRM) Combustion Category",
+          ranking: "1st Place",
+        },
+      ],
+    },
+
+    achievements: [
+      { type: "award", title: "1st Place — Formula Bharat 2025 Engineering Design CRM", desc: "MIST Blitz secured first place in the Engineering Design Concept Resources Management Combustion category at Formula Bharat 2025." },
+      { type: "recognition", title: "First Formula Student Car Built in Bangladesh", desc: "Furiosa 1.0 is the first Formula Student specification race car to be designed and built entirely within Bangladesh." },
+    ],
+  },
+
+  2025: {
+    year: "2025",
+    round: "Season 03",
+    heroImage: "/china4.jpg",
+    contentImage: "/china.JPG",
+    tagline: "Bangladesh meets the world.",
+
+    teamFormation: {
+      founded: "Ongoing",
+      totalMembers: 31,
+      summary:
+        "Season 03 marked MIST Blitz's debut on the international Formula Student stage. The team competed at Formula Student Combustion China 2025 against 76 teams from China, Japan, Russia, Kazakhstan, and Bangladesh — becoming the first Bangladeshi team to pass technical inspection and complete laps on a foreign circuit.",
+      departments: [
+        { name: "Chassis & Aerodynamics", count: 6 },
+        { name: "Suspension, Steering & Braking", count: 6 },
+        { name: "Powertrain", count: 6 },
+        { name: "Electronics & DAQ", count: 5 },
+        { name: "Management & Finance", count: 5 },
+        { name: "Media & Documentation", count: 3 },
+      ],
+      leadership: [
+        { role: "Team Principal", name: "—" },
+        { role: "Chief Engineer", name: "—" },
+        { role: "Competition Manager", name: "—" },
+      ],
+    },
+
+    milestones: [
+      "Selected to compete at Formula Student Combustion China 2025",
+      "Passed all technical inspections at FSC China — first Bangladeshi team to do so",
+      "Completed two laps on the endurance track — unprecedented for Bangladesh",
+      "Competed against 76 teams from 5 countries",
+      "Best Foreign Team Award (Leading Convoy Award)",
+      "Best Presentation Performance — Static Events",
+      "4th Place — Business Plan Presentation",
+    ],
+
+    fabrication: {
+      car: "FURIOSA 1.0",
+      summary:
+        "Furiosa 1.0 was refined and prepared for international scrutineering ahead of FSC China 2025. The car passed all technical inspections and completed two laps of the endurance circuit — a milestone never achieved before by a Bangladeshi team at an international Formula Student event.",
+      phases: [
+        {
+          name: "Design",
+          status: "completed",
+          details: "Pre-competition design review completed. Documentation package prepared for FSC China Design Event judges.",
+        },
+        {
+          name: "Analysis",
+          status: "completed",
+          details: "Final analysis and validation runs completed. All competition documentation submitted and reviewed.",
+        },
+        {
+          name: "Manufacturing",
+          status: "completed",
+          details: "Pre-competition car preparation, final assembly checks, and safety compliance verified against FSC regulations.",
+        },
+        {
+          name: "Testing",
+          status: "completed",
+          details: "Final test sessions completed before shipping. Car passed all technical scrutineering at FSC China 2025 on first attempt.",
+        },
+      ],
+    },
+
+    competitions: {
+      participated: [
+        {
+          name: "Formula Student Combustion China (FSC) 2025",
+          location: "China",
+          date: "2025",
           events: [
             "Engineering Design Event",
             "Cost & Manufacturing Analysis",
@@ -330,28 +254,29 @@ const journeyData = {
             "Autocross",
             "Endurance",
           ],
-          result: "Passed Scrutineering · Competed in all dynamic events",
-          ranking: "Best result in team history",
+          result: "Passed all technical inspections · Completed 2 endurance laps · Competed among 76 international teams",
+          ranking: "Best Foreign Team (Leading Convoy Award)",
         },
       ],
     },
 
     achievements: [
-      { type: "award", title: "Best Dynamic Result in Team History — FSC China 2024", desc: "FURIOSA 1.0 posted the best dynamic event scores ever recorded by the team." },
-      { type: "recognition", title: "Passed International Scrutineering", desc: "First time MIST Blitz passed all scrutineering checks on first attempt at an international event." },
-      { type: "award", title: "Design Event Commendation — FSC 2024", desc: "International judges commended the engineering quality and documentation of FURIOSA 1.0." },
-      { type: "recognition", title: "Featured in Formula Student Official Media", desc: "MIST Blitz featured by Formula Student China official channels as a noteworthy team." },
+      { type: "award", title: "Best Foreign Team — FSC China 2025 (Leading Convoy Award)", desc: "MIST Blitz was awarded the Leading Convoy Award for being the best-performing foreign team at Formula Student Combustion China 2025." },
+      { type: "award", title: "Best Presentation Performance — Static Events", desc: "Recognized for outstanding presentation quality in the static events at FSC China 2025." },
+      { type: "award", title: "4th Place — Business Plan Presentation", desc: "Finished 4th overall in the Business Plan Presentation event among all competing teams." },
+      { type: "recognition", title: "First Bangladeshi Team to Pass FSC Technical Inspection", desc: "MIST Blitz became the first Bangladeshi team in history to pass all technical scrutineering checks at an international Formula Student event." },
+      { type: "recognition", title: "First Bangladeshi Team to Complete Endurance Laps Abroad", desc: "Completed two laps on the FSC China endurance circuit — the first time any Bangladeshi team has driven on a foreign Formula Student track." },
     ],
   },
 };
 
-const years = [2021, 2022, 2023, 2024];
+const years = [2023, 2024, 2025];
 
 // ─── STATUS BADGE ─────────────────────────────────────────────────────────────
 function StatusBadge({ status }) {
   const map = {
     completed: { label: "Completed", cls: "bg-green-900/40 text-green-400 border-green-700/40" },
-    partial: { label: "Partial", cls: "bg-yellow-900/40 text-yellow-400 border-yellow-700/40" },
+    partial: { label: "In Progress", cls: "bg-yellow-900/40 text-yellow-400 border-yellow-700/40" },
     "not-started": { label: "Not Started", cls: "bg-zinc-800 text-white/30 border-white/10" },
   };
   const { label, cls } = map[status] || map["not-started"];
@@ -379,7 +304,7 @@ function SectionHeader({ icon: Icon, label, title }) {
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 export default function OurJourneyPage() {
-  const [activeYear, setActiveYear] = useState(2024);
+  const [activeYear, setActiveYear] = useState(2025);
   const data = journeyData[activeYear];
 
   return (
@@ -388,12 +313,15 @@ export default function OurJourneyPage() {
 
       {/* ── HERO ── */}
       <section className="relative h-[70vh] flex flex-col justify-end overflow-hidden">
-        <Image src={data.heroImage} fill alt="journey" className="object-cover opacity-35 transition-all duration-700" priority />
-        <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
+        <Image
+          src={data.heroImage}
+          fill
+          alt="journey"
+          className="object-cover opacity-50 transition-all duration-700"
+          priority
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
         <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
-
-        {/* Top accent */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-red-600" />
 
         <div className="relative z-10 px-6 md:px-16 pb-0 pt-28">
           <motion.div key={activeYear} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
@@ -404,7 +332,7 @@ export default function OurJourneyPage() {
             <h1 className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white">
               Our <span className="text-red-600">Journey</span>
             </h1>
-            <p className="text-white/40 text-base md:text-lg mt-4 max-w-lg font-light">{data.tagline}</p>
+            <p className="text-white/50 text-base md:text-lg mt-4 max-w-lg">{data.tagline}</p>
           </motion.div>
         </div>
       </section>
@@ -418,9 +346,7 @@ export default function OurJourneyPage() {
                 key={yr}
                 onClick={() => setActiveYear(yr)}
                 className={`relative px-6 md:px-10 py-5 font-black italic text-xl md:text-2xl tracking-tight transition-all duration-200 ${
-                  activeYear === yr
-                    ? "text-white"
-                    : "text-white/25 hover:text-white/60"
+                  activeYear === yr ? "text-white" : "text-white/25 hover:text-white/60"
                 }`}
               >
                 {yr}
@@ -448,7 +374,6 @@ export default function OurJourneyPage() {
             <section>
               <SectionHeader icon={Users} label="01 · Team Formation" title="The People Behind the Machine" />
               <div className="grid md:grid-cols-3 gap-6">
-                {/* Summary + leadership */}
                 <div className="md:col-span-2 space-y-6">
                   <p className="text-white/60 leading-relaxed text-base">{data.teamFormation.summary}</p>
                   <div className="grid grid-cols-2 gap-4">
@@ -457,11 +382,10 @@ export default function OurJourneyPage() {
                       <p className="font-mono text-[10px] uppercase tracking-widest text-white/30 mt-1">Total Members</p>
                     </div>
                     <div className="border border-white/10 p-5">
-                      <p className="text-4xl font-black italic text-white">{data.teamFormation.founded}</p>
-                      <p className="font-mono text-[10px] uppercase tracking-widest text-white/30 mt-1">Season Start</p>
+                      <p className="text-2xl font-black italic text-white">{data.teamFormation.founded}</p>
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-white/30 mt-1">Founded</p>
                     </div>
                   </div>
-                  {/* Leadership */}
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/25 mb-3">Leadership</p>
                     <div className="space-y-2">
@@ -483,7 +407,7 @@ export default function OurJourneyPage() {
                       <div key={i} className="flex items-center justify-between gap-4 group">
                         <span className="text-sm text-white/50 group-hover:text-white/80 transition-colors">{d.name}</span>
                         <div className="flex items-center gap-2 shrink-0">
-                          <div className="h-px w-10 bg-red-600/40" style={{ width: `${d.count * 6}px` }} />
+                          <div className="h-px bg-red-600/40" style={{ width: `${d.count * 7}px` }} />
                           <span className="font-mono text-xs text-red-600 font-bold">{d.count}</span>
                         </div>
                       </div>
@@ -492,6 +416,20 @@ export default function OurJourneyPage() {
                 </div>
               </div>
             </section>
+
+            {/* ── CAR / TEAM IMAGE ── */}
+            <div className="relative w-full h-64 md:h-96 overflow-hidden border border-white/10">
+              <Image
+                src={data.contentImage}
+                fill
+                alt={`MIST Blitz ${data.year}`}
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]/60" />
+              <div className="absolute bottom-4 left-6">
+                <span className="font-mono text-xs uppercase tracking-widest text-white/40">{data.round} · {data.year}</span>
+              </div>
+            </div>
 
             {/* ── 2. MAJOR MILESTONES ── */}
             <section>
@@ -522,7 +460,7 @@ export default function OurJourneyPage() {
               <div className="space-y-8">
                 <p className="text-white/60 leading-relaxed text-base max-w-3xl">{data.fabrication.summary}</p>
 
-                {/* Specs (2024 only) */}
+                {/* Specs */}
                 {data.fabrication.specs && (
                   <div className="border border-white/10 overflow-hidden">
                     <div className="bg-red-600 px-6 py-3">
@@ -539,19 +477,17 @@ export default function OurJourneyPage() {
                   </div>
                 )}
 
-                {/* Design → Analysis → Manufacturing → Testing */}
+                {/* Phases */}
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/25 mb-5">Build Process</p>
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-0">
                     {data.fabrication.phases.map((phase, i) => (
                       <div key={i} className={`relative border border-white/10 p-6 group hover:border-red-600/40 transition-colors ${i > 0 ? "md:border-l-0" : ""}`}>
-                        {/* Arrow connector */}
                         {i < data.fabrication.phases.length - 1 && (
                           <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-6 bg-[#0a0a0a] border border-red-600/30 items-center justify-center">
                             <ChevronRight size={12} className="text-red-600" />
                           </div>
                         )}
-                        {/* Phase number watermark */}
                         <span className="absolute top-3 right-4 font-black text-5xl text-white/4 leading-none select-none">
                           {String(i + 1).padStart(2, "0")}
                         </span>
@@ -579,7 +515,6 @@ export default function OurJourneyPage() {
                 <div className="space-y-6">
                   {data.competitions.participated.map((comp, i) => (
                     <div key={i} className="border border-white/10 hover:border-red-600/30 transition-colors overflow-hidden">
-                      {/* Header */}
                       <div className="bg-zinc-900 px-6 py-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                           <h4 className="font-black italic uppercase text-xl text-white tracking-tight">{comp.name}</h4>
@@ -589,11 +524,10 @@ export default function OurJourneyPage() {
                             <span className="font-mono text-xs text-white/35 uppercase tracking-wider">{comp.date}</span>
                           </div>
                         </div>
-                        <div className="text-right shrink-0">
+                        <div className="shrink-0">
                           <p className="text-red-500 font-mono text-xs uppercase tracking-widest">{comp.ranking}</p>
                         </div>
                       </div>
-                      {/* Body */}
                       <div className="px-6 py-6 grid md:grid-cols-2 gap-6">
                         <div>
                           <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/25 mb-3">Events Participated</p>
@@ -612,9 +546,6 @@ export default function OurJourneyPage() {
                       </div>
                     </div>
                   ))}
-                  {data.competitions.note && (
-                    <p className="text-white/25 font-mono text-xs uppercase tracking-wider">{data.competitions.note}</p>
-                  )}
                 </div>
               )}
             </section>
@@ -651,7 +582,7 @@ export default function OurJourneyPage() {
 
           </div>
 
-          {/* ── SEASON NAV BAR ── */}
+          {/* ── SEASON NAV ── */}
           <div className="border-t border-white/5 bg-[#0a0a0a]">
             <div className="max-w-7xl mx-auto px-6 md:px-16 py-8 flex items-center justify-between">
               <button
