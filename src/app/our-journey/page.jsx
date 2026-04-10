@@ -4,7 +4,7 @@ import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Trophy, Users, Wrench, Flag, Medal, Star, ChevronRight } from "lucide-react";
+import { Trophy, Medal, ChevronRight } from "lucide-react";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const journeyData = {
@@ -84,8 +84,8 @@ const journeyData = {
   2024: {
     year: "2024",
     round: "Season 02",
-    heroImage: "/furiosa.png",
-    contentImage: "/furiosa.png",
+    heroImage: "/improve.jpg",
+    contentImage: "/improve.jpg",
     tagline: "Furiosa 1.0 — built from scratch.",
 
     teamFormation: {
@@ -288,16 +288,11 @@ function StatusBadge({ status }) {
 }
 
 // ─── SECTION HEADER ───────────────────────────────────────────────────────────
-function SectionHeader({ icon: Icon, label, title }) {
+function SectionHeader({ label, title }) {
   return (
-    <div className="flex items-start gap-4 mb-8">
-      <div className="w-10 h-10 bg-red-600 flex items-center justify-center shrink-0 mt-0.5">
-        <Icon size={18} className="text-white" />
-      </div>
-      <div>
-        <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-red-500 mb-1">{label}</p>
-        <h3 className="text-2xl md:text-3xl font-black italic uppercase tracking-tight text-white">{title}</h3>
-      </div>
+    <div className="mb-8 border-l-2 border-red-600 pl-4">
+      <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-red-500 mb-1">{label}</p>
+      <h3 className="text-2xl md:text-3xl font-black italic uppercase tracking-tight text-white">{title}</h3>
     </div>
   );
 }
@@ -325,10 +320,6 @@ export default function OurJourneyPage() {
 
         <div className="relative z-10 px-6 md:px-16 pb-0 pt-28">
           <motion.div key={activeYear} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-px bg-red-600" />
-              <span className="font-mono text-red-500 text-xs uppercase tracking-[0.4em]">MIST Blitz · Our Journey</span>
-            </div>
             <h1 className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white">
               Our <span className="text-red-600">Journey</span>
             </h1>
@@ -372,7 +363,7 @@ export default function OurJourneyPage() {
 
             {/* ── 1. TEAM FORMATION ── */}
             <section>
-              <SectionHeader icon={Users} label="01 · Team Formation" title="The People Behind the Machine" />
+              <SectionHeader label="01 · Team Formation" title="The People Behind the Machine" />
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="md:col-span-2 space-y-6">
                   <p className="text-white/60 leading-relaxed text-base">{data.teamFormation.summary}</p>
@@ -433,7 +424,7 @@ export default function OurJourneyPage() {
 
             {/* ── 2. MAJOR MILESTONES ── */}
             <section>
-              <SectionHeader icon={Star} label="02 · Major Milestones" title="Defining Moments" />
+              <SectionHeader label="02 · Major Milestones" title="Defining Moments" />
               <div className="grid md:grid-cols-2 gap-0 border border-white/10">
                 {data.milestones.map((m, i) => (
                   <div
@@ -456,7 +447,7 @@ export default function OurJourneyPage() {
 
             {/* ── 3. FABRICATION ── */}
             <section>
-              <SectionHeader icon={Wrench} label="03 · Fabrication & Build" title={`Car: ${data.fabrication.car}`} />
+              <SectionHeader label="03 · Fabrication & Build" title={`Car: ${data.fabrication.car}`} />
               <div className="space-y-8">
                 <p className="text-white/60 leading-relaxed text-base max-w-3xl">{data.fabrication.summary}</p>
 
@@ -505,10 +496,9 @@ export default function OurJourneyPage() {
 
             {/* ── 4. COMPETITIONS ── */}
             <section>
-              <SectionHeader icon={Flag} label="04 · Competitions" title="Events & Results" />
+              <SectionHeader label="04 · Competitions" title="Events & Results" />
               {data.competitions.participated.length === 0 ? (
                 <div className="border border-white/10 p-8 text-center">
-                  <Flag size={32} className="text-white/10 mx-auto mb-4" />
                   <p className="text-white/30 text-sm font-mono uppercase tracking-wider">{data.competitions.note}</p>
                 </div>
               ) : (
@@ -552,7 +542,7 @@ export default function OurJourneyPage() {
 
             {/* ── 5. ACHIEVEMENTS ── */}
             <section>
-              <SectionHeader icon={Trophy} label="05 · Achievements" title="Awards & Recognition" />
+              <SectionHeader label="05 · Achievements" title="Awards & Recognition" />
               <div className="grid md:grid-cols-2 gap-4">
                 {data.achievements.map((ach, i) => (
                   <motion.div
