@@ -70,7 +70,7 @@ const OurCarsPage = () => {
             <Image src="/car2.jpg" fill alt="Our Cars" className="object-cover opacity-35" priority />
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/40 to-black" />
         <div className="relative z-10 text-center px-6">
           <p className="text-red-500 uppercase tracking-[0.4em] text-xs font-bold mb-4">Engineering Excellence</p>
           <h1 className="text-6xl md:text-9xl font-sans italic font-black uppercase tracking-tighter leading-none">
@@ -79,10 +79,6 @@ const OurCarsPage = () => {
           <p className="mt-6 text-gray-400 text-lg max-w-xl mx-auto">
             Three generations of Formula Student machines, built entirely in-house.
           </p>
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Scroll to Explore</span>
-            <div className="w-px h-12 bg-gradient-to-b from-red-600 to-transparent" />
-          </div>
         </div>
       </section>
 
@@ -116,7 +112,7 @@ const OurCarsPage = () => {
               {/* Left: Image */}
               <div className="relative h-72 md:h-96 rounded-sm overflow-hidden border border-white/10">
                 <Image src={car.image} fill alt={car.name} className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-6 left-6">
                   <span className="text-xs text-red-500 uppercase tracking-widest font-bold">{car.id}</span>
                   <h3 className="text-3xl font-sans font-black italic uppercase text-white">{car.name}</h3>

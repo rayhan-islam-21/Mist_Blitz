@@ -42,11 +42,6 @@ const Page = () => {
                             <span className="font-bold text-white">Behind the machine.</span>
                         </p>
 
-                        {/* Animated Scroll Indicator */}
-                        <div className="absolute bottom-12 flex flex-col items-center gap-4">
-                            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Scroll to Explore</span>
-                            <div className="w-px h-12 bg-linear-to-b from-red-600 to-transparent"></div>
-                        </div>
                     </div>
 
                 </section>

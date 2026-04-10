@@ -67,10 +67,6 @@ const JoinUsPage = () => {
               Apply Now
             </a>
           </div>
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Scroll to Explore</span>
-            <div className="w-px h-12 bg-linear-to-b from-red-600 to-transparent" />
-          </div>
         </div>
       </section>
 
