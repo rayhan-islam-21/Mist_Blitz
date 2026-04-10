@@ -347,7 +347,7 @@ const TeamMembers = () => {
   }, []);
 
   return (
-    <section className="bg-black py-10 md:py-16 px-4 md:px-8 min-h-screen">
+    <section className="bg-[#0a0a0a] py-10 md:py-16 px-4 md:px-8 min-h-screen">
       <div className="max-w-7xl mx-auto space-y-24">
 
         {/* ── 1. CHAIN OF COMMAND ── */}
