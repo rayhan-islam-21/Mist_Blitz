@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthContext from "@/context/Authcontext";
 import api from "@/lib/axios";
-import { FaFingerprint } from "react-icons/fa";
+import CenterLoader from "@/components/ui/center-loader";
 
 const MemberProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
@@ -42,10 +42,7 @@ const MemberProtectedRoute = ({ children }) => {
 
   if (loading || checking) {
     return (
-     <div className="min-h-screen bg-[#02040a] flex flex-col items-center justify-center font-mono text-red-500">
-      <FaFingerprint className="text-4xl mb-4 animate-pulse" />
-      <div className="text-[10px] tracking-[1em] font-black uppercase">Syncing Bio-Data...</div>
-    </div>
+      <CenterLoader fullScreen containerClassName="bg-[#02040a]" />
     );
   }
   

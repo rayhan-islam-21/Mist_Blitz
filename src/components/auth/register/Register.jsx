@@ -5,13 +5,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useSearchParams, useRouter } from "next/navigation";
-import { FaUserShield, FaArrowRight, FaLock, FaFingerprint, FaShieldAlt, FaEnvelope, FaCheckCircle, FaUserCheck } from "react-icons/fa";
+import { FaUserShield, FaArrowRight, FaLock, FaShieldAlt, FaEnvelope, FaCheckCircle, FaUserCheck } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import api from "@/lib/axios";
 import Image from "next/image";
 import AuthContext from "@/context/Authcontext";
 import saveAdminToDB from "@/lib/saveadminToDb";
+import CenterLoader from "@/components/ui/center-loader";
 
 const schema = yup.object().shape({
   password: yup.string().min(6, "Security Key must be 6+ chars").required("Required"),
@@ -99,10 +100,7 @@ const onSubmit = async (data) => {
   };
 
   if (loading) return (
-    <div className="min-h-screen bg-[#02040a] flex flex-col items-center justify-center font-mono text-red-500">
-      <FaFingerprint className="text-4xl mb-4 animate-pulse" />
-      <div className="text-[10px] tracking-[1em] font-black uppercase">Syncing Bio-Data...</div>
-    </div>
+    <CenterLoader fullScreen containerClassName="bg-[#02040a]" />
   );
 
   return (

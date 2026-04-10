@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import api from "@/lib/axios";
 import { Linkedin, ChevronRight, Wind, Settings, Layers, Zap, Star } from "lucide-react";
 import Image from "next/image";
+import CenterLoader from "@/components/ui/center-loader";
 
 const TOP_MANAGEMENT = {
   advisor: {
@@ -160,9 +161,7 @@ const TeamMembers = () => {
   };
 
   if (loading) return (
-    <div className="min-h-screen bg-black flex items-center justify-center">
-      <div className="w-12 h-12 border-4 border-zinc-900 border-t-red-600 rounded-full animate-spin" />
-    </div>
+    <CenterLoader fullScreen containerClassName="bg-black" />
   );
 
   return (

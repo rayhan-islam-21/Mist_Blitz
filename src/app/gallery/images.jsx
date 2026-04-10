@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import api from "@/lib/axios";
 import Image from "next/image";
 import { Maximize2, X } from "lucide-react";
+import CenterLoader from "@/components/ui/center-loader";
 
 const CATEGORIES = ["All", "Cars", "Fabrication", "Competitions", "Team Moments"];
 
@@ -34,9 +35,7 @@ const Gallery = () => {
 
   if (loading)
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center font-mono uppercase tracking-[0.3em]">
-        Loading_Visual_Archive...
-      </div>
+      <CenterLoader fullScreen containerClassName="bg-black" />
     );
 
   return (

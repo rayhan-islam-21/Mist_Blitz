@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import AuthContext from "@/context/Authcontext";
-import { FaFingerprint } from "react-icons/fa";
+import CenterLoader from "@/components/ui/center-loader";
 
 // This tiny component isolates the "poisonous" hook
 const GuestRedirectLogic = () => {
@@ -26,10 +26,7 @@ const GuestRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#02040a] flex flex-col items-center justify-center font-mono text-red-500">
-        <FaFingerprint className="text-4xl mb-4 animate-pulse" />
-        <div className="text-[10px] tracking-[1em] font-black uppercase">Verifying Access Token...</div>
-      </div>
+      <CenterLoader fullScreen containerClassName="bg-[#02040a]" />
     );
   }
 

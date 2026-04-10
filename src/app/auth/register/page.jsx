@@ -1,14 +1,13 @@
 import AdminRegister from "@/components/auth/register/Register";
 import React, { Suspense } from "react";
+import CenterLoader from "@/components/ui/center-loader";
 
 const Register = () => {
   return (
     <div className="md:min-h-screen">
       <Suspense
         fallback={
-          <div className="h-screen flex justify-center items-center">
-            Loading...
-          </div>
+          <CenterLoader fullScreen containerClassName="bg-[#02040a]" />
         }
       >
         <AdminRegister />

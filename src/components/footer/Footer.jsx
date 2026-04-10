@@ -1,3 +1,4 @@
+import { RoundedRedLoader } from "@/components/ui/center-loader";
 "use client";
 
 import { useState } from "react";
@@ -339,7 +340,7 @@ export default function Footer() {
                     className="relative group font-mono tracking-tighter bg-red-600 text-white border-4 border-black px-10 py-2 font-black uppercase italic shadow-[4px_4px_0px_black] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 overflow-hidden"
                   >
                     <span className="relative z-10">
-                      {status === "loading" ? "SCANNING..." : "Authenticate"}
+                      {status === "loading" ? <RoundedRedLoader size="h-5 w-5" className="border-white/35 border-t-white" /> : "Authenticate"}
                     </span>
                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform"></div>
                   </button>

@@ -22,6 +22,7 @@ import PremiumDropdown from "@/components/ui/premium-dropdown";
 import api from "@/lib/axios";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
+import CenterLoader, { RoundedRedLoader } from "@/components/ui/center-loader";
 
 const MyProfile = () => {
   const { user, setUser, loading } = useContext(AuthContext);
@@ -115,9 +116,7 @@ const MyProfile = () => {
     "bg-white border border-slate-200 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)] hover:shadow-[8px_8px_0px_0px_rgba(220,38,38,0.1)] transition-all duration-300";
 
   if (loading) {
-    return (
-      <div className="h-screen w-full flex items-center justify-center"></div>
-    );
+    return <CenterLoader fullScreen containerClassName="bg-[#FDFDFD]" />;
   }
 
   return (
@@ -154,7 +153,7 @@ const MyProfile = () => {
               />
             </div>
             <p className="text-xl md:text-2xl font-black italic tracking-tighter uppercase leading-none">
-              {isSaving ? "Syncing..." : isEditing ? "Editing" : "Verified"}
+              {isSaving ? <RoundedRedLoader size="h-5 w-5" className="border-white/35 border-t-white" /> : isEditing ? "Editing" : "Verified"}
             </p>
           </div>
         </header>

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import api from "@/lib/axios";
 import toast from "react-hot-toast";
+import { RoundedRedLoader } from "@/components/ui/center-loader";
 
 const AdminHistoryPage = () => {
   const [logs, setLogs] = useState([]);
@@ -120,8 +121,10 @@ const AdminHistoryPage = () => {
             <tbody className="divide-y divide-slate-100">
               {loading ? (
                 <tr>
-                  <td colSpan="4" className="p-20 text-center animate-pulse font-black text-slate-300">
-                    SYNCHRONIZING_ARCHIVES...
+                  <td colSpan="4" className="p-20">
+                    <div className="flex justify-center">
+                      <RoundedRedLoader size="h-10 w-10" />
+                    </div>
                   </td>
                 </tr>
               ) : (
@@ -148,8 +151,8 @@ const AdminHistoryPage = () => {
           {/* Mobile Card View */}
           <div className="md:hidden divide-y divide-slate-100">
             {loading ? (
-              <div className="p-10 text-center animate-pulse font-black text-slate-300 text-xs">
-                SYNCHRONIZING...
+              <div className="p-10 flex justify-center">
+                <RoundedRedLoader size="h-10 w-10" />
               </div>
             ) : filteredLogs.length > 0 ? (
               filteredLogs.map((log) => (

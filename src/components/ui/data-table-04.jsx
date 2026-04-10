@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Button from "./retro-btn";
+import { RoundedRedLoader } from "@/components/ui/center-loader";
 
 const DataTableEquipment = () => {
   const [equipment, setEquipment] = useState([]);
@@ -224,8 +225,10 @@ const DataTableEquipment = () => {
             <tbody className="divide-y divide-slate-100">
               {loading ? (
                 <tr>
-                  <td colSpan="5" className="p-20 text-center font-black text-slate-200 uppercase tracking-[0.4em] italic text-xl animate-pulse">
-                    Scanning Database...
+                  <td colSpan="5" className="p-20">
+                    <div className="flex justify-center">
+                      <RoundedRedLoader size="h-10 w-10" />
+                    </div>
                   </td>
                 </tr>
               ) : table.getRowModel().rows.map(row => (

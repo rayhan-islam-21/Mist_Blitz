@@ -16,6 +16,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AuthContext from "@/context/Authcontext";
+import { RoundedRedLoader } from "@/components/ui/center-loader";
 
 const CheckoutEquipmentTable = () => {
   const [equipment, setEquipment] = useState([]);
@@ -237,8 +238,10 @@ const CheckoutEquipmentTable = () => {
             <tbody className="divide-y divide-slate-100">
               {dataLoading ? (
                 <tr>
-                  <td colSpan={columns.length} className="p-20 text-center font-black text-slate-200 uppercase tracking-[0.4em] italic text-xl animate-pulse">
-                    Scanning Data...
+                  <td colSpan={columns.length} className="p-20">
+                    <div className="flex justify-center">
+                      <RoundedRedLoader size="h-10 w-10" />
+                    </div>
                   </td>
                 </tr>
               ) : table.getRowModel().rows.length > 0 ? (

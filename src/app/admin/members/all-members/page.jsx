@@ -12,6 +12,7 @@ import toast, { Toaster } from "react-hot-toast";
 import api from "@/lib/axios";
 import Link from "next/link";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { RoundedRedLoader } from "@/components/ui/center-loader";
 
 const AllMembersTable = () => {
   const [members, setMembers] = useState([]);
@@ -96,8 +97,10 @@ const AllMembersTable = () => {
             <tbody className="divide-y divide-slate-100">
               {loading ? (
                 <tr>
-                  <td colSpan="5" className="p-20 text-center font-black text-slate-200 uppercase tracking-[0.4em] italic text-xl animate-pulse">
-                    Scanning Database...
+                  <td colSpan="5" className="p-20">
+                    <div className="flex justify-center">
+                      <RoundedRedLoader size="h-10 w-10" />
+                    </div>
                   </td>
                 </tr>
               ) : filteredMembers.map((member) => (

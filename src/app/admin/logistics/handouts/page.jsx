@@ -19,6 +19,7 @@ import {
 } from "@tanstack/react-table";
 import toast, { Toaster } from "react-hot-toast";
 import api from "@/lib/axios";
+import { RoundedRedLoader } from "@/components/ui/center-loader";
 
 const CurrentHandouts = () => {
   const [handouts, setHandouts] = useState([]);
@@ -236,8 +237,10 @@ MIST Blitz Admin Team`;
             <tbody className="divide-y divide-slate-100">
               {loading ? (
                 <tr>
-                  <td colSpan="5" className="p-20 font-sans text-center font-black text-slate-200 uppercase tracking-[0.4em] italic text-xl animate-pulse">
-                    Initializing Link...
+                  <td colSpan="5" className="p-20">
+                    <div className="flex justify-center">
+                      <RoundedRedLoader size="h-10 w-10" />
+                    </div>
                   </td>
                 </tr>
               ) : handouts.length === 0 ? (

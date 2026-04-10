@@ -6,7 +6,6 @@ import {
   FaUser,
   FaLinkedin,
   FaCloudUploadAlt,
-  FaCircleNotch,
   FaCheckCircle,
   FaRocket,
   FaInfoCircle,
@@ -15,6 +14,7 @@ import {
 import PremiumDropdown from "@/components/ui/premium-dropdown";
 import Image from "next/image";
 import Button from "@/components/ui/retro-btn";
+import { RoundedRedLoader } from "@/components/ui/center-loader";
 import saveMemberToDB from "@/lib/savememberToDb";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -278,10 +278,7 @@ const AddMemberPage = () => {
                   className="cursor-pointer flex flex-col items-center px-4 text-center w-full h-full justify-center"
                 >
                   {uploading ? (
-                    <FaCircleNotch
-                      className="animate-spin text-red-500 mb-2"
-                      size={20}
-                    />
+                    <RoundedRedLoader size="h-6 w-6" className="mb-2" />
                   ) : formData.image ? (
                     <FaCheckCircle className="text-red-500 mb-2" size={24} />
                   ) : (
@@ -292,7 +289,7 @@ const AddMemberPage = () => {
                   )}
                   <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
                     {uploading
-                      ? "Uploading..."
+                      ? ""
                       : formData.image
                       ? "Change Photo"
                       : "Upload Photo"}
@@ -401,7 +398,7 @@ const AddMemberPage = () => {
               className="w-full py-4 rounded bg-red-600 text-white active:scale-95 transition-transform"
             >
               <span className="uppercase tracking-widest italic text-sm">
-                {uploading ? "Uploading..." : "Deploy Member"}
+                {uploading ? <RoundedRedLoader size="h-5 w-5" className="border-white/35 border-t-white" /> : "Deploy Member"}
               </span>
             </Button>
 

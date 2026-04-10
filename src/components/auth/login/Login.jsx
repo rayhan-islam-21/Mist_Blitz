@@ -5,12 +5,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FaLock, FaUserShield, FaArrowRight, FaFingerprint, FaShieldAlt, FaEnvelope, FaCheckCircle, FaUserCheck } from "react-icons/fa";
+import { FaLock, FaUserShield, FaArrowRight, FaShieldAlt, FaEnvelope, FaCheckCircle, FaUserCheck } from "react-icons/fa";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import AuthContext from "@/context/Authcontext";
 import api from "@/lib/axios";
 import Image from "next/image";
+import CenterLoader from "@/components/ui/center-loader";
 
 const schema = yup.object().shape({
   email: yup.string().email("Invalid format").required("Email is required"),
@@ -82,10 +83,7 @@ const AdminLogin = () => {
 
   if (authLoading || isFetchingIdentity) {
     return (
-      <div className="min-h-screen bg-[#02040a] flex flex-col items-center justify-center font-mono text-red-500">
-        <FaFingerprint className="text-4xl mb-4 animate-pulse" />
-        <div className="text-[10px] tracking-[1em] font-black uppercase">Syncing Bio-Data...</div>
-      </div>
+      <CenterLoader fullScreen containerClassName="bg-[#02040a]" />
     );
   }
 

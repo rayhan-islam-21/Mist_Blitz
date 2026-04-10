@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import { RoundedRedLoader } from "@/components/ui/center-loader";
 import { Mail, MapPin, Phone, Facebook, Instagram, Youtube, Linkedin, Twitter } from "lucide-react";
 
 const socialLinks = [
@@ -193,7 +194,7 @@ const ContactPage = () => {
                   disabled={status === "loading"}
                   className="cta-btn w-full bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
                 >
-                  {status === "loading" ? "Sending..." : "Send Message"}
+                  {status === "loading" ? <RoundedRedLoader size="h-5 w-5" className="border-white/35 border-t-white" /> : "Send Message"}
                 </button>
               </form>
             )}
