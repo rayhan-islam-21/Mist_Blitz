@@ -11,62 +11,40 @@ const Page = () => {
             <Navbar />
 
             <main>
-                {/* ====== Improved Hero Section ====== */}
-                <section className="relative w-full h-screen overflow-hidden">
-                    {/* Background wrapper with overflow-hidden to clip the zoom effect */}
-                    <div className="absolute inset-0 overflow-hidden">
-                        <div className="absolute inset-0 scale-105 animate-slow-zoom">
-                            <Image
-                                src="/china4.jpg" 
-                                alt="Team Hero Banner"
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                        </div>
+                {/* Hero */}
+                <section className="relative w-full h-[70vh] overflow-hidden flex flex-col justify-end">
+                    <div className="absolute inset-0">
+                        <Image
+                            src="/china4.jpg"
+                            alt="Team Hero"
+                            fill
+                            className="object-cover opacity-50"
+                            priority
+                        />
                     </div>
+                    <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-r from-black/70 via-transparent to-transparent" />
 
-                    {/* Multi-layered Overlay */}
-                    <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black"></div>
-                    
-                    {/* Hero Content */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
-                        <div className="space-y-2">
-                            <h1 className="text-6xl md:text-[8rem] font-sans font-black uppercase italic tracking-tighter leading-none">
-                                OUR <span className="text-red-600">Team</span>
-                            </h1>
+                    <div className="relative z-10 px-6 md:px-16 pb-12">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-8 h-px bg-red-600" />
+                            <span className="font-mono text-red-500 text-xs uppercase tracking-[0.4em]">MIST Blitz · The Crew</span>
                         </div>
-                        
-                        <p className="mt-6 text-sm md:text-xl font-light uppercase tracking-[0.3em] max-w-2xl text-zinc-300">
-                            The visionaries and engineers <br /> 
-                            <span className="font-bold text-white">Behind the machine.</span>
+                        <h1 className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white">
+                            Our <span className="text-red-600">Team</span>
+                        </h1>
+                        <p className="text-white/40 text-base md:text-lg mt-4 max-w-lg">
+                            The engineers and operators behind every bolt, weld, and lap.
                         </p>
-
                     </div>
-
                 </section>
 
-                {/* ====== Team Members Section ====== */}
-                <section className="relative z-10 bg-black w-full overflow-hidden">
+                <section className="relative z-10 bg-black w-full">
                     <TeamMembers />
                 </section>
             </main>
 
             <Footer />
-
-            <style jsx global>{`
-                html, body {
-                    max-width: 100%;
-                    overflow-x: hidden;
-                }
-                @keyframes slow-zoom {
-                    0% { transform: scale(1); }
-                    100% { transform: scale(1.1); }
-                }
-                .animate-slow-zoom {
-                    animation: slow-zoom 20s infinite alternate linear;
-                }
-            `}</style>
         </div>
     );
 };
