@@ -65,51 +65,55 @@ const seasons = [
 ];
 
 export default function OurJourneyPage() {
-  const [active, setActive] = useState(3);
+  const [active, setActive] = useState(seasons.length - 1);
 
   const cur = seasons[active];
+  const progress = ((active + 1) / seasons.length) * 100;
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#080b12] text-white selection:bg-red-600 selection:text-white">
+    <div className="relative min-h-screen overflow-x-hidden bg-[#07090f] text-white selection:bg-red-600 selection:text-white">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-red-600/20 blur-3xl" />
-        <div className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="absolute -left-24 top-8 h-80 w-80 rounded-full bg-red-600/25 blur-3xl" />
+        <div className="absolute right-10 top-1/3 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl" />
         <div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-25"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)",
-            backgroundSize: "42px 42px",
+              "linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
             maskImage:
-              "radial-gradient(circle at center, rgba(0,0,0,0.55), transparent 72%)",
+              "radial-gradient(circle at 20% 20%, rgba(0,0,0,0.75), transparent 70%)",
           }}
         />
       </div>
 
       <Navbar />
 
-      <section className="relative mx-auto flex min-h-[92vh] w-full max-w-7xl items-end px-6 pb-16 pt-36 md:px-10">
-        <div className="absolute inset-x-6 top-28 h-[65vh] overflow-hidden rounded-[2.5rem] border border-white/10 md:inset-x-10">
-          <Image src={cur.image} fill alt={cur.title} className="object-cover object-center" priority />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#070910]/95 via-[#070910]/65 to-[#070910]/35" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#070910] via-transparent to-transparent" />
-        </div>
+      <section className="relative mx-auto w-full max-w-7xl px-6 pb-12 pt-32 md:px-10 md:pt-40">
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-black/35 p-6 backdrop-blur-sm md:p-10">
+          <div className="absolute inset-0">
+            <Image src={cur.image} fill alt={cur.title} className="object-cover object-center opacity-35" priority />
+            <div className="absolute inset-0 bg-linear-to-r from-[#05060a] via-[#080b12]/85 to-[#080b12]/70" />
+          </div>
 
-        <div className="relative z-10 grid w-full items-end gap-8 lg:grid-cols-[1fr_auto]">
+          <div className="relative z-10 grid items-end gap-10 lg:grid-cols-[1fr_auto]">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/5 px-4 py-2 backdrop-blur">
+            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/20 bg-black/25 px-4 py-2 backdrop-blur">
               <span className="h-2 w-2 rounded-full bg-red-600" />
-              <span className="text-[11px] uppercase tracking-[0.26em] text-white/70">MIST Blitz Timeline</span>
+              <span className="text-[11px] uppercase tracking-[0.3em] text-white/75">OUR JOURNEY</span>
             </div>
-            <h1 className="mb-3 text-[13vw] font-black uppercase leading-[0.9] tracking-[-0.04em] text-white md:text-[8vw]">
-              Journey
+            <h1 className="text-[12vw] font-black uppercase leading-[0.88] tracking-[-0.04em] text-white md:text-[7vw]">
+              Built Through
+            </h1>
+            <h1 className="mb-4 text-[12vw] font-black uppercase leading-[0.88] tracking-[-0.04em] text-red-500 md:text-[7vw]">
+              Every Season
             </h1>
             <p className="max-w-xl text-base text-white/75 md:text-lg">
-              Four seasons of relentless building, testing, and racing. Explore how the team evolved from a small workshop group into an international Formula Student competitor.
+              This is our race-development timeline from first concept to international competition. Select a season to explore the milestones and technical progress.
             </p>
           </motion.div>
 
@@ -117,178 +121,180 @@ export default function OurJourneyPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.5 }}
-            className="grid grid-cols-2 gap-3 md:min-w-[320px]"
+            className="grid grid-cols-2 gap-3 md:min-w-85"
           >
             {[cur.stat1, cur.stat2].map((s, i) => (
-              <div key={i} className="rounded-2xl border border-white/15 bg-black/35 p-4 backdrop-blur-sm">
+              <div key={i} className="rounded-2xl border border-white/20 bg-black/45 p-4 backdrop-blur-sm">
                 <p className="text-3xl font-black leading-none text-red-500">{s.n}</p>
                 <p className="mt-1 text-[11px] uppercase tracking-[0.24em] text-white/55">{s.l}</p>
               </div>
             ))}
           </motion.div>
         </div>
+        </div>
       </section>
 
-      <div className="sticky top-16 z-40 border-y border-white/10 bg-[#06080f]/85 backdrop-blur-xl">
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-2 md:grid-cols-4">
-          {seasons.map((s, i) => (
-            <button
-              key={s.year}
-              onClick={() => setActive(i)}
-              className={`group relative flex flex-col items-center overflow-hidden px-3 py-5 transition-all duration-300 ${
-                active === i ? "bg-red-600/15" : "hover:bg-white/[0.04]"
-              }`}
-            >
-              {active === i && (
-                <motion.div layoutId="seasonActive" className="absolute inset-0 border-b-2 border-red-500" />
-              )}
-              <span
-                className={`mb-1 text-[10px] uppercase tracking-[0.25em] ${
-                  active === i ? "text-red-400" : "text-white/35"
-                }`}
-              >
-                {s.round}
-              </span>
-              <span
-                className={`text-2xl font-black leading-none ${
-                  active === i ? "text-white" : "text-white/45 group-hover:text-white"
-                }`}
-              >
-                {s.year}
-              </span>
-              <span
-                className={`mt-1 hidden text-[10px] uppercase tracking-[0.18em] md:block ${
-                  active === i ? "text-white/70" : "text-white/20"
-                }`}
-              >
-                {s.title}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={cur.year}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.35 }}
-          className="mx-auto w-full max-w-7xl px-6 py-14 md:px-10"
-        >
-          <div className="mb-10 rounded-[2rem] border border-white/10 bg-white/[0.02] p-6 md:p-8">
-            <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr]">
-              <div>
-                <span className="mb-4 block text-[11px] uppercase tracking-[0.34em] text-red-400">
-                  Season Focus
-                </span>
-                <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.03em] text-white md:text-6xl">
-                  {cur.title}
-                </h2>
-                <p className="mt-3 text-lg uppercase tracking-[0.11em] text-red-300">{cur.tagline}</p>
-                <p className="mt-6 max-w-2xl text-white/75">{cur.description}</p>
-              </div>
-
-              <div className="relative min-h-[280px] overflow-hidden rounded-2xl border border-white/10">
-                <Image src={cur.image} fill alt={cur.title} className="object-cover object-center" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/15 bg-black/35 px-4 py-3 backdrop-blur">
-                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/60">
-                    {cur.round} / {cur.year}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-3xl border border-white/10 bg-[#0b0f1a]/80 p-6 md:p-8">
-              <div className="mb-8 flex items-center gap-3">
-                <span className="h-2 w-2 rounded-full bg-red-500" />
-                <span className="text-[11px] uppercase tracking-[0.28em] text-white/65">Milestones</span>
-              </div>
-
-              <div className="space-y-5">
-                {cur.milestones.map((m, i) => (
-                  <div key={i} className="grid grid-cols-[22px_1fr] gap-4">
-                    <div className="relative">
-                      <span className="text-[10px] font-bold text-red-400">{String(i + 1).padStart(2, "0")}</span>
-                      {i < cur.milestones.length - 1 && <div className="absolute left-[6px] top-5 h-8 w-px bg-white/20" />}
-                    </div>
-                    <div className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm uppercase tracking-[0.08em] text-white/80">
-                      {m}
-                    </div>
-                  </div>
+      <section className="mx-auto w-full max-w-7xl px-6 pb-16 md:px-10">
+        <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
+          <aside className="lg:sticky lg:top-28 lg:h-fit">
+            <div className="rounded-3xl border border-white/10 bg-[#0a0d16]/85 p-5 backdrop-blur-sm">
+              <p className="mb-4 text-[11px] uppercase tracking-[0.28em] text-white/60">Season selector</p>
+              <div className="relative">
+                <div className="absolute left-2.75 top-2 h-[calc(100%-10px)] w-px bg-white/15" />
+                {seasons.map((s, i) => (
+                  <button
+                    key={s.year}
+                    onClick={() => setActive(i)}
+                    className="group relative mb-4 flex w-full items-center gap-3 text-left"
+                  >
+                    <span
+                      className={`relative z-10 h-5 w-5 rounded-full border-2 transition ${
+                        active === i
+                          ? "border-red-500 bg-red-500 shadow-[0_0_0_4px_rgba(239,68,68,0.2)]"
+                          : "border-white/35 bg-[#0a0d16] group-hover:border-white"
+                      }`}
+                    />
+                    <span className="flex-1 rounded-xl border border-white/10 bg-white/2 px-3 py-2 transition group-hover:border-white/20">
+                      <span className={`block text-xl font-black leading-none ${active === i ? "text-white" : "text-white/65"}`}>
+                        {s.year}
+                      </span>
+                      <span className="mt-1 block text-[10px] uppercase tracking-[0.2em] text-white/50">{s.title}</span>
+                    </span>
+                  </button>
                 ))}
               </div>
-            </div>
 
-            <div className="space-y-6">
-              <div className="rounded-3xl border border-white/10 bg-[#0b0f1a]/80 p-6 md:p-8">
-                <div className="mb-5 flex items-center justify-between">
-                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/65">Build Pipeline</span>
-                  <span className="text-[11px] uppercase tracking-[0.2em] text-red-400">4 stages</span>
+              <div className="mt-3">
+                <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/50">
+                  <span>Progress</span>
+                  <span>{Math.round(progress)}%</span>
                 </div>
-                <div className="space-y-3">
-                  {cur.phases.map((phase, i) => (
-                    <div key={phase} className="relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
-                      <div
-                        className="absolute inset-y-0 left-0 bg-red-600/90"
-                        style={{ width: `${35 + i * 17}%` }}
-                      />
-                      <div className="relative flex items-center justify-between">
-                        <p className="text-sm uppercase tracking-[0.11em] text-white">{phase}</p>
-                        <span className="text-[10px] text-white/75">0{i + 1}</span>
-                      </div>
+                <div className="h-2 rounded-full bg-white/10">
+                  <motion.div
+                    className="h-2 rounded-full bg-red-500"
+                    initial={false}
+                    animate={{ width: `${progress}%` }}
+                    transition={{ duration: 0.35 }}
+                  />
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={cur.year}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-7"
+            >
+              <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0d16]/85 backdrop-blur-sm">
+                <div className="grid gap-0 md:grid-cols-[1.05fr_0.95fr]">
+                  <div className="p-6 md:p-8">
+                    <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-red-400">
+                      {cur.round} / {cur.year}
+                    </p>
+                    <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.03em] text-white md:text-6xl">
+                      {cur.title}
+                    </h2>
+                    <p className="mt-3 text-lg uppercase tracking-widest text-red-300">{cur.tagline}</p>
+                    <p className="mt-6 text-white/75">{cur.description}</p>
+
+                    <div className="mt-7 grid grid-cols-2 gap-3">
+                      {[cur.stat1, cur.stat2].map((s, i) => (
+                        <div key={i} className="rounded-xl border border-white/15 bg-black/35 p-4">
+                          <p className="text-3xl font-black leading-none text-red-500">{s.n}</p>
+                          <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-white/55">{s.l}</p>
+                        </div>
+                      ))}
                     </div>
+                  </div>
+
+                  <div className="relative min-h-75 md:min-h-full">
+                    <Image src={cur.image} fill alt={cur.title} className="object-cover object-center" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
+                    <div className="absolute bottom-4 right-4 rounded-lg border border-white/15 bg-black/45 px-3 py-2 text-[11px] uppercase tracking-[0.24em] text-white/70 backdrop-blur">
+                      Season {active + 1}
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="rounded-3xl border border-white/10 bg-[#0a0d16]/85 p-6 backdrop-blur-sm">
+                  <p className="mb-5 text-[11px] uppercase tracking-[0.28em] text-white/60">Key Milestones</p>
+                  <div className="space-y-3">
+                    {cur.milestones.map((m, i) => (
+                      <div key={m} className="rounded-xl border border-white/10 bg-white/2 px-4 py-3">
+                        <p className="text-[10px] uppercase tracking-[0.23em] text-red-400">M{i + 1}</p>
+                        <p className="mt-1 text-sm uppercase tracking-[0.08em] text-white/80">{m}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-3xl border border-white/10 bg-[#0a0d16]/85 p-6 backdrop-blur-sm">
+                  <p className="mb-5 text-[11px] uppercase tracking-[0.28em] text-white/60">Engineering Flow</p>
+                  <div className="space-y-3">
+                    {cur.phases.map((phase, i) => (
+                      <div key={phase} className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/3 px-4 py-3">
+                        <span
+                          className="absolute inset-y-0 left-0 bg-red-600/85 transition-all"
+                          style={{ width: `${30 + i * 18}%` }}
+                        />
+                        <div className="relative flex items-center justify-between">
+                          <p className="text-sm uppercase tracking-[0.11em] text-white">{phase}</p>
+                          <span className="text-[10px] uppercase tracking-[0.15em] text-white/70">0{i + 1}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 rounded-xl border border-red-500/35 bg-red-500/10 p-4">
+                    <p className="text-[11px] uppercase tracking-[0.2em] text-red-300">Season Snapshot</p>
+                    <p className="mt-1 text-sm text-white/80">
+                      {cur.year} marked a clear improvement in team capability, technical depth, and race-readiness.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-black/30 px-4 py-3">
+                <button
+                  onClick={() => setActive((p) => Math.max(0, p - 1))}
+                  disabled={active === 0}
+                  className="rounded-full border border-white/20 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white/70 transition hover:border-red-400 hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  Prev Season
+                </button>
+
+                <div className="flex items-center gap-2">
+                  {seasons.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActive(i)}
+                      aria-label={`Go to season ${seasons[i].year}`}
+                      className={`h-2 rounded-full transition-all ${
+                        active === i ? "w-8 bg-red-500" : "w-2 bg-white/35 hover:bg-white/75"
+                      }`}
+                    />
                   ))}
                 </div>
-              </div>
 
-              <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-red-600/25 to-[#171b29] p-6 md:p-8">
-                <span className="text-[11px] uppercase tracking-[0.24em] text-white/75">Season snapshot</span>
-                <p className="mt-3 text-sm text-white/85">
-                  {cur.year} was a key step in MIST Blitz growth, with stronger engineering workflow, broader team capability, and improved competitive confidence.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-10 flex items-center justify-between rounded-2xl border border-white/10 bg-black/30 px-4 py-3 md:px-6">
-            <button
-              onClick={() => setActive((p) => Math.max(0, p - 1))}
-              disabled={active === 0}
-              className="flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm uppercase tracking-[0.13em] text-white/70 transition hover:border-red-400 hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
-            >
-              Prev
-              <span className="text-red-400">{active > 0 ? seasons[active - 1].year : "-"}</span>
-            </button>
-
-            <div className="flex items-center gap-2">
-              {seasons.map((_, i) => (
                 <button
-                  key={i}
-                  onClick={() => setActive(i)}
-                  aria-label={`Go to season ${seasons[i].year}`}
-                  className={`h-2 rounded-full transition-all ${
-                    active === i ? "w-9 bg-red-500" : "w-2 bg-white/35 hover:bg-white/70"
-                  }`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={() => setActive((p) => Math.min(seasons.length - 1, p + 1))}
-              disabled={active === seasons.length - 1}
-              className="flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm uppercase tracking-[0.13em] text-white/70 transition hover:border-red-400 hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
-            >
-              <span className="text-red-400">{active < seasons.length - 1 ? seasons[active + 1].year : "-"}</span>
-              Next
-            </button>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+                  onClick={() => setActive((p) => Math.min(seasons.length - 1, p + 1))}
+                  disabled={active === seasons.length - 1}
+                  className="rounded-full border border-white/20 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white/70 transition hover:border-red-400 hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  Next Season
+                </button>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
 
       <div className="border-t border-white/10 bg-[#06080f]">
         <div className="mx-auto grid w-full max-w-7xl grid-cols-2 divide-x divide-y divide-white/10 md:grid-cols-4 md:divide-y-0">

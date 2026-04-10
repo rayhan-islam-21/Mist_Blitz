@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={oswald.variable}>
       <body
         className={`${oswald.variable} bg-black text-white`}
       >

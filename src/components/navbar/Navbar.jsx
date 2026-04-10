@@ -42,16 +42,14 @@ const Navbar = () => {
 
           {/* LEFT: Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="relative rounded-md border border-white/10 bg-white/5 px-2 py-1 backdrop-blur-md">
-              <Image
-                src="https://res.cloudinary.com/dnrubj8x4/image/upload/v1771498710/hero_q5f7az.png"
-                alt="MIST BLITZ"
-                width={130}
-                height={52}
-                className="brightness-200 contrast-125 w-28 h-auto md:w-36"
-                priority
-              />
-            </div>
+            <Image
+              src="https://res.cloudinary.com/dnrubj8x4/image/upload/v1771498710/hero_q5f7az.png"
+              alt="MIST BLITZ"
+              width={130}
+              height={52}
+              className="brightness-200 contrast-125 w-28 h-auto md:w-36"
+              priority
+            />
           </Link>
 
           {/* CENTER: Nav links (desktop) */}
