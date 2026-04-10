@@ -224,7 +224,7 @@ function CaptainCard({ captain }) {
 }
 
 // ─── DEPT PANEL ───────────────────────────────────────────────────────────────
-function DeptPanel({ depts, membersMap }) {
+function DeptPanel({ depts, membersMap, loading }) {
   const [active, setActive] = useState(depts[0]?.key || null);
   const members = membersMap[active] || [];
 
@@ -252,8 +252,16 @@ function DeptPanel({ depts, membersMap }) {
         ))}
       </div>
 
+      {loading && (
+        <div className="border border-t-0 border-white/10 p-6 md:p-8">
+          <div className="h-40 flex items-center justify-center">
+            <CenterLoader />
+          </div>
+        </div>
+      )}
+
       {/* Content */}
-      {activeDept && (
+      {!loading && activeDept && (
         <div className="border border-t-0 border-white/10 p-6 md:p-8">
           <div className="mb-8">
             <h4 className="text-xl font-black italic uppercase tracking-tight text-white">{activeDept.fullLabel}</h4>
@@ -338,16 +346,6 @@ const TeamMembers = () => {
     fetchData();
   }, []);
 
-  if (loading) {
-    return (
-      <section className="bg-black px-4 md:px-8 py-10 md:py-16">
-        <div className="max-w-7xl mx-auto h-56 md:h-64 flex items-center justify-center">
-          <CenterLoader />
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section className="bg-black py-10 md:py-16 px-4 md:px-8 min-h-screen">
       <div className="max-w-7xl mx-auto space-y-24">
@@ -364,13 +362,13 @@ const TeamMembers = () => {
         {/* ── 2. TECHNICAL TEAM ── */}
         <div>
           <SectionHeader label="02 · Technical Team" title="Engineering Sub-Teams" />
-          <DeptPanel depts={TECH_DEPTS} membersMap={techMap} />
+          <DeptPanel depts={TECH_DEPTS} membersMap={techMap} loading={loading} />
         </div>
 
         {/* ── 3. MANAGERIAL TEAM ── */}
         <div>
           <SectionHeader label="03 · Managerial Team" title="Operations & Strategy" />
-          <DeptPanel depts={MGMT_DEPTS} membersMap={mgmtMap} />
+          <DeptPanel depts={MGMT_DEPTS} membersMap={mgmtMap} loading={loading} />
         </div>
 
       </div>
