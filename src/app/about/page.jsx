@@ -33,38 +33,37 @@ function SectionHeader({ label, title }) {
 
 const About = () => {
   return (
-    <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-red-600 selection:text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
       <Navbar />
 
-      {/* ── HERO ── */}
-      <section className="relative h-[70vh] flex flex-col justify-end overflow-hidden">
-        <Image
-          src="/team.jpg"
-          fill
-          priority
-          alt="MIST Blitz Team"
-          className="object-cover opacity-50 transition-all duration-700"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
-        <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
-
-        <div className="relative z-10 px-6 md:px-16 pb-12">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <h1 className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white">
-              About <span className="text-red-600">Blitz</span>
-            </h1>
-            <p className="text-white/50 text-base md:text-lg mt-4 max-w-lg">
-              Bangladesh&apos;s first internationally competing Formula Student team — built from scratch at MIST.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
       <main className="bg-[#0a0a0a]">
+        {/* ── HERO ── */}
+        <section className="relative w-full h-[70vh] overflow-hidden flex flex-col justify-end">
+          <Image
+            src="/team.jpg"
+            fill
+            priority
+            alt="MIST Blitz Team"
+            className="object-cover opacity-50 transition-all duration-700"
+          />
+          <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
+
+          <div className="relative z-10 px-6 md:px-16 pb-12">
+            <motion.div
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <h1 className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white">
+                About <span className="text-red-600">Blitz</span>
+              </h1>
+              <p className="text-white/50 text-base md:text-lg mt-4 max-w-lg">
+                Bangladesh&apos;s Formula Student team — built from scratch at MIST.
+              </p>
+            </motion.div>
+          </div>
+        </section>
         <div className="max-w-7xl mx-auto px-6 md:px-16 py-20 space-y-24">
 
           {/* ── OUR TEAM ── */}
