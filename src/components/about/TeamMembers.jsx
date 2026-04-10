@@ -1,10 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import api from "@/lib/axios";
 import { Linkedin, Star } from "lucide-react";
 import Image from "next/image";
 import CenterLoader from "@/components/ui/center-loader";
+
+const fadeUp = {
+  initial: { y: 40, opacity: 0 },
+  whileInView: { y: 0, opacity: 1 },
+  viewport: { once: true },
+  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+};
 
 // ─── STATIC TOP DATA ──────────────────────────────────────────────────────────
 const TOP_MANAGEMENT = [
@@ -274,9 +282,19 @@ function DeptPanel({ depts, membersMap, loading }) {
           {leads.length > 0 && (
             <div className="mb-8">
               <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-white/25 mb-4">Unit Leads</p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
-                {leads.map(m => <LeadCard key={m._id} member={m} />)}
-              </div>
+              <motion.div
+                key={active + "-leads"}
+                initial="hidden"
+                animate="show"
+                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07 } } }}
+                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5"
+              >
+                {leads.map(m => (
+                  <motion.div key={m._id} variants={{ hidden: { y: 20, opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } } }}>
+                    <LeadCard member={m} />
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           )}
 
@@ -285,9 +303,19 @@ function DeptPanel({ depts, membersMap, loading }) {
             <div>
               {leads.length > 0 && <div className="border-t border-white/8 mb-6" />}
               <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-white/25 mb-4">Members</p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                {rest.map(m => <MemberCard key={m._id} member={m} />)}
-              </div>
+              <motion.div
+                key={active + "-members"}
+                initial="hidden"
+                animate="show"
+                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }}
+                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+              >
+                {rest.map(m => (
+                  <motion.div key={m._id} variants={{ hidden: { y: 20, opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } } }}>
+                    <MemberCard member={m} />
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           )}
 
@@ -305,10 +333,10 @@ function DeptPanel({ depts, membersMap, loading }) {
 // ─── SECTION HEADER ───────────────────────────────────────────────────────────
 function SectionHeader({ label, title }) {
   return (
-    <div className="mb-10 border-l-2 border-red-600 pl-4">
+    <motion.div {...fadeUp} className="mb-10 border-l-2 border-red-600 pl-4">
       <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-red-500 mb-1">{label}</p>
       <h2 className="text-3xl md:text-5xl font-black italic uppercase tracking-tight text-white">{title}</h2>
-    </div>
+    </motion.div>
   );
 }
 
@@ -353,23 +381,35 @@ const TeamMembers = () => {
         {/* ── 1. CHAIN OF COMMAND ── */}
         <div>
           <SectionHeader label="01 · Team Structure" title="Chain of Command" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {TOP_MANAGEMENT.map(p => <HierarchyCard key={p.key} person={p} />)}
-            <CaptainCard captain={CAPTAIN} />
-          </div>
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+          >
+            {TOP_MANAGEMENT.map(p => (
+              <motion.div key={p.key} variants={{ hidden: { y: 30, opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } }}>
+                <HierarchyCard person={p} />
+              </motion.div>
+            ))}
+            <motion.div variants={{ hidden: { y: 30, opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } }}>
+              <CaptainCard captain={CAPTAIN} />
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* ── 2. TECHNICAL TEAM ── */}
-        <div>
+        <motion.div {...fadeUp}>
           <SectionHeader label="02 · Technical Team" title="Engineering Sub-Teams" />
           <DeptPanel depts={TECH_DEPTS} membersMap={techMap} loading={loading} />
-        </div>
+        </motion.div>
 
         {/* ── 3. MANAGERIAL TEAM ── */}
-        <div>
+        <motion.div {...fadeUp}>
           <SectionHeader label="03 · Managerial Team" title="Operations & Strategy" />
           <DeptPanel depts={MGMT_DEPTS} membersMap={mgmtMap} loading={loading} />
-        </div>
+        </motion.div>
 
       </div>
     </section>

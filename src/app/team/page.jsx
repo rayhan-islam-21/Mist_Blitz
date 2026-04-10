@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import { motion } from "framer-motion";
 import Navbar from '@/components/navbar/Navbar';
 import TeamMembers from '@/components/about/TeamMembers';
 import Footer from '@/components/footer/Footer';
@@ -11,7 +12,7 @@ const Page = () => {
             <Navbar />
 
             <main>
-                {/* Hero — same style as Our Journey */}
+                {/* Hero */}
                 <section className="relative w-full h-[70vh] overflow-hidden flex flex-col justify-end">
                     <Image
                         src="/china4.jpg"
@@ -24,12 +25,18 @@ const Page = () => {
                     <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
 
                     <div className="relative z-10 px-6 md:px-16 pb-12">
-                        <h1 className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white">
-                            Our <span className="text-red-600">Team</span>
-                        </h1>
-                        <p className="text-white/50 text-base md:text-lg mt-4 max-w-lg">
-                            The engineers and operators behind every bolt, weld, and lap.
-                        </p>
+                        <motion.div
+                            initial={{ y: 30, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                            <h1 className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white">
+                                Our <span className="text-red-600">Team</span>
+                            </h1>
+                            <p className="text-white/50 text-base md:text-lg mt-4 max-w-lg">
+                                The engineers and operators behind every bolt, weld, and lap.
+                            </p>
+                        </motion.div>
                     </div>
                 </section>
 

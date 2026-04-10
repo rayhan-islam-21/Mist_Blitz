@@ -1,215 +1,215 @@
-// pages/about.js
 "use client";
+import { motion } from "framer-motion";
 import WhatWeDo from "@/components/about/WhatWeDo";
 import MISTBlitzIntro from "@/components/about/MISTBlitzIntro";
-import TeamMembers from "@/components/about/TeamMembers";
 import Achievements from "@/components/about/Achievements";
 import Image from "next/image";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import Link from "next/link";
 
+const fadeUp = {
+  initial: { y: 40, opacity: 0 },
+  whileInView: { y: 0, opacity: 1 },
+  viewport: { once: true },
+  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+};
+
+const fadeUpDelay = (delay = 0) => ({
+  initial: { y: 40, opacity: 0 },
+  whileInView: { y: 0, opacity: 1 },
+  viewport: { once: true },
+  transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+});
+
+function SectionHeader({ label, title }) {
+  return (
+    <motion.div {...fadeUp} className="mb-10 border-l-2 border-red-600 pl-4">
+      <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-red-500 mb-1">{label}</p>
+      <h2 className="text-3xl md:text-5xl font-black italic uppercase tracking-tight text-white">{title}</h2>
+    </motion.div>
+  );
+}
+
 const About = () => {
   return (
-    <div className="bg-black min-h-screen selection:bg-red-600 selection:text-white">
+    <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-red-600 selection:text-white">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center animate-slow-zoom justify-center overflow-hidden">
+      {/* ── HERO ── */}
+      <section className="relative h-[70vh] flex flex-col justify-end overflow-hidden">
         <Image
           src="/team.jpg"
           fill
           priority
-          alt="Mist Blitz Team"
-          className="object-cover object-center opacity-50 scale-105 animate-slow-zoom"
+          alt="MIST Blitz Team"
+          className="object-cover opacity-50 transition-all duration-700"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/20 to-[#000000]" />
-        <div className="relative z-20 text-center px-6">
-          <h1 className="text-6xl md:text-8xl font-sans italic font-black text-white tracking-normal uppercase">
-            About <span className="text-red-600">blitz</span>
-          </h1>
-          <p className="body-copy body-font text-gray-300 max-w-2xl mx-auto mt-6">
-            We are a group of passionate engineers from MIST, dedicated to
-            pushing the boundaries of automotive excellence through the Formula
-            Student challenge.
-          </p>
+        <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
+
+        <div className="relative z-10 px-6 md:px-16 pb-12">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h1 className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white">
+              About <span className="text-red-600">Blitz</span>
+            </h1>
+            <p className="text-white/50 text-base md:text-lg mt-4 max-w-lg">
+              Bangladesh&apos;s first internationally competing Formula Student team — built from scratch at MIST.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      <main className="bg-black relative">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24">
+      <main className="bg-[#0a0a0a]">
+        <div className="max-w-7xl mx-auto px-6 md:px-16 py-20 space-y-24">
 
-          {/* a. Our Team */}
-          <div className="grid md:grid-cols-2 gap-16 items-center mb-32">
-            <div>
-              <h3 className="text-red-500 font-sans italic font-bold uppercase tracking-widest text-sm mb-2">
-                Our Team
-              </h3>
-              <h2 className="text-3xl md:text-5xl uppercase text-white font-sans font-black italic mb-6">
-                Building More Than <span className="text-red-600">Just Race Cars.</span>
-              </h2>
-              <p className="body-copy text-gray-400 mb-6">
-                Founded at the Military Institute of Science and Technology,
-                MIST Blitz represents the pinnacle of student engineering.
-                Our journey isn&apos;t just about the finish line; it&apos;s about the
-                thousands of hours spent in the lab, the precision of our CAD
-                designs, and the grit required to build a high-performance
-                machine from scratch.
-              </p>
+          {/* ── OUR TEAM ── */}
+          <section>
+            <SectionHeader label="01 · Our Team" title="Building More Than Just Race Cars" />
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              <div className="space-y-8">
+                <motion.p {...fadeUpDelay(0.1)} className="text-white/60 leading-relaxed text-base">
+                  Founded at the Military Institute of Science and Technology, MIST Blitz represents
+                  the pinnacle of student engineering. Our journey isn&apos;t just about the finish line —
+                  it&apos;s about thousands of hours in the workshop, precision CAD design, and the grit
+                  required to build a high-performance machine from scratch.
+                </motion.p>
 
-              {/* Vision & Mission */}
-              <div className="space-y-6 mb-8">
-                <div className="border-l-2 border-red-600 pl-4">
-                  <h4 className="text-white font-black uppercase text-sm tracking-wider mb-1">Vision</h4>
-                  <p className="body-copy text-gray-400 text-sm">To become Bangladesh&apos;s leading Formula Student team, recognized globally for engineering excellence and innovation.</p>
-                </div>
-                <div className="border-l-2 border-white/20 pl-4">
-                  <h4 className="text-white font-black uppercase text-sm tracking-wider mb-1">Mission</h4>
-                  <p className="body-copy text-gray-400 text-sm">To develop world-class engineers through hands-on, competitive, real-world experience in vehicle design and manufacturing.</p>
-                </div>
-              </div>
-
-              <div className="flex gap-8 border-t border-white/10 pt-8">
-                <div>
-                  <p className="text-3xl font-bold text-red-600">50+</p>
-                  <p className="text-gray-500 text-sm">Active Members</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-red-600">03</p>
-                  <p className="text-gray-500 text-sm">Prototypes</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-red-600">100%</p>
-                  <p className="text-gray-500 text-sm">In-house Design</p>
-                </div>
-              </div>
-            </div>
-            <div className="relative h-100 rounded-2xl overflow-hidden border border-white/10">
-              <div className="absolute inset-0 bg-blue-600/10 z-10"></div>
-              <Image src="/car2.jpg" fill className="object-cover" alt="Workshop" />
-            </div>
-          </div>
-
-          {/* Section Components */}
-          <div className="space-y-4">
-            <MISTBlitzIntro />
-
-            <div className="py-16 border-y border-white/5">
-              <WhatWeDo />
-            </div>
-
-            {/* b. What We Do — already covered by WhatWeDo component */}
-
-            {/* c. About Formula Student */}
-            <div className="py-16">
-              <h3 className="text-red-500 font-sans italic font-bold uppercase tracking-widest text-sm mb-2">
-                About Formula Student
-              </h3>
-              <h2 className="text-3xl md:text-4xl uppercase text-white font-sans font-black italic mb-8">
-                What is Formula Student?
-              </h2>
-              <div className="grid md:grid-cols-2 gap-12">
-                <div>
-                  <p className="body-copy text-gray-400 mb-6">
-                    Formula Student (also known as Formula SAE) is the world&apos;s largest and most established engineering
-                    design competition for university students. Teams design, build, and race a small formula-style race car.
-                  </p>
-                  <p className="body-copy text-gray-400">
-                    The competition is not just about speed — judges evaluate engineering design, cost analysis, business
-                    planning, and dynamic performance. It prepares students for real-world engineering careers.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="text-white font-black uppercase text-sm tracking-wider mb-4">Competition Structure</h4>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-red-500 text-xs uppercase tracking-widest font-bold mb-1">Static Events</p>
-                      <ul className="text-gray-400 text-sm space-y-1">
-                        <li>• Engineering Design Event</li>
-                        <li>• Cost & Manufacturing Analysis</li>
-                        <li>• Business Plan Presentation</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="text-red-500 text-xs uppercase tracking-widest font-bold mb-1">Dynamic Events</p>
-                      <ul className="text-gray-400 text-sm space-y-1">
-                        <li>• Acceleration — 75m sprint</li>
-                        <li>• Skid Pad — figure-8 handling</li>
-                        <li>• Autocross — single-lap performance</li>
-                        <li>• Endurance — 22km reliability race</li>
-                        <li>• Efficiency — fuel/energy scoring</li>
-                      </ul>
-                    </div>
+                <motion.div {...fadeUpDelay(0.15)} className="grid grid-cols-2 gap-4">
+                  <div className="border border-white/10 p-5">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-white/25 mb-1">Vision</p>
+                    <p className="text-white/60 text-sm leading-relaxed">
+                      To become Bangladesh&apos;s leading Formula Student team, recognised globally for engineering excellence.
+                    </p>
                   </div>
-                </div>
-              </div>
-            </div>
-
-            {/* d. Our University */}
-            <div className="py-16 border-t border-white/5">
-              <h3 className="text-red-500 font-sans italic font-bold uppercase tracking-widest text-sm mb-2">
-                Our University
-              </h3>
-              <h2 className="text-3xl md:text-4xl uppercase text-white font-sans font-black italic mb-8">
-                MIST — Military Institute of Science & Technology
-              </h2>
-              <div className="grid md:grid-cols-2 gap-12">
-                <div>
-                  <p className="body-copy text-gray-400 mb-6">
-                    The Military Institute of Science and Technology (MIST) is one of Bangladesh&apos;s leading engineering
-                    universities, offering world-class facilities and a rigorous academic environment. MIST provides
-                    the foundation for our team&apos;s technical capabilities.
-                  </p>
-                  <p className="body-copy text-gray-400 mb-6">
-                    Our team benefits from the support of the Mechanical and Electrical engineering departments,
-                    access to workshops, CAD labs, and a community of driven engineering students.
-                  </p>
-                  <div className="flex gap-4 mt-6">
-                    <Link
-                      href="https://mist.ac.bd"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cta-btn bg-transparent border border-red-500/60 text-red-500 hover:bg-red-600 hover:text-white"
-                    >
-                      Visit MIST
-                    </Link>
+                  <div className="border border-white/10 p-5">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-white/25 mb-1">Mission</p>
+                    <p className="text-white/60 text-sm leading-relaxed">
+                      To develop world-class engineers through hands-on, competitive, real-world vehicle design.
+                    </p>
                   </div>
-                </div>
-                <div className="space-y-4">
-                  <h4 className="text-white font-black uppercase text-sm tracking-wider mb-2">Departmental Support</h4>
+                </motion.div>
+
+                <motion.div {...fadeUpDelay(0.2)} className="flex gap-10 border-t border-white/8 pt-8">
                   {[
-                    { dept: "Mechanical Engineering", support: "Fabrication facilities, design supervision, CNC access" },
-                    { dept: "Electrical & Electronic Engineering", support: "Electronics labs, embedded systems mentorship" },
-                    { dept: "Civil Engineering", support: "Structural analysis guidance" },
-                  ].map((item, i) => (
-                    <div key={i} className="border border-white/10 p-4">
-                      <p className="text-white font-black uppercase text-xs tracking-wider mb-1">{item.dept}</p>
-                      <p className="text-gray-500 text-sm">{item.support}</p>
+                    { val: "31+", label: "Active Members" },
+                    { val: "01", label: "Race Car Built" },
+                    { val: "100%", label: "In-house Design" },
+                  ].map((s, i) => (
+                    <div key={i}>
+                      <p className="text-3xl font-black italic text-red-600">{s.val}</p>
+                      <p className="text-white/30 text-xs font-mono uppercase tracking-wider mt-1">{s.label}</p>
                     </div>
                   ))}
-                </div>
+                </motion.div>
               </div>
-            </div>
 
+              <motion.div {...fadeUpDelay(0.1)} className="relative h-80 md:h-120 overflow-hidden border border-white/10 group">
+                <Image
+                  src="/car2.jpg"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-all duration-700"
+                  alt="MIST Blitz Car"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a]/60 via-transparent to-transparent" />
+              </motion.div>
+            </div>
+          </section>
+
+          {/* ── MIST BLITZ INTRO COMPONENT ── */}
+          <section>
+            <MISTBlitzIntro />
+          </section>
+
+          {/* ── WHAT WE DO ── */}
+          <section className="border-t border-white/8 pt-16">
+            <WhatWeDo />
+          </section>
+
+          {/* ── FORMULA STUDENT ── */}
+          <section className="border-t border-white/8 pt-16">
+            <SectionHeader label="03 · The Competition" title="What Is Formula Student?" />
+            <div className="grid md:grid-cols-2 gap-12">
+              <div className="space-y-6">
+                <motion.p {...fadeUpDelay(0.1)} className="text-white/60 leading-relaxed text-base">
+                  Formula Student is the world&apos;s largest engineering design competition for university
+                  students. Teams design, build, and race a small formula-style race car. Judges evaluate
+                  engineering design, cost analysis, business planning, and dynamic performance.
+                </motion.p>
+                <motion.p {...fadeUpDelay(0.15)} className="text-white/60 leading-relaxed text-base">
+                  It prepares students for real-world engineering careers by demanding end-to-end
+                  ownership — from concept to competition-ready vehicle.
+                </motion.p>
+              </div>
+              <motion.div {...fadeUpDelay(0.1)} className="space-y-4">
+                {[
+                  { type: "Static Events", items: ["Engineering Design Event", "Cost & Manufacturing Analysis", "Business Plan Presentation"] },
+                  { type: "Dynamic Events", items: ["Acceleration — 75m sprint", "Skid Pad — figure-8 handling", "Autocross — single-lap performance", "Endurance — 22km reliability race"] },
+                ].map((group, i) => (
+                  <div key={i} className="border border-white/10 p-5">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-red-500 mb-3">{group.type}</p>
+                    <ul className="space-y-1.5">
+                      {group.items.map((item, j) => (
+                        <li key={j} className="flex items-center gap-2 text-sm text-white/50">
+                          <span className="w-1 h-1 bg-red-600 shrink-0" />{item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </section>
+
+          {/* ── OUR UNIVERSITY ── */}
+          <section className="border-t border-white/8 pt-16">
+            <SectionHeader label="04 · Our Institution" title="Military Institute of Science & Technology" />
+            <div className="grid md:grid-cols-2 gap-12">
+              <div className="space-y-6">
+                <motion.p {...fadeUpDelay(0.1)} className="text-white/60 leading-relaxed text-base">
+                  MIST is one of Bangladesh&apos;s leading engineering universities, providing world-class
+                  facilities and a rigorous academic environment. Our team benefits from Mechanical and
+                  Electrical engineering departments, workshops, CAD labs, and a driven student community.
+                </motion.p>
+                <motion.div {...fadeUpDelay(0.15)}>
+                  <Link
+                    href="https://mist.ac.bd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 border border-red-600/50 text-red-500 hover:bg-red-600 hover:text-white px-6 py-3 text-xs font-black uppercase tracking-widest transition-all duration-200"
+                  >
+                    Visit MIST →
+                  </Link>
+                </motion.div>
+              </div>
+              <motion.div {...fadeUpDelay(0.1)} className="space-y-3">
+                {[
+                  { dept: "Mechanical Engineering", support: "Fabrication facilities, design supervision, CNC access" },
+                  { dept: "Electrical & Electronic Engineering", support: "Electronics labs, embedded systems mentorship" },
+                  { dept: "Civil Engineering", support: "Structural analysis guidance" },
+                ].map((item, i) => (
+                  <div key={i} className="border border-white/10 p-4 hover:border-red-600/30 transition-colors">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-red-500 mb-1">{item.dept}</p>
+                    <p className="text-white/40 text-sm">{item.support}</p>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </section>
+
+          {/* ── ACHIEVEMENTS ── */}
+          <section className="border-t border-white/8 pt-16">
             <Achievements />
-          </div>
+          </section>
+
         </div>
       </main>
 
       <Footer />
-      <style jsx global>{`
-        html, body {
-          max-width: 100%;
-          overflow-x: hidden;
-        }
-        @keyframes slow-zoom {
-          0% { transform: scale(1); }
-          100% { transform: scale(1.1); }
-        }
-        .animate-slow-zoom {
-          animation: slow-zoom 20s infinite alternate linear;
-        }
-      `}</style>
     </div>
   );
 };
