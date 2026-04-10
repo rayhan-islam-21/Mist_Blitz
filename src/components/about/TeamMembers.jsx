@@ -338,7 +338,15 @@ const TeamMembers = () => {
     fetchData();
   }, []);
 
-  if (loading) return <CenterLoader fullScreen containerClassName="bg-black" />;
+  if (loading) {
+    return (
+      <section className="bg-black px-4 md:px-8 py-10 md:py-16">
+        <div className="max-w-7xl mx-auto h-56 md:h-64 flex items-center justify-center">
+          <CenterLoader />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-black py-10 md:py-16 px-4 md:px-8 min-h-screen">
