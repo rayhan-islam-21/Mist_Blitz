@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import Image from "next/image";
@@ -40,33 +41,24 @@ const JoinUsPage = () => {
   const dept = departments.find((d) => d.category === activeCategory);
 
   return (
-    <div className="bg-black min-h-screen text-white selection:bg-red-600 selection:text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
       <Navbar />
 
+      <main className="bg-[#0a0a0a]">
       {/* Hero */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 scale-105 animate-slow-zoom">
-            <Image src="/team.jpg" fill alt="Join Us" className="object-cover opacity-35" priority />
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/40 to-black" />
-        <div className="relative z-10 text-center px-6">
-          <p className="text-red-500 uppercase tracking-[0.4em] text-xs font-bold mb-4">Be Part of Something Greater</p>
-          <h1 className="text-6xl md:text-9xl font-sans italic font-black uppercase tracking-tighter leading-none">
-            Join <span className="text-red-600">Us</span>
-          </h1>
-          <p className="mt-6 text-gray-400 text-lg max-w-xl mx-auto">
-            We&apos;re always looking for passionate, driven individuals to join the Blitz family.
-          </p>
-          <div className="mt-10">
-            <a
-              href="#apply"
-              className="cta-btn bg-red-600 text-white hover:bg-red-700 inline-block"
-            >
-              Apply Now
-            </a>
-          </div>
+      <section className="relative w-full h-[70vh] overflow-hidden flex flex-col justify-end">
+        <Image src="/team.jpg" fill alt="Join Us" className="object-cover opacity-50 transition-all duration-700" priority />
+        <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a]/60 via-transparent to-transparent" />
+        <div className="relative z-10 px-6 md:px-16 pb-12">
+          <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
+            <h1 className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white">
+              Join <span className="text-red-600">Us</span>
+            </h1>
+            <p className="text-white/50 text-base md:text-lg mt-4 max-w-lg">
+              Passionate about engineering? Be part of the Blitz family.
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -193,18 +185,9 @@ const JoinUsPage = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
-
-      <style jsx global>{`
-        @keyframes slow-zoom {
-          0% { transform: scale(1); }
-          100% { transform: scale(1.1); }
-        }
-        .animate-slow-zoom {
-          animation: slow-zoom 20s infinite alternate linear;
-        }
-      `}</style>
     </div>
   );
 };

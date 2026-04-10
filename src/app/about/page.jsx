@@ -46,8 +46,8 @@ const About = () => {
             alt="MIST Blitz Team"
             className="object-cover opacity-50 transition-all duration-700"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
-          <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a]/60 via-transparent to-transparent" />
 
           <div className="relative z-10 px-6 md:px-16 pb-12">
             <motion.div
