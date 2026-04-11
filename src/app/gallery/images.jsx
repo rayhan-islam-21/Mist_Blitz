@@ -6,13 +6,13 @@ import Image from "next/image";
 import { Maximize2, X } from "lucide-react";
 import CenterLoader from "@/components/ui/center-loader";
 
-const CATEGORIES = ["All", "Cars", "Fabrication", "Competitions", "Team Moments"];
+const YEARS = ["All", "2024", "2025", "2026"];
 
 const Gallery = () => {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedImg, setSelectedImg] = useState(null);
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeYear, setActiveYear] = useState("All");
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -29,9 +29,9 @@ const Gallery = () => {
   }, []);
 
   const filtered =
-    activeCategory === "All"
+    activeYear === "All"
       ? photos
-      : photos.filter((p) => p.category === activeCategory);
+      : photos.filter((p) => String(p.year) === activeYear);
 
   if (loading)
     return (
@@ -58,19 +58,19 @@ const Gallery = () => {
           <div className="h-1 w-32 bg-red-600 mt-[-2vw]"></div>
         </div>
 
-        {/* Category Tabs */}
+        {/* Year Tabs */}
         <div className="flex gap-2 mb-12 overflow-x-auto border-b border-white/10 pb-0">
-          {CATEGORIES.map((cat) => (
+          {YEARS.map((yr) => (
             <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
+              key={yr}
+              onClick={() => setActiveYear(yr)}
               className={`pb-4 px-3 text-xs font-black uppercase tracking-widest transition-all duration-300 border-b-2 whitespace-nowrap ${
-                activeCategory === cat
+                activeYear === yr
                   ? "border-red-600 text-white"
                   : "border-transparent text-white/30 hover:text-white/60"
               }`}
             >
-              {cat}
+              {yr}
             </button>
           ))}
         </div>
