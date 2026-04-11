@@ -118,13 +118,11 @@ const AboutPreview = () => {
           {/* CAR SECTION: Photo + Sliding Specs */}
           <div className="grid lg:grid-cols-12 gap-8">
             {/* Large car image */}
-            <div className="lg:col-span-8 relative h-160 border border-white/10 group overflow-hidden bg-zinc-900">
-              <Image
-                src="/car2.jpg"
-                alt="Furiosa 1.0 Prototype"
-                fill
-                className="object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-[2s]"
-              />
+            <div
+              className="lg:col-span-8 relative border border-white/10 group overflow-hidden bg-zinc-900"
+              style={{ backgroundImage: `url('/car2.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '40rem' }}
+            >
+              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-[2s]" />
               <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-transparent to-transparent" />
               <div className="absolute bottom-12 left-12 right-12">
                 <h3 className="md:text-7xl text-4xl font-black italic uppercase mb-8 tracking-tighter text-white">
