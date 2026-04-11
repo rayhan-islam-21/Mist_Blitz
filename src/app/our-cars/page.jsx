@@ -125,10 +125,10 @@ const OurCarsPage = () => {
                 {/* Specs */}
                 <div className="mb-10">
                   <h4 className="text-xs uppercase tracking-widest text-white/40 mb-5 font-bold">Key Specifications</h4>
-                  <div className="space-y-3">
+                  <div className="divide-y divide-white/5">
                     {Object.entries(car.specs).map(([key, val]) => (
-                      <div key={key} className="flex items-start gap-4 border-b border-white/5 pb-3">
-                        <span className="text-white/40 text-xs uppercase tracking-wider w-28 shrink-0 pt-0.5">{key}</span>
+                      <div key={key} className="flex items-center gap-4 py-3">
+                        <span className="text-white/40 text-xs uppercase tracking-wider w-28 shrink-0">{key}</span>
                         <span className="text-gray-200 text-sm">{val}</span>
                       </div>
                     ))}
