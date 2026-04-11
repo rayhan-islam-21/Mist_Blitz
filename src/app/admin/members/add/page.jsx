@@ -33,6 +33,7 @@ const AddMemberPage = () => {
       techDept: [],
       nonTechDept: [],
       position: "Trainee",
+      year: 2025,
       image: "",
       linkedin: "",
     },
@@ -234,6 +235,28 @@ const AddMemberPage = () => {
                   selected={formData.position}
                   onSelect={(val) => setValue("position", val)}
                 />
+              </div>
+
+              <div className="mt-6 space-y-1.5">
+                <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">
+                  Season / Year
+                </label>
+                <div className="flex gap-2">
+                  {[2024, 2025, 2026].map((yr) => (
+                    <button
+                      key={yr}
+                      type="button"
+                      onClick={() => setValue("year", yr)}
+                      className={`flex-1 py-2.5 text-xs font-black uppercase tracking-widest border transition-all duration-200 ${
+                        formData.year === yr
+                          ? "bg-red-600 border-red-600 text-white"
+                          : "border-slate-200 text-slate-500 hover:border-red-400 hover:text-red-500"
+                      }`}
+                    >
+                      {yr}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <div className="mt-6 space-y-1.5">

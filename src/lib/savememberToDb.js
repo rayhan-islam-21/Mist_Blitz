@@ -9,10 +9,9 @@ const saveMemberToDB = async (data) => {
             nonTechDept: data.nonTechDept,
             image: data.image,
             linkedin: data.linkedin,
-            position: data.position
+            position: data.position,
+            year: Number(data.year),
         });
-
-
     }
     catch (err) {
         console.error("Axios error:", err);
