@@ -110,8 +110,8 @@ const OurCarsPage = () => {
           {car && (
             <div className="grid md:grid-cols-2 gap-16 items-stretch">
               {/* Left: Image */}
-              <div className="relative min-h-72 md:min-h-96 h-full rounded-sm overflow-hidden border border-white/10">
-                <Image src={car.image} fill alt={car.name} className="object-cover" />
+              <div className="relative rounded-sm overflow-hidden border border-white/10" style={{ minHeight: '24rem' }}>
+                <Image src={car.image} fill alt={car.name} className="object-cover object-center" />
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-6 left-6">
                   <span className="text-xs text-red-500 uppercase tracking-widest font-bold">{car.id}</span>
