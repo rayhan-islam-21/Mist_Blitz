@@ -21,7 +21,7 @@ export default function JoinCTA() {
       "Email%3A";
   };
   return (
-    <section className="relative py-28 selection:bg-red-600 selection:text-white bg-[#050505] border-t border-white/5 flex flex-col items-center justify-center text-center overflow-hidden">
+    <section className="relative py-16 selection:bg-red-600 selection:text-white bg-[#050505] border-t border-white/5 flex flex-col items-center justify-center text-center overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vw] font-black text-white/1 italic select-none pointer-events-none uppercase tracking-tighter">
         FSC_2024
       </div>
@@ -31,7 +31,7 @@ export default function JoinCTA() {
           initial={{ y: 60, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
-          className="text-7xl font-sans tracking-tighter md:text-[11rem] font-black uppercase italic leading-none mb-6"
+          className="text-7xl font-sans tracking-tighter md:text-[11rem] font-black uppercase italic leading-none mb-3"
         >
           FUEL THE <br />
           <span className="text-red-600">FUTURE</span>!
@@ -40,13 +40,13 @@ export default function JoinCTA() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="max-w-3xl mx-auto mb-8"
+          className="max-w-3xl mx-auto mb-6"
         >
-          <p className="text-xl md:text-3xl font-bold tracking-wider italic text-gray-100 uppercase leading-tight mb-3">
+          <p className="text-xl md:text-2xl font-bold tracking-wider italic text-gray-100 uppercase leading-tight mb-2">
             Join MIST BLITZ in engineering the next era of{" "}
             <span className="text-red-600">Global Motorsports.</span>
           </p>
-          <p className="text-lg font-sans text-gray-500 text-center text-balance font-medium leading-relaxed">
+          <p className="text-base font-sans text-gray-500 text-center text-balance font-medium leading-relaxed">
             Partner with the vanguard of the Military Institute of Science and
             Technology. Invest in high-tier technical innovation and gain
             international visibility at the
@@ -59,7 +59,7 @@ export default function JoinCTA() {
           transition={{ delay: 0.4 }}
           className="relative md:inline-block flex justify-center items-center group"
         >
-          <button onClick={handleClick} className="cta-btn relative min-h-14 py-4 md:py-5 bg-white text-black mx-center italic hover:bg-red-700 hover:text-white gap-5 shadow-[16px_16px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-1">
+          <button onClick={handleClick} className="cta-btn relative min-h-14 py-4 md:py-5 bg-white text-black mx-center italic hover:bg-red-600 hover:text-white gap-5 shadow-[16px_16px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-none active:translate-y-1">
             SECURE PARTNERSHIP
             <MoveRight
               size={24}
