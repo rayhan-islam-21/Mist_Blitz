@@ -63,8 +63,8 @@ const JoinUsPage = () => {
       </section>
 
       {/* Why Join */}
-      <section className="bg-[#0a0a0a] py-20 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <section className="bg-[#0a0a0a] py-20 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-xs uppercase tracking-widest text-red-500 mb-2 font-bold">Why Join the Team</h2>
             <h3 className="text-3xl md:text-5xl font-sans font-black italic uppercase text-white mb-6">
@@ -106,8 +106,8 @@ const JoinUsPage = () => {
       </section>
 
       {/* Roles & Departments */}
-      <section className="bg-[#111111] border-y border-white/5 py-20 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="bg-[#111111] border-y border-white/5 py-20 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-xs uppercase tracking-widest text-red-500 mb-2 font-bold">Open Roles</h2>
           <p className="text-3xl md:text-5xl font-sans font-black italic uppercase text-white mb-10">
             Where You Fit In
@@ -141,8 +141,8 @@ const JoinUsPage = () => {
       </section>
 
       {/* Application Process */}
-      <section className="bg-[#0a0a0a] py-20 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="bg-[#0a0a0a] py-20 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-xs uppercase tracking-widest text-red-500 mb-2 font-bold">How to Apply</h2>
           <p className="text-3xl md:text-5xl font-sans font-black italic uppercase text-white mb-12">
             Application Process
@@ -161,8 +161,8 @@ const JoinUsPage = () => {
       </section>
 
       {/* Apply CTA */}
-      <section id="apply" className="bg-red-600 py-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+      <section id="apply" className="bg-red-600 py-16 px-4 md:px-8">
+        <div className="max-w-5xl mx-auto text-center">
           <h3 className="text-3xl md:text-5xl font-sans font-black italic uppercase text-white mb-4">
             Ready to Join?
           </h3>

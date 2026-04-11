@@ -54,8 +54,8 @@ const ContactPage = () => {
       </section>
 
       {/* Main Content */}
-      <section className="py-12 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
+      <section className="py-12 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
 
           {/* Left: Contact Info */}
           <div>

@@ -189,7 +189,7 @@ export default function PremiumPartners() {
       </main>
 
       {/* 4. CTA BANNER */}
-      <section className="bg-red-600 py-16 px-6">
+      <section className="bg-red-600 py-16 px-4 md:px-8">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-red-200 text-xs uppercase tracking-widest font-black mb-3">Partner With Us</p>
