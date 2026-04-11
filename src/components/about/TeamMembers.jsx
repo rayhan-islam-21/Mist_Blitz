@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import api from "@/lib/axios";
-import { Linkedin, Star } from "lucide-react";
+import { Star } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
 import CenterLoader from "@/components/ui/center-loader";
 
@@ -108,7 +109,7 @@ function MemberCard({ member }) {
           onClick={e => e.stopPropagation()}
           className="absolute top-3 right-3 w-7 h-7 bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-600 hover:border-red-600 transition-all duration-200"
         >
-          <Linkedin size={12} className="text-white" />
+          <FaLinkedin size={12} className="text-white" />
         </a>
       )}
     </div>
@@ -159,7 +160,7 @@ function LeadCard({ member }) {
           onClick={e => e.stopPropagation()}
           className="absolute top-3 right-3 w-7 h-7 bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-600 hover:border-red-600 transition-all duration-200"
         >
-          <Linkedin size={12} className="text-white" />
+          <FaLinkedin size={12} className="text-white" />
         </a>
       )}
     </div>
@@ -224,7 +225,7 @@ function CaptainCard({ captain }) {
           rel="noopener noreferrer"
           className="absolute top-3 right-3 w-7 h-7 bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-600 hover:border-red-600 transition-all duration-200"
         >
-          <Linkedin size={12} className="text-white" />
+          <FaLinkedin size={12} className="text-white" />
         </a>
       )}
     </div>
@@ -353,8 +354,30 @@ const TeamMembers = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { data } = await api.get(`/members?year=${activeYear}`);
-        const members = Array.isArray(data) ? data : [];
+        // Fetch leads (all years) + year-filtered members in parallel
+        const [{ data: allData }, { data: yearData }] = await Promise.all([
+          api.get(`/members`),
+          api.get(`/members?year=${activeYear}`),
+        ]);
+
+        const allMembers = Array.isArray(allData) ? allData : [];
+        const yearMembers = Array.isArray(yearData) ? yearData : [];
+
+        // Leads from ALL members (no year filter)
+        const allLeads = allMembers.filter(isLead);
+        // Non-leads only from the selected year
+        const yearNonLeads = yearMembers.filter(m => !isLead(m));
+
+        // Merge: leads always + year-filtered non-leads
+        const merged = [...allLeads, ...yearNonLeads];
+        // Deduplicate by _id
+        const seen = new Set();
+        const members = merged.filter(m => {
+          if (seen.has(m._id)) return false;
+          seen.add(m._id);
+          return true;
+        });
+
         const tech = {};
         const mgmt = {};
         members.forEach(m => {
