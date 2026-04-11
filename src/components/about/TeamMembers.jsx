@@ -341,15 +341,19 @@ function SectionHeader({ label, title }) {
 }
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
+const YEARS = [2024, 2025, 2026];
+
 const TeamMembers = () => {
   const [loading, setLoading] = useState(true);
   const [techMap, setTechMap] = useState({});
   const [mgmtMap, setMgmtMap] = useState({});
+  const [activeYear, setActiveYear] = useState(2025);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
-        const { data } = await api.get("/members");
+        const { data } = await api.get(`/members?year=${activeYear}`);
         const members = Array.isArray(data) ? data : [];
         const tech = {};
         const mgmt = {};
@@ -372,11 +376,31 @@ const TeamMembers = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [activeYear]);
 
   return (
     <section className="bg-[#0a0a0a] py-10 md:py-16 px-4 md:px-8 min-h-screen">
       <div className="max-w-7xl mx-auto space-y-24">
+
+        {/* ── YEAR SELECTOR ── */}
+        <div className="flex items-center gap-3">
+          <span className="text-white/30 text-xs uppercase tracking-widest font-black">Season</span>
+          <div className="flex gap-1 border border-white/10">
+            {YEARS.map(yr => (
+              <button
+                key={yr}
+                onClick={() => setActiveYear(yr)}
+                className={`px-5 py-2 text-xs font-black uppercase tracking-widest transition-all duration-200 ${
+                  activeYear === yr
+                    ? "bg-red-600 text-white"
+                    : "text-white/30 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                {yr}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* ── 1. CHAIN OF COMMAND ── */}
         <div>

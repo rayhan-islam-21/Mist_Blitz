@@ -30,11 +30,15 @@ export async function POST(req) {
   }
 }
 
-export async function GET() {
+export async function GET(req) {
   try {
     await connectDB();
 
-    const users = await Member.find().select('name position image techDept nonTechDept linkedin isLead');
+    const { searchParams } = new URL(req.url);
+    const year = searchParams.get("year");
+
+    const query = year ? { year: Number(year) } : {};
+    const users = await Member.find(query).select('name position image techDept nonTechDept linkedin isLead year');
     return NextResponse.json(users, { status: 200 });
   } catch (error) {
     console.error("Error fetching users:", error);

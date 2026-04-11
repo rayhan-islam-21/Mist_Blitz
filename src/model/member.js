@@ -41,6 +41,11 @@ const MemberSchema = new mongoose.Schema({
     ],
     default: "Trainee"
   },
+  year: {
+    type: Number,
+    enum: [2024, 2025, 2026],
+    default: null
+  },
   createdAt: { type: Date, default: Date.now }
 });
 
