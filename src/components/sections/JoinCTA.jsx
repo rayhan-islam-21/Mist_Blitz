@@ -59,7 +59,7 @@ export default function JoinCTA() {
           transition={{ delay: 0.4 }}
           className="relative md:inline-block flex justify-center items-center group"
         >
-          <button onClick={handleClick} className="cta-btn relative min-h-14 py-4 md:py-5 bg-white text-black mx-center italic hover:bg-red-600 hover:text-white gap-5 shadow-[16px_16px_0px_0px_rgba(220,38,38,0.1)] hover:shadow-[0_0_40px_rgba(220,38,38,0.6)] active:translate-y-1">
+          <button onClick={handleClick} className="cta-btn relative min-h-14 py-4 md:py-5 bg-red-600 text-white mx-center italic hover:bg-red-700 gap-5 shadow-[0_0_40px_rgba(220,38,38,0.3)] hover:shadow-[0_0_60px_rgba(220,38,38,0.6)] active:translate-y-1">
             SECURE PARTNERSHIP
             <MoveRight
               size={24}
