@@ -330,7 +330,7 @@ export default function OurJourneyPage() {
 
       {/* ── YEAR TABS ── */}
       <div className="sticky top-16 z-50 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 md:px-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex gap-0">
             {years.map((yr) => (
               <button
@@ -359,7 +359,7 @@ export default function OurJourneyPage() {
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.35 }}
         >
-          <div className="max-w-7xl mx-auto px-6 md:px-16 py-16 space-y-20">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 space-y-20">
 
             {/* ── 1. TEAM FORMATION ── */}
             <section>
@@ -574,7 +574,7 @@ export default function OurJourneyPage() {
 
           {/* ── SEASON NAV ── */}
           <div className="border-t border-white/5 bg-[#0a0a0a]">
-            <div className="max-w-7xl mx-auto px-6 md:px-16 py-8 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 flex items-center justify-between">
               <button
                 onClick={() => setActiveYear(y => { const i = years.indexOf(y); return i > 0 ? years[i - 1] : y; })}
                 disabled={activeYear === years[0]}

@@ -64,7 +64,7 @@ const About = () => {
             </motion.div>
           </div>
         </section>
-        <div className="max-w-7xl mx-auto px-6 md:px-16 py-20 space-y-24">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-20 space-y-24">
 
           {/* ── OUR TEAM ── */}
           <section>
