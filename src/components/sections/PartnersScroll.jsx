@@ -3,7 +3,6 @@
 import LogoLoop from "../LogoLoop";
 import { motion } from "framer-motion";
 import { useRef } from "react";
-import Link from "next/link";
 
 const spon = [
   { logo: "/sponsers/sp9.png" },
@@ -37,42 +36,18 @@ export default function PartnersScroll() {
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
-        {/* Header row */}
+        {/* Header */}
         <motion.div
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+          variants={fadeUp}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 pb-10 border-b border-white/5"
+          transition={{ duration: 0.6 }}
+          className="mb-14 pb-10 border-b border-white/5"
         >
-          <div>
-            <motion.p variants={fadeUp} transition={{ duration: 0.5 }}
-              className="font-mono text-[10px] uppercase tracking-widest text-red-500 mb-3"
-            >
-              Strategic Partners · Season 2025
-            </motion.p>
-            <motion.h2 variants={fadeUp} transition={{ duration: 0.6 }}
-              className="text-4xl md:text-6xl font-black italic uppercase leading-none tracking-tighter text-white"
-            >
-              Our <span className="text-red-600">Sponsors</span>
-            </motion.h2>
-          </div>
-
-          <motion.div variants={fadeUp} transition={{ duration: 0.6 }}
-            className="md:max-w-xs md:text-right"
-          >
-            <p className="text-white/40 text-sm leading-relaxed mb-3">
-              Companies that fuel our mission — providing hardware, software,
-              and strategic resources to compete globally.
-            </p>
-            <Link
-              href="/sponsors"
-              className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-white/30 hover:text-red-500 transition-colors group"
-            >
-              <span>View all partners</span>
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </Link>
-          </motion.div>
+          <h2 className="text-4xl md:text-6xl font-black italic uppercase leading-none tracking-tighter text-white">
+            Our <span className="text-red-600">Sponsors</span>
+          </h2>
         </motion.div>
 
         {/* Logo strip */}
