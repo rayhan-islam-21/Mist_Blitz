@@ -67,22 +67,22 @@ const Hero = () => {
       <div className="relative z-30 px-6 md:px-12 pb-24 md:pb-32">
 
         {/* Main heading */}
-        <div className="overflow-hidden mb-2">
+        <div className="overflow-hidden mb-1">
           <motion.h1
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             transition={{ delay: 0.3, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[16vw] md:text-[12vw] font-black italic uppercase leading-none tracking-tighter text-white"
+            className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white"
           >
             MIST
           </motion.h1>
         </div>
-        <div className="overflow-hidden mb-8">
+        <div className="overflow-hidden mb-6">
           <motion.h1
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             transition={{ delay: 0.45, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[16vw] md:text-[12vw] font-black italic uppercase leading-none tracking-tighter text-red-600"
+            className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-red-600"
           >
             BLITZ
           </motion.h1>
@@ -111,30 +111,14 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right: info text + stats bar */}
-          <div className="flex flex-col items-start md:items-end gap-4">
-            {/* Small event info */}
-            <div className="space-y-1 md:text-right">
-              <p className="font-mono text-[9px] uppercase tracking-widest text-white/25">
-                Venue · Zhuhai International Circuit, China
-              </p>
-              <p className="font-mono text-[9px] uppercase tracking-widest text-white/25">
-                Event · Formula Student China 2025
-              </p>
-              <p className="font-mono text-[9px] uppercase tracking-widest text-white/25">
-                Result · Best Foreign Team · 4th Place BPP
-              </p>
-            </div>
-
-            {/* Stats bar */}
-            <div className="flex gap-0 border border-white/10">
-              {stats.map((s, i) => (
-                <div key={i} className="px-5 py-4 border-r border-white/10 last:border-r-0 text-center">
-                  <p className="font-black italic uppercase text-white text-xl md:text-2xl leading-none">{s.value}</p>
-                  <p className="font-mono text-[8px] uppercase tracking-widest text-white/30 mt-1">{s.sub}</p>
-                </div>
-              ))}
-            </div>
+          {/* Right: stats bar only */}
+          <div className="flex gap-0 border border-white/10">
+            {stats.map((s, i) => (
+              <div key={i} className="px-5 py-4 border-r border-white/10 last:border-r-0 text-center">
+                <p className="font-black italic uppercase text-white text-xl md:text-2xl leading-none">{s.value}</p>
+                <p className="font-mono text-[8px] uppercase tracking-widest text-white/30 mt-1">{s.sub}</p>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>
