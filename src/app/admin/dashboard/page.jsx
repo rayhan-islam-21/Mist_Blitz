@@ -1,27 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  FaUsers,
-  FaBoxOpen,
-  FaUserPlus,
-  FaShieldAlt,
-  FaRocket,
-  FaTerminal,
-} from "react-icons/fa";
+import { FaUsers, FaBoxOpen, FaUserPlus, FaBell } from "react-icons/fa";
 import api from "@/lib/axios";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
 
+const StatCard = ({ label, value, icon: Icon, accent = false }) => (
+  <div className={`relative border p-6 overflow-hidden ${accent ? "border-red-600/30 bg-red-600/5" : "border-white/5 bg-white/2"}`}>
+    <p className="font-mono text-[9px] uppercase tracking-widest text-white/30 mb-3">{label}</p>
+    <p className="text-5xl font-black italic text-white leading-none mb-4">
+      {String(value).padStart(2, "0")}
+    </p>
+    <Icon size={60} className="absolute -right-2 -bottom-2 text-white/3" />
+  </div>
+);
+
 const AdminDashboard = () => {
-  const [stats, setStats] = useState({
-    memberCount: 0,
-    equipmentCount: 0,
-    recentMembers: [],
-  });
-  
-  // Removed local loading state to let AdminLayout handle the initial mount
+  const [stats, setStats] = useState({ memberCount: 0, equipmentCount: 0, recentMembers: [] });
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -30,142 +27,136 @@ const AdminDashboard = () => {
           api.get("/members"),
           api.get("/equipment"),
         ]);
-
-        const recent = [...membersRes.data].reverse().slice(0, 4);
-
         setStats({
           memberCount: membersRes.data.length,
           equipmentCount: equipmentRes.data.length,
-          recentMembers: recent,
+          recentMembers: [...membersRes.data].reverse().slice(0, 6),
         });
-      } catch (error) {
-        toast.error("SYSTEM_SYNC_FAILURE");
+      } catch {
+        toast.error("Failed to load dashboard data");
       }
     };
     fetchDashboardData();
   }, []);
 
   return (
-    <div className="min-h-screen bg-white selection:bg-red-600 selection:text-white text-slate-900 font-sans p-4 md:p-10">
-      <Toaster position="top-center" />
+    <div className="min-h-screen selection:bg-red-600 selection:text-white">
+      <Toaster position="top-right" toastOptions={{ style: { background: "#111", color: "#fff", border: "1px solid rgba(255,255,255,0.1)" } }} />
 
-      {/* HEADER SECTION */}
-      <header className="max-w-7xl mx-auto mb-10 flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-100 pb-6 gap-4">
+      {/* Header */}
+      <div className="flex items-end justify-between mb-10 pb-6 border-b border-white/5">
         <div>
-          <h1 className="text-2xl md:text-5xl font-black tracking-tighter uppercase italic leading-none">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-red-500 mb-2">Admin Panel</p>
+          <h1 className="text-3xl md:text-4xl font-black italic uppercase tracking-tight text-white leading-none">
             System <span className="text-red-600">Overview</span>
           </h1>
-          <p className="text-slate-500 text-xs md:text-sm mt-2 font-medium flex items-center gap-2">
-            <FaShieldAlt className="text-red-500/50" /> Command Level: Administrator
-          </p>
         </div>
-        <div className="flex items-center gap-2 bg-slate-950 text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest italic">
-          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-          Database_Live
+        <div className="flex items-center gap-2 border border-white/5 px-3 py-1.5 bg-white/2">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+          <span className="font-mono text-[9px] uppercase tracking-widest text-white/30">DB Live</span>
         </div>
-      </header>
+      </div>
 
-      <main className="max-w-7xl mx-auto space-y-6">
-        {/* STATS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Total Members Card */}
-          <div className="group bg-white border border-slate-200 p-8 relative overflow-hidden transition-all rounded hover:shadow-2xl hover:shadow-red-50">
-            <div className="relative z-10">
-              <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2">
-                Total_Personnel
-              </p>
-              <h3 className="text-7xl font-black italic tracking-tighter leading-none mb-4 group-hover:scale-110 transition-transform origin-left">
-                {stats.memberCount.toString().padStart(2, "0")}
-              </h3>
-              <div className="flex items-center gap-2 text-[10px] font-bold text-slate-900 bg-slate-50 w-fit px-3 py-1 rounded-full border border-slate-100">
-                <FaUsers className="text-red-600" /> Active_Members
-              </div>
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+        <StatCard label="Total Members" value={stats.memberCount} icon={FaUsers} accent />
+        <StatCard label="Equipment Items" value={stats.equipmentCount} icon={FaBoxOpen} />
+        <div className="border border-white/5 bg-white/2 p-6 flex flex-col justify-between">
+          <p className="font-mono text-[9px] uppercase tracking-widest text-white/30 mb-3">DB Status</p>
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+              <span className="font-mono text-[10px] text-green-400 uppercase">Connected</span>
             </div>
-            <FaUsers size={120} className="absolute -right-4 -bottom-4 text-slate-50 group-hover:text-red-50/50 transition-colors" />
-          </div>
-
-          {/* Total Equipment Card */}
-          <div className="group bg-slate-950 p-8 relative overflow-hidden transition-all border-b-[6px] border-red-600">
-            <div className="relative z-10 text-white">
-              <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-500 mb-2">
-                Inventory_Assets
-              </p>
-              <h3 className="text-7xl font-black italic tracking-tighter leading-none mb-4 group-hover:scale-110 transition-transform origin-left">
-                {stats.equipmentCount.toString().padStart(2, "0")}
-              </h3>
-              <div className="flex items-center gap-2 text-[10px] font-bold text-white bg-red-600 w-fit px-3 py-1 italic">
-                <FaBoxOpen /> Active_Equipment
-              </div>
-            </div>
-            <FaBoxOpen size={120} className="absolute -right-4 -bottom-4 text-white/5 opacity-20" />
+            <p className="font-mono text-[9px] text-white/20 uppercase tracking-wider">MongoDB Atlas</p>
           </div>
         </div>
+        <div className="border border-white/5 bg-white/2 p-6 flex flex-col justify-between">
+          <p className="font-mono text-[9px] uppercase tracking-widest text-white/30 mb-3">Platform</p>
+          <div>
+            <p className="font-black italic text-white text-lg leading-none">MIST</p>
+            <p className="font-black italic text-red-600 text-lg leading-none">BLITZ</p>
+            <p className="font-mono text-[9px] text-white/20 mt-1 uppercase tracking-wider">v1.0 · 2025</p>
+          </div>
+        </div>
+      </div>
 
-        {/* BOTTOM SECTION: RECENT ACTIVITY */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 border border-slate-200 rounded-2xl p-6 bg-white">
-            <div className="flex items-center justify-between mb-8">
-              <h4 className="text-sm font-black uppercase italic tracking-widest flex items-center gap-2">
-                <FaUserPlus className="text-red-600" /> Recently_Joined
-              </h4>
-              <Link href="/admin/members/all-members" className="text-[10px] font-black uppercase text-slate-400 hover:text-red-600">
-                View_All_Members
-              </Link>
+      {/* Recent Members + Quick Links */}
+      <div className="grid lg:grid-cols-3 gap-6">
+
+        {/* Recent Members */}
+        <div className="lg:col-span-2 border border-white/5 bg-white/2">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
+            <div className="flex items-center gap-2">
+              <FaUserPlus size={12} className="text-red-500" />
+              <span className="font-mono text-[10px] uppercase tracking-widest text-white/60">Recently Added</span>
             </div>
+            <Link
+              href="/admin/members/all-members"
+              className="font-mono text-[9px] uppercase tracking-widest text-white/20 hover:text-red-500 transition-colors"
+            >
+              View All →
+            </Link>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {stats.recentMembers.map((member) => (
-                <div key={member._id} className="flex items-center gap-4 p-4 border border-slate-50 rounded-xl hover:bg-slate-50 transition-all">
-                  <div className="relative w-12 h-12 bg-slate-900 rounded-lg overflow-hidden shrink-0 border-2 border-white shadow-sm">
+          <div className="divide-y divide-white/5">
+            {stats.recentMembers.length === 0 ? (
+              <p className="px-6 py-8 text-white/20 font-mono text-xs">No members yet</p>
+            ) : (
+              stats.recentMembers.map((member) => (
+                <div key={member._id} className="flex items-center gap-4 px-6 py-3 hover:bg-white/2 transition-colors">
+                  <div className="relative w-8 h-8 bg-white/5 overflow-hidden shrink-0">
                     {member.image ? (
                       <Image src={member.image} alt="" fill className="object-cover" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-slate-500">
-                        <FaTerminal size={14} />
+                      <div className="w-full h-full flex items-center justify-center text-white/20 font-black text-xs">
+                        {member.name?.charAt(0)}
                       </div>
                     )}
                   </div>
-                  <div className="min-w-0">
-                    <p className="text-xs font-black uppercase italic truncate">{member.name}</p>
-                    <p className="text-[9px] font-bold text-slate-400 tracking-tight">{member.position}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-black italic uppercase text-white truncate">{member.name}</p>
+                    <p className="font-mono text-[9px] uppercase tracking-wider text-white/30">{member.position}</p>
                   </div>
+                  {member.year && (
+                    <span className="font-mono text-[9px] text-white/20 shrink-0">{member.year}</span>
+                  )}
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* SYSTEM STATUS CARD */}
-          <div className="bg-slate-50 p-6 border-l-4 border-slate-950 flex flex-col justify-between">
-            <div className="space-y-4">
-              <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">System_Integrity</h4>
-              <div className="space-y-3">
-                <div className="flex justify-between items-end">
-                  <span className="text-[10px] font-bold uppercase">Database_Link</span>
-                  <span className="text-[10px] font-mono text-green-600 font-bold">STABLE</span>
-                </div>
-                <div className="w-full h-1.5 bg-slate-200 overflow-hidden">
-                  <div className="w-full h-full bg-slate-950" />
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-end">
-                  <span className="text-[10px] font-bold uppercase">Asset_Security</span>
-                  <span className="text-[10px] font-mono text-green-600 font-bold">100%</span>
-                </div>
-                <div className="w-full h-1.5 bg-slate-200 overflow-hidden">
-                  <div className="w-full h-full bg-red-600" />
-                </div>
-              </div>
-            </div>
-            <div className="mt-8 pt-8 border-t border-slate-200">
-              <div className="flex items-center gap-2">
-                <FaRocket className="text-red-500 animate-bounce" size={14} />
-                <span className="text-[11px] font-black uppercase italic">Mist_Blitz_V1.0</span>
-              </div>
-            </div>
+              ))
+            )}
           </div>
         </div>
-      </main>
+
+        {/* Quick Actions */}
+        <div className="border border-white/5 bg-white/2">
+          <div className="px-6 py-4 border-b border-white/5">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-white/60">Quick Actions</span>
+          </div>
+          <div className="p-4 space-y-2">
+            {[
+              { label: "Add Member", href: "/admin/members/add", accent: true },
+              { label: "All Members", href: "/admin/members/all-members" },
+              { label: "Add Equipment", href: "/admin/equipment/add" },
+              { label: "All Equipment", href: "/admin/equipment/all-equipment" },
+              { label: "Handouts", href: "/admin/logistics/handouts" },
+              { label: "Notices", href: "/admin/notices", icon: <FaBell size={10} /> },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-2 w-full px-4 py-2.5 font-mono text-[11px] uppercase tracking-widest transition-colors ${
+                  item.accent
+                    ? "bg-red-600 text-white hover:bg-red-700"
+                    : "border border-white/5 text-white/40 hover:border-white/20 hover:text-white"
+                }`}
+              >
+                {item.icon}
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

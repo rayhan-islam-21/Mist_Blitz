@@ -22,58 +22,33 @@ import {
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-// ----- ROLE CONSTANTS -----
-const ROLE = {
-  ADMIN: "admin",
-  MEMBER: "member",
-};
+const ROLE = { ADMIN: "admin", MEMBER: "member" };
 
 const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const pathname = usePathname();
   const router = useRouter();
-
   const [openSubmenus, setOpenSubmenus] = useState({});
   const [logoutModalOpen, setLogoutModalOpen] = useState(false);
-
   const { user, logOut, loading } = useContext(AuthContext);
 
-  // ✅ SAFE READINESS FLAG
   const isReady = !loading && !!user;
-
-  // ✅ SAFE ROLE RESOLUTION
   const isAdmin =
     user?.admindata?.role?.toLowerCase() === "admin" ||
     user?.role?.toLowerCase() === "admin";
-
   const userRole = isAdmin ? ROLE.ADMIN : ROLE.MEMBER;
 
-  // ----- MENU -----
   const menuItems = [
+    { name: "Dashboard", icon: <FaTachometerAlt />, path: "/admin/dashboard", roles: [ROLE.ADMIN] },
+    { name: "My Profile", icon: <FaUser />, path: "/member/profile", roles: [ROLE.MEMBER, ROLE.ADMIN] },
     {
-      name: "Dashboard",
-      icon: <FaTachometerAlt />,
-      path: "/admin/dashboard",
-      roles: [ROLE.ADMIN],
-    },
-    {
-      name: "My Profile",
-      icon: <FaUser />,
-      path: "/member/profile",
-      roles: [ROLE.MEMBER, ROLE.ADMIN],
-    },
-    {
-      name: "Members",
-      icon: <FaUserPlus />,
-      roles: [ROLE.ADMIN],
+      name: "Members", icon: <FaUserPlus />, roles: [ROLE.ADMIN],
       subMenu: [
         { name: "All Members", path: "/admin/members/all-members", roles: [ROLE.ADMIN] },
         { name: "Add Member", path: "/admin/members/add", roles: [ROLE.ADMIN] },
       ],
     },
     {
-      name: "Equipment",
-      icon: <FaClipboardList />,
-      roles: [ROLE.ADMIN, ROLE.MEMBER],
+      name: "Equipment", icon: <FaClipboardList />, roles: [ROLE.ADMIN, ROLE.MEMBER],
       subMenu: [
         { name: "All Equipment", path: "/admin/equipment/all-equipment", roles: [ROLE.ADMIN] },
         { name: "Add Equipment", path: "/admin/equipment/add", roles: [ROLE.ADMIN] },
@@ -82,23 +57,15 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       ],
     },
     {
-      name: "Logistics",
-      icon: <FaExchangeAlt />,
-      roles: [ROLE.ADMIN],
+      name: "Logistics", icon: <FaExchangeAlt />, roles: [ROLE.ADMIN],
       subMenu: [
         { name: "Current Handouts", path: "/admin/logistics/handouts", roles: [ROLE.ADMIN] },
         { name: "Transaction Logs", path: "/admin/logistics/history", roles: [ROLE.ADMIN] },
       ],
     },
-    {
-      name: "Notices",
-      icon: <FaBell />,
-      path: "/admin/notices",
-      roles: [ROLE.ADMIN],
-    },
+    { name: "Notices", icon: <FaBell />, path: "/admin/notices", roles: [ROLE.ADMIN] },
   ];
 
-  // ----- AUTO OPEN ACTIVE SUBMENU -----
   useEffect(() => {
     menuItems.forEach((item) => {
       if (item.subMenu?.some((sub) => sub.path === pathname)) {
@@ -107,9 +74,8 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
     });
   }, [pathname]);
 
-  const toggleSubmenu = (key) => {
+  const toggleSubmenu = (key) =>
     setOpenSubmenus((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
 
   const handleConfirmLogout = async () => {
     await logOut();
@@ -121,24 +87,24 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   return (
     <>
       <aside
-        className={`fixed top-0 left-0 h-full z-50 transition-all duration-300 ease-in-out border-r border-gray-200
-        bg-white text-slate-600 shadow-xl md:shadow-sm flex flex-col
-        ${sidebarOpen ? "w-72 translate-x-0" : "w-72 -translate-x-full md:translate-x-0 md:w-64"}`}
+        className={`fixed top-0 left-0 h-full z-50 transition-all duration-300 ease-in-out
+          bg-[#0a0a0a] border-r border-white/5 flex flex-col
+          ${sidebarOpen ? "w-64 translate-x-0" : "w-64 -translate-x-full md:translate-x-0"}`}
       >
-        {/* LOGO */}
-        <div className="flex items-center justify-between p-6 h-20 border-b border-gray-50 shrink-0">
-          <Image src="/logo_black.png" width={100} height={100} alt="logo" priority />
-          <button onClick={toggleSidebar} className="md:hidden p-2 -mr-2 text-slate-400 hover:text-slate-600">
-            <FaTimes size={20} />
+        {/* Logo */}
+        <div className="flex items-center justify-between px-5 h-16 border-b border-white/5 shrink-0">
+          <Image src="/logo.png" width={90} height={36} alt="MIST BLITZ" priority />
+          <button onClick={toggleSidebar} className="md:hidden text-white/40 hover:text-white p-1">
+            <FaTimes size={16} />
           </button>
         </div>
 
-        {/* NAV */}
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-hide">
+        {/* Nav */}
+        <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
           {!isReady ? (
-            <div className="space-y-3 px-2">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="h-10 w-full bg-slate-100 animate-pulse rounded-lg" />
+            <div className="space-y-2 px-2 pt-2">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="h-9 w-full bg-white/5 animate-pulse rounded" />
               ))}
             </div>
           ) : (
@@ -150,47 +116,56 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                 const hasActiveChild = item.subMenu?.some((sub) => sub.path === pathname);
 
                 return (
-                  <div key={index} className="relative">
+                  <div key={index}>
                     {!item.subMenu ? (
                       <Link
                         href={item.path}
-                        className={`flex items-center px-4 py-3 rounded-xl transition-all group ${
-                          isActive ? "bg-red-50 text-red-500 font-semibold" : "hover:bg-gray-50 text-slate-500"
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded text-sm transition-all ${
+                          isActive
+                            ? "bg-red-600/10 text-red-500 border-l-2 border-red-600"
+                            : "text-white/40 hover:text-white hover:bg-white/5 border-l-2 border-transparent"
                         }`}
                       >
-                        {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-red-600 rounded-r-full" />}
-                        <span className={`text-lg ${isActive ? "text-red-600" : "text-slate-400 group-hover:text-slate-600"}`}>
-                          {item.icon}
-                        </span>
-                        <span className="ml-3 text-sm">{item.name}</span>
+                        <span className="text-base">{item.icon}</span>
+                        <span className="font-mono text-[11px] uppercase tracking-wider">{item.name}</span>
                       </Link>
                     ) : (
                       <>
                         <button
                           onClick={() => toggleSubmenu(item.name)}
-                          className={`flex items-center w-full px-4 py-3 rounded-xl transition-all group ${
-                            hasActiveChild ? "text-red-500 font-semibold bg-red-50/30" : "hover:bg-gray-50"
+                          className={`flex items-center gap-3 w-full px-3 py-2.5 rounded text-sm transition-all border-l-2 ${
+                            hasActiveChild
+                              ? "text-red-500 border-red-600 bg-red-600/5"
+                              : "text-white/40 hover:text-white hover:bg-white/5 border-transparent"
                           }`}
                         >
-                          <span className={`text-lg ${hasActiveChild ? "text-red-600" : "text-slate-400 group-hover:text-slate-600"}`}>
-                            {item.icon}
-                          </span>
-                          <span className="ml-3 text-sm">{item.name}</span>
-                          <FaChevronDown size={10} className={`ml-auto transition-transform ${isSubMenuOpen ? "rotate-180" : ""}`} />
+                          <span className="text-base">{item.icon}</span>
+                          <span className="font-mono text-[11px] uppercase tracking-wider flex-1 text-left">{item.name}</span>
+                          <FaChevronDown
+                            size={9}
+                            className={`transition-transform ${isSubMenuOpen ? "rotate-180" : ""}`}
+                          />
                         </button>
 
                         <AnimatePresence>
                           {isSubMenuOpen && (
-                            <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
-                              <div className="ml-9 mt-1 space-y-1 border-l-2 border-gray-100">
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="ml-6 mt-0.5 border-l border-white/5 pl-3 space-y-0.5 pb-1">
                                 {item.subMenu
                                   .filter((sub) => sub.roles.includes(userRole))
                                   .map((sub, i) => (
                                     <Link
                                       key={i}
                                       href={sub.path}
-                                      className={`block px-5 py-2.5 text-sm rounded-r-lg ${
-                                        pathname === sub.path ? "text-red-600 font-medium bg-red-50" : "text-slate-500 hover:text-red-600"
+                                      className={`block py-2 text-[11px] font-mono uppercase tracking-wider transition-colors ${
+                                        pathname === sub.path
+                                          ? "text-red-500"
+                                          : "text-white/30 hover:text-white"
                                       }`}
                                     >
                                       {sub.name}
@@ -208,80 +183,76 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           )}
         </nav>
 
-        {/* FOOTER */}
-        <div className="p-4 border-t border-gray-100 bg-gray-50/20 space-y-2">
-          {!isReady ? (
-            <div className="h-14 w-full bg-slate-100 animate-pulse rounded-xl" />
-          ) : (
+        {/* Footer */}
+        <div className="p-3 border-t border-white/5 space-y-2">
+          {isReady && (
             <>
-              <div className="flex items-center p-3 rounded-xl bg-white border border-gray-200 shadow-sm">
-                <div className="relative w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-bold mr-3 overflow-hidden">
+              <div className="flex items-center gap-3 px-3 py-2.5 bg-white/3 rounded">
+                <div className="relative w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold shrink-0 overflow-hidden">
                   {user?.info?.image ? (
                     <Image src={user.info.image} alt="profile" fill className="object-cover" />
                   ) : (
-                    user?.displayName?.charAt(0) || "U"
+                    user?.displayName?.charAt(0)?.toUpperCase() || "U"
                   )}
                 </div>
-                <div className="flex-1 overflow-hidden">
-                  <p className="text-sm font-semibold font-mono uppercase truncate">
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-mono font-black uppercase truncate text-white">
                     {user?.info?.name || user?.displayName || "User"}
                   </p>
-                  <p className="text-[10px] text-slate-500 truncate uppercase tracking-widest font-medium">
-                    {user?.admindata?.role}
+                  <p className="text-[9px] font-mono uppercase tracking-widest text-white/30">
+                    {user?.admindata?.role || "member"}
                   </p>
                 </div>
               </div>
 
               <button
                 onClick={() => setLogoutModalOpen(true)}
-                className="flex items-center font-mono justify-center w-full gap-2 px-4 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-transparent hover:border-red-100"
+                className="flex items-center gap-2 w-full px-3 py-2 text-[11px] font-mono uppercase tracking-wider text-white/30 hover:text-red-400 hover:bg-red-600/5 rounded transition-colors"
               >
-                <FaSignOutAlt />
-                <span>Logout Session</span>
+                <FaSignOutAlt size={12} />
+                <span>Logout</span>
               </button>
             </>
           )}
         </div>
       </aside>
 
-      {/* --- LOGOUT CONFIRMATION MODAL (ORIGINAL UI RESTORED) --- */}
+      {/* Logout modal */}
       <Dialog open={logoutModalOpen} onOpenChange={setLogoutModalOpen}>
-        <DialogContent className="sm:max-w-md rounded-none border-[6px] border-black/20 p-0 overflow-hidden bg-white shadow-2xl">
-          <div className="p-8 space-y-6">
+        <DialogContent className="sm:max-w-sm rounded-none border border-white/10 p-0 overflow-hidden bg-[#0a0a0a] shadow-2xl">
+          <div className="p-6 space-y-4">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-red-100 flex items-center justify-center shrink-0 border border-red-200">
-                <FaPowerOff size={22} className="text-red-600" />
+              <div className="w-10 h-10 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
+                <FaPowerOff size={16} className="text-red-500" />
               </div>
-              <div className="space-y-2">
-                <h3 className="text-2xl font-black font-sans uppercase italic tracking-tighter text-slate-950">
-                  End <span className="text-red-600">Session</span>?
+              <div>
+                <h3 className="text-lg font-black italic uppercase tracking-tight text-white">
+                  End <span className="text-red-600">Session?</span>
                 </h3>
-                <p className="text-[11px] font-mono font-semibold text-slate-600 leading-relaxed uppercase tracking-tighter">
-                  You are about to Logout from the dashboard
+                <p className="text-[11px] font-mono text-white/40 mt-1 uppercase tracking-wider">
+                  You will be logged out of the dashboard
                 </p>
               </div>
             </div>
-            <div className="bg-slate-50 p-4 border-l-4 border-slate-950 shadow-inner">
-              <span className="text-[10px] font-mono font-bold text-slate-400 block mb-1 tracking-widest">
-                ACTIVE_OPERATOR:
-              </span>
-              <span className="text-sm font-mono font-black text-slate-950 break-all uppercase italic">
-                {user?.info?.name || user?.displayName || "NULL_USER"}
-              </span>
+            <div className="bg-white/3 border border-white/5 p-3">
+              <p className="text-[9px] font-mono text-white/30 uppercase tracking-widest mb-1">Operator</p>
+              <p className="text-sm font-mono font-black text-white uppercase">
+                {user?.info?.name || user?.displayName || "Unknown"}
+              </p>
             </div>
           </div>
-          <div className="bg-slate-950 p-6 flex gap-4">
+          <div className="flex border-t border-white/5">
             <button
               onClick={() => setLogoutModalOpen(false)}
-              className="flex-1 px-4 py-3 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors border border-transparent hover:border-slate-700"
+              className="flex-1 px-4 py-3 text-[11px] font-mono uppercase tracking-widest text-white/30 hover:text-white hover:bg-white/5 transition-colors"
             >
-              CANCEL
+              Cancel
             </button>
             <button
               onClick={handleConfirmLogout}
-              className="flex-1 bg-red-600 hover:bg-red-700 text-white py-4 font-black uppercase italic tracking-widest transition-all border-b-4 border-red-800 active:border-b-0 active:translate-y-0.5"
+              className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 text-[11px] font-mono uppercase tracking-widest transition-colors"
             >
-              LOGOUT
+              Logout
             </button>
           </div>
         </DialogContent>
@@ -293,7 +264,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-slate-900/40 z-40 md:hidden"
+            className="fixed inset-0 bg-black/60 z-40 md:hidden"
             onClick={toggleSidebar}
           />
         )}

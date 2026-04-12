@@ -14,34 +14,28 @@ const AdminLayout = ({ children }) => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   if (loading || !user) {
-    return <CenterLoader fullScreen containerClassName="bg-white" />;
+    return <CenterLoader fullScreen containerClassName="bg-[#0a0a0a]" />;
   }
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-slate-50 flex overflow-x-hidden">
+      <div className="min-h-screen bg-[#0a0a0a] text-white flex overflow-x-hidden">
         <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <div className="flex-1 flex flex-col min-w-0 max-w-full transition-all duration-300 md:ml-64">
-          <header className="md:hidden sticky top-0 z-30 flex items-center justify-between px-4 h-16 bg-white border-b border-gray-200 w-full">
+        <div className="flex-1 flex flex-col min-w-0 md:ml-64">
+          {/* Mobile top bar */}
+          <header className="md:hidden sticky top-0 z-30 flex items-center justify-between px-4 h-14 bg-[#0a0a0a] border-b border-white/5">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 bg-red-600 rounded flex items-center justify-center text-white font-bold text-sm">
-                M
-              </div>
-              <span className="font-bold text-slate-900 text-sm tracking-tight">
-                MIST Blitz
-              </span>
+              <div className="w-6 h-6 bg-red-600 flex items-center justify-center text-white font-black text-xs">M</div>
+              <span className="font-mono text-xs uppercase tracking-widest text-white">MIST BLITZ</span>
             </div>
-            <button
-              onClick={toggleSidebar}
-              className="p-2 text-slate-600 hover:bg-gray-100 rounded-lg"
-            >
-              <FaBars size={20} />
+            <button onClick={toggleSidebar} className="p-2 text-white/40 hover:text-white">
+              <FaBars size={16} />
             </button>
           </header>
 
-          <main className="p-1 md:p-8 lg:p-4 w-full bg-white max-w-full min-h-screen">
-            <div className="max-w-full">{children}</div>
+          <main className="flex-1 p-4 md:p-8 bg-[#0a0a0a] min-h-screen">
+            {children}
           </main>
         </div>
       </div>
