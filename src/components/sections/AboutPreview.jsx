@@ -6,12 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const CAR_PHOTOS = [
-  { src: "/car2.jpg",    label: "MB-F1.0 · Track" },
-  { src: "/china4.jpg",  label: "FSC China 2025 · Zhuhai" },
-  { src: "/china3.jpg",  label: "FSC China 2025 · Paddock" },
-  { src: "/china.JPG",   label: "FSC China 2025 · Circuit" },
-  { src: "/p1.jpg",      label: "MB-F1.0 · Workshop" },
-  { src: "/improve.jpg", label: "MB-F1.0 · Testing" },
+  { src: "https://res.cloudinary.com/dnrubj8x4/image/upload/q_auto/f_auto/v1767172251/IMG-20251011-WA0122_kxvoo6.jpg", label: "MB-F1.0 · FSC China 2025" },
+  { src: "https://res.cloudinary.com/dnrubj8x4/image/upload/q_auto/f_auto/v1767172247/IMG-20251010-WA0062_a7exhh.jpg", label: "MB-F1.0 · Zhuhai Circuit" },
+  { src: "https://res.cloudinary.com/dnrubj8x4/image/upload/q_auto/f_auto/v1767172247/20251012_180539_lxntc9.jpg",      label: "MB-F1.0 · Paddock" },
+  { src: "https://res.cloudinary.com/dnrubj8x4/image/upload/q_auto/f_auto/v1766947238/tjvqgphzlwe3rfuiniar.jpg",       label: "MB-F1.0 · Track" },
+  { src: "https://res.cloudinary.com/dnrubj8x4/image/upload/q_auto/f_auto/v1766833754/yy1tqykhgnmieqkdm6xp.jpg",       label: "MB-F1.0 · Testing" },
 ];
 
 const carSpecs = [

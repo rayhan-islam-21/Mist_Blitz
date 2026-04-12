@@ -17,6 +17,7 @@ import {
   Phone,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Footer() {
@@ -28,21 +29,26 @@ export default function Footer() {
   const [status, setStatus] = useState("idle");
 
   const quickLinks = [
-    "About",
-    "Car",
-    "Events",
-    "Sponsors",
-    "Gallery",
-    "News",
-    "Contact",
+    { label: "About",      href: "/about" },
+    { label: "Our Car",    href: "/our-cars" },
+    { label: "Team",       href: "/team" },
+    { label: "Gallery",    href: "/gallery" },
+    { label: "Sponsors",   href: "/sponsors" },
+    { label: "Support Us", href: "/support-us" },
+    { label: "Join Us",    href: "/join-us" },
+    { label: "Contact",    href: "/contact" },
+  ];
+
+  const competitions = [
+    { name: "Formula Student China 2025", venue: "Zhuhai International Circuit", status: "done",     color: "border-green-500" },
+    { name: "Formula Student Germany 2025", venue: "Hockenheimring, Germany",    status: "upcoming", color: "border-yellow-400" },
   ];
 
   const socialLinks = [
-    { icon: Facebook, label: "Facebook", bg: "bg-blue-500" },
-    { icon: Twitter, label: "Twitter", bg: "bg-cyan-500" },
-    { icon: Instagram, label: "Instagram", bg: "bg-pink-500" },
-    { icon: Youtube, label: "YouTube", bg: "bg-red-600" },
-    { icon: Linkedin, label: "LinkedIn", bg: "bg-purple-600" },
+    { icon: Facebook,  label: "Facebook",  bg: "bg-blue-500",   href: "https://www.facebook.com/mistblitz" },
+    { icon: Instagram, label: "Instagram", bg: "bg-pink-500",   href: "https://www.instagram.com/mistblitz" },
+    { icon: Youtube,   label: "YouTube",   bg: "bg-red-600",    href: "https://www.youtube.com/@mistblitz" },
+    { icon: Linkedin,  label: "LinkedIn",  bg: "bg-blue-700",   href: "https://www.linkedin.com/company/mistblitz" },
   ];
 
   const handleVerify = async (e) => {
@@ -150,35 +156,38 @@ export default function Footer() {
           <div>
             <h4 className="text-2xl mb-6 text-red-500">Quick Links</h4>
             <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link}>
-                  <a
-                    href={`#${link.toLowerCase()}`}
+              {quickLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <Link
+                    href={href}
                     className="inline-block text-gray-300 hover:text-yellow-400 uppercase text-sm tracking-wider transition-all hover:translate-x-2"
                   >
-                    → {link}
-                  </a>
+                    → {label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Upcoming */}
+          {/* Competitions */}
           <div>
-            <h4 className="text-2xl mb-6 text-yellow-400">Upcoming</h4>
+            <h4 className="text-2xl mb-6 text-yellow-400">Competitions</h4>
             <div className="space-y-4 text-sm">
-              <div className="border-l-4 border-blue-500 pl-4">
-                <p className="body-copy text-gray-400">Jan 15, 2025</p>
-                Team Recruitment
-              </div>
-              <div className="border-l-4 border-red-500 pl-4">
-                <p className="body-copy text-gray-400">Mar 20, 2025</p>
-                Car Launch Event
-              </div>
-              <div className="border-l-4 border-yellow-400 pl-4">
-                <p className="body-copy text-gray-400">Jun 10, 2025</p>
-                Formula Student UK
-              </div>
+              {competitions.map((c) => (
+                <div key={c.name} className={`border-l-4 ${c.color} pl-4`}>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 border ${
+                      c.status === "done"
+                        ? "border-green-500 text-green-400"
+                        : "border-yellow-400 text-yellow-400"
+                    }`}>
+                      {c.status === "done" ? "Completed" : "Upcoming"}
+                    </span>
+                  </div>
+                  <p className="font-bold text-white uppercase text-xs tracking-wide leading-snug">{c.name}</p>
+                  <p className="body-copy text-gray-500 text-xs mt-0.5">{c.venue}</p>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -189,10 +198,12 @@ export default function Footer() {
               Stay connected for the latest updates, photos, and race results!
             </p>
             <div className="flex flex-wrap gap-3">
-              {socialLinks.map(({ icon: Icon, label, bg }) => (
+              {socialLinks.map(({ icon: Icon, label, bg, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className={`group w-12 h-12 border-4 border-white flex items-center justify-center transition-all hover:scale-110 ${bg}`}
                   style={{ boxShadow: "3px 3px 0px white" }}
@@ -225,7 +236,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-          <p className="body-copy">© 2024 MIST Blitz Formula Student Team</p>
+          <p className="body-copy">© 2025 MIST BLITZ Formula Student Team</p>
           <div className="flex gap-3 mt-2 md:mt-0">
             <span className="px-3 py-1 bg-blue-500 border-2 border-white -rotate-2 text-xs uppercase tracking-wider text-white">
               Fast
