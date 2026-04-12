@@ -201,7 +201,7 @@ const AboutPreview = () => {
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="grid md:grid-cols-3 gap-10 text-white/50 text-sm leading-relaxed"
+              className="grid md:grid-cols-2 gap-10 text-white/50 text-sm leading-relaxed"
             >
               <p>
                 Founded in 2024, MIST BLITZ was established to bridge the gap
