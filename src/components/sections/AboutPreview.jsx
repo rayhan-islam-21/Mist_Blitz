@@ -184,43 +184,44 @@ const AboutPreview = () => {
       {/* ── SECTION 2: ORIGIN + PHILOSOPHY ── */}
       <section className="py-24 px-4 md:px-8 border-b border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-1 gap-12 items-start">
-            {/* Origin */}
-            <div>
-              <SectionLabel number="02" label="Origin" />
-              <motion.h2
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.7 }}
-                className="text-4xl md:text-7xl font-black italic uppercase leading-none tracking-tighter mb-8"
-              >
-                OUR <span className="text-red-600">ORIGIN</span>
-              </motion.h2>
-              <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="grid md:grid-cols-2 gap-8 text-white/50 text-sm leading-relaxed"
-              >
-                <p>
-                  Founded in 2024, MIST BLITZ was established to bridge the gap
-                  between academic theory and real-world motorsport engineering —
-                  giving MIST students hands-on experience in vehicle design,
-                  manufacturing, testing, and validation.
-                </p>
-                <p>
-                  Our debut at Formula Student China pushed the team to build a
-                  competition-ready car from scratch, mastering chassis design,
-                  vehicle dynamics, powertrain optimization, and systems
-                  integration.
-                </p>
-              </motion.div>
-            </div>
-
+          <div>
+            <motion.h2
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7 }}
+              className="text-4xl md:text-7xl font-black italic uppercase leading-none tracking-tighter mb-10"
+            >
+              OUR <span className="text-red-600">ORIGIN</span>
+            </motion.h2>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="grid md:grid-cols-3 gap-10 text-white/50 text-sm leading-relaxed"
+            >
+              <p>
+                Founded in 2024, MIST BLITZ was established to bridge the gap
+                between academic theory and real-world motorsport engineering —
+                giving MIST students hands-on experience in vehicle design,
+                manufacturing, testing, and validation.
+              </p>
+              <p>
+                Our debut at Formula Student China pushed the team to build a
+                competition-ready car from scratch, mastering chassis design,
+                vehicle dynamics, powertrain optimization, and systems
+                integration to meet international competition standards.
+              </p>
+              <p>
+                What started as a vision inside the classrooms of MIST has grown
+                into Bangladesh&apos;s most ambitious student engineering project —
+                the first team from the country to pass full technical scrutineering
+                and complete endurance laps on an international Formula Student circuit.
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
