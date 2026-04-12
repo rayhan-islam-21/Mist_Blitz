@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const carSpecs = [
   { label: "Power Unit", value: "KTM 390 Duke — 373.3cc" },
@@ -14,130 +15,248 @@ const carSpecs = [
   { label: "Tyres", value: "Apollo Amazer 4G Life R13" },
 ];
 
+const stats = [
+  { value: "50+", label: "Engineers" },
+  { value: "01", label: "Car Built" },
+  { value: "76", label: "Teams Competed" },
+  { value: "2025", label: "Debut Season" },
+];
+
+const SectionLabel = ({ number, label }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    className="flex items-center gap-4 mb-10"
+  >
+    <span className="font-mono text-[10px] text-white/20 tracking-widest">{number}</span>
+    <div className="h-px w-12 bg-white/10" />
+    <span className="font-mono text-[10px] uppercase tracking-widest text-red-500">{label}</span>
+  </motion.div>
+);
+
 const AboutPreview = () => {
   const [activeSpec, setActiveSpec] = useState(0);
 
   return (
     <div className="bg-[#050505] text-white font-sans selection:bg-red-600 selection:text-white overflow-hidden relative">
+      {/* Subtle dot grid */}
       <div
-        className="absolute inset-0 opacity-[0.1] pointer-events-none"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage: `radial-gradient(#ffffff 0.5px, transparent 0.5px)`,
           backgroundSize: "30px 30px",
         }}
       />
 
-      {/* SECTION 1: INTRO */}
-      <section className="relative pt-32 pb-20 px-6 border-b border-white/5">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div className="relative z-10">
-            <motion.h1
-              initial={{ y: 60, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 100, damping: 30 }}
-              className="text-5xl md:text-[9rem] font-black uppercase italic leading-none tracking-tighter mb-10"
-            >
-              MIST <br />
-              <span className="text-red-600">BLITZ</span>!
-            </motion.h1>
+      {/* ── SECTION 1: WHO WE ARE ── */}
+      <section className="relative pt-24 pb-0 px-4 md:px-8 border-b border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <SectionLabel number="01" label="About" />
 
-            <div className="space-y-8">
-              <p className="text-xl md:text-3xl text-balance font-bold leading-tight tracking-tight text-gray-100 uppercase italic">
-                Bangladesh&apos;s emerging force in{" "}
-                <span className="text-red-600">Formula Student engineering.</span>
-              </p>
-              <p className="text-sm text-balance font-sans text-gray-300 md:text-lg font-normal leading-relaxed max-w-lg">
-                MIST BLITZ is the official Formula Student team of the{" "}
-                <span className="text-white font-semibold italic">
-                  Military Institute of Science and Technology (MIST).
-                </span>{" "}
-                The team designs, manufactures, and validates a single-seat,
-                open-wheel race car in compliance with international Formula
-                Student regulations, representing Bangladesh on a global
-                motorsport platform.
-              </p>
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left: text */}
+            <div>
+              <motion.h2
+                initial={{ y: 40, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="text-4xl md:text-6xl font-black italic uppercase leading-none tracking-tighter mb-8 text-white"
+              >
+                Bangladesh&apos;s Formula<br />
+                Student<br />
+                <span className="text-red-600">Vanguard.</span>
+              </motion.h2>
+
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15, duration: 0.6 }}
+                className="space-y-4 text-white/50 text-sm leading-relaxed max-w-md mb-10"
+              >
+                <p>
+                  MIST BLITZ is the official Formula Student team of the Military
+                  Institute of Science and Technology — designing, manufacturing,
+                  and validating a single-seat open-wheel race car under
+                  international Formula Student regulations.
+                </p>
+                <p>
+                  In 2025, we became the first Bangladeshi team to pass full
+                  technical scrutineering and complete endurance laps at Formula
+                  Student China, among 76 international teams.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-white/30 hover:text-red-500 transition-colors group"
+                >
+                  <span>Full Story</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+              </motion.div>
             </div>
+
+            {/* Right: image */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              <div className="relative overflow-hidden aspect-4/3 border border-white/10">
+                <Image
+                  src="/china4.jpg"
+                  alt="MIST BLITZ at Formula Student China"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-1000"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
+                  <div>
+                    <p className="font-mono text-[9px] uppercase tracking-widest text-white/40 mb-1">
+                      Formula Student China 2025
+                    </p>
+                    <p className="font-black italic uppercase text-white text-sm">
+                      Zhuhai International Circuit
+                    </p>
+                  </div>
+                  <div className="bg-red-600 px-3 py-1.5">
+                    <p className="font-mono text-[9px] uppercase tracking-widest text-white font-black">
+                      FSC 2025
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
 
-          <div className="relative group mt-16 lg:mt-0">
-            <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-red-600 z-20" />
-            <div className="relative aspect-square overflow-hidden border border-white/10 group-hover:border-red-600/50 transition-all duration-500 shadow-2xl">
-              <Image
-                src="/china4.jpg"
-                alt="Formula Student Competition"
-                fill
-                className="object-cover group-hover:scale-105 transition-all duration-1000"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-black/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+          {/* Stats strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="mt-16 border-t border-white/5 grid grid-cols-2 md:grid-cols-4"
+          >
+            {stats.map((s, i) => (
+              <div key={i} className="py-8 px-6 border-r border-white/5 last:border-r-0">
+                <p className="font-black italic text-3xl md:text-4xl text-white leading-none">{s.value}</p>
+                <p className="font-mono text-[9px] uppercase tracking-widest text-white/30 mt-2">{s.label}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── SECTION 2: ORIGIN + PHILOSOPHY ── */}
+      <section className="py-24 px-4 md:px-8 border-b border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-12 items-start">
+            {/* Origin */}
+            <div className="lg:col-span-2">
+              <SectionLabel number="02" label="Origin" />
+              <motion.h2
+                initial={{ y: 40, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="text-4xl md:text-7xl font-black italic uppercase leading-none tracking-tighter mb-8"
+              >
+                OUR <span className="text-red-600">ORIGIN</span>
+              </motion.h2>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="grid md:grid-cols-2 gap-8 text-white/50 text-sm leading-relaxed"
+              >
+                <p>
+                  Founded in 2024, MIST BLITZ was established to bridge the gap
+                  between academic theory and real-world motorsport engineering —
+                  giving MIST students hands-on experience in vehicle design,
+                  manufacturing, testing, and validation.
+                </p>
+                <p>
+                  Our debut at Formula Student China pushed the team to build a
+                  competition-ready car from scratch, mastering chassis design,
+                  vehicle dynamics, powertrain optimization, and systems
+                  integration.
+                </p>
+              </motion.div>
             </div>
+
+            {/* Philosophy */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="border-l-2 border-red-600 pl-8 pt-4 mt-16 lg:mt-0"
+            >
+              <p className="font-mono text-[9px] uppercase tracking-widest text-white/30 mb-4">
+                Team Philosophy
+              </p>
+              <p className="text-xl md:text-2xl font-black italic uppercase leading-tight text-white">
+                &ldquo;Design with<br />Purpose.<br />Build with<br />
+                <span className="text-red-600">Precision.&rdquo;</span>
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 2: OUR ORIGIN + TEAM PHILOSOPHY (moved up, no stats section above) */}
-      <section className="py-32 px-6 relative">
+      {/* ── SECTION 3: THE MACHINE ── */}
+      <section className="py-24 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row justify-between items-start mb-24 gap-12">
-            <div className="lg:w-2/3">
-              <motion.h2
-                initial={{ x: -60, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                className="text-5xl md:text-9xl font-black uppercase italic leading-tight tracking-tighter mb-8"
-              >
-                OUR <span className="text-red-600">ORIGIN</span>
-              </motion.h2>
-              <div className="grid md:grid-cols-2 text-balance gap-10 text-gray-300">
-                <p className="body-copy text-gray-300">
-                  Founded in 2024, MIST BLITZ was established to bridge the gap
-                  between academic theory and real-world motorsport engineering.
-                  The team provides MIST students with hands-on experience in
-                  vehicle design, manufacturing, testing, and validation.
-                </p>
-                <p className="body-copy text-gray-300">
-                  Our first mission,{" "}
-                  <span className="text-white">Formula Student China</span>,
-                  operating under Formula Student regulations, the team focuses
-                  on chassis design, vehicle dynamics, powertrain optimization,
-                  and systems integration to meet international competition
-                  standards.
-                </p>
-              </div>
-            </div>
-            <div className="lg:w-1/3 w-full bg-linear-to-br from-white/5 to-transparent p-10 border-l-4 border-red-600 backdrop-blur-md">
-              <h4 className="font-black uppercase tracking-widest text-white text-xs mb-6">
-                TEAM PHILOSOPHY
-              </h4>
-              <p className="text-2xl font-black italic leading-tight uppercase text-white mb-4">
-                &ldquo;DESIGN WITH PURPOSE. BUILD WITH <br />
-                <span className="text-red-600">PRECISION.&rdquo;</span>
-              </p>
-            </div>
-          </div>
+          <SectionLabel number="03" label="The Machine" />
 
-          {/* CAR SECTION: Photo + Sliding Specs */}
-          <div className="grid lg:grid-cols-12 gap-8">
-            {/* Large car image */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid lg:grid-cols-12 border border-white/10 overflow-hidden"
+          >
+            {/* Car image */}
             <div
-              className="lg:col-span-8 relative border border-white/10 group overflow-hidden bg-zinc-900"
-              style={{ backgroundImage: `url('/car2.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '40rem' }}
+              className="lg:col-span-8 relative min-h-104 overflow-hidden"
+              style={{
+                backgroundImage: `url('/car2.jpg')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
             >
-              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-[2s]" />
+              <div className="absolute inset-0 bg-black/50 hover:bg-black/20 transition-all duration-[2s]" />
               <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-transparent to-transparent" />
-              <div className="absolute bottom-12 left-12 right-12">
-                <h3 className="md:text-7xl text-4xl font-black italic uppercase mb-8 tracking-tighter text-white">
-                  FURIOSA 1.0
-                </h3>
-                <span className="font-mono text-xs uppercase tracking-widest text-gray-400">
-                  Power Unit: KTM 390 DUKE || 373.3cc
+              <div className="absolute top-6 left-6">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-white/30">
+                  MB-F1.0
                 </span>
               </div>
+              <div className="absolute bottom-8 left-8 right-8">
+                <h3 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white mb-2">
+                  FURIOSA 1.0
+                </h3>
+                <p className="font-mono text-xs text-white/30 uppercase tracking-widest">
+                  KTM 390 Duke · 33.8 kW · 290 kg
+                </p>
+              </div>
             </div>
 
-            {/* Sliding specs panel */}
-            <div className="lg:col-span-4 flex flex-col gap-0 overflow-hidden">
+            {/* Specs panel */}
+            <div className="lg:col-span-4 flex flex-col border-t lg:border-t-0 border-l-0 lg:border-l border-white/10">
               <div className="bg-red-600 px-6 py-4">
-                <p className="text-white font-black uppercase text-xs tracking-widest">
+                <p className="text-white font-black uppercase text-[10px] tracking-widest">
                   Key Specifications
                 </p>
               </div>
@@ -145,55 +264,56 @@ const AboutPreview = () => {
                 <button
                   key={i}
                   onClick={() => setActiveSpec(i)}
-                  className={`group relative w-full text-left px-6 py-5 border-b border-white/5 transition-all duration-300 overflow-hidden ${
-                    activeSpec === i ? "bg-red-600/10" : "bg-zinc-900/60 hover:bg-white/5"
+                  className={`relative w-full text-left px-6 py-4 border-b border-white/5 transition-all duration-300 ${
+                    activeSpec === i ? "bg-red-600/10" : "hover:bg-white/3"
                   }`}
                 >
-                  {/* sliding red bar */}
                   <span
-                    className={`absolute left-0 top-0 h-full w-1 bg-red-600 transition-all duration-300 ${
-                      activeSpec === i ? "opacity-100" : "opacity-0 group-hover:opacity-60"
+                    className={`absolute left-0 top-0 h-full w-0.5 bg-red-600 transition-opacity duration-300 ${
+                      activeSpec === i ? "opacity-100" : "opacity-0"
                     }`}
                   />
-                  <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold mb-1">
+                  <p className="text-[9px] uppercase tracking-widest text-white/30 font-mono mb-1">
                     {spec.label}
                   </p>
                   <p
-                    className={`font-black uppercase tracking-tight transition-colors duration-200 ${
-                      activeSpec === i ? "text-white text-lg" : "text-white/70 text-base"
+                    className={`font-black uppercase text-sm transition-colors ${
+                      activeSpec === i ? "text-white" : "text-white/60"
                     }`}
                   >
                     {spec.value}
                   </p>
                 </button>
               ))}
+              <div className="mt-auto p-6 border-t border-white/5">
+                <Link
+                  href="/our-cars"
+                  className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-white/30 hover:text-red-500 transition-colors group"
+                >
+                  <span>Full Specs</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* MARQUEE */}
-      <div className="py-8 bg-red-600 z-50 -rotate-[0.95] w-[115%] -ml-[7.5%] border-y-4 border-black group cursor-default">
-        <div className="flex whitespace-nowrap z-50 gap-12 animate-marquee font-black italic uppercase text-2xl text-white select-none">
-          <span>FSC CHINA 2024 ENTRY</span>
-          <span>•</span>
-          <span>MIST BLITZ // DHAKA</span>
-          <span>•</span>
-          <span>Weight: 290kg (40:60)</span>
-          <span>•</span>
-          <span>KTM 390 DUKE POWER UNIT</span>
-          <span>•</span>
-          <span>373.3cc Engine</span>
-          <span>•</span>
-          <span>Peak Torque: 39Nm @ 6500rpm</span>
-          <span>•</span>
-          <span>Output: 33.8kW @ 8500rpm</span>
-          <span>•</span>
-          <span>Steel Spaceframe Chassis</span>
-          <span>•</span>
-          <span>Double Wishbone Geometry</span>
-          <span>•</span>
-          <span>Furiosa 1.0</span>
+      {/* ── MARQUEE ── */}
+      <div className="py-6 bg-red-600 -rotate-[0.95] w-[115%] -ml-[7.5%] border-y border-black/20 overflow-hidden">
+        <div className="flex whitespace-nowrap gap-12 animate-marquee font-black italic uppercase text-xl text-white select-none">
+          {[
+            "FSC China 2025", "•", "Best Foreign Team", "•", "MIST BLITZ // DHAKA",
+            "•", "Weight: 290kg", "•", "KTM 390 DUKE", "•", "373.3cc Engine",
+            "•", "Peak Torque: 39Nm @ 6500rpm", "•", "Output: 33.8kW @ 8500rpm",
+            "•", "Steel Spaceframe", "•", "Furiosa 1.0", "•",
+            "FSC China 2025", "•", "Best Foreign Team", "•", "MIST BLITZ // DHAKA",
+            "•", "Weight: 290kg", "•", "KTM 390 DUKE", "•", "373.3cc Engine",
+            "•", "Peak Torque: 39Nm @ 6500rpm", "•", "Output: 33.8kW @ 8500rpm",
+            "•", "Steel Spaceframe", "•", "Furiosa 1.0", "•",
+          ].map((item, i) => (
+            <span key={i}>{item}</span>
+          ))}
         </div>
       </div>
 
@@ -204,7 +324,7 @@ const AboutPreview = () => {
         }
         .animate-marquee {
           display: inline-flex;
-          animation: marquee 20s linear infinite;
+          animation: marquee 25s linear infinite;
         }
       `}</style>
     </div>

@@ -63,22 +63,11 @@ const Hero = () => {
         <div className="font-mono text-[10px] uppercase tracking-widest text-white/40">MB-F1.0 · Furiosa</div>
       </motion.div>
 
+      {/* Red diagonal accent */}
+      <div className="absolute top-0 right-0 w-1 h-full bg-red-600 opacity-80 z-20" />
+
       {/* Main content */}
       <div className="relative z-30 px-6 md:px-12 pb-16 md:pb-20">
-
-        {/* Season badge */}
-        <motion.div
-          initial={{ x: -30, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="flex items-center gap-3 mb-6"
-        >
-          <div className="bg-red-600 px-3 py-1">
-            <span className="font-mono text-[10px] font-black uppercase tracking-widest text-white">2025</span>
-          </div>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Formula Student · Bangladesh</span>
-          <div className="h-px flex-1 bg-white/10 max-w-xs" />
-        </motion.div>
 
         {/* Main heading */}
         <div className="overflow-hidden mb-2">
@@ -86,7 +75,7 @@ const Hero = () => {
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             transition={{ delay: 0.3, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[14vw] md:text-[11vw] font-black italic uppercase leading-none tracking-tighter text-white"
+            className="text-[16vw] md:text-[12vw] font-black italic uppercase leading-none tracking-tighter text-white"
           >
             MIST
           </motion.h1>
@@ -96,7 +85,7 @@ const Hero = () => {
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             transition={{ delay: 0.45, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[14vw] md:text-[11vw] font-black italic uppercase leading-none tracking-tighter text-red-600"
+            className="text-[16vw] md:text-[12vw] font-black italic uppercase leading-none tracking-tighter text-red-600"
           >
             BLITZ
           </motion.h1>
@@ -114,11 +103,11 @@ const Hero = () => {
               Bangladesh&apos;s Formula Student team — engineering race cars from scratch at the
               Military Institute of Science and Technology.
             </p>
-            <div className="flex gap-3">
-              <Link href="/our-cars" className="cta-btn bg-red-600 text-white hover:bg-red-700">
+            <div className="flex gap-3 flex-wrap">
+              <Link href="/our-cars" className=" bg-red-600 text-white hover:bg-red-700">
                 Explore Furiosa 1.0
               </Link>
-              <Link href="/about" className="cta-btn border border-white/20 text-white hover:border-white/60">
+              <Link href="/about" className=" border border-white/20 text-white hover:border-white/60">
                 Our Story
               </Link>
             </div>
