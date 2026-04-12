@@ -1,9 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+
+const CAR_PHOTOS = [
+  { src: "/car2.jpg",    label: "MB-F1.0 · Track" },
+  { src: "/china4.jpg",  label: "FSC China 2025 · Zhuhai" },
+  { src: "/china3.jpg",  label: "FSC China 2025 · Paddock" },
+  { src: "/china.JPG",   label: "FSC China 2025 · Circuit" },
+  { src: "/p1.jpg",      label: "MB-F1.0 · Workshop" },
+  { src: "/improve.jpg", label: "MB-F1.0 · Testing" },
+];
 
 const carSpecs = [
   { label: "Power Unit", value: "KTM 390 Duke — 373.3cc" },
@@ -29,6 +38,14 @@ const fadeUp = {
 
 const AboutPreview = () => {
   const [activeSpec, setActiveSpec] = useState(0);
+  const [carPhoto, setCarPhoto] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setCarPhoto((p) => (p + 1) % CAR_PHOTOS.length);
+    }, 3500);
+    return () => clearInterval(t);
+  }, []);
 
   return (
     <div className="bg-[#050505] text-white font-sans selection:bg-red-600 selection:text-white overflow-hidden relative">
@@ -236,23 +253,53 @@ const AboutPreview = () => {
             transition={{ duration: 0.6 }}
             className="grid lg:grid-cols-12 border border-white/10 overflow-hidden"
           >
-            {/* Car image */}
-            <div
-              className="lg:col-span-8 relative min-h-104 overflow-hidden"
-              style={{
-                backgroundImage: `url('/car2.jpg')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <div className="absolute inset-0 bg-black/50 hover:bg-black/20 transition-all duration-[2s]" />
+            {/* Car image carousel */}
+            <div className="lg:col-span-8 relative min-h-104 overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={carPhoto}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8 }}
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: `url('${CAR_PHOTOS[carPhoto].src}')`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+              </AnimatePresence>
+              <div className="absolute inset-0 bg-black/50" />
               <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-transparent to-transparent" />
-              <div className="absolute top-6 left-6">
+
+              {/* Dot indicators */}
+              <div className="absolute top-5 left-0 right-0 flex justify-center gap-1.5 z-10">
+                {CAR_PHOTOS.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCarPhoto(i)}
+                    className={`h-px transition-all duration-300 ${
+                      i === carPhoto ? "w-6 bg-red-500" : "w-3 bg-white/20"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <div className="absolute top-6 left-6 z-10">
                 <span className="font-mono text-[9px] uppercase tracking-widest text-white/30">
                   MB-F1.0
                 </span>
               </div>
-              <div className="absolute bottom-8 left-8 right-8">
+
+              {/* Photo label */}
+              <div className="absolute top-6 right-6 z-10">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-white/30">
+                  {CAR_PHOTOS[carPhoto].label}
+                </span>
+              </div>
+
+              <div className="absolute bottom-8 left-8 right-8 z-10">
                 <h3 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white mb-2">
                   FURIOSA 1.0
                 </h3>
