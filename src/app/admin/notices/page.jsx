@@ -76,7 +76,7 @@ export default function NoticesPage() {
     <div className="min-h-screen bg-[#0a0a0a] text-white p-6 md:p-10">
       <Toaster position="top-right" />
 
-      <div className="max-w-3xl mx-auto space-y-10">
+      <div className="max-w-5xl mx-auto space-y-10">
 
         {/* Header */}
         <div>

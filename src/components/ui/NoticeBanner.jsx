@@ -35,22 +35,26 @@ export default function NoticeBanner() {
 
   if (!visible || !notice) return null;
 
-  const isBg = notice.type === "warning" ? "bg-red-600" : "bg-[#111] border-b border-white/10";
+  const isBg = notice.type === "warning"
+    ? "bg-red-600"
+    : notice.type === "success"
+    ? "bg-green-700"
+    : "bg-slate-900";
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-200 flex items-center justify-between gap-4 px-4 md:px-8 ${isBg}`} style={{ height: "36px" }}>
+    <div className={`fixed top-0 left-0 right-0 z-200 flex items-center justify-between gap-4 px-4 md:px-10 ${isBg}`} style={{ height: "44px" }}>
       <div className="flex items-center gap-3 flex-1 min-w-0">
-        <span className="w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse shrink-0" />
-        <span className="font-mono text-[10px] uppercase tracking-widest text-white/50 shrink-0 hidden sm:block">Notice</span>
-        <p className="text-xs text-white/80 truncate">{notice.message}</p>
+        <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
+        <span className="font-mono text-[10px] font-black uppercase tracking-widest text-white/60 shrink-0 hidden sm:block border-r border-white/10 pr-3">Notice</span>
+        <p className="text-xs font-semibold text-white truncate">{notice.message}</p>
         {notice.link && (
-          <Link href={notice.link} className="shrink-0 font-mono text-[10px] uppercase tracking-widest text-white/50 hover:text-white underline underline-offset-2 transition-colors whitespace-nowrap">
+          <Link href={notice.link} className="shrink-0 font-mono text-[10px] font-black uppercase tracking-widest text-red-400 hover:text-white bg-white/10 hover:bg-white/20 px-3 py-1 transition-colors whitespace-nowrap">
             {notice.linkText || "Learn More"} →
           </Link>
         )}
       </div>
-      <button onClick={dismiss} className="shrink-0 text-white/30 hover:text-white transition-colors p-1" aria-label="Dismiss">
-        <X size={12} />
+      <button onClick={dismiss} className="shrink-0 text-white/40 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded" aria-label="Dismiss">
+        <X size={13} />
       </button>
     </div>
   );
