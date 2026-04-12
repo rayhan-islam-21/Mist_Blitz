@@ -35,26 +35,50 @@ export default function NoticeBanner() {
 
   if (!visible || !notice) return null;
 
-  const isBg = notice.type === "warning"
-    ? "bg-red-600"
-    : notice.type === "success"
-    ? "bg-green-700"
-    : "bg-slate-900";
+  const bgColor = notice.type === "success" ? "#16a34a" : notice.type === "warning" ? "#dc2626" : "#dc2626";
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-200 flex items-center justify-between gap-4 px-4 md:px-10 ${isBg}`} style={{ height: "44px" }}>
-      <div className="flex items-center gap-3 flex-1 min-w-0">
-        <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
-        <span className="font-mono text-[10px] font-black uppercase tracking-widest text-white/60 shrink-0 hidden sm:block border-r border-white/10 pr-3">Notice</span>
-        <p className="text-xs font-semibold text-white truncate">{notice.message}</p>
+    <div
+      className="fixed top-0 left-0 right-0 z-200 overflow-hidden flex items-center justify-center"
+      style={{ height: "56px", backgroundColor: bgColor }}
+    >
+      {/* Decorative circles — left */}
+      <div className="absolute left-0 top-0 h-full flex items-center pointer-events-none select-none">
+        <div className="w-24 h-24 rounded-full opacity-20 bg-white -ml-8" />
+        <div className="w-14 h-14 rounded-full opacity-10 bg-white -ml-4" />
+        <div className="w-10 h-10 rounded-sm opacity-15 bg-white/30 ml-2 rotate-12" />
+        <div className="w-16 h-16 rounded-full opacity-10 bg-white ml-1" />
+      </div>
+
+      {/* Decorative circles — right */}
+      <div className="absolute right-0 top-0 h-full flex items-center pointer-events-none select-none">
+        <div className="w-16 h-16 rounded-full opacity-10 bg-white -mr-1" />
+        <div className="w-10 h-10 rounded-sm opacity-15 bg-white/30 mr-2 -rotate-12" />
+        <div className="w-14 h-14 rounded-full opacity-10 bg-white mr-1" />
+        <div className="w-24 h-24 rounded-full opacity-20 bg-white -mr-8" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex items-center gap-4 px-10">
+        <p className="text-white text-sm font-medium">{notice.message}</p>
         {notice.link && (
-          <Link href={notice.link} className="shrink-0 font-mono text-[10px] font-black uppercase tracking-widest text-red-400 hover:text-white bg-white/10 hover:bg-white/20 px-3 py-1 transition-colors whitespace-nowrap">
-            {notice.linkText || "Learn More"} →
+          <Link
+            href={notice.link}
+            className="shrink-0 inline-flex items-center gap-1.5 border border-white/50 hover:border-white text-white text-xs font-semibold px-4 py-1.5 rounded-full transition-colors hover:bg-white/10 whitespace-nowrap"
+          >
+            {notice.linkText || "Learn more"}
+            <span className="text-sm">›</span>
           </Link>
         )}
       </div>
-      <button onClick={dismiss} className="shrink-0 text-white/40 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded" aria-label="Dismiss">
-        <X size={13} />
+
+      {/* Dismiss */}
+      <button
+        onClick={dismiss}
+        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full z-20"
+        aria-label="Dismiss"
+      >
+        <X size={14} />
       </button>
     </div>
   );

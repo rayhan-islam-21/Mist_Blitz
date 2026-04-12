@@ -3,7 +3,7 @@
 
 /* Push fixed navbar down when notice banner is visible */
 html[data-notice="true"] nav.fixed-navbar {
-  top: 44px;
+  top: 56px;
 }
 
 @custom-variant dark (&:is(.dark *));
