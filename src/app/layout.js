@@ -1,4 +1,5 @@
 import AuthProvider from "@/context/Authprovider";
+import NoticeBanner from "@/components/ui/NoticeBanner";
 import "./globals.css";
 import { Viga } from "next/font/google";
 
@@ -22,7 +23,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${oswald.variable} bg-black text-white`}
       >
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <NoticeBanner />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
