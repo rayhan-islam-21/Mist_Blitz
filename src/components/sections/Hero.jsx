@@ -63,9 +63,6 @@ const Hero = () => {
         <div className="font-mono text-[10px] uppercase tracking-widest text-white/40">MB-F1.0 · Furiosa</div>
       </motion.div>
 
-      {/* Red diagonal accent */}
-      <div className="absolute top-0 right-0 w-1 h-full bg-red-600 opacity-80 z-20" />
-
       {/* Main content */}
       <div className="relative z-30 px-6 md:px-12 pb-16 md:pb-20">
 
@@ -89,7 +86,7 @@ const Hero = () => {
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             transition={{ delay: 0.3, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[18vw] md:text-[14vw] font-black italic uppercase leading-none tracking-tighter text-white"
+            className="text-[14vw] md:text-[11vw] font-black italic uppercase leading-none tracking-tighter text-white"
           >
             MIST
           </motion.h1>
@@ -99,7 +96,7 @@ const Hero = () => {
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             transition={{ delay: 0.45, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[18vw] md:text-[14vw] font-black italic uppercase leading-none tracking-tighter text-red-600"
+            className="text-[14vw] md:text-[11vw] font-black italic uppercase leading-none tracking-tighter text-red-600"
           >
             BLITZ
           </motion.h1>
@@ -117,7 +114,7 @@ const Hero = () => {
               Bangladesh&apos;s Formula Student team — engineering race cars from scratch at the
               Military Institute of Science and Technology.
             </p>
-            <div className="flex gap-3 flex-wrap">
+            <div className="flex gap-3">
               <Link href="/our-cars" className="cta-btn bg-red-600 text-white hover:bg-red-700">
                 Explore Furiosa 1.0
               </Link>
