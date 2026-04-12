@@ -101,11 +101,11 @@ const Hero = () => {
               Bangladesh&apos;s Formula Student team — engineering race cars from scratch at the
               Military Institute of Science and Technology.
             </p>
-            <div className="flex gap-3">
-              <Link href="/our-cars" className="cta-btn bg-red-600 text-white hover:bg-red-700">
+            <div className="flex items-center gap-4">
+              <Link href="/our-cars" className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-mono text-[11px] uppercase tracking-widest px-4 py-2 transition-colors">
                 Explore Furiosa 1.0
               </Link>
-              <Link href="/about" className="cta-btn border border-white/20 text-white hover:border-white/60">
+              <Link href="/about" className="inline-flex items-center gap-2 border border-white/20 hover:border-white/60 text-white font-mono text-[11px] uppercase tracking-widest px-4 py-2 transition-colors">
                 Our Story
               </Link>
             </div>

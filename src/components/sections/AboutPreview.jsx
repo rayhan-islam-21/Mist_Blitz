@@ -27,21 +27,6 @@ const fadeUp = {
   show: { y: 0, opacity: 1 },
 };
 
-const SectionLabel = ({ number, label }) => (
-  <motion.div
-    variants={fadeUp}
-    initial="hidden"
-    whileInView="show"
-    viewport={{ once: true, amount: 0.3 }}
-    transition={{ duration: 0.5 }}
-    className="flex items-center gap-4 mb-10"
-  >
-    <span className="font-mono text-[10px] text-white/20 tracking-widest">{number}</span>
-    <div className="h-px w-12 bg-white/10" />
-    <span className="font-mono text-[10px] uppercase tracking-widest text-red-500">{label}</span>
-  </motion.div>
-);
-
 const AboutPreview = () => {
   const [activeSpec, setActiveSpec] = useState(0);
 
@@ -59,8 +44,6 @@ const AboutPreview = () => {
       {/* ── SECTION 1: WHO WE ARE ── */}
       <section className="relative pt-24 pb-0 px-4 md:px-8 border-b border-white/5">
         <div className="max-w-7xl mx-auto">
-          <SectionLabel number="01" label="About" />
-
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Left: text */}
             <div>
@@ -229,7 +212,6 @@ const AboutPreview = () => {
       {/* ── SECTION 3: THE MACHINE ── */}
       <section className="py-24 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          <SectionLabel number="03" label="The Machine" />
 
           <motion.div
             variants={fadeUp}
