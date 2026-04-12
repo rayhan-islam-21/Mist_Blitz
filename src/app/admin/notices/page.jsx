@@ -71,6 +71,7 @@ export default function NoticesPage() {
   };
 
   return (
+    <>
     <div className="min-h-screen bg-white text-slate-900 p-6 md:p-10">
       <Toaster position="top-right" />
 
@@ -268,5 +269,6 @@ export default function NoticesPage() {
           </div>
         </DialogContent>
       </Dialog>
+    </>
   );
 }
