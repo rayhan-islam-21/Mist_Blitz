@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 const carSpecs = [
@@ -19,13 +20,6 @@ const stats = [
   { value: "01", label: "Car Built" },
   { value: "76", label: "Teams Competed" },
   { value: "2025", label: "Debut Season" },
-];
-
-const awards = [
-  { event: "FSC China 2025", title: "Best Foreign Team & Leading Convoy Award" },
-  { event: "FSC China 2025", title: "Best Presentation Performance" },
-  { event: "FSC China 2025", title: "4th Place — Business Plan Presentation" },
-  { event: "Formula Bharat 2025", title: "1st Place — Engineering Design CRM" },
 ];
 
 const fadeUp = {
@@ -132,40 +126,38 @@ const AboutPreview = () => {
               </motion.div>
             </div>
 
-            {/* Right: Awards panel */}
+            {/* Right: image */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex flex-col gap-0 border border-white/10"
+              className="relative"
             >
-              <div className="bg-red-600 px-6 py-3">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-white font-black">
-                  Awards &amp; Recognition
-                </p>
-              </div>
-              {awards.map((award, i) => (
-                <div
-                  key={i}
-                  className="px-6 py-5 border-b border-white/5 last:border-b-0 flex items-start gap-4 hover:bg-white/3 transition-colors"
-                >
-                  <span className="text-red-500 text-xs mt-0.5 shrink-0">★</span>
+              <div className="relative overflow-hidden aspect-4/3 border border-white/10">
+                <Image
+                  src="/china4.jpg"
+                  alt="MIST BLITZ at Formula Student China"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-1000"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
                   <div>
-                    <p className="font-mono text-[9px] uppercase tracking-widest text-white/30 mb-1">
-                      {award.event}
+                    <p className="font-mono text-[9px] uppercase tracking-widest text-white/40 mb-1">
+                      Formula Student China 2025
                     </p>
-                    <p className="font-black italic uppercase text-sm text-white leading-tight">
-                      {award.title}
+                    <p className="font-black italic uppercase text-white text-sm">
+                      Zhuhai International Circuit
+                    </p>
+                  </div>
+                  <div className="bg-red-600 px-3 py-1.5">
+                    <p className="font-mono text-[9px] uppercase tracking-widest text-white font-black">
+                      FSC 2025
                     </p>
                   </div>
                 </div>
-              ))}
-              <div className="px-6 py-4 bg-white/2">
-                <p className="font-mono text-[9px] uppercase tracking-widest text-white/20">
-                  Season 01 · 2025 · First Bangladeshi entry at FSC
-                </p>
               </div>
             </motion.div>
           </div>
@@ -192,9 +184,9 @@ const AboutPreview = () => {
       {/* ── SECTION 2: ORIGIN + PHILOSOPHY ── */}
       <section className="py-24 px-4 md:px-8 border-b border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-12 items-start">
+          <div className="grid lg:grid-cols-1 gap-12 items-start">
             {/* Origin */}
-            <div className="lg:col-span-2">
+            <div>
               <SectionLabel number="02" label="Origin" />
               <motion.h2
                 variants={fadeUp}
@@ -229,23 +221,6 @@ const AboutPreview = () => {
               </motion.div>
             </div>
 
-            {/* Philosophy */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="border-l-2 border-red-600 pl-8 pt-4 mt-16 lg:mt-0 self-end pb-4"
-            >
-              <p className="font-mono text-[9px] uppercase tracking-widest text-white/30 mb-4">
-                Team Philosophy
-              </p>
-              <p className="text-xl md:text-2xl font-black italic uppercase leading-tight text-white">
-                &ldquo;Design with<br />Purpose.<br />Build with<br />
-                <span className="text-red-600">Precision.&rdquo;</span>
-              </p>
-            </motion.div>
           </div>
         </div>
       </section>
