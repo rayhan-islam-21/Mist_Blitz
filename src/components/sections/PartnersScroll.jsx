@@ -3,6 +3,7 @@
 import LogoLoop from "../LogoLoop";
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 
 const spon = [
   { logo: "/sponsers/sp9.png" },
