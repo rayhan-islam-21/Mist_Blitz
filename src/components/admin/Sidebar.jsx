@@ -18,6 +18,7 @@ import {
   FaSignOutAlt,
   FaPowerOff,
   FaBell,
+  FaNewspaper,
 } from "react-icons/fa";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -64,6 +65,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       ],
     },
     { name: "Notices", icon: <FaBell />, path: "/admin/notices", roles: [ROLE.ADMIN] },
+    { name: "News", icon: <FaNewspaper />, path: "/admin/news", roles: [ROLE.ADMIN] },
   ];
 
   useEffect(() => {

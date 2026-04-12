@@ -4,15 +4,15 @@ import Hero from "@/components/sections/Hero";
 import PartnersScroll from "@/components/sections/PartnersScroll";
 import Footer from "@/components/footer/Footer";
 import JoinTeamSection from "@/components/sections/JoinTeam";
-import ProtectedRoute from "@/components/protected/Protected";
+import LatestUpdates from "@/components/sections/LatestUpdates";
 
 export default function Home() {
   return (
     <>
-
         <Navbar />
         <Hero />
         <AboutPreview />
+        <LatestUpdates />
         <PartnersScroll />
         <JoinTeamSection />
         <Footer />
