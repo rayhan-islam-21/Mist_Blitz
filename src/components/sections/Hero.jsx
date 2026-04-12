@@ -56,18 +56,15 @@ const Hero = () => {
         className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 md:px-12 py-4 border-b border-white/5"
       >
         <div className="flex items-center gap-3">
-          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
           <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">LIVE · Season 01</span>
         </div>
         <div className="font-mono text-[11px] text-white/30 tracking-widest tabular-nums">{time}</div>
         <div className="font-mono text-[10px] uppercase tracking-widest text-white/40">MB-F1.0 · Furiosa</div>
       </motion.div>
 
-      {/* Red diagonal accent */}
-      <div className="absolute top-0 right-0 w-1 h-full bg-red-600 opacity-80 z-20" />
 
       {/* Main content */}
-      <div className="relative z-30 px-6 md:px-12 pb-16 md:pb-20">
+      <div className="relative z-30 px-6 md:px-12 pb-24 md:pb-32">
 
         {/* Main heading */}
         <div className="overflow-hidden mb-2">
@@ -98,29 +95,46 @@ const Hero = () => {
           transition={{ delay: 0.9, duration: 0.7 }}
           className="flex flex-col md:flex-row md:items-end justify-between gap-8"
         >
-          <div className="max-w-md">
-            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6">
+          {/* Left: tagline + buttons */}
+          <div className="max-w-sm">
+            <p className="text-white/60 text-sm leading-relaxed mb-6">
               Bangladesh&apos;s Formula Student team — engineering race cars from scratch at the
               Military Institute of Science and Technology.
             </p>
-            <div className="flex gap-3 flex-wrap">
-              <Link href="/our-cars" className=" bg-red-600 text-white hover:bg-red-700">
+            <div className="flex gap-3">
+              <Link href="/our-cars" className="cta-btn bg-red-600 text-white hover:bg-red-700">
                 Explore Furiosa 1.0
               </Link>
-              <Link href="/about" className=" border border-white/20 text-white hover:border-white/60">
+              <Link href="/about" className="cta-btn border border-white/20 text-white hover:border-white/60">
                 Our Story
               </Link>
             </div>
           </div>
 
-          {/* Stats bar */}
-          <div className="flex gap-0 border border-white/10">
-            {stats.map((s, i) => (
-              <div key={i} className="px-5 py-4 border-r border-white/10 last:border-r-0 text-center">
-                <p className="font-black italic uppercase text-white text-xl md:text-2xl leading-none">{s.value}</p>
-                <p className="font-mono text-[8px] uppercase tracking-widest text-white/30 mt-1">{s.sub}</p>
-              </div>
-            ))}
+          {/* Right: info text + stats bar */}
+          <div className="flex flex-col items-start md:items-end gap-4">
+            {/* Small event info */}
+            <div className="space-y-1 md:text-right">
+              <p className="font-mono text-[9px] uppercase tracking-widest text-white/25">
+                Venue · Zhuhai International Circuit, China
+              </p>
+              <p className="font-mono text-[9px] uppercase tracking-widest text-white/25">
+                Event · Formula Student China 2025
+              </p>
+              <p className="font-mono text-[9px] uppercase tracking-widest text-white/25">
+                Result · Best Foreign Team · 4th Place BPP
+              </p>
+            </div>
+
+            {/* Stats bar */}
+            <div className="flex gap-0 border border-white/10">
+              {stats.map((s, i) => (
+                <div key={i} className="px-5 py-4 border-r border-white/10 last:border-r-0 text-center">
+                  <p className="font-black italic uppercase text-white text-xl md:text-2xl leading-none">{s.value}</p>
+                  <p className="font-mono text-[8px] uppercase tracking-widest text-white/30 mt-1">{s.sub}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
