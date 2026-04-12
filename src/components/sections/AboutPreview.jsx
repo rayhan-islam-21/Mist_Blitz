@@ -198,12 +198,6 @@ const AboutPreview = () => {
                 vehicle dynamics, powertrain optimization, and systems
                 integration to meet international competition standards.
               </p>
-              <p>
-                What started as a vision inside the classrooms of MIST has grown
-                into Bangladesh&apos;s most ambitious student engineering project —
-                the first team from the country to pass full technical scrutineering
-                and complete endurance laps on an international Formula Student circuit.
-              </p>
             </motion.div>
           </div>
         </div>
@@ -212,6 +206,27 @@ const AboutPreview = () => {
       {/* ── SECTION 3: THE MACHINE ── */}
       <section className="py-24 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
+
+          {/* Heading above car */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8"
+          >
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-red-500 mb-2">Season 2025 · MB-F1.0</p>
+              <h2 className="text-4xl md:text-6xl font-black italic uppercase leading-none tracking-tighter text-white">
+                The <span className="text-red-600">Machine</span>
+              </h2>
+            </div>
+            <p className="text-white/40 text-sm leading-relaxed max-w-sm md:text-right">
+              Furiosa 1.0 — Bangladesh&apos;s first Formula Student car to pass
+              full international scrutineering and complete endurance laps.
+            </p>
+          </motion.div>
 
           <motion.div
             variants={fadeUp}
