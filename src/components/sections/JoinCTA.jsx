@@ -31,7 +31,7 @@ export default function JoinCTA() {
           initial={{ y: 60, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
-          className="text-7xl font-sans tracking-tighter md:text-[11rem] font-black uppercase italic leading-none mb-3"
+          className="text-7xl font-sans tracking-tighter md:text-[11rem] font-black uppercase italic leading-none mb-2"
         >
           FUEL THE <br />
           <span className="text-red-600">FUTURE</span>!
