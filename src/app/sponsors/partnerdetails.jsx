@@ -120,12 +120,12 @@ export default function PremiumPartners() {
                   >
                     {/* Top row: logo + arrow */}
                     <div className="flex items-start justify-between mb-10">
-                      <div className="relative w-28 h-14 bg-white rounded-sm flex items-center justify-center p-2 shrink-0">
+                      <div className="relative w-48 h-24 bg-white rounded-sm flex items-center justify-center p-3 shrink-0">
                         <Image
                           src={sponsor.logo}
                           alt={sponsor.name}
                           fill
-                          className="object-contain p-2"
+                          className="object-contain p-3"
                         />
                       </div>
                       <ArrowUpRight
