@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 const CATEGORY_COLORS = {
@@ -100,6 +101,19 @@ export default function LatestUpdates() {
               >
                 {/* Top accent */}
                 <div className="h-0.5 bg-white/5 group-hover:bg-red-600 transition-colors duration-300" />
+
+                {/* Image */}
+                {item.image && (
+                  <div className="relative w-full aspect-video overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+                  </div>
+                )}
 
                 <div className="p-6 flex flex-col flex-1">
                   {/* Category + date */}
