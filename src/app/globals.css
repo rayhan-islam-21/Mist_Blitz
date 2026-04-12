@@ -1,6 +1,11 @@
 /* globals.css */
 @import "tailwindcss";
 
+/* Push fixed navbar down when notice banner is visible */
+html[data-notice="true"] nav.fixed-navbar {
+  top: 36px;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /* * {
