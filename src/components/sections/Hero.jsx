@@ -64,7 +64,7 @@ const Hero = () => {
 
 
       {/* Main content */}
-      <div className="relative z-30 px-6 md:px-12 pb-44 md:pb-56">
+      <div className="relative z-30 px-6 md:px-12 pb-10 md:pb-14">
 
         {/* Main heading */}
         <div className="overflow-hidden mb-1">
