@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import toast, { Toaster } from "react-hot-toast";
 import { Trash2, Eye, EyeOff } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const CATEGORIES = ["Competition", "Achievement", "Team Update", "Event", "Announcement"];
 
@@ -14,6 +15,7 @@ export default function NewsPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState(EMPTY);
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   const fetchNews = async () => {
     try {
@@ -54,11 +56,12 @@ export default function NewsPage() {
     }
   };
 
-  const deleteItem = async (id) => {
-    if (!confirm("Delete this update?")) return;
+  const deleteItem = async () => {
+    if (!deleteTarget) return;
     try {
-      await api.delete(`/admin/news/${id}`);
+      await api.delete(`/admin/news/${deleteTarget._id}`);
       toast.success("Deleted");
+      setDeleteTarget(null);
       fetchNews();
     } catch {
       toast.error("Failed to delete");
@@ -186,7 +189,7 @@ export default function NewsPage() {
                       {item.isPublished ? <EyeOff size={14} /> : <Eye size={14} />}
                     </button>
                     <button
-                      onClick={() => deleteItem(item._id)}
+                      onClick={() => setDeleteTarget(item)}
                       title="Delete"
                       className="p-2 border border-slate-200 rounded-lg hover:border-red-300 text-slate-400 hover:text-red-500 transition-colors"
                     >
@@ -200,5 +203,48 @@ export default function NewsPage() {
         </div>
       </div>
     </div>
+
+      {/* Delete confirmation modal */}
+      <Dialog open={!!deleteTarget} onOpenChange={(open) => { if (!open) setDeleteTarget(null); }}>
+        <DialogContent className="sm:max-w-md rounded-none border-[6px] border-black/20 p-0 overflow-hidden bg-white shadow-2xl">
+          <div className="p-8 space-y-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-red-100 flex items-center justify-center shrink-0 border border-red-200">
+                <Trash2 size={22} className="text-red-600" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-2xl font-black font-sans uppercase italic tracking-tighter text-slate-950">
+                  Delete <span className="text-red-600">Update?</span>
+                </h3>
+                <p className="text-[11px] font-mono font-semibold text-slate-500 leading-relaxed uppercase tracking-tighter">
+                  This action cannot be undone.
+                </p>
+              </div>
+            </div>
+            {deleteTarget && (
+              <div className="bg-slate-50 p-4 border-l-4 border-slate-950 shadow-inner">
+                <span className="text-[10px] font-mono font-bold text-slate-400 block mb-1 tracking-widest">ITEM:</span>
+                <span className="text-sm font-mono font-black text-slate-950 break-all uppercase italic line-clamp-2">
+                  {deleteTarget.title}
+                </span>
+              </div>
+            )}
+          </div>
+          <div className="bg-slate-950 p-6 flex gap-4">
+            <button
+              onClick={() => setDeleteTarget(null)}
+              className="flex-1 px-4 py-3 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors"
+            >
+              CANCEL
+            </button>
+            <button
+              onClick={deleteItem}
+              className="flex-1 bg-red-600 hover:bg-red-700 text-white py-4 font-black uppercase italic tracking-widest transition-all"
+            >
+              DELETE
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
   );
 }

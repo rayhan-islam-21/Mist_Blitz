@@ -5,6 +5,7 @@ import PartnersScroll from "@/components/sections/PartnersScroll";
 import Footer from "@/components/footer/Footer";
 import JoinTeamSection from "@/components/sections/JoinTeam";
 import LatestUpdates from "@/components/sections/LatestUpdates";
+import KeyHighlights from "@/components/sections/KeyHighlights";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <Navbar />
         <Hero />
         <AboutPreview />
+        <KeyHighlights />
         <LatestUpdates />
         <PartnersScroll />
         <JoinTeamSection />

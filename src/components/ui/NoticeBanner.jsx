@@ -36,44 +36,17 @@ export default function NoticeBanner() {
   if (!visible || !notice) return null;
 
   return (
-    <div
-      className="fixed top-0 left-0 right-0 z-200 flex items-center justify-center overflow-hidden"
-      style={{
-        height: "48px",
-        background: "linear-gradient(135deg, #1a0a0a 0%, #2d0a0a 40%, #1a0a0a 100%)",
-      }}
-    >
-      {/* Subtle grid overlay */}
-      <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage: "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
-
-      {/* Left red accent */}
-      <div className="absolute left-0 top-0 h-full w-1 bg-red-600" />
-
-      {/* Right red accent */}
-      <div className="absolute right-0 top-0 h-full w-1 bg-red-600" />
-
-      {/* Glowing red orb left */}
-      <div className="absolute left-16 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-red-600/20 blur-2xl pointer-events-none" />
-      {/* Glowing red orb right */}
-      <div className="absolute right-16 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-red-600/20 blur-2xl pointer-events-none" />
-
+    <div className="fixed top-0 left-0 right-0 z-200 h-11 bg-red-600 flex items-center justify-center">
       {/* Content */}
-      <div className="relative z-10 flex items-center gap-4 px-12">
-        <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse shrink-0" />
-        <p className="text-white text-sm font-medium tracking-wide">{notice.message}</p>
+      <div className="flex items-center gap-3 px-10">
+        <span className="w-1.5 h-1.5 rounded-full bg-white/70 animate-pulse shrink-0" />
+        <p className="text-white text-xs font-semibold tracking-wide">{notice.message}</p>
         {notice.link && (
           <Link
             href={notice.link}
-            className="shrink-0 inline-flex items-center gap-1 border border-red-500/60 hover:border-red-400 hover:bg-red-600/20 text-red-400 hover:text-red-300 text-xs font-semibold px-3 py-1 rounded-full transition-all whitespace-nowrap"
+            className="shrink-0 inline-flex items-center gap-1 bg-white text-red-600 text-[11px] font-black uppercase tracking-widest px-3 py-1 hover:bg-red-50 transition-colors whitespace-nowrap"
           >
-            {notice.linkText || "Learn more"}
-            <span>›</span>
+            {notice.linkText || "Learn more"} ›
           </Link>
         )}
       </div>
@@ -81,7 +54,7 @@ export default function NoticeBanner() {
       {/* Dismiss */}
       <button
         onClick={dismiss}
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/70 transition-colors p-1.5 z-20"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors p-1.5"
         aria-label="Dismiss"
       >
         <X size={13} />
