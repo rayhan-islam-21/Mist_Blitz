@@ -6,21 +6,16 @@ import toast, { Toaster } from "react-hot-toast";
 import { Trash2, BellRing, BellOff } from "lucide-react";
 
 const TYPE_OPTIONS = [
-  { value: "info",    label: "Info",    color: "text-white/60" },
-  { value: "success", label: "Success", color: "text-green-400" },
-  { value: "warning", label: "Warning", color: "text-red-400" },
+  { value: "info",    label: "Info" },
+  { value: "success", label: "Success" },
+  { value: "warning", label: "Warning" },
 ];
 
 export default function NoticesPage() {
   const [notices, setNotices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({
-    message: "",
-    link: "",
-    linkText: "",
-    type: "info",
-  });
+  const [form, setForm] = useState({ message: "", link: "", linkText: "", type: "info" });
 
   const fetchNotices = async () => {
     try {
@@ -41,7 +36,7 @@ export default function NoticesPage() {
     setSubmitting(true);
     try {
       await api.post("/admin/notices", form);
-      toast.success("Notice published — all previous notices deactivated");
+      toast.success("Notice published");
       setForm({ message: "", link: "", linkText: "", type: "info" });
       fetchNotices();
     } catch {
@@ -54,7 +49,7 @@ export default function NoticesPage() {
   const toggleActive = async (notice) => {
     try {
       await api.patch(`/admin/notices/${notice._id}`, { isActive: !notice.isActive });
-      toast.success(notice.isActive ? "Notice deactivated" : "Notice activated");
+      toast.success(notice.isActive ? "Deactivated" : "Activated");
       fetchNotices();
     } catch {
       toast.error("Failed to update notice");
@@ -65,36 +60,38 @@ export default function NoticesPage() {
     if (!confirm("Delete this notice?")) return;
     try {
       await api.delete(`/admin/notices/${id}`);
-      toast.success("Notice deleted");
+      toast.success("Deleted");
       fetchNotices();
     } catch {
-      toast.error("Failed to delete notice");
+      toast.error("Failed to delete");
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white p-6 md:p-10">
+    <div className="min-h-screen bg-white text-slate-900 p-6 md:p-10">
       <Toaster position="top-right" />
 
       <div className="max-w-5xl mx-auto space-y-10">
 
         {/* Header */}
-        <div>
-          <h1 className="text-2xl font-black italic uppercase tracking-tight">Notice Management</h1>
-          <p className="text-white/40 text-sm mt-1">
+        <div className="border-b border-slate-100 pb-6">
+          <h1 className="text-2xl md:text-4xl font-black italic uppercase tracking-tight text-slate-900">
+            Notice <span className="text-red-600">Management</span>
+          </h1>
+          <p className="text-slate-400 text-sm mt-1">
             Publish a notice — it appears as a banner on every page until dismissed by the visitor.
           </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="border border-white/10 p-6 space-y-5">
+        <form onSubmit={handleSubmit} className="border border-slate-200 rounded-xl p-6 space-y-5 bg-white shadow-sm">
           <div>
-            <label className="block font-mono text-[10px] uppercase tracking-widest text-white/40 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">
               Message *
             </label>
             <textarea
               rows={3}
-              className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-red-600 resize-none"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder-slate-300 focus:outline-none focus:border-red-500 resize-none"
               placeholder="e.g. Registration open for MIST BLITZ Season 2026!"
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -103,24 +100,24 @@ export default function NoticesPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block font-mono text-[10px] uppercase tracking-widest text-white/40 mb-2">
+              <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">
                 Link URL (optional)
               </label>
               <input
                 type="text"
-                className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-red-600"
+                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder-slate-300 focus:outline-none focus:border-red-500"
                 placeholder="/join-us"
                 value={form.link}
                 onChange={(e) => setForm({ ...form, link: e.target.value })}
               />
             </div>
             <div>
-              <label className="block font-mono text-[10px] uppercase tracking-widest text-white/40 mb-2">
+              <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">
                 Link Text
               </label>
               <input
                 type="text"
-                className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-red-600"
+                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder-slate-300 focus:outline-none focus:border-red-500"
                 placeholder="Apply Now"
                 value={form.linkText}
                 onChange={(e) => setForm({ ...form, linkText: e.target.value })}
@@ -129,19 +126,17 @@ export default function NoticesPage() {
           </div>
 
           <div>
-            <label className="block font-mono text-[10px] uppercase tracking-widest text-white/40 mb-2">
-              Type
-            </label>
-            <div className="flex gap-3">
+            <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Type</label>
+            <div className="flex gap-2">
               {TYPE_OPTIONS.map((t) => (
                 <button
                   key={t.value}
                   type="button"
                   onClick={() => setForm({ ...form, type: t.value })}
-                  className={`px-4 py-2 border text-xs font-mono uppercase tracking-widest transition-colors ${
+                  className={`px-4 py-2 rounded-lg border text-xs font-bold uppercase tracking-widest transition-colors ${
                     form.type === t.value
-                      ? "border-red-600 bg-red-600/10 text-white"
-                      : "border-white/10 text-white/40 hover:border-white/30"
+                      ? "border-red-600 bg-red-50 text-red-600"
+                      : "border-slate-200 text-slate-400 hover:border-slate-300"
                   }`}
                 >
                   {t.label}
@@ -153,47 +148,49 @@ export default function NoticesPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-mono text-xs uppercase tracking-widest py-3 transition-colors"
+            className="w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-bold text-sm uppercase tracking-widest py-3 rounded-lg transition-colors"
           >
             {submitting ? "Publishing..." : "Publish Notice"}
           </button>
         </form>
 
-        {/* Existing notices */}
+        {/* Notices list */}
         <div>
-          <h2 className="font-mono text-[10px] uppercase tracking-widest text-white/30 mb-4">
+          <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
             All Notices ({notices.length})
           </h2>
 
           {loading ? (
-            <p className="text-white/30 text-sm">Loading...</p>
+            <p className="text-slate-400 text-sm">Loading...</p>
           ) : notices.length === 0 ? (
-            <p className="text-white/30 text-sm">No notices yet.</p>
+            <p className="text-slate-400 text-sm">No notices yet.</p>
           ) : (
             <div className="space-y-3">
               {notices.map((n) => (
                 <div
                   key={n._id}
-                  className={`flex items-start justify-between gap-4 border p-4 transition-colors ${
-                    n.isActive ? "border-red-600/40 bg-red-600/5" : "border-white/5 opacity-50"
+                  className={`flex items-start justify-between gap-4 border rounded-xl p-4 transition-colors ${
+                    n.isActive ? "border-red-200 bg-red-50" : "border-slate-100 bg-slate-50 opacity-60"
                   }`}
                 >
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className={`font-mono text-[9px] uppercase tracking-widest ${
-                        n.type === "warning" ? "text-red-400" : n.type === "success" ? "text-green-400" : "text-white/30"
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${
+                        n.type === "warning" ? "bg-red-100 text-red-600"
+                        : n.type === "success" ? "bg-green-100 text-green-600"
+                        : "bg-slate-200 text-slate-500"
                       }`}>{n.type}</span>
                       {n.isActive && (
-                        <span className="font-mono text-[9px] uppercase tracking-widest text-red-500 bg-red-600/10 px-2 py-0.5">
+                        <span className="text-[10px] font-bold uppercase tracking-widest bg-red-600 text-white px-2 py-0.5 rounded-full">
                           Live
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-white leading-snug">{n.message}</p>
+                    <p className="text-sm font-medium text-slate-900 leading-snug">{n.message}</p>
                     {n.link && (
-                      <p className="text-xs text-white/30 mt-1 font-mono">{n.link}</p>
+                      <p className="text-xs text-slate-400 mt-1 font-mono">{n.link}</p>
                     )}
-                    <p className="text-[10px] text-white/20 mt-2 font-mono">
+                    <p className="text-[10px] text-slate-300 mt-2">
                       {new Date(n.createdAt).toLocaleDateString("en-GB", {
                         day: "numeric", month: "short", year: "numeric",
                         hour: "2-digit", minute: "2-digit"
@@ -205,14 +202,14 @@ export default function NoticesPage() {
                     <button
                       onClick={() => toggleActive(n)}
                       title={n.isActive ? "Deactivate" : "Activate"}
-                      className="p-2 border border-white/10 hover:border-white/30 text-white/40 hover:text-white transition-colors"
+                      className="p-2 border border-slate-200 rounded-lg hover:border-slate-300 text-slate-400 hover:text-slate-600 transition-colors"
                     >
                       {n.isActive ? <BellOff size={14} /> : <BellRing size={14} />}
                     </button>
                     <button
                       onClick={() => deleteNotice(n._id)}
                       title="Delete"
-                      className="p-2 border border-white/10 hover:border-red-600 text-white/40 hover:text-red-400 transition-colors"
+                      className="p-2 border border-slate-200 rounded-lg hover:border-red-300 text-slate-400 hover:text-red-500 transition-colors"
                     >
                       <Trash2 size={14} />
                     </button>
