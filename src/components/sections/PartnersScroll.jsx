@@ -46,7 +46,7 @@ export default function PartnersScroll() {
           transition={{ duration: 0.6 }}
           className="mb-14 pb-10 border-b border-white/5"
         >
-          <h2 className="text-4xl md:text-6xl font-black italic uppercase leading-none tracking-tighter text-white">
+          <h2 className="text-5xl md:text-7xl font-black italic uppercase leading-none tracking-tighter text-white">
             Our <span className="text-red-600">Sponsors</span>
           </h2>
         </motion.div>
