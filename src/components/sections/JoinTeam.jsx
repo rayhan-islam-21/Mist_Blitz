@@ -52,7 +52,7 @@ const MGMT_DEPTS = [
 
 export default function JoinBlitzTeam() {
   return (
-    <section className="relative bg-[#050505] border-t border-white/5 py-24 px-4 md:px-8 selection:bg-red-600 selection:text-white overflow-hidden">
+    <section className="relative bg-[#050505] border-t border-white/5 selection:bg-red-600 selection:text-white overflow-hidden">
 
       {/* Dot grid bg */}
       <div
@@ -63,7 +63,7 @@ export default function JoinBlitzTeam() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 px-4 md:px-8 pt-24">
 
         {/* Header */}
         <motion.div
@@ -198,7 +198,7 @@ export default function JoinBlitzTeam() {
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
-        className="mt-16 bg-red-600 py-16 px-6 text-center"
+        className="relative z-10 bg-red-600 py-16 text-center"
       >
         <h3 className="text-3xl md:text-5xl font-black italic uppercase text-white mb-4 tracking-tight">
           Ready to Join?
