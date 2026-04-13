@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import api from "@/lib/axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Trash2, Eye, EyeOff } from "lucide-react";
+import { Trash2, Eye, EyeOff, ImagePlus, X } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import Image from "next/image";
+import { RoundedRedLoader } from "@/components/ui/center-loader";
 
 const CATEGORIES = ["Competition", "Achievement", "Team Update", "Event", "Announcement"];
 
@@ -14,8 +16,32 @@ export default function NewsPage() {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState(EMPTY);
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploading(true);
+    const uploadData = new FormData();
+    uploadData.append("file", file);
+    uploadData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET);
+    try {
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        { method: "POST", body: uploadData }
+      );
+      const data = await res.json();
+      if (data.secure_url) setForm((f) => ({ ...f, image: data.secure_url }));
+      else toast.error("Upload failed");
+    } catch {
+      toast.error("Image upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const fetchNews = async () => {
     try {
@@ -122,14 +148,38 @@ export default function NewsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Image URL (optional)</label>
+              <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Cover Image (optional)</label>
               <input
-                type="text"
-                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder-slate-300 focus:outline-none focus:border-red-500"
-                placeholder="https://... or /image.jpg"
-                value={form.image}
-                onChange={(e) => setForm({ ...form, image: e.target.value })}
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                onChange={handleImageUpload}
+                className="hidden"
               />
+              {form.image ? (
+                <div className="relative rounded-lg overflow-hidden border border-slate-200 aspect-video">
+                  <Image src={form.image} alt="preview" fill className="object-cover" unoptimized />
+                  <button
+                    type="button"
+                    onClick={() => setForm((f) => ({ ...f, image: "" }))}
+                    className="absolute top-2 right-2 p-1.5 bg-red-600 text-white rounded-full hover:bg-red-700"
+                  >
+                    <X size={12} />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                  className="w-full h-28 border-2 border-dashed border-slate-200 hover:border-red-400 rounded-lg flex flex-col items-center justify-center gap-2 text-slate-400 hover:text-red-500 transition-colors disabled:opacity-50"
+                >
+                  {uploading ? <RoundedRedLoader size="h-5 w-5" /> : <ImagePlus size={20} />}
+                  <span className="text-[10px] font-bold uppercase tracking-widest">
+                    {uploading ? "Uploading..." : "Upload Image"}
+                  </span>
+                </button>
+              )}
             </div>
           </div>
 
