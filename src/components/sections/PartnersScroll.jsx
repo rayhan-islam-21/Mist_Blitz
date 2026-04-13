@@ -33,9 +33,9 @@ export default function PartnersScroll() {
   return (
     <section
       ref={containerRef}
-      className="relative bg-[#050505] selection:text-white selection:bg-red-600 border-t border-white/5 py-20 overflow-hidden"
+      className="relative bg-[#050505] selection:text-white selection:bg-red-600 border-t border-white/5 py-20 px-4 md:px-8 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <div className="max-w-7xl mx-auto">
 
         {/* Header */}
         <motion.div
