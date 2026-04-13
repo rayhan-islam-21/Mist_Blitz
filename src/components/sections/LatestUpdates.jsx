@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 
 const CATEGORY_COLORS = {
   Competition:   "bg-red-600/10 text-red-500 border-red-600/20",
@@ -44,7 +43,7 @@ export default function LatestUpdates() {
   if (!loading && news.length === 0) return null;
 
   return (
-    <section className="bg-[#050505] border-t border-white/5 py-24 px-4 md:px-8 selection:bg-red-600 selection:text-white">
+    <section className="bg-[#050505] border-t border-white/5 pt-24 pb-0 px-4 md:px-8 selection:bg-red-600 selection:text-white">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
