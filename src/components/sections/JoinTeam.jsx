@@ -73,18 +73,50 @@ export default function JoinBlitzTeam() {
           viewport={{ once: true, amount: 0.3 }}
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20"
         >
-          <div>
-            <motion.p variants={fadeUp} transition={{ duration: 0.5 }}
-              className="font-mono text-[10px] uppercase tracking-widest text-red-500 mb-3"
+          <div className="flex items-end gap-8">
+            {/* Animated ring visual */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.6 }}
+              className="relative shrink-0 hidden md:flex items-center justify-center w-24 h-24"
             >
-              Open Positions
-            </motion.p>
-            <motion.h2 variants={fadeUp} transition={{ duration: 0.6 }}
-              className="text-5xl md:text-7xl font-black italic uppercase leading-none tracking-tighter text-white"
-            >
-              TEAM <span className="text-red-600">BLITZ</span>
-            </motion.h2>
+              {/* Outer slow ring */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 rounded-full border border-dashed border-red-600/30"
+              />
+              {/* Middle medium ring */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-3 rounded-full border border-white/10"
+              >
+                {/* Dot on the ring */}
+                <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-red-600" />
+              </motion.div>
+              {/* Inner pulsing core */}
+              <motion.div
+                animate={{ scale: [1, 1.15, 1] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                className="w-6 h-6 rounded-full bg-red-600/80"
+              />
+            </motion.div>
+
+            <div>
+              <motion.p variants={fadeUp} transition={{ duration: 0.5 }}
+                className="font-mono text-[10px] uppercase tracking-widest text-red-500 mb-3"
+              >
+                Open Positions
+              </motion.p>
+              <motion.h2 variants={fadeUp} transition={{ duration: 0.6 }}
+                className="text-5xl md:text-7xl font-black italic uppercase leading-none tracking-tighter text-white"
+              >
+                TEAM <span className="text-red-600">BLITZ</span>
+              </motion.h2>
+            </div>
           </div>
+
           <motion.p variants={fadeUp} transition={{ duration: 0.6 }}
             className="text-white/30 text-sm font-mono uppercase tracking-wider max-w-xs md:text-right leading-relaxed"
           >
