@@ -11,17 +11,74 @@ import {
   FaCartPlus,
   FaTimes,
   FaCamera,
+  FaFileExcel,
+  FaUpload,
+  FaCheckCircle,
+  FaTimesCircle,
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import PremiumDropdown from "@/components/ui/premium-dropdown";
 import Button from "@/components/ui/retro-btn";
 import Image from "next/image";
 import saveEquipmentToDb from "@/lib/saveEquipmentToDb";
+import * as XLSX from "xlsx";
+import api from "@/lib/axios";
+
+const VALID_CATEGORIES = ["Electronics", "Mechanical", "Optics", "Tools", "Safety Gear"];
+const VALID_OWNER_TYPES = ["Blitz Official Inventory", "Private Member Owned"];
 
 const AddEquipmentPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
+
+  // Excel import state
+  const [importRows, setImportRows] = useState(null);   // parsed rows
+  const [importing, setImporting] = useState(false);
+  const excelInputRef = useRef(null);
+
+  const handleExcelFile = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      const wb = XLSX.read(evt.target.result, { type: "binary" });
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const raw = XLSX.utils.sheet_to_json(ws, { defval: "" });
+      // Normalise column names (case-insensitive)
+      const rows = raw.map((r) => {
+        const lower = Object.fromEntries(
+          Object.entries(r).map(([k, v]) => [k.toLowerCase().trim(), String(v).trim()])
+        );
+        return {
+          name:       lower["name"]       || lower["equipment name"] || "",
+          quantity:   lower["quantity"]   || lower["qty"]            || "1",
+          category:   lower["category"]  || "Electronics",
+          ownerType:  lower["ownertype"] || lower["owner type"]     || "Blitz Official Inventory",
+          memberName: lower["membername"]|| lower["member name"]    || "",
+        };
+      }).filter((r) => r.name);   // drop empty rows
+      setImportRows(rows);
+    };
+    reader.readAsBinaryString(file);
+    e.target.value = "";   // reset so same file can be re-selected
+  };
+
+  const handleBulkImport = async () => {
+    if (!importRows?.length) return;
+    setImporting(true);
+    try {
+      const res = await api.post("/equipment/bulk", { items: importRows });
+      const { inserted, skipped, errors } = res.data;
+      toast.success(`Imported ${inserted} items${skipped ? `, ${skipped} skipped (duplicates)` : ""}`);
+      if (errors?.length) toast.error(`Failed: ${errors.join(", ")}`);
+      setImportRows(null);
+    } catch {
+      toast.error("Bulk import failed");
+    } finally {
+      setImporting(false);
+    }
+  };
 
   const generateBash = () =>
     `BZ-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
@@ -145,6 +202,99 @@ const AddEquipmentPage = () => {
             </p>
           </div>
         </header>
+
+        {/* ── Excel Import ── */}
+        <div className="mb-10 border border-slate-200 rounded-xl p-6 bg-slate-50">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+            <div>
+              <p className="text-xs font-black uppercase tracking-widest text-slate-700 flex items-center gap-2">
+                <FaFileExcel className="text-green-600" /> Bulk Import via Excel
+              </p>
+              <p className="text-[10px] text-slate-400 mt-1 font-mono">
+                Columns: <span className="text-slate-600">name · quantity · category · ownerType · memberName</span>
+              </p>
+            </div>
+            <input type="file" accept=".xlsx,.xls,.csv" ref={excelInputRef} onChange={handleExcelFile} className="hidden" />
+            <button
+              type="button"
+              onClick={() => excelInputRef.current?.click()}
+              className="inline-flex items-center gap-2 border border-slate-300 hover:border-green-500 hover:text-green-600 text-slate-600 text-xs font-bold uppercase tracking-widest px-4 py-2.5 rounded-lg transition-all"
+            >
+              <FaUpload size={11} /> Choose File
+            </button>
+          </div>
+
+          {importRows && (
+            <div className="mt-4 space-y-3">
+              <div className="overflow-x-auto rounded-lg border border-slate-200">
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-slate-100 text-left">
+                      {["Name", "Qty", "Category", "Owner Type", "Member"].map((h) => (
+                        <th key={h} className="px-3 py-2 font-black uppercase tracking-wider text-slate-500 text-[9px]">{h}</th>
+                      ))}
+                      <th className="px-3 py-2 text-[9px] text-slate-500 uppercase tracking-wider">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 bg-white">
+                    {importRows.map((row, i) => {
+                      const validCat = VALID_CATEGORIES.includes(row.category);
+                      const validOwner = VALID_OWNER_TYPES.includes(row.ownerType);
+                      const ok = row.name && validCat && validOwner;
+                      return (
+                        <tr key={i} className={ok ? "" : "bg-red-50"}>
+                          <td className="px-3 py-2 font-semibold text-slate-900">{row.name || <span className="text-red-500">MISSING</span>}</td>
+                          <td className="px-3 py-2 text-slate-600">{row.quantity}</td>
+                          <td className="px-3 py-2">
+                            <span className={validCat ? "text-slate-600" : "text-red-500 font-bold"}>{row.category}</span>
+                          </td>
+                          <td className="px-3 py-2 text-slate-600 text-[10px]">{row.ownerType}</td>
+                          <td className="px-3 py-2 text-slate-400">{row.memberName || "—"}</td>
+                          <td className="px-3 py-2">
+                            {ok
+                              ? <FaCheckCircle className="text-green-500" size={13} />
+                              : <FaTimesCircle className="text-red-500" size={13} />
+                            }
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <p className="text-[10px] text-slate-400 font-mono">
+                  {importRows.filter(r => VALID_CATEGORIES.includes(r.category) && r.name).length} / {importRows.length} rows valid
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setImportRows(null)}
+                    className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-600 px-3 py-2 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleBulkImport}
+                    disabled={importing}
+                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-lg transition-colors"
+                  >
+                    <FaFileExcel size={11} />
+                    {importing ? "Importing..." : `Import ${importRows.length} Items`}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="relative mb-8 flex items-center gap-4">
+          <div className="flex-1 h-px bg-slate-100" />
+          <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">or add single item</span>
+          <div className="flex-1 h-px bg-slate-100" />
+        </div>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
