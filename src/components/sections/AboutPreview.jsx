@@ -233,7 +233,7 @@ const AboutPreview = () => {
             className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8"
           >
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-red-500 mb-2">Season 2025 · MB-F1.0</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-red-500 mb-2">Season 2025</p>
               <h2 className="text-4xl md:text-6xl font-black italic uppercase leading-none tracking-tighter text-white">
                 The <span className="text-red-600">Machine</span>
               </h2>
