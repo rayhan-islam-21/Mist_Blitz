@@ -56,10 +56,6 @@ const MISTBlitzIntro = () => {
               </p>
             </div>
 
-            <div className="pt-4 flex items-center gap-4">
-               <div className="h-0.5 w-12 bg-red-600"></div>
-               <span className="text-sm text-gray-500 uppercase tracking-[0.2em] font-medium">Innovate • Fabricate • Race</span>
-            </div>
           </div>
 
         </div>
