@@ -70,40 +70,40 @@ export default function PartnersScroll() {
           </div>
         </div>
 
-      </div>
+        {/* Bottom CTA */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="mt-14 grid md:grid-cols-2 gap-10 pt-10 border-t border-white/5 items-center"
+        >
+          <div className="border-l-2 border-red-600 pl-6">
+            <p className="text-xl md:text-2xl font-black italic uppercase leading-tight text-white mb-3">
+              The fuel behind <span className="text-red-600">Furiosa 1.0</span>
+            </p>
+            <p className="text-white/40 text-sm leading-relaxed">
+              Our partners provide the high-precision hardware and strategic
+              resources required to compete at the edge of physics. They
+              don&apos;t just sponsor — they engineer the future with us.
+            </p>
+          </div>
 
-      {/* Bottom CTA — full width red banner */}
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6 }}
-        className="mt-16 bg-red-600 py-16 px-6 text-center"
-      >
-        <h3 className="text-3xl md:text-5xl font-black italic uppercase text-white mb-4 tracking-tight">
-          Ready to Partner?
-        </h3>
-        <p className="text-red-100 text-sm md:text-base max-w-lg mx-auto mb-10">
-          Download our sponsorship proposal for full details on partnership
-          benefits, our team, and competition plans.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="/sponsorship-proposal.pdf"
-            download
-            className="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white hover:text-red-600 font-black text-xs uppercase tracking-widest px-10 py-4 transition-all"
-          >
-            Download Proposal (PDF)
-          </a>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white hover:text-red-600 font-black text-xs uppercase tracking-widest px-10 py-4 transition-all"
-          >
-            Contact Us
-          </Link>
-        </div>
-      </motion.div>
+          <div className="flex flex-col gap-3 md:items-end">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-white/20">
+              Interested in partnering with MIST BLITZ?
+            </p>
+            <Link
+              href="/sponsors"
+              className="inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-mono text-[11px] uppercase tracking-widest px-5 py-3 transition-colors"
+            >
+              Become a Sponsor
+            </Link>
+          </div>
+        </motion.div>
+
+      </div>
     </section>
   );
 }
