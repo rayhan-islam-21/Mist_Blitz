@@ -1,21 +1,14 @@
 "use client";
 
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Sidebar from "@/components/admin/Sidebar";
 import { FaBars } from "react-icons/fa";
-import AuthContext from "@/context/Authcontext";
 import ProtectedRoute from "@/components/protected/Protected";
-import CenterLoader from "@/components/ui/center-loader";
 
 const AdminLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user, loading } = useContext(AuthContext);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
-
-  if (loading || !user) {
-    return <CenterLoader fullScreen containerClassName="bg-white" />;
-  }
 
   return (
     <ProtectedRoute>
