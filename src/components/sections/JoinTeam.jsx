@@ -189,47 +189,38 @@ export default function JoinBlitzTeam() {
           </motion.div>
         </div>
 
-        {/* CTA */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="border border-white/8 p-10 md:p-14 relative overflow-hidden"
-        >
-          <div className="absolute left-0 top-0 h-full w-1 bg-red-600" />
-          <div className="absolute left-0 top-0 w-64 h-full bg-red-600/5 pointer-events-none" />
-
-          <div className="relative grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-red-500 mb-4">Applications Open</p>
-              <h3 className="text-3xl md:text-5xl font-black italic uppercase leading-none tracking-tighter text-white mb-4">
-                Ready to <span className="text-red-600">Join?</span>
-              </h3>
-              <p className="text-white/40 text-sm leading-relaxed max-w-sm">
-                Become part of Bangladesh&apos;s premier Formula Student team. Applications are open across all divisions.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-4 md:justify-end">
-              <Link
-                href="/join-us"
-                className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-black text-xs uppercase tracking-widest px-8 py-4 transition-colors"
-              >
-                Apply Now →
-              </Link>
-              <a
-                href="mailto:info@mistblitz.com"
-                className="inline-flex items-center justify-center gap-2 border border-white/15 hover:border-red-600 text-white/50 hover:text-white font-black text-xs uppercase tracking-widest px-8 py-4 transition-all"
-              >
-                Email Us
-              </a>
-            </div>
-          </div>
-        </motion.div>
-
       </div>
+
+      {/* CTA — full width red banner */}
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        className="mt-16 bg-red-600 py-16 px-6 text-center"
+      >
+        <h3 className="text-3xl md:text-5xl font-black italic uppercase text-white mb-4 tracking-tight">
+          Ready to Join?
+        </h3>
+        <p className="text-red-100 text-sm md:text-base max-w-lg mx-auto mb-10">
+          Become part of Bangladesh&apos;s premier Formula Student team. Applications are open across all divisions.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/join-us"
+            className="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white hover:text-red-600 font-black text-xs uppercase tracking-widest px-10 py-4 transition-all"
+          >
+            Apply Now
+          </Link>
+          <a
+            href="mailto:info@mistblitz.com"
+            className="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white hover:text-red-600 font-black text-xs uppercase tracking-widest px-10 py-4 transition-all"
+          >
+            Email Us
+          </a>
+        </div>
+      </motion.div>
     </section>
   );
 }
