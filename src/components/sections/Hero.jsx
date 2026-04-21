@@ -69,7 +69,7 @@ const Hero = () => {
         {/* Main heading */}
         <div className="overflow-hidden mb-1">
           <motion.h1
-            initial={{ y: 100 }}
+            initial={{ y: 200 }}
             animate={{ y: 0 }}
             transition={{ delay: 0.3, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-white"
@@ -79,7 +79,7 @@ const Hero = () => {
         </div>
         <div className="overflow-hidden mb-6">
           <motion.h1
-            initial={{ y: 100 }}
+            initial={{ y: 200 }}
             animate={{ y: 0 }}
             transition={{ delay: 0.45, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             className="text-[12vw] md:text-[9vw] font-black italic uppercase leading-none tracking-tighter text-red-600"

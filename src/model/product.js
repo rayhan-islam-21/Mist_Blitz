@@ -27,7 +27,7 @@ const equipmentSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["Electronics", "Mechanical", "Tools", "Safety Gear"],
+      enum: ["Electronics", "Mechanical", "Optics", "Tools", "Safety Gear"],
     },
 
     bash: {
