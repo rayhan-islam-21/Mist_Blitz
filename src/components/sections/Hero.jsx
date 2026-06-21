@@ -98,7 +98,7 @@ const Hero = () => {
           {/* Left: tagline + buttons */}
           <div className="max-w-sm">
             <p className="text-white/60 text-sm leading-relaxed mb-6">
-              Bangladesh&apos;s Formula Student team — engineering race cars from scratch at the
+              Bangladesh&apos;s Formula Student team engineering race cars from scratch at the
               Military Institute of Science and Technology.
             </p>
             <div className="flex items-center gap-4">
