@@ -26,17 +26,17 @@ function SectionHeader({ label, title }) {
   return (
     <motion.div {...fadeUp} className="mb-10 border-l-2 border-red-600 pl-4">
       <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-red-500 mb-1">{label}</p>
-      <h2 className="text-3xl md:text-5xl font-black italic uppercase tracking-tight text-white">{title}</h2>
+      <h2 className="text-5xl md:text-7xl font-black italic uppercase tracking-tight text-white">{title}</h2>
     </motion.div>
   );
 }
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[linear-gradient(180deg,#0b0b0b_0%,#060606_100%)] text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
       <Navbar />
 
-      <main className="bg-[#0a0a0a]">
+      <main className="bg-[linear-gradient(180deg,#0b0b0b_0%,#060606_100%)]">
         {/* ── HERO ── */}
         <section className="relative w-full h-[70vh] overflow-hidden flex flex-col justify-end">
           <Image
@@ -68,7 +68,7 @@ const About = () => {
 
           {/* ── OUR TEAM ── */}
           <section>
-            <SectionHeader label="01 · Our Team" title="Building More Than Just Race Cars" />
+            <SectionHeader label="01 Our Team" title="Building More Than Just Race Cars" />
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="space-y-8">
                 <motion.p {...fadeUpDelay(0.1)} className="text-white/60 leading-relaxed text-base">
@@ -131,23 +131,28 @@ const About = () => {
 
           {/* ── FORMULA STUDENT ── */}
           <section className="border-t border-white/8 pt-16">
-            <SectionHeader label="03 · The Competition" title="What Is Formula Student?" />
+            <SectionHeader label="03 The Competition" title="What Is Formula Student?" />
             <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-6">
                 <motion.p {...fadeUpDelay(0.1)} className="text-white/60 leading-relaxed text-base">
-                  Formula Student is the world&apos;s largest engineering design competition for university
-                  students. Teams design, build, and race a small formula-style race car. Judges evaluate
-                  engineering design, cost analysis, business planning, and dynamic performance.
+                  Formula Student (Formula SAE) is a global student engineering design competition
+                  organised by SAE and regional hosts. Student teams design, build, and test a
+                  formula-style prototype vehicle and present it to industry judges. Entries are
+                  evaluated on engineering design, manufacturability & cost, business planning,
+                  and on-track performance.
                 </motion.p>
                 <motion.p {...fadeUpDelay(0.15)} className="text-white/60 leading-relaxed text-base">
-                  It prepares students for real-world engineering careers by demanding end-to-end
-                  ownership — from concept to competition-ready vehicle.
+                  The competition combines static events (design, cost and business presentation)
+                  with dynamic trials (acceleration, skidpad, autocross, and a long-distance endurance
+                  that includes a fuel-economy component). Classes include combustion and electric
+                  vehicles, and safety-focused technical rules (eg. engine restrictors or battery
+                  limits) keep performance and costs appropriate for student teams.
                 </motion.p>
               </div>
               <motion.div {...fadeUpDelay(0.1)} className="space-y-4">
                 {[
-                  { type: "Static Events", items: ["Engineering Design Event", "Cost & Manufacturing Analysis", "Business Plan Presentation"] },
-                  { type: "Dynamic Events", items: ["Acceleration — 75m sprint", "Skid Pad — figure-8 handling", "Autocross — single-lap performance", "Endurance — 22km reliability race"] },
+                  { type: "Static Events", items: ["Engineering Design", "Cost & Manufacturing Analysis", "Business Plan Presentation"] },
+                  { type: "Dynamic Events", items: ["Acceleration — straight-line sprint", "Skidpad — lateral grip / handling test", "Autocross — single-lap performance", "Endurance — long-distance reliability & fuel-economy"] },
                 ].map((group, i) => (
                   <div key={i} className="border border-white/10 p-5">
                     <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-red-500 mb-3">{group.type}</p>
@@ -166,36 +171,34 @@ const About = () => {
 
           {/* ── OUR UNIVERSITY ── */}
           <section className="border-t border-white/8 pt-16">
-            <SectionHeader label="04 · Our Institution" title="Military Institute of Science & Technology" />
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-6">
-                <motion.p {...fadeUpDelay(0.1)} className="text-white/60 leading-relaxed text-base">
-                  MIST is one of Bangladesh&apos;s leading engineering universities, providing world-class
-                  facilities and a rigorous academic environment. Our team benefits from Mechanical and
-                  Electrical engineering departments, workshops, CAD labs, and a driven student community.
-                </motion.p>
-                <motion.div {...fadeUpDelay(0.15)}>
-                  <Link
-                    href="https://mist.ac.bd"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 border border-red-600/50 text-red-500 hover:bg-red-600 hover:text-white px-6 py-3 text-xs font-black uppercase tracking-widest transition-all duration-200"
-                  >
-                    Visit MIST →
-                  </Link>
-                </motion.div>
-              </div>
-              <motion.div {...fadeUpDelay(0.1)} className="space-y-3">
-                {[
-                  { dept: "Mechanical Engineering", support: "Fabrication facilities, design supervision, CNC access" },
-                  { dept: "Electrical & Electronic Engineering", support: "Electronics labs, embedded systems mentorship" },
-                  { dept: "Civil Engineering", support: "Structural analysis guidance" },
-                ].map((item, i) => (
-                  <div key={i} className="border border-white/10 p-4 hover:border-red-600/30 transition-colors">
-                    <p className="font-mono text-[9px] uppercase tracking-[0.35em] text-red-500 mb-1">{item.dept}</p>
-                    <p className="text-white/40 text-sm">{item.support}</p>
-                  </div>
-                ))}
+            <SectionHeader label="04 Our Institution" title="Military Institute of Science & Technology" />
+            <div className="max-w-3xl space-y-6">
+              <motion.p {...fadeUpDelay(0.1)} className="text-white/60 leading-relaxed text-base md:text-lg">
+                MIST is a leading engineering university in Bangladesh, known for a strong academic
+                environment, modern laboratories, workshops, CAD facilities, and an active student
+                community. It gives students the space to build real projects and turn engineering
+                theory into practice.
+              </motion.p>
+              <motion.p {...fadeUpDelay(0.15)} className="text-white/60 leading-relaxed text-base md:text-lg">
+                The university supports a wide range of disciplines, including Civil Engineering,
+                Electrical and Computer Engineering, Mechanical Engineering, Biomedical and Nuclear
+                Engineering, Architecture and Planning, and Science and Humanities. That broad base
+                helps teams like MIST BLITZ work across design, fabrication, electronics, testing,
+                and systems integration.
+              </motion.p>
+              <motion.p {...fadeUpDelay(0.2)} className="text-white/60 leading-relaxed text-base md:text-lg">
+                For our team, MIST is more than a campus. It is the environment where collaboration,
+                discipline, and hands-on engineering come together to create a race car from scratch.
+              </motion.p>
+              <motion.div {...fadeUpDelay(0.25)}>
+                <Link
+                  href="https://mist.ac.bd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-red-600/50 text-red-500 hover:bg-red-600 hover:text-white px-6 py-3 text-xs font-black uppercase tracking-widest transition-all duration-200"
+                >
+                  Visit MIST →
+                </Link>
               </motion.div>
             </div>
           </section>

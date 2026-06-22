@@ -41,12 +41,12 @@ export default function Footer() {
 
   const competitions = [
     { name: "Formula Student China 2025", venue: "Zhuhai International Circuit", status: "done",     color: "border-green-500" },
-    { name: "Formula Student Germany 2025", venue: "Hockenheimring, Germany",    status: "upcoming", color: "border-yellow-400" },
+    { name: "Formula Student Japan 2026", venue: "Japan",    status: "upcoming", color: "border-yellow-400" },
   ];
 
   const socialLinks = [
     { icon: Facebook,  label: "Facebook",  bg: "bg-blue-500",   href: "https://www.facebook.com/mistblitz" },
-    { icon: Instagram, label: "Instagram", bg: "bg-pink-500",   href: "https://www.instagram.com/mistblitz" },
+    { icon: Instagram, label: "Instagram", bg: "bg-pink-500",   href: "https://www.instagram.com/mistblitzfs" },
     { icon: Youtube,   label: "YouTube",   bg: "bg-red-600",    href: "https://www.youtube.com/@mistblitz" },
     { icon: Linkedin,  label: "LinkedIn",  bg: "bg-blue-700",   href: "https://www.linkedin.com/company/mistblitz" },
   ];

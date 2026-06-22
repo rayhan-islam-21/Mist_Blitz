@@ -32,11 +32,11 @@ const WhatWeDo = () => {
   ];
 
   return (
-    <section className="py-24 bg-black selection:text-white  text-white font-sans selection:bg-red-600">
+    <section className="py-24 bg-transparent selection:text-white text-white font-sans selection:bg-red-600">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* HEADER: RAW & BOLD */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 border-b-4 border-white pb-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 border-b border-white/20 pb-10">
           <div className="max-w-2xl">
             <h1 className="text-6xl md:text-8xl font-black  italic tracking-tighter uppercase leading-[0.85]">
               WHAT WE {" "}<span className="text-red-600">DO.</span>
@@ -45,11 +45,11 @@ const WhatWeDo = () => {
         </div>
 
         {/* CARDS: INDUSTRIAL BENTO */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-white/20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-white/10 bg-white/1.5">
           {categories.map((item, index) => (
             <div 
               key={index} 
-              className="group relative p-10 border-r border-b border-white/20 hover:bg-zinc-900 transition-all duration-500"
+              className="group relative p-10 border-r border-b border-white/10 bg-transparent hover:bg-white/3 transition-all duration-500"
             >
               {/* TOP STRIP */}
               <div className="flex justify-between items-center mb-12">
@@ -92,7 +92,7 @@ const WhatWeDo = () => {
         </div>
 
         {/* FOOTER: THE QUOTE AS A TECHNICAL SPEC */}
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-4 gap-8 items-center bg-zinc-900/50 p-8 border-l-8 border-red-600">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-4 gap-8 items-center bg-white/2 p-8 border-l-8 border-red-600/90 shadow-[0_16px_40px_rgba(0,0,0,0.12)]">
           <div className="md:col-span-3">
             <p className="text-xl md:text-2xl font-bold uppercase italic tracking-tighter leading-tight">
               “Formula Student is not just a race; it is an <span className="text-red-600">Engineering Crucible</span> where ingenuity meets the asphalt.”

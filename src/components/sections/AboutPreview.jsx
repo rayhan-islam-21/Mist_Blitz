@@ -96,15 +96,15 @@ const AboutPreview = () => {
                 className="space-y-4 text-white/50 text-sm leading-relaxed max-w-md mb-10"
               >
                 <p>
-                  MIST BLITZ is the official Formula Student team of the Military
-                  Institute of Science and Technology — designing, manufacturing,
-                  and validating a single-seat open-wheel race car under
-                  international Formula Student regulations.
+                  MIST BLITZ is the Formula Student team of the Military Institute
+                  of Science and Technology in Bangladesh. Since starting in 2024
+                  the team has competed internationally and became the first team
+                  from Bangladesh to run its car on a foreign track after passing
+                  technical inspection.
                 </p>
                 <p>
-                  In 2025, we became the first Bangladeshi team to pass full
-                  technical scrutineering and complete endurance laps at Formula
-                  Student China, among 76 international teams.
+                  In Formula Student China 2025 the team represented Bangladesh
+                  with Furiosa 1.0 in its first international season.
                 </p>
               </motion.div>
 
@@ -117,7 +117,7 @@ const AboutPreview = () => {
               >
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-white/30 hover:text-red-500 transition-colors group"
+                  className="inline-flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-white border border-red-600 bg-red-600/15 hover:bg-red-600 hover:text-white px-4 py-2 transition-colors group"
                 >
                   <span>Full Story</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -143,14 +143,7 @@ const AboutPreview = () => {
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
-                  <div>
-                    <p className="font-mono text-[9px] uppercase tracking-widest text-white/40 mb-1">
-                      Formula Student China 2025
-                    </p>
-                    <p className="font-black italic uppercase text-white text-sm">
-                      Zhuhai International Circuit
-                    </p>
-                  </div>
+                  <div />
                   <div className="bg-red-600 px-3 py-1.5">
                     <p className="font-mono text-[9px] uppercase tracking-widest text-white font-black">
                       FSC 2025
@@ -203,16 +196,16 @@ const AboutPreview = () => {
               className="grid md:grid-cols-2 gap-10 text-white/50 text-sm leading-relaxed"
             >
               <p>
-                Founded in 2024, MIST BLITZ was established to bridge the gap
-                between academic theory and real-world motorsport engineering —
-                giving MIST students hands-on experience in vehicle design,
-                manufacturing, testing, and validation.
+                Founded in 2024 MIST BLITZ was created at the Military Institute
+                of Science and Technology to turn classroom learning into real
+                motorsport engineering through design manufacturing testing and
+                validation.
               </p>
               <p>
-                Our debut at Formula Student China pushed the team to build a
-                competition-ready car from scratch, mastering chassis design,
-                vehicle dynamics, powertrain optimization, and systems
-                integration to meet international competition standards.
+                In its first international season the team built Furiosa 1.0 and
+                competed at Formula Student China 2025 where it became the first
+                team from Bangladesh to run a car on a foreign track after
+                passing technical inspection.
               </p>
             </motion.div>
           </div>
@@ -220,7 +213,7 @@ const AboutPreview = () => {
       </section>
 
       {/* ── SECTION 3: THE MACHINE ── */}
-      <section className="py-24 px-4 md:px-8">
+      <section className="py-24 px-4 md:px-8 relative bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.05),transparent_55%)]">
         <div className="max-w-7xl mx-auto">
 
           {/* Heading above car */}
@@ -250,7 +243,7 @@ const AboutPreview = () => {
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="grid lg:grid-cols-12 border border-white/10 overflow-hidden"
+            className="grid lg:grid-cols-12 overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(10,10,10,0.88))] shadow-[0_30px_90px_rgba(0,0,0,0.32)]"
           >
             {/* Car image carousel */}
             <div className="lg:col-span-8 relative min-h-104 overflow-hidden">
@@ -269,7 +262,7 @@ const AboutPreview = () => {
                   }}
                 />
               </AnimatePresence>
-              <div className="absolute inset-0 bg-black/50" />
+              <div className="absolute inset-0 bg-black/30" />
               <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-transparent to-transparent" />
 
               {/* Dot indicators */}
@@ -309,8 +302,8 @@ const AboutPreview = () => {
             </div>
 
             {/* Specs panel */}
-            <div className="lg:col-span-4 flex flex-col border-t lg:border-t-0 lg:border-l border-white/10">
-              <div className="bg-red-600 px-6 py-4">
+            <div className="lg:col-span-4 flex flex-col border-t lg:border-t-0 lg:border-l border-white/10 bg-[#0d0d0d]/80 backdrop-blur-sm">
+              <div className="bg-red-600/95 px-6 py-4">
                 <p className="text-white font-black uppercase text-[10px] tracking-widest">
                   Key Specifications
                 </p>

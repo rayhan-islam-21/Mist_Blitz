@@ -4,7 +4,7 @@ import { Highlighter } from '../ui/highlighter';
 
 const MISTBlitzIntro = () => {
   return (
-    <section className="relative py-12 bg-black overflow-hidden">
+    <section className="relative py-12 bg-transparent overflow-hidden">
       {/* Subtle Background Accent */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-red-600/5 blur-[120px] -z-10"></div>
       
@@ -14,7 +14,7 @@ const MISTBlitzIntro = () => {
           {/* Image Side with Decorative Frame */}
           <div className="w-full lg:w-1/2 relative group">
             <div className="absolute  bg-linear-to-r from-red-600 to-red-500 rounded-2xl  opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-            <div className="relative bg-gray-800 rounded-2xl overflow-hidden border border-white/60">
+            <div className="relative bg-transparent rounded-2xl overflow-hidden border border-white/8 shadow-none">
               <Image
                 src="/mist.jpeg" 
                 alt="Furiosa 1.0 Race Car"
@@ -22,7 +22,7 @@ const MISTBlitzIntro = () => {
                 height={100}
                 className="w-full h-auto object-cover transform transition duration-500 group-hover:scale-105" 
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/70 to-transparent p-6">
                 <span className="text-red-400 font-mono text-sm tracking-widest uppercase">Project Identity</span>
                 <h3 className="text-white text-xl font-bold italic">FURIOSA 1.0</h3>
               </div>
@@ -35,9 +35,9 @@ const MISTBlitzIntro = () => {
               Establishment 2024
             </div>
 
-            <h2 className="text-4xl font-sans italic md:text-6xl  font-black text-white leading-[0.85]">
+            <h2 className="text-4xl font-sans italic md:text-6xl font-black text-white leading-[0.95] pr-2">
               THE GENESIS OF <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
+              <span className="text-transparent bg-clip-text bg-[linear-gradient(90deg,#ef4444,#dc2626)]">
                 MIST BLITZ
               </span>
             </h2>
